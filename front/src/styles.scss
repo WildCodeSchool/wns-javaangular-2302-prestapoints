@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+//DEBUT SURCHARGE
+$theme-colors: (
+  "primary":          #4385F4,
+  "secondary":        #95989A,
+  "dark":             #001C46,
+  "gray-text":        #638096,
+  "background-grey":  #F5F7FA,
+  "background-grey-lighter": #F8F8F8,
+  "white-1":           #ffffff,
+  "accepted":         #4385F4,
+  "refund":           orange,
+  "success":         #60DAB1,
+  "info":            #66d1d1,
+  "warning":         #FFCC00,
+  "danger":          #FA393E,
+  "light":           #ececec,
+  "primary-muted":   #b1cfec,
+  "info-muted":      #7ee5e5,
+  "danger-muted":    #f77eb9,
+  "validate":        #60DAB1,
+  "line-table":      #BAC5DB,
+  "color-placeholder": #BAC5DB,
+  "border-gray":      #E8ECF4,
+  "text-muted":      #f6f7ff,
+  "background-primary": #EEF5FF,
+  "background-danger": #f9e9e9,
+  "mat-label":#7C879C, 
+  "test":#d4a517
+  );
+//FIN SURCHARGE
+
+
+@import 'node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import 'node_modules/bootstrap-icons/font/bootstrap-icons.css';
+@import 'node_modules/bootstrap/scss/bootstrap';
