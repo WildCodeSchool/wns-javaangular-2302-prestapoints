@@ -1,9 +1,7 @@
 package fr.service;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import fr.dto.UserDto;
 import fr.mapper.UserToDtoMapper;
 import fr.model.User;
@@ -11,7 +9,7 @@ import fr.repository.UserRepository;
 
 @Service
 public class UserService {
-    
+
     @Autowired
     private UserRepository userRepository;
 
@@ -24,6 +22,7 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
+        
         return userRepository.getById(id);
     }
 }

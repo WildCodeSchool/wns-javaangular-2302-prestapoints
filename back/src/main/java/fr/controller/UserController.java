@@ -10,7 +10,6 @@ import fr.mapper.UserToDtoMapper;
 import fr.model.User;
 import fr.service.UserService;
 
-
 @RestController
 public class UserController {
 
@@ -34,5 +33,4 @@ public class UserController {
     public UserDto getUser(@PathVariable("id") Long id) {
         return userToDtoMapper.convertToDto(userService.getUserById(id));
     }
-
 }
