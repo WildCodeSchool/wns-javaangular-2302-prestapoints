@@ -1,0 +1,36 @@
+<div>
+  <ul>
+    <p>Le frontend fonctionne correctement si vous pouvez voir :</p>
+    <li>l'icône d'un avion dans le bouton vert :</li>
+    <p></p>
+    <p>La communication avec le backend fonctionne correctement si vous pouvez voir :</p>
+    <li>la valeur "Toto" retournée par le endpoint Spring dans le bouton:</li>
+    <p></p>
+    <li>La fenêtre modale s'ouvre (permet de vérifier le fonctionnement du js de bootstrap)</li>
+  </ul>
+  <a href="" class="btn btn-success"><i class="bi bi-airplane-engines me-2"></i>{{ user.name }}</a>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Coool ça fonctionne</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       ALLEZ MAINTENANT FAUT BOSSER !!!!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
