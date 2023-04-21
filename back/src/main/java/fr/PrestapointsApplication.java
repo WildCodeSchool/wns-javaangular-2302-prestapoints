@@ -12,7 +12,7 @@ import com.github.javafaker.Faker;
 
 @SpringBootApplication
 public class PrestapointsApplication implements CommandLineRunner {
-	private boolean isItOkForFixture = false;
+	private boolean launchAllFixtures = false;
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -23,7 +23,7 @@ public class PrestapointsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		if (isItOkForFixture) {
+		if (launchAllFixtures) {
 			Faker faker = new Faker();
 			// NE JAMAIS METTRE L'ID
 			// remplir les noms de colonnes MySQL
