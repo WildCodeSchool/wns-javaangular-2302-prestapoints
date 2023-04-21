@@ -1,11 +1,8 @@
 package fr;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +12,7 @@ import com.github.javafaker.Faker;
 
 @SpringBootApplication
 public class PrestapointsApplication implements CommandLineRunner {
+	private boolean isItOkForFixture = false;
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -25,38 +23,41 @@ public class PrestapointsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Faker faker = new Faker();
-		// NE JAMAIS METTRE L'ID
-		// remplir les noms de colonnes MySQL
-		List<String> userColumns = Arrays.asList(
-				"firstname",
-				"lastname");
+		if (isItOkForFixture) {
+			Faker faker = new Faker();
+			// NE JAMAIS METTRE L'ID
+			// remplir les noms de colonnes MySQL
+			List<String> userColumns = Arrays.asList(
+					"firstname",
+					"lastname");
 
-		// remplir les fakers des colonnes précédentes
-		Supplier<?>[] userSuppliers = new Supplier[] {
-				() -> faker.name().firstName(),
-				() -> faker.name().lastName()
-		};
+			// remplir les fakers des colonnes précédentes
+			Supplier<?>[] userSuppliers = new Supplier[] {
+					() -> faker.name().firstName(),
+					() -> faker.name().lastName()
+			};
 
-		// mettre le nom de la table entre double ET simple quote
-		// mettre le nombre de ligne souhaitée
-		fixtures("'user'", 10, userColumns, userSuppliers);
-		/***********************************************/
-		List<String> testColumns = Arrays.asList(
-				"role",
-				"avion",
-				"date");
+			// mettre le nom de la table entre double ET simple quote
+			// mettre le nombre de ligne souhaitée
+			fixtures("'user'", 10, userColumns, userSuppliers);
+			/***********************************************/
+			List<String> testColumns = Arrays.asList(
+					"role",
+					"avion",
+					"date");
 
-		Supplier<?>[] testSuppliers = new Supplier[] {
-				() -> faker.name().prefix(),
-				() -> faker.starTrek().character(),
-				() -> faker.date().birthday()
-		};
-		fixtures("'test'", 100, testColumns, testSuppliers);
+			Supplier<?>[] testSuppliers = new Supplier[] {
+					() -> faker.name().prefix(),
+					() -> faker.starTrek().character(),
+					() -> faker.date().birthday()
+			};
+			fixtures("'test'", 100, testColumns, testSuppliers);
 
-		/***********************************************/
+			/***********************************************/
+		}
 	}
-/********************************************************************************************/
+
+	/********************************************************************************************/
 	// DO NOT TOUCH
 	private void fakingDB(int number, List<String> columns, String tableName, Supplier<?>[] suppliers) {
 		int columnsNumber = columns.size();
