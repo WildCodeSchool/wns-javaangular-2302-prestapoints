@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import fr.dto.UserDto;
-import fr.mapper.UserToDtoMapper;
+import fr.mapper.UserMapper;
 import fr.model.User;
 import fr.service.UserService;
 
@@ -14,7 +14,7 @@ import fr.service.UserService;
 public class UserController {
 
     @Autowired
-    private UserToDtoMapper userToDtoMapper;
+    private UserMapper userMapper;
 
     @Autowired
     private UserService userService;
@@ -25,12 +25,12 @@ public class UserController {
         User user = new User();
         user.setFirstname("Toto");
 
-        return userToDtoMapper.convertToDto(user);
+        return userMapper.convertToDto(user);
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/{id}")
     public UserDto getUser(@PathVariable("id") Long id) {
-        return userToDtoMapper.convertToDto(userService.getUserById(id));
+        return userMapper.convertToDto(userService.getUserById(id));
     }
 }

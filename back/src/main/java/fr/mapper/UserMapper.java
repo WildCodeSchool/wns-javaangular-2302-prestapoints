@@ -7,7 +7,7 @@ import fr.dto.UserDto;
 import fr.model.User;
 
 @Component
-public class UserToDtoMapper {
+public class UserMapper {
 
     @Autowired
     private ModelMapper modelMapper;
