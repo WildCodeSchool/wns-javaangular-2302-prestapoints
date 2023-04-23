@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
 import { User } from '../../../shared/model/user';
 import { DemoService } from '../demo-service/demo.service';
 

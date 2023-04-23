@@ -1,4 +1,5 @@
 package fr.model;
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,12 +11,14 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class User {
+public class Test {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String lastname;
-    private String firstname;
+    private String role;
+    private String avion;
+    private Date date;
 }
+

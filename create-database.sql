@@ -8,4 +8,3 @@ GRANT ALL PRIVILEGES ON prestapoints.* TO 'prestapoints'@'localhost' WITH GRANT 
 --flush this user in MYSQL
 FLUSH PRIVILEGES;
 
-
