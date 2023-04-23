@@ -146,9 +146,7 @@ Les <repositories> effectuent des opérations sur la base de données pour les r
 # Fixtures
 #
 
-Pour la préparations des fixtures, voici la ligne de commande et les consignes :
-./mvnw spring-boot:run -D fixtures
-
+Pour la préparations des fixtures, voici les consignes :
 Dans le dossier <fixture> créez votre fichier de fixture selon l'entité concernée ou complétez celle existante.
 Ensuite dans le fichier d'application PrestapointsApplication.java faites l'injection de dépendance et appeler votre méthode ce qui lancera vos fixtures à chaque démarrage.
 Exemple : 
@@ -158,24 +156,26 @@ Exemple :
 	private UserFixtures userFixtures;
  
         ...
-        userFixtures.prepareFixtures(); --> ajouter dans la méthode run
+        userFixtures.prepareFixtures(); --> ajouter la méthode
         ...
 
 //fichier fixture/PrestationFixtures.java
         public void prepareFixtures() {
-        Faker faker = new Faker();
-        List<String> columns = Arrays.asList(
-                        "id",
-                        "firstname",     --> ajouter les colonnes concernées
-                        "lastname");
-
-        Supplier<?>[] suppliers = new Supplier[] {
-                        () -> fixtures.id(),
-                        () -> faker.name().firstName(),  -->appliquer les fakers souhaitées
-                        () -> faker.name().lastName()    --> ..           
-        };
-
-        fixtures.launchFixtures("'user'", 10, columns, suppliers);   -->écrire le nom de la "'table'" et le nombre de lignes souhaitées
+                
+                String table = TablesEnum.USER.getTableName();   --> choisissez la table concernée dans l'énum (il en ressortira la valeur "'user'" pour cet exemple)
+                Integer numberOfLigne = 10;    --> ajoutez le nombre de ligne souhaitée, attention à bien prendre en compte les déclarations des autres fixtures s'il y a dépendence
+                List<String> columns = Arrays.asList(
+                                "id",
+                                "firstname",     --> ajouter les colonnes concernées
+                                "lastname");
+                                
+                Faker faker = new Faker();              
+                Supplier<?>[] suppliers = new Supplier[] {
+                                () -> fixtures.id(),
+                                () -> faker.name().firstName(),  -->appliquer les fakers souhaitées
+                                () -> faker.name().lastName()               
+                };
+                ...
         } 
 
 
