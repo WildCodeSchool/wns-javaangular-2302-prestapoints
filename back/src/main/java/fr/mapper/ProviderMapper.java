@@ -1,5 +1,8 @@
 package fr.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,5 +26,15 @@ public class ProviderMapper {
         Provider provider = modelMapper.map(providerDto, Provider.class);
 
         return provider;
+    }
+
+    public List<ProviderDto> convertAllToDto(List<Provider> providers) {
+        List<ProviderDto> providersDto = new ArrayList<>();
+        
+        for (Provider provider : providers) {
+            providersDto.add(modelMapper.map(provider, ProviderDto.class));
+        }
+
+        return providersDto;
     }
 }

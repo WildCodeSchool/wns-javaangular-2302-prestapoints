@@ -1,5 +1,6 @@
 package fr.dto;
 
+import fr.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,4 +9,5 @@ import lombok.Setter;
 public class ProviderDto {
 
     private Long id;
+    private User user;
 }

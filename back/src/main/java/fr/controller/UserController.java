@@ -1,5 +1,7 @@
 package fr.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +23,9 @@ public class UserController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/")
-    public UserDto showTest() {
-        User user = new User();
-        user.setFirstname("Toto");
+    public List<UserDto> showAll() {
 
-        return userMapper.convertToDto(user);
+        return userMapper.convertAllToDto(userService.findAll());
     }
 
     @CrossOrigin(origins = "*")

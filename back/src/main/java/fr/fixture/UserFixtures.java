@@ -22,13 +22,16 @@ public class UserFixtures {
                 List<String> columns = Arrays.asList(
                         "id",
                         "firstname",
-                        "lastname");
+                        "lastname",
+                        "provider_id"
+                        );
                         
                 Faker faker = new Faker();
                 Supplier<?>[] suppliers = new Supplier[] {
                                 () -> fixtures.id(),
                                 () -> faker.name().firstName(),
-                                () -> faker.name().lastName()
+                                () -> faker.name().lastName(),
+                                () -> fixtures.otherRelationId()
                 };
 
                 fixtures.launchFixtures(table, numberOfLigne, columns, suppliers);
