@@ -20,16 +20,16 @@ public class PrestationFixtures {
         Integer numberOfLigne = 50;
 
         List<String> columns = Arrays.asList(
-            "id",
-            "title",
-            "duration",
-            "add_point", 
-            "provider_id");
-            
+                "id",
+                "title",
+                "duration",
+                "add_point",
+                "creator_id");
+
         Faker faker = new Faker();
         Supplier<?>[] suppliers = new Supplier[] {
                 () -> fixtures.id(),
-                () -> faker.commerce().productName(),
+                () -> faker.lorem().sentence(faker.number().numberBetween(1, 10)),
                 () -> faker.number().numberBetween(1, 100),
                 () -> faker.number().numberBetween(10, 500),
                 () -> faker.number().numberBetween(1, 10)

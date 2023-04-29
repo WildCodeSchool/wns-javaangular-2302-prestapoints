@@ -1,7 +1,6 @@
 package fr.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fr.dto.UserDto;
@@ -27,7 +26,7 @@ public class UserService {
 
         return userRepository.getReferenceById(id);
     }
-    
+
     public List<User> findAll() {
         return userRepository.findAll();
     }

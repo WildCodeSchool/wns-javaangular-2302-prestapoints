@@ -2,7 +2,6 @@ package fr.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import fr.dto.PrestationDto;
 import fr.mapper.PrestationMapper;
 import fr.model.Prestation;
@@ -10,8 +9,7 @@ import fr.repository.PrestationRepository;
 
 @Service
 public class PrestationService {
-    
-    
+
     @Autowired
     private PrestationRepository prestationRepository;
 
@@ -27,7 +25,7 @@ public class PrestationService {
 
         return prestationRepository.getReferenceById(id);
     }
-    
+
     public Iterable<Prestation> findAllPrestations() {
 
         return prestationRepository.findAll();

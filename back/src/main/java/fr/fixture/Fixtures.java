@@ -16,7 +16,6 @@ public class Fixtures {
 	private static int relationId = 0;
 	private static int otherRelationId = 0;
 
-
 	private void fakingDB(int number, List<String> columns, String tableName, Supplier<?>[] suppliers) {
 		int columnsNumber = columns.size();
 		tableName = tableName.replace("'", "");
@@ -73,14 +72,14 @@ public class Fixtures {
 		lastId++;
 		return lastId;
 	}
-	
+
 	public int relationId() {
 		relationId++;
 		return relationId;
 	}
 
 	public int otherRelationId() {
-        otherRelationId++;
-        return otherRelationId;
-    }
+		otherRelationId++;
+		return otherRelationId;
+	}
 }

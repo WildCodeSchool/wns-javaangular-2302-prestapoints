@@ -10,25 +10,29 @@ import com.github.javafaker.Faker;
 import fr.enums.TablesEnum;
 
 @Component
-public class UserFixtures {
+public class RegistrationFixtures {
 
         @Autowired
         private Fixtures fixtures;
 
         public void prepareFixtures() {
-                String table = TablesEnum.USER.getTableName();
-                Integer numberOfLigne = 10;
+                String table = TablesEnum.REGISTRATION.getTableName();
+                Integer numberOfLigne = 50;
 
                 List<String> columns = Arrays.asList(
                                 "id",
-                                "firstname",
-                                "lastname");
+                                "comment",
+                                "evaluation",
+                                "prestation_id",
+                                "user_id");
 
                 Faker faker = new Faker();
                 Supplier<?>[] suppliers = new Supplier[] {
                                 () -> fixtures.id(),
-                                () -> faker.name().firstName(),
-                                () -> faker.name().lastName()
+                                () -> faker.lorem().sentence(faker.number().numberBetween(10, 25)),
+                                () -> faker.number().numberBetween(0, 5),
+                                () -> faker.number().numberBetween(1, 50),
+                                () -> faker.number().numberBetween(1, 10)
                 };
 
                 fixtures.launchFixtures(table, numberOfLigne, columns, suppliers);

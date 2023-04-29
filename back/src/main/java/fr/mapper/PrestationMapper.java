@@ -1,14 +1,14 @@
 package fr.mapper;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import fr.dto.PrestationDto;
 import fr.model.Prestation;
 
 @Component
 public class PrestationMapper {
-    
+
     @Autowired
     private ModelMapper modelMapper;
 

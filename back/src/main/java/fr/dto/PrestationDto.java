@@ -1,6 +1,7 @@
 package fr.dto;
 
-import fr.model.Provider;
+import java.util.List;
+import fr.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,5 +13,6 @@ public class PrestationDto {
     private String title;
     private Integer duration;
     private Integer add_point;
-    private Provider provider;
+    private List<User> registeredUsers;
+    private User creator;
 }

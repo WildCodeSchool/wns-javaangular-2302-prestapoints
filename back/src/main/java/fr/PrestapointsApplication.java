@@ -5,9 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import fr.fixture.PrestationFixtures;
-import fr.fixture.ProviderFixtures;
-import fr.fixture.RegistrationsFixtures;
 import fr.fixture.UserFixtures;
+import fr.fixture.RegistrationFixtures;
 import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
@@ -18,21 +17,20 @@ public class PrestapointsApplication {
 	@Autowired
 	private PrestationFixtures prestationFixtures;
 	@Autowired
-	private ProviderFixtures providerFixtures;
-	@Autowired
-	private RegistrationsFixtures registrationsFixtures;
+	private RegistrationFixtures userPrestationFixtures;
 
-	private boolean loadFixtures = true;
+
+	/* STOP FIXTURES = false   # START FIXTURES = true */ 
+	private boolean loadFixtures = false;
 
 	@PostConstruct
 	public void init() {
 		if (this.loadFixtures) {
 			//Faire attention à l'ordre des dépendences !
 			userFixtures.prepareFixtures();
-			providerFixtures.prepareFixtures(); // depends on user
-			prestationFixtures.prepareFixtures(); // depends on user and provider
-			registrationsFixtures.prepareFixtures(); // depends on user and prestation		
-		}
+			prestationFixtures.prepareFixtures(); // depends on user 
+			userPrestationFixtures.prepareFixtures();// depends on user and prestation
+			}
 	}
 
 	public static void main(String[] args) {
