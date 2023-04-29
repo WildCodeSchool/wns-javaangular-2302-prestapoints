@@ -22,14 +22,17 @@ public class PrestationService {
     }
 
     public Prestation getPrestationById(Long id) {
-
         return prestationRepository.getReferenceById(id);
     }
 
     public Iterable<Prestation> findAllPrestations() {
-
         return prestationRepository.findAll();
     }
+
+    public Iterable<Prestation> findPrestationsByUserId(Long userId) {
+        return prestationRepository.findAllPrestationsInUser(userId);
+    }
+
 
     public void deletePrestation(Long id) {
         prestationRepository.deleteById(id);
