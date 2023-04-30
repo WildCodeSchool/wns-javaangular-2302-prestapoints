@@ -1,22 +1,10 @@
-<p>user-registrations works!</p>
 
-<button class="btn btn-danger mt-2" (click)="getRegistreredPrestationsByUserId('1')"> test</button>
-
-
-<div class="container">
-  <div class="row justify-content-center">
     <ng-container *ngFor="let prestation of prestations">
-      <div class="col-12 col-sm-4 g-2">
 
-        <div class="card " style="width: 18rem;">
-
-          <div class="card-body">
             <h5 class="card-title">{{ prestation.id }}</h5>
             <p class="card-text">{{ prestation.title }} </p>
+            <p class="card-text">durée {{ prestation.duration }} heures </p>
+            <p class="card-text">rapporte {{ prestation.add_point }} points </p>
 
-          </div>
-        </div>
-      </div>
     </ng-container>
-  </div>
-</div>
+

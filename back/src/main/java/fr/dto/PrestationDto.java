@@ -15,4 +15,5 @@ public class PrestationDto {
     private Integer add_point;
     private List<User> registeredUsers;
     private User creator;
+  
 }

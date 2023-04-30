@@ -1,9 +1,7 @@
 package fr.model;
 
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,12 +29,11 @@ public class Prestation {
     private Integer duration;
     private Integer add_point;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonManagedReference
     private User creator;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinTable(name = "registration", joinColumns = @JoinColumn(name = "prestation_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> registeredUsers;
 }

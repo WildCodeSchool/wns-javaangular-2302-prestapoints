@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class RegistrationDto {
 
-    private int id;
     private int evaluation;
     private String comment;
 }
