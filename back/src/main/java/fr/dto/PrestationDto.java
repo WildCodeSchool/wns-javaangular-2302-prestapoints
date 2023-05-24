@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class PrestationDto {
 
-    private int id;
+    private Integer id;
     private String title;
     private String duration;
     private String addPoint;
