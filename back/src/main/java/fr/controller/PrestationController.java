@@ -1,41 +1,48 @@
 package fr.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import fr.exception.ExceptionJsonDetail;
 import fr.dto.PrestationDto;
-import fr.mapper.PrestationMapper;
-import fr.model.Prestation;
+import fr.entity.Prestation;
 import fr.service.PrestationService;
 
 @RestController
+@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class PrestationController {
-
     @Autowired
-    private PrestationMapper prestationMapper;
+    PrestationService prestationService;
 
-    @Autowired
-    private PrestationService prestationService;
+    @GetMapping("/prestations")
+    public List<PrestationDto> getAllPrestations() {
 
-    @CrossOrigin(origins = "*")
-    @GetMapping("/home/prestations")
-    public List<PrestationDto> showPrestations() {
-        List<PrestationDto> prestationDtos = new ArrayList<>();
-        for (Prestation prestation : prestationService.findAllPrestations()) {
-            prestationDtos.add(prestationMapper.convertToDto(prestation));
+        return prestationService.getAllPrestations();
+    }
+
+    @GetMapping("/prestations/{id}")
+    public ResponseEntity<String> getPrestation(@PathVariable Integer id){
+        try {
+            
+            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(prestationService.getPrestationById(id));
+        } catch (ExceptionJsonDetail exceptionJsonDetail) {
+
+            return ResponseEntity.status(404).contentType(MediaType.APPLICATION_JSON).body(exceptionJsonDetail.getNotFound());
         }
-        return prestationDtos;
     }
 
-    @CrossOrigin(origins = "*")
-    @GetMapping("/home/prestation/{id}")
-    public PrestationDto getPrestation(@PathVariable("id") Long id) {
-        return prestationMapper.convertToDto(prestationService.getPrestationById(id));
+    @PostMapping("/prestations")
+    public Prestation createPrestation(@RequestBody PrestationDto prestationDto){
+
+        return prestationService.createPrestation(prestationDto);
     }
 
+    @DeleteMapping("/prestations/{id}")
+    public void deletePrestation(@PathVariable Integer id){
+
+        prestationService.deletePrestationById(id);
+    }
 }

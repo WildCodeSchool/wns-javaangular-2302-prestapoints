@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.dto.RegistrationDto;
-import fr.model.Registration;
+import fr.entity.Registration;
 
 @Component
 public class RegistrationMapper {

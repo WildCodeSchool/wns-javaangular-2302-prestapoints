@@ -24,7 +24,6 @@ public class PrestationFixtures {
                 "title",
                 "duration",
                 "add_point",
-                "creator_id",
                 "image");
 
         Faker faker = new Faker();
@@ -33,7 +32,6 @@ public class PrestationFixtures {
                 () -> faker.lorem().sentence(faker.number().numberBetween(1, 10)),
                 () -> faker.number().numberBetween(1, 100),
                 () -> faker.number().numberBetween(10, 500),
-                () -> faker.number().numberBetween(1, 10),
                 () -> fixtures.imageFakerRandom(200, 300)
         };
 

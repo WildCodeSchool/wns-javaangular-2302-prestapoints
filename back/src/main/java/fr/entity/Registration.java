@@ -1,4 +1,4 @@
-package fr.model;
+package fr.entity;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;

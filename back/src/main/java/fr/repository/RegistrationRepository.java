@@ -3,7 +3,7 @@ package fr.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import fr.model.Registration;
+import fr.entity.Registration;
 
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
     
