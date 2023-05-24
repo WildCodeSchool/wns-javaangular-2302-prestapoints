@@ -12,6 +12,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PrestationFormulaireComponent {
     prestationForm!: FormGroup;
+    selectedFile: File | undefined;
+    imageUrl: string | undefined;
 
     constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
   
@@ -29,34 +31,54 @@ export class PrestationFormulaireComponent {
       }
   
     onSubmit() {
-      if (this.prestationForm.invalid) {
-        return;
-      }
-  
-      const formData = this.prestationForm.value;
-      const prestation = new Prestation(
-        formData.title,
-        formData.duration,
-        formData.addPoint,
-        formData.dateStart,
-        formData.dateEnd,
-        formData.state,
-        formData.description,
-        formData.maxUser
-      );
-  
-      // Envoie de l'objet JSON au serveur
-    this.http.post("http://localhost:8080/prestations", prestation).subscribe(
-      response => {
-        // Traitement de la réponse du serveur
-        this.prestationForm.reset();
-      },
-      error => {
-        // Gestion des erreurs
-        console.error(error);
-      }
-    );
-  
-   
+        if (this.prestationForm.invalid) {
+            return;
+        }
+    
+        const formData = this.prestationForm.value;
+        const prestation = new Prestation(
+            formData.title,
+            formData.duration,
+            formData.addPoint,
+            formData.dateStart,
+            formData.dateEnd,
+            formData.state,
+            formData.description,
+            formData.maxUser
+        );
+    
+        // Envoie de l'objet JSON au serveur
+        this.http.post("http://localhost:8080/prestations", prestation).subscribe(
+            response => {
+                // Traitement de la réponse du serveur
+                this.prestationForm.reset();
+            },
+            error => {
+                // Gestion des erreurs
+                console.error(error);
+            }
+        );
+    }
+
+    onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+    uploadImage() {
+        if (this.selectedFile) {
+        const formData = new FormData();
+        formData.append('image', this.selectedFile);
+
+        this.http.post('http://localhost:8080/prestations/upload', formData)
+            .subscribe(
+            (response: any) => {
+                this.imageUrl = response.imageUrl;
+                console.log('Image uploaded successfully');
+            },
+            (error) => {
+                console.log('Error uploading image:', error);
+            }
+            );
+        }
     }
   }

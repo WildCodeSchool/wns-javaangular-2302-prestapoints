@@ -99,6 +99,13 @@
                   </div>
                 </div>
               </div>
+
+              <form (ngSubmit)="uploadImage()" enctype="multipart/form-data">
+                <input type="file" (change)="onFileSelected($event)" accept="image/*">
+                <button type="submit">Uploader</button>
+              </form>
+              
+              <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded Image">
             </div>
           </div>
           <div class="modal-footer">
