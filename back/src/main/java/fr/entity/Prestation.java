@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter @Setter//lombok
+@Getter
+@Setter
 public class Prestation {
     
     @Id
@@ -19,15 +20,16 @@ public class Prestation {
     private String state;
     private String description;
     private String maxUser;
-    
+    private String image;
+
     @ManyToOne
-    @JoinColumn(name = "provider_id")
-    private Provider provider;
+    @JoinColumn(name = "registration_id")
+    private Registration registration;
 
     public Prestation() {
     }
 
-    public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd, String state, String description, String maxUser, Integer add_point, Provider provider) {
+    public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd, String state, String description, String maxUser, Integer add_point, String image, Registration registration) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -37,6 +39,7 @@ public class Prestation {
         this.state = state;
         this.description = description;
         this.maxUser = maxUser;
-        this.provider = provider;
+        this.image = image;
+        this.registration = registration;
     }
 }

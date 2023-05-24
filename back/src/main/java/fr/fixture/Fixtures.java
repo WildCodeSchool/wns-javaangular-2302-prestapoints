@@ -1,6 +1,7 @@
 package fr.fixture;
 
 import java.util.List;
+import java.util.Random;
 import java.util.function.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,7 +16,6 @@ public class Fixtures {
 	private static int lastId = 0;
 	private static int relationId = 0;
 	private static int otherRelationId = 0;
-
 
 	private void fakingDB(int number, List<String> columns, String tableName, Supplier<?>[] suppliers) {
 		int columnsNumber = columns.size();
@@ -32,6 +32,7 @@ public class Fixtures {
 				values += "?,";
 			}
 		}
+
 		for (int id = 1; id <= number; id++) {
 			Object[] params = new Object[suppliers.length];
 			// params[0] = id;
@@ -69,18 +70,62 @@ public class Fixtures {
 		jdbcTemplate.execute("SET FOREIGN_KEY_CHECKS=1");
 	}
 
+	/**
+	 * 
+	 * @return an id increment by one, according to the id's quantity defined at the
+	 *         beggining
+	 */
 	public int id() {
 		lastId++;
 		return lastId;
 	}
-	
+
+	/**
+	 * 
+	 * @return an other id increment by one, according to the id's quantity defined
+	 *         at the beggining
+	 */
 	public int relationId() {
 		relationId++;
 		return relationId;
 	}
 
+	/**
+	 * 
+	 * @return a last id increment by one, according to the id's quantity defined at
+	 *         the beggining
+	 */
 	public int otherRelationId() {
-        otherRelationId++;
-        return otherRelationId;
-    }
+		otherRelationId++;
+		return otherRelationId;
+	}
+
+	/**
+	 * Choose image id on the website https://picsum.photos/images
+	 * 
+	 * @param the image id choosen
+	 * @param the width wanted, prefered have a width > heigth
+	 * @param the heigth
+	 * 
+	 * @return an image
+	 */
+	public String imageFakerById(Integer id, Integer heigth, Integer width) {
+
+		return "https://picsum.photos/id/" + id.toString() + "/" + width.toString() + "/" + heigth.toString();
+	}
+
+	/**
+	 * Choose image id on the website https://picsum.photos/images
+	 * 
+	 * @param the width wanted, prefered have a width > heigth
+	 * @param the heigth
+	 * 
+	 * @return an image randomly
+	 */
+	public String imageFakerRandom(Integer heigth, Integer width) {
+		Random random = new Random();
+		Integer id = random.nextInt(237) + 1;
+
+		return "https://picsum.photos/id/" + id.toString() + "/" + width.toString() + "/" + heigth.toString();
+	}
 }
