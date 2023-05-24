@@ -3,13 +3,13 @@
 @import 'node_modules/bootstrap-icons/font/bootstrap-icons.css';
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import "./_variables.scss";
+@import "./variables.scss";
 
 body {
   font-family: 'Raleway', sans-serif;
   color: map-get($colors, black-blue);
     overflow-x: hidden !important;
-    font-size: map-get($font-size, mid);
+
 
     main {
         overflow: hidden !important;
@@ -18,10 +18,10 @@ body {
 }
 
 .btn {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Raleway', sans-serif;
     text-transform: none;
     width: fit-content;
-    background-color: map-get($colors, blue);
+    background-color: map-get($colors, presta-20);
     border: none;
     color: white;
     font-weight: bold;
@@ -35,67 +35,102 @@ body {
     &-secondary {
         padding: 0.5rem 2rem;
     }
-
-    &:hover {
-        background-color: map-get($colors, blue-hv) !important;
-        border-color: map-get($colors, blue-hv) !important;
-    }
-
-    &:focus {
-        background-color: map-get($colors, blue-hv) !important;
-        border-color: map-get($colors, blue-hv) !important;
-        box-shadow: 0 0 0 0.25rem #3184fd80;
-    }
-
-    &:active {
-        background-color: map-get($colors, blue-hv) !important;
-        border-color: map-get($colors, blue-hv) !important;
-        &:focus {
-            box-shadow: 0 0 0 0.25rem #3184fd80;
-        }
-    }
 }
 
 // TEXT & TITLES
+
+.text-black-blue {
+    color: map-get($colors, presta-10);
+}
+
+.text-fw-xx-bold {
+    font-weight: map-get($font-weight, xx-bold);
+}
+
+.text-fs-lgx {
+    font-size: map-get($font-size, lgx);
+}
+
+.text-fs-md-xl {
+    font-size: map-get($font-size, md-xl);
+}
+
+.text-fw-x-bold {
+    font-weight: map-get($font-weight, x-bold);
+}
+
+.text-fs-md {
+    font-size: map-get($font-size, md);
+}
+
+.text-fw-medium {
+    font-weight: map-get($font-weight, medium);
+}
+
+.mb-lg {
+    margin-bottom: map-get($spacers, 7);
+}
+
+.text-fs-m {
+    font-size: map-get($font-size, m);
+}
+
+.mb-m {
+    margin-bottom: map-get($spacers, 3);
+}
+
+.text-fs-xs {
+    font-size: map-get($font-size, xs);
+}
+
+.text-fw-bold {
+    font-weight: map-get($font-weight, bold);
+}
+
+.text-fs-sm {
+    font-size: map-get($font-size, sm);
+}   
 
 h1 {
     @extend .text-black-blue;
     @extend .text-fw-xx-bold;
     @extend .text-fs-lgx;
-    @extend .text-fs-md-xl;
 
-    font-family: 'Sora', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 h2 {
     @extend .text-black-blue;
     @extend .text-fw-x-bold;
     @extend .text-fs-md;
-    @extend .mb-lg;
 
-    font-family: 'Sora', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 h3 {
     @extend .text-black-blue;
     @extend .text-fw-x-bold;
-    @extend .text-fs-m; // A voir si la taille est OK
-    @extend .mb-m;
+    @extend .text-fs-sm; 
 
-    font-family: 'Sora', sans-serif;
-}
-
-.text-fs-md{
-    line-height: 2.2rem;    
+    font-family: 'Raleway', sans-serif;
 }
 
 .small-title {
-    color: map-get($colors, blue);
+    color: map-get($colors, presta-10);
     font-size: map-get($font-size, sm);
     font-weight: map-get($font-weight, bold);
     text-transform: uppercase;
     margin-bottom: 0;
 }
+
+p ul li {
+    @extend .text-black-blue;
+    @extend .text-fs-xs;
+
+    font-family: 'Raleway', sans-serif;
+}
+
+
 
 //CONTAINER
 

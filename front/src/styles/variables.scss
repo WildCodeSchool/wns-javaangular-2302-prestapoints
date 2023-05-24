@@ -46,6 +46,26 @@ $font-size: (
     70: 2rem    // 32px
 );
 
+$font-size: (
+    xxs: 0.75rem,  // 12px
+    xs: 0.875rem,    // 14px
+    sm: 1rem,   // 16px
+    md: 1.25rem,    // 20px
+    lgx: 1.5rem, // 24px
+    xl: 1.75rem,    // 28px
+    xxl: 2rem    // 32px
+);
+
+$font-weight : (
+    x-bold: 900,
+    xx-bold: 700,
+    bold: 600,
+    medium: 500,
+    regular: 400,
+    light: 300,
+    x-light: 200
+);
+
 
 @each $name, $value in $font-size {
     .presta-text-fs-#{$name} {
