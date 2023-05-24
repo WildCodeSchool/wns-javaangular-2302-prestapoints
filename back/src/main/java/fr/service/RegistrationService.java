@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import fr.repository.RegistrationRepository;
 
 @Service
-public class ProviderService {
+public class RegistrationService {
 
     @Autowired
-    RegistrationRepository providerRepository;
+    RegistrationRepository registrationRepository;
 
-    public void deleteProvider(Long id) {
-        providerRepository.deleteById(id);
+    public void deleteRegistration(Long id) {
+        registrationRepository.deleteById(id);
     }
 }
