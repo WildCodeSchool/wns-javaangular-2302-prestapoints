@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.dto.ProviderDto;
-import fr.model.Provider;
+import fr.entity.Provider;
 
 @Component
 public class ProviderMapper {

@@ -3,8 +3,8 @@ package fr.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fr.dto.UserDto;
+import fr.entity.User;
 import fr.mapper.UserMapper;
-import fr.model.User;
 import fr.repository.UserRepository;
 
 @Service

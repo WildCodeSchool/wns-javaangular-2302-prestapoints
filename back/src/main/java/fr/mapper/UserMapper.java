@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import fr.dto.UserDto;
-import fr.model.User;
+import fr.entity.User;
 
 @Component
 public class UserMapper {

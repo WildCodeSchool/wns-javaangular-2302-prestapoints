@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import fr.dto.UserDto;
+import fr.entity.User;
 import fr.mapper.UserMapper;
-import fr.model.User;
 import fr.service.UserService;
 
 @RestController

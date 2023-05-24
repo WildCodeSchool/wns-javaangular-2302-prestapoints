@@ -1,6 +1,6 @@
 package fr.dto;
 
-import fr.model.Provider;
+import fr.entity.Provider;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,9 +8,14 @@ import lombok.Setter;
 @Setter
 public class PrestationDto {
 
-    private Long id;
+    private int id;
     private String title;
-    private Integer duration;
-    private Integer add_point;
+    private String duration;
+    private String addPoint;
+    private String dateStart;
+    private String dateEnd;
+    private String state;
+    private String description;
+    private String maxUser;
     private Provider provider;
 }
