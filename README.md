@@ -47,17 +47,27 @@ front/src/app/
 │   │   └── ...
 │   └── <core.module.ts>
 ├─ pages  
-│   ├── feature1/
-│   │   ├── components/
-│   │   │   ├── feature1.component.ts
-│   │   │   ├── feature1.component.html
-│   │   │   ├── feature1.component.scss
-│   │   │   └── feature1.component.spec.ts
+│   ├── connection/
+│   │   ├── signin/
+│   │   │   ├── signin.component.ts
+│   │   │   ├── signin.component.html
+│   │   │   ├── signin.component.scss
+│   │   │   └── signin.component.spec.ts
+│   │   ├── login/
+│   │   │   ├── login.component.ts
+│   │   │   ├── login.component.html
+│   │   │   ├── login.component.scss
+│   │   │   └── login.component.spec.ts
 │   │   ├── services/
-│   │   │   ├── feature1.service.ts
+│   │   │   ├── connection.service.ts
 │   │   │   └── ...
-│   │   ├── <feature1.module.ts>
-│   │   ├── <feature1-routing.module.ts>
+│   │   │── connection.component.ts
+│   │   │── connection.component.html
+│   │   │── connection.component.scss
+│   │   │── connection.component.spec.ts
+│   │   │
+│   │   ├── <connection.module.ts>
+│   │   ├── <connection-routing.module.ts>
 │   │   └── ...
 │   ├── feature2/
 │   │   ├── components/
@@ -131,6 +141,76 @@ Les <DTOs> (Data Transfer Objects) représentent les objets métiers au format J
 Les <mappers> sont les classes qui effectuent le mapping entre les <models> et les <DTOs>. Ils seront utilisés par les <controllers> pour convertir les <models> en <DTO> et vice versa.
 Les <repositories> effectuent des opérations sur la base de données pour les renvoyer au <service>.
 <Config> contient les fichiers de configuration, dans notre application, pour paramétrer la sécurité dans un premier temps.
+
+#
+# Fixtures
+#
+
+Pour la préparations des fixtures, voici les consignes :
+Dans le dossier <fixture> créez votre fichier de fixture selon l'entité concernée ou complétez celle existante.
+Ensuite dans le fichier d'application PrestapointsApplication.java faites l'injection de dépendance et appeler votre méthode ce qui lancera vos fixtures à chaque démarrage.
+Exemple : 
+
+//fichier PrestapointsApplication.java
+        @Autowired
+	private UserFixtures userFixtures;
+ 
+        ...
+        userFixtures.prepareFixtures(); --> ajouter la méthode
+        ...
+
+//fichier fixture/PrestationFixtures.java
+        public void prepareFixtures() {
+                
+                String table = TablesEnum.USER.getTableName();   --> choisissez la table concernée dans l'énum (il en ressortira la valeur "'user'" pour cet exemple)
+                Integer numberOfLigne = 10;    --> ajoutez le nombre de ligne souhaitée, attention à bien prendre en compte les déclarations des autres fixtures s'il y a dépendence
+                List<String> columns = Arrays.asList(
+                                "id",
+                                "firstname",     --> ajouter les colonnes concernées
+                                "lastname");
+                                
+                Faker faker = new Faker();              
+                Supplier<?>[] suppliers = new Supplier[] {
+                                () -> fixtures.id(),
+                                () -> faker.name().firstName(),  -->appliquer les fakers souhaitées
+                                () -> faker.name().lastName()               
+                };
+                ...
+        } 
+
+
+
+#
+# LES ETAPES POUR GIT
+#
+
+En partant de la branche dev on tire sa branche de travail construite avec le n° de l'US et ce que fait l'US
+Ex: 
+        <US1-create_component_card>
+
+La commande est 
+        <git checkout -b US1-create_component_card>
+
+Ensuite, une fois le travail terminé, on stage avec 
+        <git status> 
+afin de vérifier que tous les fichiers sont à ajouter, puis
+        <git add .> ou <git add leNomDeMonFichier>
+pour ajouter le fichier à l'étape supérieure, enfin il faut faire le commit avec
+        <git commit -m "what i did">
+Il peut y avoir multiples commits d'effectués sur une même branche. Ce qui est bien pour diviser son travail. 
+A ce stade, rien n'est arrivé sur github, tout est en local mais vous pouvez changer de branche et travailler sur différentes tâches (sans oublier de add et commmit bien entendu).
+
+Pour push sur github, il faut faire un 
+        <git push origin US1-create_component_card>
+A ce stade le travail est arrivé sur github, mais ce n'est pas encore fini, il faut le mettre en review pour faire une nouvelle Pull request
+        <ATTENTION A BIEN FAIRE UNE PR US1-create_component_card  vers DEV>
+par défaut github va proposer main.
+
+Une fois la PR est validé par les reviewers, il faut merge la branche dans DEV. Une fois que c'est fait, github est en avance sur DEV par rapport à mon DEV en local.
+Il faut donc Pull dev de origin vers le local.
+        <git pull origin dev>
+
+Un nouveau travail peut commencer avec une nouvelle en reprenant avec la commande   <git checkout -b maNouvelleBranche>
 
 
 ####################################################################################################################
