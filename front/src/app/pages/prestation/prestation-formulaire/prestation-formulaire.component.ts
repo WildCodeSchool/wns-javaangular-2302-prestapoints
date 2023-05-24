@@ -29,7 +29,6 @@ export class PrestationFormulaireComponent {
       }
   
     onSubmit() {
-        console.log("on submite");
       if (this.prestationForm.invalid) {
         return;
       }
@@ -50,7 +49,6 @@ export class PrestationFormulaireComponent {
     this.http.post("http://localhost:8080/prestations", prestation).subscribe(
       response => {
         // Traitement de la réponse du serveur
-        console.log(response);
         this.prestationForm.reset();
       },
       error => {
@@ -59,6 +57,6 @@ export class PrestationFormulaireComponent {
       }
     );
   
-      //this.prestationForm.reset();
+   
     }
   }
