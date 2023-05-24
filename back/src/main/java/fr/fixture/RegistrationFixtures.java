@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import fr.enums.TablesEnum;
 
 @Component
-public class ProviderFixtures {
+public class RegistrationFixtures {
 
     @Autowired
     private Fixtures fixtures;
