@@ -15,7 +15,7 @@
         </div>
         <div class="col">
             <!-- Last name -->
-            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Prenom"
+            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Prénom"
                 formControlName="lastname">
             <div *ngIf="signInForm.controls['lastname'].errors && !signInForm.controls['lastname'].pristine"
                 class="error-msg">
@@ -28,8 +28,11 @@
     <div>
         <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail"
             formControlName="email">
-        <div *ngIf="signInForm.controls['email'].errors && !signInForm.controls['email'].pristine" class="error-msg">
-            <div [hidden]="!signInForm.get('email')?.errors?.['required']">L'email est requis</div>
+        <div *ngIf="signInForm.controls['email'].errors && !signInForm.controls['email'].pristine"
+            class="error-msg">
+            {{ signInForm.get('email')?.errors?.['email'].rules }}
+            <div [hidden]="!signInForm.get('email')?.errors?.['required']">l'E-mail est requis
+            </div>
         </div>
     </div>
 
@@ -50,11 +53,11 @@
 
     <!-- Phone number -->
     <div>
-        <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Telephone"
+        <input type="text" id="defaultRegisterFormPhone" class="form-control" placeholder="Téléphone"
             aria-describedby="defaultRegisterFormPhoneHelpBlock" formControlName="phone">
-        <div *ngIf="signInForm.controls['password'].errors && !signInForm.controls['password'].pristine"
-            class="error-msg">
-            <div [hidden]="!signInForm.get('password')?.errors?.['required']">Le numero est requis
+        <div *ngIf="signInForm.controls['phone'].errors && !signInForm.controls['phone'].pristine" class="error-msg">
+            {{ signInForm.get('phone')?.errors?.['phone'].rules }}
+            <div [hidden]="!signInForm.get('phone')?.errors?.['required']">le numéro de téléphone est requis
             </div>
         </div>
     </div>

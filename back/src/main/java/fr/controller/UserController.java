@@ -1,9 +1,12 @@
 package fr.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import fr.dto.UserDto;
 import fr.mapper.UserMapper;
@@ -20,11 +23,10 @@ public class UserController {
     private UserService userService;
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/")
-    public UserDto showTest() {
-        User user = new User();
-        user.setFirstname("Toto");
-
+    @PostMapping("/createUser")
+    public UserDto createUsers(@RequestBody UserDto userDto) {
+        System.out.println("je suis dans le controller");
+        User user = userService.createUser(userDto);
         return userMapper.convertToDto(user);
     }
 
