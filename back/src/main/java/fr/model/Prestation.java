@@ -23,6 +23,6 @@ public class Prestation {
     private Integer add_point;
 
     @ManyToOne
-    @JoinColumn(name = "provider_id")
-    private Registration provider;
+    @JoinColumn(name = "registration_id")
+    private Registration registration;
 }

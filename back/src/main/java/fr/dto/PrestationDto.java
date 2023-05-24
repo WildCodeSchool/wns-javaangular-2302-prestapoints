@@ -12,5 +12,5 @@ public class PrestationDto {
     private String title;
     private Integer duration;
     private Integer add_point;
-    private Registration provider;
+    private Registration registration;
 }
