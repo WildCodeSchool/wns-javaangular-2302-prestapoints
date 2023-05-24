@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.dto.ProviderDto;
-import fr.model.Provider;
+import fr.model.Registration;
 
 @Component
 public class ProviderMapper {
@@ -13,14 +13,14 @@ public class ProviderMapper {
     @Autowired
     private ModelMapper modelMapper;
 
-    public ProviderDto convertToDto(Provider provider) {
+    public ProviderDto convertToDto(Registration provider) {
         ProviderDto providerDto = modelMapper.map(provider, ProviderDto.class);
 
         return providerDto;
     }
 
-    public Provider convertToEntity(ProviderDto providerDto) {
-        Provider provider = modelMapper.map(providerDto, Provider.class);
+    public Registration convertToEntity(ProviderDto providerDto) {
+        Registration provider = modelMapper.map(providerDto, Registration.class);
 
         return provider;
     }

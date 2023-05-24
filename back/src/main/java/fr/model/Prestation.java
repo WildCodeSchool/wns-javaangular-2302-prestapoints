@@ -24,5 +24,5 @@ public class Prestation {
 
     @ManyToOne
     @JoinColumn(name = "provider_id")
-    private Provider provider;
+    private Registration provider;
 }
