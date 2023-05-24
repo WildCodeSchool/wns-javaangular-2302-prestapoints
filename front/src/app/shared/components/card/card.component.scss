@@ -1,0 +1,23 @@
+@import "src/styles.scss";
+
+.card {
+  border-radius: 20px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 4px rgba(19, 19, 19, 0.362);
+}
+
+.card-title {
+  font-size: 14px;
+}
+
+.category-text,
+.card-points {
+  color: #22577a;
+  /* pourquoi "primary" ne fonctionne pas, il donne un bleu primaire*/
+}
+
+.card-duration,
+.card-city {
+  color: #638096;
+  font-size: 15px;
+}
