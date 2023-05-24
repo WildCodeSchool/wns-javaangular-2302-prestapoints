@@ -16,7 +16,7 @@ public class ProviderFixtures {
     private Fixtures fixtures;
 
     public void prepareFixtures() {
-        String table = TablesEnum.PROVIDER.getTableName();
+        String table = TablesEnum.REGISTRATION.getTableName();
         Integer numberOfLigne = 10;
         
         List<String> columns = Arrays.asList(
