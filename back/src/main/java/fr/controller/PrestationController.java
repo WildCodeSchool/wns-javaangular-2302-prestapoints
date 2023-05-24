@@ -12,6 +12,7 @@ import fr.model.Prestation;
 import fr.service.PrestationService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class PrestationController {
     @Autowired
     PrestationService prestationService;

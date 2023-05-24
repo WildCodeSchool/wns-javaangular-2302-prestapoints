@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter @Setter @NoArgsConstructor //lombok
+@Getter @Setter//lombok
 public class Prestation {
 
   @Id
@@ -17,7 +17,6 @@ public class Prestation {
   private String dateStart;
   private String dateEnd;
   private String state;
-  @Column(columnDefinition="TEXT")
   private String description;
   private String maxUser;
 

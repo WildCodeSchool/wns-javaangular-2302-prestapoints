@@ -153,3 +153,6 @@ to see if angular is working well, it will be front part of the application
 <!-- you can verify the results of the backend with postman or test the URL : http://localhost:4200/  -->
 
 verify your DB to confirm the creation of <id> and <name>.
+
+
+./mvnw -Dspring-boot.run.profiles=dev spring-boot:run
