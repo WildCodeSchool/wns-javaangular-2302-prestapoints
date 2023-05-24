@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DemoComponent } from './pages/demo/demo-component/demo.component';
-import { FooterComponent } from './shared/footer/footer.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [AppComponent, DemoComponent],
