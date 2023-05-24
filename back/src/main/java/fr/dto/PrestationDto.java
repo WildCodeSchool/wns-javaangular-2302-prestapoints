@@ -1,6 +1,6 @@
 package fr.dto;
 
-import fr.model.Provider;
+import fr.model.Registration;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,5 +12,5 @@ public class PrestationDto {
     private String title;
     private Integer duration;
     private Integer add_point;
-    private Provider provider;
+    private Registration registration;
 }
