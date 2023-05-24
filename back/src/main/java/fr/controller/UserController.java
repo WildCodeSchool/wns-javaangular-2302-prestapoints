@@ -30,7 +30,7 @@ public class UserController {
 
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/{id}")
-    public UserDto getUser(@PathVariable("id") Long id) {
+    public UserDto getUser(@PathVariable("id") Integer id) {
         return userMapper.convertToDto(userService.getUserById(id));
     }
 }

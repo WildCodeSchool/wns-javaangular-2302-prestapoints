@@ -1,5 +1,7 @@
 package fr.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fr.dto.UserDto;
@@ -21,8 +23,11 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User getUserById(Long id) {
-        
+    public User getUserById(Integer id) {
         return userRepository.getReferenceById(id);
+    }
+
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
