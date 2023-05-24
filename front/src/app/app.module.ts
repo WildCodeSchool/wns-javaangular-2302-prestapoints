@@ -9,17 +9,9 @@ import { DemoComponent } from './pages/demo/demo-component/demo.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, DemoComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule,FormsModule,ReactiveFormsModule,],
-  providers: [FormBuilder],
-  declarations: [AppComponent, DemoComponent, FooterComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule, 
-    HttpClientModule
-    
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, DemoComponent, FooterComponent],
+    imports: [BrowserModule, AppRoutingModule, HttpClientModule,FormsModule,ReactiveFormsModule,],
+    providers: [FormBuilder],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}
