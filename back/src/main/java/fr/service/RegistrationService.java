@@ -11,7 +11,7 @@ public class RegistrationService {
     @Autowired
     RegistrationRepository registrationRepository;
 
-    public void deleteRegistration(Long id) {
+    public void deleteRegistration(Integer id) {
         registrationRepository.deleteById(id);
     }
 }
