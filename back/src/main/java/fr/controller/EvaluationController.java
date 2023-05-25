@@ -13,7 +13,7 @@ import fr.service.PrestationService;
 @RestController
 @CrossOrigin(origins = "*")
 //@CrossOrigin(origins = "http://localhost:4200")
-public class PrestationController {
+public class EvaluationController {
     @Autowired
     PrestationService prestationService;
 

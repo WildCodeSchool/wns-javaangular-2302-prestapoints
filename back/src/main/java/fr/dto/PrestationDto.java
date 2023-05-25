@@ -1,7 +1,7 @@
 package fr.dto;
 
 
-import fr.entity.Registration;
+import fr.entity.Evaluation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +18,5 @@ public class PrestationDto {
     private String state;
     private String description;
     private String maxUser;
-    private Registration registration;
+    private Evaluation evaluation;
 }

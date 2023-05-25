@@ -3,7 +3,7 @@ package fr.enums;
 public enum TablesEnum {
 
     USER("'user'"),
-    REGISTRATION("'registration'"),
+    EVALUATION("'evaluation'"),
     ROLE("'role'"),
     PARTNER("'partner'"),
     CATEGORY("'category'"),

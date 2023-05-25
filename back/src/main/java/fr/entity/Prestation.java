@@ -23,13 +23,13 @@ public class Prestation {
     private String image;
 
     @ManyToOne
-    @JoinColumn(name = "registration_id")
-    private Registration registration;
+    @JoinColumn(name = "evaluation_id")
+    private Evaluation evaluation;
 
     public Prestation() {
     }
 
-    public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd, String state, String description, String maxUser, Integer add_point, String image, Registration registration) {
+    public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd, String state, String description, String maxUser, Integer add_point, String image, Evaluation evaluation) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -40,6 +40,6 @@ public class Prestation {
         this.description = description;
         this.maxUser = maxUser;
         this.image = image;
-        this.registration = registration;
+        this.evaluation = evaluation;
     }
 }
