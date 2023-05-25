@@ -25,6 +25,44 @@ afin de vérifier que ce dernier fonctionne correctement, ce sera la partie fron
 vérifier également qu'une table user avec un champ <id> et un champ <name> se sont bien créés dans votre BDD.
 
 #
+# Variables d'environnement
+#
+
+ 
+1- Sous Windows -> Ouvrir les "propriétés systèmes", aller dans "Paramètres système avancés" puis cliquer sur "Variables d'environnement" 
+
+1- Sous MAC -> Ouvrir les "préférences  systèmes", aller dans "Paramètres système avancés" puis cliquer sur "Variables d'environnement"
+
+2- Dans Variables utilisateur, cliquer sur le bouton "Nouvelle..."
+
+        Remplir les champs
+        Nom de la variable :
+        Valeur de la variable :
+
+        cliquer sur OK
+
+3- Recommencer pour créer toutes les variables 
+        Nom de la variable : DATABASE_USERNAME
+        Valeur de la variable :
+
+        Nom de la variable : DATABASE_PASSWORD
+        Valeur de la variable : 
+
+        Nom de la variable : DATABASE_URL
+        Valeur de la variable : 
+
+        Nom de la variable : JWT_SECRET
+        Valeur de la variable : 
+
+        Nom de la variable : JWT_EXPIRATION
+        Valeur de la variable : 
+
+4- Dans le fichier application.properties, remplacer les valeurs par les nom des variables d'environnement sous la forme ${DATABASE_USERNAME} par exemple.
+
+
+Il est possible de devoir redémarrer pour la prise en compte
+
+#
 # Architecture Angular
 #
 
