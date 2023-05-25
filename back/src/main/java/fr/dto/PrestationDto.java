@@ -23,6 +23,6 @@ public class PrestationDto {
     private String maxUser;
     private String image;
 
-    private List<Registration> registration;
+    private List<Integer> registration;
 
 }

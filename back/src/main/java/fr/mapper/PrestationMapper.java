@@ -26,15 +26,22 @@ public class PrestationMapper {
     UserRepository userRepository;
 
     public PrestationDto convertToDto(Prestation prestation) {
+        List<Integer> registrationIds = new ArrayList<>();
+
         PrestationDto prestationDto = modelMapper.map(prestation, PrestationDto.class);
-        List<Registration> registrations = registrationRepository.findAllByPrestationId(prestation.getId());
-        prestationDto.setRegistration(registrations);
+        List<Registration> registrations = prestation.getRegistration();
+        
+        for (Registration registration : registrations) {
+            registrationIds.add(registration.getId());
+        }
+        prestationDto.setRegistration(registrationIds);
+        
         return prestationDto;
     }
 
     public Prestation convertToEntity(PrestationDto prestationDto) {
         Prestation prestation = modelMapper.map(prestationDto, Prestation.class);
-
+        
         return prestation;
     }
 }
