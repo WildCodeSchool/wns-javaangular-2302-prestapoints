@@ -1,40 +1,51 @@
 package fr.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.exception.ExceptionJsonDetail;
+
 import fr.dto.PrestationDto;
+import fr.entity.Prestation;
 import fr.mapper.PrestationMapper;
-import fr.model.Prestation;
 import fr.repository.PrestationRepository;
 
 @Service
 public class PrestationService {
-    
-    
+
     @Autowired
     private PrestationRepository prestationRepository;
 
     @Autowired
     private PrestationMapper prestationMapper;
 
-    public void createPrestation(PrestationDto prestationDto) {
+    public List<PrestationDto> getAllPrestations() {
+        List<PrestationDto> prestationDtos = new ArrayList<>();
+        List<Prestation> prestations = prestationRepository.findAll();
+
+        for (Prestation prestation : prestations) {
+            prestationDtos.add(prestationMapper.convertToDto(prestation));
+        }
+        return prestationDtos;
+    }
+
+    public String getPrestationById(int id) throws ExceptionJsonDetail {
+        Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
+        prestationMapper.convertToDto(prestation);
+        JSONObject object = new JSONObject(prestation);
+        return  object.toString();
+    }
+
+    public Prestation createPrestation(PrestationDto prestationDto) {
         Prestation prestation = prestationMapper.convertToEntity(prestationDto);
-        prestationRepository.save(prestation);
+        return prestationRepository.save(prestation);
     }
 
-    public Prestation getPrestationById(Long id) {
-
-        return prestationRepository.getReferenceById(id);
-    }
-    
-    public Iterable<Prestation> findAllPrestations() {
-
-        return prestationRepository.findAll();
-    }
-
-    public void deletePrestation(Long id) {
+    public void deletePrestationById(int id){
         prestationRepository.deleteById(id);
     }
-
 }

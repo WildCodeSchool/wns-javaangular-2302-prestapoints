@@ -1,4 +1,4 @@
-$colors: (
+$theme-colors: (
     "primary":          #22577A,
     "secondary":        #38a3a5,
     "tertiary":         #ffedeb,
@@ -6,8 +6,7 @@ $colors: (
     "quinary":          #e63757,
     "dark":             #001C46,
     "grey-text":        #638096,
-    "background-grey":  #F5F7FA,
-    "background-grey-lighter": #F8F8F8,
+    "background-grey":      #FAF6F0,
     "white":           #ffffff,
     "accepted":         #4385F4,
     "refund":           orange,
@@ -15,7 +14,7 @@ $colors: (
     "info":            #66d1d1,
     "warning":         #FFCC00,
     "danger":          #FA393E,
-    "mat-label":#7C879C, 
+    "mat-labe":        #7C879C, 
 );
 
 $border-size: (
@@ -69,7 +68,13 @@ $font-weight : (
     }
 };
 
-@each $name, $value in $colors {
+@each $name, $value in $font-weight {
+    .presta-text-fw-#{$name} {
+        font-weight: $value;
+    }
+};
+
+@each $name, $value in $theme-colors {
     .presta-bg-#{$name} {
       background-color: $value;
     }
@@ -96,7 +101,13 @@ $spacers: (
     "12": 5rem, // 80px
     "13": 6rem, // 96px
     "14": 8rem, // 128px
-    "15": 11rem // 176px
+    "15": 11rem, // 176px
+    "16": 12rem, // 192px
+    "17": 13rem, // 208px
+    "18": 14rem, // 224px
+    "19": 15rem, // 240px
+    "20": 16rem, // 256px
+    "21": 17rem // 272px
 );
 
 @each $name, $value in $spacers {

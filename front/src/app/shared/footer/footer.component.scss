@@ -1,0 +1,18 @@
+@import "/src/styles/variables.scss";
+
+.footer {
+  height: 23rem;
+  border-top: map-get($theme-colors, quinary) 5px solid; 
+
+  .social-media-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    a {
+      margin-right: 50px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}

@@ -4,7 +4,6 @@
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
             "type": "java",
             "name": "Current File",
@@ -16,8 +15,7 @@
             "name": "PrestapointsApplication",
             "request": "launch",
             "mainClass": "fr.PrestapointsApplication",
-            "projectName": "prestapoints",
-            "args": [""],
+            "projectName": "prestapoints"
         }
     ]
 }

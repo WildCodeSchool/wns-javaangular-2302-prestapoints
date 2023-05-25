@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.dto.PrestationDto;
-import fr.model.Prestation;
+import fr.entity.Prestation;
 
 @Component
 public class PrestationMapper {
