@@ -1,0 +1,75 @@
+<!-- Default form register -->
+<form [formGroup]="signInForm" (ngSubmit)="onSubmitFormSignIn()" class="text-center p-5">
+
+    <p class="h4 mb-4 text-tertiary">Créer son compte</p>
+
+    <div class="form-row mb-4">
+        <div class="col mb-2">
+            <!-- First name -->
+            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Nom"
+                formControlName="firstname">
+            <div *ngIf="signInForm.controls['firstname'].errors && !signInForm.controls['firstname'].pristine"
+                class="error-msg">
+                <div [hidden]="!signInForm.get('firstname')?.errors?.['required']">Le nom est requis</div>
+            </div>
+        </div>
+        <div class="col">
+            <!-- Last name -->
+            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Prénom"
+                formControlName="lastname">
+            <div *ngIf="signInForm.controls['lastname'].errors && !signInForm.controls['lastname'].pristine"
+                class="error-msg">
+                <div [hidden]="!signInForm.get('lastname')?.errors?.['required']">Le prenom est requis</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- E-mail -->
+    <div>
+        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail"
+            formControlName="email">
+        <div *ngIf="signInForm.controls['email'].errors && !signInForm.controls['email'].pristine"
+            class="error-msg">
+            {{ signInForm.get('email')?.errors?.['email'].rules }}
+            <div [hidden]="!signInForm.get('email')?.errors?.['required']">l'E-mail est requis
+            </div>
+        </div>
+    </div>
+
+    <!-- Password -->
+    <div>
+        <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Mot de passe"
+            aria-describedby="defaultRegisterFormPasswordHelpBlock" formControlName="password">
+        <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-tertiary mb-4">
+            Au moins 8 caractères et un chiffre
+        </small>
+        <div *ngIf="signInForm.controls['password'].errors && !signInForm.controls['password'].pristine"
+            class="error-msg">
+            {{ signInForm.get('password')?.errors?.['password'].rules }}
+            <div [hidden]="!signInForm.get('password')?.errors?.['required']">Le mot de passe est requis
+            </div>
+        </div>
+    </div>
+
+    <!-- Phone number -->
+    <div>
+        <input type="text" id="defaultRegisterFormPhone" class="form-control" placeholder="Téléphone"
+            aria-describedby="defaultRegisterFormPhoneHelpBlock" formControlName="phone">
+        <div *ngIf="signInForm.controls['phone'].errors && !signInForm.controls['phone'].pristine" class="error-msg">
+            {{ signInForm.get('phone')?.errors?.['phone'].rules }}
+            <div [hidden]="!signInForm.get('phone')?.errors?.['required']">le numéro de téléphone est requis
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign up button -->
+    <button class="btn my-4 btn-block btn-quinary text-tertiary" type="submit"
+        [disabled]="!signInForm.valid">S'inscrire</button>
+
+    <!-- Terms of service -->
+    <p class="text-tertiary">En cliquant sur
+        <em>S'inscrire</em> vous acceptez nos
+        <a href="" target="_blank">conditions d'utilisation</a>
+
+</form>
+<!-- Default form register -->

@@ -18,9 +18,9 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public void createUser(UserDto userDto) {
+    public User createUser(UserDto userDto) {
         User user = userMapper.convertToEntity(userDto);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public User getUserById(Integer id) {

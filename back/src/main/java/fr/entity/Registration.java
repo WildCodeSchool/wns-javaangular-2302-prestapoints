@@ -16,9 +16,9 @@ import lombok.Setter;
 public class Registration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
-    private int evaluation;
+    private Integer id;
+
+    private Integer evaluation;
     private String comment;
 
     @ManyToOne(fetch = FetchType.LAZY)

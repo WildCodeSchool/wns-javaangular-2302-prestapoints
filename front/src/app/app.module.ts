@@ -5,13 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { DemoComponent } from './pages/demo/demo-component/demo.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
+
 @NgModule({
-    declarations: [AppComponent, DemoComponent, FooterComponent],
-    imports: [BrowserModule, AppRoutingModule, HttpClientModule,FormsModule,ReactiveFormsModule,],
-    providers: [FormBuilder],
-    bootstrap: [AppComponent],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

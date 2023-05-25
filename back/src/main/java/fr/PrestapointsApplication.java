@@ -24,7 +24,7 @@ public class PrestapointsApplication {
 
 
 	/* STOP FIXTURES = false   # START FIXTURES = true */ 
-	private boolean loadFixtures = true;
+	private boolean loadFixtures = false;
 
 	@PostConstruct
 	public void init() {
