@@ -33,7 +33,6 @@ public class JwtUtils{
     @Value("${jwt.expiration}")
     private Long jwtExpiration;
 
-
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
