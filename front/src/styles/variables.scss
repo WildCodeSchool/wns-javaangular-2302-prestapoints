@@ -1,26 +1,22 @@
 $colors: (
-  presta-10:          #22577A,
-  presta-20:        #38a3a5,
-  presta-30:         #ffedeb,
-  presta-40:       #F8F9F0,
-  presta-50:          #e63757,
-  presta-60:             #001C46,
-  presta-70:        #638096,
-  presta-bg-10:  #F5F7FA,
-  presta-bg-20: #F8F8F8,
-  presta-white:           #ffffff,
-  presta-accepted:         #4385F4,
-  presta-refund:           orange,
-  presta-success:         #60DAB1,
-  presta-info:            #66d1d1,
-  presta-warning:         #FFCC00,
-  presta-danger:          #FA393E,
-  presta-light:           #ececec,
-  presta-validate:        #60DAB1,
-  presta-mat-label:     #7C879C, 
-  );
-
-
+    "primary":          #22577A,
+    "secondary":        #38a3a5,
+    "tertiary":         #ffedeb,
+    "quaternary":       #F8F9F0,
+    "quinary":          #e63757,
+    "dark":             #001C46,
+    "grey-text":        #638096,
+    "background-grey":  #F5F7FA,
+    "background-grey-lighter": #F8F8F8,
+    "white":           #ffffff,
+    "accepted":         #4385F4,
+    "refund":           orange,
+    "success":         #60DAB1,
+    "info":            #66d1d1,
+    "warning":         #FFCC00,
+    "danger":          #FA393E,
+    "mat-label":#7C879C, 
+);
 
 $border-size: (
     1: 1px,  
@@ -128,9 +124,6 @@ $spacers: (
         padding-bottom: $value;
     }
 
-    .presta-m-#{$name} {
-        margin: $value;
-    }
     .presta-m-#{$name} {
         margin: $value;
     }
