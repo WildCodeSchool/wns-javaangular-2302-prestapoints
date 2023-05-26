@@ -26,16 +26,8 @@ public class PrestationMapper {
     UserRepository userRepository;
 
     public PrestationDto convertToDto(Prestation prestation) {
-        List<Integer> registrationIds = new ArrayList<>();
-
         PrestationDto prestationDto = modelMapper.map(prestation, PrestationDto.class);
-        List<Registration> registrations = prestation.getRegistrations();
-        
-        for (Registration registration : registrations) {
-            registrationIds.add(registration.getId());
-        }
-        prestationDto.setRegistrations(registrationIds);
-        
+               
         return prestationDto;
     }
 
