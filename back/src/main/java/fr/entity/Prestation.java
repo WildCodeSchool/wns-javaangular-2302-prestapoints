@@ -26,9 +26,9 @@ public class Prestation {
     private String image;
 
     @OneToMany(mappedBy = "prestation")
-    private List<Registration> registration = new ArrayList<>();
+    private List<Registration> registrations = new ArrayList<>();
 
-    public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd, String state, String description, String maxUser, String image, List<Registration> registration) {
+    public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd, String state, String description, String maxUser, String image, List<Registration> registrations) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -39,7 +39,7 @@ public class Prestation {
         this.description = description;
         this.maxUser = maxUser;
         this.image = image;
-        this.registration = registration;
+        this.registrations = registrations;
     }
 
     public Prestation() {

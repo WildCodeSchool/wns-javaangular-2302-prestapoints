@@ -47,8 +47,10 @@ public class Fixtures {
 		if (isTableExist(tableName)) {
 			// La table existe, on la vide
 			deleteTable(tableName);
+            
             return true;
 		}
+
         return false;
 	}
 
