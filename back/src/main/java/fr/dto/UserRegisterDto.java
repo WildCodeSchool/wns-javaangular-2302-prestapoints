@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RegistrationDto {
+public class UserRegisterDto {
 
     private int evaluation;
     private String comment;

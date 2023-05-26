@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 import fr.enums.TablesEnum;
 
 @Component
-public class RegistrationFixtures {
+public class UserRegisterFixtures {
 
     @Autowired
     private Fixtures fixtures;
 
     public void prepareFixtures() {
-        String table = TablesEnum.REGISTRATION.getTableName();
+        String table = TablesEnum.USERREGISTER.getTableName();
         Integer numberOfLigne = 10;
         
         List<String> columns = Arrays.asList(
