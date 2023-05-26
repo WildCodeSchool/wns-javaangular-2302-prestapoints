@@ -1,6 +1,6 @@
 package fr.dto;
 
-
+import java.util.List;
 import fr.entity.Registration;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +18,8 @@ public class PrestationDto {
     private String state;
     private String description;
     private String maxUser;
-    private Registration registration;
+    private String image;
+
+    private List<Registration> registrations;
+
 }

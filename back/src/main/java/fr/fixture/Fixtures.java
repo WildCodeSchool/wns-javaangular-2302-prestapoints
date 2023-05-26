@@ -43,6 +43,18 @@ public class Fixtures {
 		}
 	}
 
+    public boolean isDatatableExistAndDelete(String tableName) {
+		if (isTableExist(tableName)) {
+			// La table existe, on la vide
+			deleteTable(tableName);
+            
+            return true;
+		}
+
+        return false;
+	}
+
+
 	public void launchFixtures(String tableName, int number, List<String> columns, Supplier<?>[] suppliers) {
 		if (isTableExist(tableName)) {
 			// La table existe, on la vide
