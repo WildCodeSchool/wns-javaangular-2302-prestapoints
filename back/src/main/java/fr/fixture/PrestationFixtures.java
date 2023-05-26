@@ -36,11 +36,7 @@ public class PrestationFixtures {
                 prestation.setId(i);
                 prestation.setTitle(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
                 prestation.setDuration(String.valueOf(faker.number().numberBetween(1, 100)));
-                
-                String latitude = String.valueOf(faker.number().randomDouble(5, 48, 50));
-                String longitude = String.valueOf(faker.number().randomDouble(5, 1, 2));
-                prestation.setAddPoint(latitude + ", " +  longitude);
-
+                prestation.setAddPoint(String.valueOf(faker.number().numberBetween(100, 500)));
                 prestation.setDateEnd(String.valueOf(sdf.format(faker.date().future(30,TimeUnit.DAYS))));
                 prestation.setDateStart(String.valueOf(sdf.format(faker.date().future(30,TimeUnit.DAYS))));
                 prestation.setState(String.valueOf(faker.number().numberBetween(1, 3)));
