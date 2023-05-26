@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PrestationDto } from 'back/src/main/java/fr/dto/PrestationDto.java';
+
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class PrestationService {
 
   constructor(private http: HttpClient) {}
 
-  getPrestations(): Observable<PrestationDto[]> {
-    return this.http.get<PrestationDto[]>(this.apiUrl);
+  getPrestations(): Observable<Prestation> {
+    return this.http.get<Prestation>(this.apiUrl);
   }
 }
