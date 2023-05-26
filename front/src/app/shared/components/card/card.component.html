@@ -1,18 +1,23 @@
 <div class="card" style="width: 13rem">
   <div class="card-body">
-    <h6 class="category-text text-primary">Textile</h6>
-    <h5 class="card-title">Formez-vous à la tapisserie d'ameublement</h5>
+    <h6 class="category-text text-primary">{{ prestation?.category }}</h6>
+    <h6 class="card-title">{{ prestation?.title }}</h6>
+
     <img
       class="card-img-top"
-      src="assets/activities/upholstery.jpg"
-      alt="Activity"
+      src="{{ prestation?.image }}"
+      alt="photo prestation"
     />
     <br /><br />
-    <p class="card-points text-primary">50 pts</p>
 
-    <p class="card-duration text-gray-text"><i class="bi bi-alarm"></i> 3H</p>
-    <p class="card-city text-gray-text">
-      <i class="bi bi-geo-alt"></i> Bordeaux
+    <p class="card-point text-primary">{{ prestation?.addPoint }} pts</p>
+
+    <p class="card-duration text-grey-text">
+      <i class="bi bi-alarm"></i> {{ prestation?.duration }}
+    </p>
+    <p class="card-city text-grey-text">
+      <i class="bi bi-geo-alt"></i>
+      <!--{{ prestation?.city }}-->
     </p>
     <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
   </div>
