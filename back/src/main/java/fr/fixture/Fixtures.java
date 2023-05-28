@@ -136,7 +136,7 @@ public class Fixtures {
 	 */
 	public String imageFakerRandom(Integer heigth, Integer width) {
 		Random random = new Random();
-		Integer id = random.nextInt(237) + 1;
+		Integer id = random.nextInt(1080) + 1;
 
 		return "https://picsum.photos/id/" + id.toString() + "/" + width.toString() + "/" + heigth.toString();
 	}
