@@ -43,7 +43,7 @@ public class PrestationFixtures {
                 prestation.setDescription(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
                 prestation.setMaxUser(String.valueOf(faker.number().numberBetween(1,6)));
                 prestation.setImage(fixtures.imageFakerRandom(200, 300));
-                
+
                 prestationRepository.save(prestation);
             }
         }

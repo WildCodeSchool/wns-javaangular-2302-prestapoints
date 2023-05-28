@@ -3,6 +3,8 @@ package fr.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,8 +27,18 @@ public class Prestation {
     private String maxUser;
     private String image;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id")    
+    private Type type;
+    
+
     @OneToMany(mappedBy = "prestation")
+    @JsonIgnore
     private List<Registration> registrations = new ArrayList<>();
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd, String state, String description, String maxUser, String image, List<Registration> registrations) {
         this.id = id;

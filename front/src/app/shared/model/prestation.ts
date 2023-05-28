@@ -1,4 +1,7 @@
+import { Registration } from "./registration";
+
 export class Prestation {
+
   constructor(
     public title?: string,
     public duration?: string,
@@ -10,5 +13,7 @@ export class Prestation {
     public maxUser?: string,
     public image?: string,
     public category?: string,
+    public type?: string,
+   // public registration?: Registration[]
   ) {}
 }
