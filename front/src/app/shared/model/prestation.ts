@@ -1,4 +1,6 @@
+import { Type } from "./type";
 import { Registration } from "./registration";
+import { Location } from "./location";
 
 export class Prestation {
 
@@ -12,8 +14,9 @@ export class Prestation {
     public description?: string,
     public maxUser?: string,
     public image?: string,
-    public category?: string,
-    public type?: string,
+    public type?: Type,
+    public location?: Location,
+    
    // public registration?: Registration[]
   ) {}
 }

@@ -1,6 +1,6 @@
 <div class="card" style="width: 13rem">
   <div class="card-body">
-    <h6 class="category-text text-primary">{{ prestation?.category }}</h6>
+    <h6 class="category-text text-primary fw-bold">{{ prestation?.type?.name }}</h6>
     <h6 class="card-title text-truncate">{{ prestation?.title }}</h6>
 
     <img
@@ -16,7 +16,7 @@
     </p>
     <p class="card-city text-grey-text">
       <i class="bi bi-geo-alt"></i>
-      <!--{{ prestation?.city }}-->
+      {{ prestation?.location?.city }}
     </p>
   </div>
 </div>

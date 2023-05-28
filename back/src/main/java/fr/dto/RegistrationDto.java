@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class RegistrationDto {
 
-    private int evaluation;
+    private Integer evaluation;
     private String comment;
 }

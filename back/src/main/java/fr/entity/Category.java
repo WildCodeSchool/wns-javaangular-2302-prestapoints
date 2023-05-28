@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,13 @@ public class Category {
     private String name;
     
     @OneToMany(mappedBy = "category")
-    @JsonIgnore
+    @JsonIgnoreProperties 
     private List<Type> types = new ArrayList<>();
+
+    public void setTypes(List<Type> types) {
+        this.types = types;
+        for (Type type : types) {
+            type.setCategory(this);
+          }
+    }
 }

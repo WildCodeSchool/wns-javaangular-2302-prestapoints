@@ -18,7 +18,8 @@ public class PrestationDto {
     private String description;
     private String maxUser;
     private String image;
-    private String type;
+    private TypeDto type;
+    private LocationDto location;
 
     private List<RegistrationDto> registrations;
 
