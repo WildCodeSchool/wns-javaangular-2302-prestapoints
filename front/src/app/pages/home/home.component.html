@@ -1,26 +1,39 @@
 <div class="container">
-    
-    <div class="d-flex justify-content-end position-relative">
-        <div class="position-absolute top-50 start-25 translate-middle">
-            <app-searchbar></app-searchbar>
-        </div>
-        
-        <img src="https://cdn.pixabay.com/photo/2015/08/19/08/26/artisan-895670_1280.jpg" class="img-fluid w-50" alt="...">
+  <div class="d-flex justify-content-end position-relative">
+
+    <div class="position-absolute top-50 start-25 translate-middle">
+      <app-searchbar></app-searchbar>
     </div>
 
-    <hr class="my-4">
-    
-    <div class="">
-        <p class="mb-0 fw-0 " >Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i></p>
-        
-            <div  class="d-flex flex-column flex-sm-row">
-                <ng-container *ngFor="let prestationTarget of prestations">
-                    <app-card [prestation]="prestationTarget"></app-card>
-                </ng-container>
+    <img src="https://cdn.pixabay.com/photo/2015/08/19/08/26/artisan-895670_1280.jpg" class="img-fluid w-50 shadow" alt="...">
+
+  </div>
+
+  <hr class="my-4">
+
+  <p class="my-0 fw-0 ">Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i></p>
+
+  <div id="swiperCustom" class="carousel slide ">
+    <div class="carousel-inner  ">
+      <ng-container *ngFor="let prestationTarget of prestations; let i = index">
+        <div class="carousel-item {{ i === currentIndex ? 'active' : '' }}">
+          <div class="row justify-content-center position-relative">
+            <div class="col-12 col-md-6 col-lg-2 d-flex justify-content-center"
+              *ngFor="let prestationTarget of prestations?.slice(i, i + 5)">
+              <app-card [prestation]="prestationTarget"></app-card>
             </div>
-
-            <hr class="my-4 p-1">
+          </div>
         </div>
-
+      </ng-container>
     </div>
 
+    <button class="carousel-control-prev btn btn-primary position-absolute top-50 start-0 translate-middle p-0 h-25"
+      type="button" data-bs-target="#swiperCustom" (click)="prev()">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+
+    <button class="carousel-control-next btn btn-primary position-absolute top-50 start-100 translate-middle p-0 h-25"
+      type="button" data-bs-target="#swiperCustom" (click)="next()">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+  </div>
