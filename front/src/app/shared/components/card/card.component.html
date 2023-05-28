@@ -1,0 +1,22 @@
+<div class="card" style="width: 13rem">
+  <div class="card-body">
+    <h6 class="category-text text-primary">{{ prestation?.category }}</h6>
+    <h6 class="card-title text-truncate">{{ prestation?.title }}</h6>
+
+    <img
+      class="card-img-top rounded-0 mb-2"
+      src="{{ prestation?.image }}"
+      alt="photo prestation"
+    />
+
+    <p class="card-point text-primary">{{ prestation?.addPoint }} pts</p>
+
+    <p class="card-duration text-grey-text">
+      <i class="bi bi-alarm"></i> {{ prestation?.duration }} h
+    </p>
+    <p class="card-city text-grey-text">
+      <i class="bi bi-geo-alt"></i>
+      <!--{{ prestation?.city }}-->
+    </p>
+  </div>
+</div>
