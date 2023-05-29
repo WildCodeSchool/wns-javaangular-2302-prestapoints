@@ -13,11 +13,11 @@ import lombok.*;
 @Getter
 @Setter
 public class Prestation {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     private String title;
     private String duration;
     private String addPoint;
@@ -30,19 +30,19 @@ public class Prestation {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
-    @JsonIgnoreProperties   
+    @JsonIgnoreProperties
     private Type type;
-    
 
     @OneToMany(mappedBy = "prestation")
     @JsonIgnore
     private List<Registration> registrations = new ArrayList<>();
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
     private Location location;
 
-    public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd, String state, String description, String maxUser, String image, List<Registration> registrations) {
+    public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd,
+            String state, String description, String maxUser, String image, List<Registration> registrations) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -58,6 +58,4 @@ public class Prestation {
 
     public Prestation() {
     }
-
-
 }

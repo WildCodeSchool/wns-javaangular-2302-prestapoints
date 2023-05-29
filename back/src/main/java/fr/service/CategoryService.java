@@ -30,6 +30,7 @@ public class CategoryService {
         for (Category category : categories) {
             categoriesDto.add(categoryMapper.convertToDto(category));
         }
+
         return categoriesDto;
     }
 
@@ -37,15 +38,17 @@ public class CategoryService {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
         categoryMapper.convertToDto(category);
         JSONObject object = new JSONObject(category);
-        return  object.toString();
+
+        return object.toString();
     }
 
     public Category createCategory(CategoryDto categoryDto) {
         Category category = categoryMapper.convertToEntity(categoryDto);
+
         return categoryRepository.save(category);
     }
 
-    public void deleteCategoryById(Integer id){
+    public void deleteCategoryById(Integer id) {
         categoryRepository.deleteById(id);
     }
 }

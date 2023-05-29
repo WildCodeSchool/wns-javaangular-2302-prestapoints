@@ -36,8 +36,6 @@ public class PrestationFixtures {
             Integer numberOfLigne = 20;
 
             for (int i = 0; i < numberOfLigne; i++) {
-
-
                 prestation.setId(i);
                 prestation.setTitle(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
                 prestation.setDuration(String.valueOf(faker.number().numberBetween(1, 100)));

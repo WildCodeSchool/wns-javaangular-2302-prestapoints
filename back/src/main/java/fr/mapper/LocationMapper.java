@@ -8,7 +8,6 @@ import fr.dto.LocationDto;
 import fr.entity.Location;
 import fr.repository.LocationRepository;
 
-
 @Component
 public class LocationMapper {
     

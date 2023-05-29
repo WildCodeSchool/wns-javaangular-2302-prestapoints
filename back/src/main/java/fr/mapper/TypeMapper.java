@@ -8,7 +8,6 @@ import fr.dto.TypeDto;
 import fr.entity.Type;
 import fr.repository.TypeRepository;
 
-
 @Component
 public class TypeMapper {
     

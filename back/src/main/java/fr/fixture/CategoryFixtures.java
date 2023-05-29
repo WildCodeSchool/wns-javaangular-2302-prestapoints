@@ -23,9 +23,7 @@ public class CategoryFixtures {
     @Autowired
     TypeRepository typeRepository;
 
-
     public void prepareFixtures() {
-
         String table = TablesEnum.CATEGORY.getTableName();
         Faker faker = new Faker();
         Category category = new Category();

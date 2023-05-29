@@ -30,6 +30,7 @@ public class TypeService {
         for (Type type : types) {
             typesDto.add(typeMapper.convertToDto(type));
         }
+
         return typesDto;
     }
 
@@ -37,15 +38,17 @@ public class TypeService {
         Type type = typeRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
         typeMapper.convertToDto(type);
         JSONObject object = new JSONObject(type);
-        return  object.toString();
+
+        return object.toString();
     }
 
     public Type createType(TypeDto typeDto) {
         Type type = typeMapper.convertToEntity(typeDto);
+
         return typeRepository.save(type);
     }
 
-    public void deleteTypeById(Integer id){
+    public void deleteTypeById(Integer id) {
         typeRepository.deleteById(id);
     }
 }

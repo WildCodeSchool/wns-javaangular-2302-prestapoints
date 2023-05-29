@@ -30,6 +30,7 @@ public class LocationService {
         for (Location location : locations) {
             LocationsDto.add(locationMapper.convertToDto(location));
         }
+
         return LocationsDto;
     }
 
@@ -37,15 +38,17 @@ public class LocationService {
         Location location = locationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
         locationMapper.convertToDto(location);
         JSONObject object = new JSONObject(location);
-        return  object.toString();
+
+        return object.toString();
     }
 
     public Location createLocation(LocationDto locationDto) {
         Location location = locationMapper.convertToEntity(locationDto);
+
         return locationRepository.save(location);
     }
 
-    public void deleteLocationById(Integer id){
+    public void deleteLocationById(Integer id) {
         locationRepository.deleteById(id);
     }
 }

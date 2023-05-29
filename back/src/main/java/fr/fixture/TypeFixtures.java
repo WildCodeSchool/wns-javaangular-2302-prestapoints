@@ -25,13 +25,11 @@ public class TypeFixtures {
 
 
     public void prepareFixtures() {
-
         String table = TablesEnum.TYPE.getTableName();
         Faker faker = new Faker();
         Type type = new Type();
 
-        if (fixtures.isDatatableExistAndDelete(table)){
-                        
+        if (fixtures.isDatatableExistAndDelete(table)){     
             Integer numberOfLigne = 5;
 
             for (int i = 1; i <= numberOfLigne; i++) {

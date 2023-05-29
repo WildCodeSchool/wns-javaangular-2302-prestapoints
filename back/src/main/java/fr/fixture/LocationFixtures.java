@@ -34,7 +34,6 @@ public class LocationFixtures {
 
             for (int i = 0; i < numberOfLigne; i++) {
 
-
                 location.setId(i);
                 location.setPostalCode(faker.address().countryCode());
                 location.setCity(faker.address().cityName());
