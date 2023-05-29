@@ -26,6 +26,7 @@ public class User {
     private String firstname;
     private String email;
     private String password;
+    private String phone;
     private Timestamp tokenValidation;
     private Timestamp creation;
     

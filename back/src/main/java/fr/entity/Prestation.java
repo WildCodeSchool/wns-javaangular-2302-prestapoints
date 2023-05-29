@@ -1,5 +1,8 @@
 package fr.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,9 +25,8 @@ public class Prestation {
     private String maxUser;
     private String image;
 
-    @ManyToOne
-    @JoinColumn(name = "registration_id")
-    private Registration registration;
+    @OneToMany(mappedBy = "prestation")
+    private List<Registration> registration = new ArrayList<>();
 
     public Prestation() {
     }
@@ -40,6 +42,5 @@ public class Prestation {
         this.description = description;
         this.maxUser = maxUser;
         this.image = image;
-        this.registration = registration;
     }
 }

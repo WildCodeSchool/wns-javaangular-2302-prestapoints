@@ -19,6 +19,8 @@ public class SecurityUserService implements UserDetailsService {
     public SecurityUserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+
+        System.out.println(" ****** ****** ******* *** *le password  " + passwordEncoder.encode("coucou"));
     }
 
     @Override

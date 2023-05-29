@@ -38,12 +38,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String token = jwtUtils.getToken(request);
+        log.info("le token est : " + token);
 
         if (token != null && jwtUtils.validateToken(token)) {
+            log.info("le token est validé ");
+
             String email = jwtUtils.extractUsername(token);
+            log.info("le username est " + email);
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(email);
             if (userDetails != null) {
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails.getUsername(), null, userDetails.getAuthorities());
                 log.info("authenticated user with email :{}", email);

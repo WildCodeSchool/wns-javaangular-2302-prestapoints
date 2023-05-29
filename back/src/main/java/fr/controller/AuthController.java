@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,10 +35,11 @@ public class AuthController {
 
     @PostMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    Map<String, ?> doAuth() {
+    @CrossOrigin(origins = "*")
+    public Map<String, ?> doAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));       
         List<String> rolesNames = user.securityUser().getAuthorities().stream()
                 .map(authority -> authority.getAuthority()).toList();
         String token = jwtUtils.generateToken(user.getEmail(), rolesNames);
@@ -46,7 +48,8 @@ public class AuthController {
     
     @GetMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    Map<String, ?> testAuth() {
+    @CrossOrigin(origins = "*")
+    public Map<String, ?> testAuth() {
         return Map.of("success", true);
     }
 }

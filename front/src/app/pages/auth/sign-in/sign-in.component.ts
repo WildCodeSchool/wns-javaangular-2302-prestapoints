@@ -13,14 +13,14 @@ export class SignInComponent {
   constructor(private fb: FormBuilder, private signInService: SignInService) { }
 
   newUser?: User;
-  createdUser: User = new User();
+
 
   signInForm = this.fb.group({
     firstname: ['', [Validators.required]],
     lastname: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator]],
-    phone: ['', [Validators.required, this.phoneValidator]],
+    phone: ['', [Validators.required]],
   });
 
   onSubmitFormSignIn() {
@@ -32,13 +32,15 @@ export class SignInComponent {
         this.signInForm.get('password')?.value,
         this.signInForm.get('phone')?.value,
       )
-      this.signInService.createUser(this.newUser).subscribe((user) => {
-        this.createdUser = user;
+      console.log(this.newUser.phone);
+      
+      this.signInService.createUser(this.newUser).subscribe(() => {
+
         this.signInForm.reset();
       });
     }
   }
-
+  
   passwordValidator(control: AbstractControl): ValidationErrors | null {
     const passwordRegex = RegExp('(?=.*[1-9])');
     const valid = passwordRegex.test(control.value);

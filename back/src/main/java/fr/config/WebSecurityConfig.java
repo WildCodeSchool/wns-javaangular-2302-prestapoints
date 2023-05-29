@@ -74,6 +74,7 @@ public class WebSecurityConfig {
         DaoAuthenticationProvider authProvider = new DaoOverride();
         authProvider.setUserDetailsService(userService);
         authProvider.setPasswordEncoder(passwordEncoder);
+        
         return authProvider;
     }
 }
