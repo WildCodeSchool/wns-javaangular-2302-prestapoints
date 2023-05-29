@@ -1,0 +1,12 @@
+<div class="search-bar p-0 border-secondary">
+  <input type="text" placeholder="Recherche par lieu" class="search-input rounded-left ">
+  <input type="text" placeholder="Recherche par mot-clé" class="search-input">
+  <button class="discover-button rounded-right h-100 m-0 py-0 border-0">Découvrir</button>
+</div>
+
+<form class="d-flex mt-5" (ngSubmit)="searchForm.valid && onSubmit()" [formGroup]="searchForm" #searchF="ngForm">
+  <input class="form-control me-2" type="text" placeholder="Rechercher" required maxlength="50" 
+  name="search" formControlName="search" >
+  <button class="btn btn-outline-secondary" type="submit" >Rechercher</button>
+
+</form>
