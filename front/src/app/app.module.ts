@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { DemoComponent } from './pages/demo/demo-component/demo.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { SlickCarouselModule } from "ngx-slick-carousel";
+
 
 @NgModule({
   declarations: [AppComponent, DemoComponent, FooterComponent, NavbarComponent],
@@ -16,7 +18,8 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SlickCarouselModule
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent],

@@ -7,6 +7,7 @@ import { PrestationService } from 'src/app/shared/services/prestation.service';
 import { SearchbarComponent } from 'src/app/shared/searchbar/searchbar.component';
 import { SliderComponent } from 'src/app/shared/components/slider/slider.component';
 import { CardComponent } from 'src/app/shared/components/card/card.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 @NgModule({
@@ -14,11 +15,13 @@ import { CardComponent } from 'src/app/shared/components/card/card.component';
     HomeComponent,
     SearchbarComponent,
     SliderComponent,
-    CardComponent
+    CardComponent, 
+    
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    SlickCarouselModule
   ], 
   providers: [PrestationService],
 })
