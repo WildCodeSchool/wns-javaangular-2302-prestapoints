@@ -6,11 +6,13 @@ import { Prestation } from '../model/prestation';
 
 @Injectable()
 export class PrestationService {
-  private apiUrl: string = 'http://localhost:8080/prestations';
+  private apiUrl?: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getPrestations(): Observable<Prestation[]> {
+    this.apiUrl = 'http://localhost:8080/prestations';
+
     return this.http.get<Prestation[]>(this.apiUrl);
   }
 }

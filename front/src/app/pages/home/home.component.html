@@ -2,7 +2,7 @@
 
   <div class="d-flex justify-content-end position-relative">
     <div class="position-absolute top-50 start-25 translate-middle">
-      <app-searchbar></app-searchbar>
+      <app-searchbar (prestationsEmitter)="onGetPrestation($event)"></app-searchbar>
     </div>
     <img src="https://cdn.pixabay.com/photo/2015/08/19/08/26/artisan-895670_1280.jpg" class="img-fluid w-50 shadow"
       alt="photo d'accueil">
