@@ -8,35 +8,13 @@ import { PrestationService } from 'src/app/shared/services/prestation.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public prestations?: Prestation[];
-  public prestationTarget?: Prestation;
-  public currentIndex = 0;
-
-  constructor(private service: PrestationService) {
-    this.prestationTarget = new Prestation('');
-  }
+  public prestationsApi?: Prestation[];
+  
+  constructor(private service: PrestationService) {}
 
   ngOnInit() {
     this.service.getPrestations().subscribe((response) => {
-      this.prestations = response;
+      this.prestationsApi = response;
     });
-  }
-
-  prev() {
-    if (this.prestations?.length != null) {
-      this.currentIndex = 
-        this.currentIndex === 0
-          ? this.prestations.length - 1
-          : this.currentIndex - 1;
-    }
-  }
-
-  next() {
-    if (this.prestations?.length != null) {
-      this.currentIndex =
-        this.currentIndex === this.prestations.length - 1
-          ? 0
-          : this.currentIndex + 1;
-    }
   }
 }

@@ -6,13 +6,15 @@ import { HomeComponent } from './home.component';
 import { CardComponent } from 'src/app/shared/components/card/card.component';
 import { PrestationService } from 'src/app/shared/services/prestation.service';
 import { SearchbarComponent } from 'src/app/shared/searchbar/searchbar.component';
+import { SliderComponent } from 'src/app/shared/components/slider/slider.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     CardComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    SliderComponent
   ],
   imports: [
     CommonModule,

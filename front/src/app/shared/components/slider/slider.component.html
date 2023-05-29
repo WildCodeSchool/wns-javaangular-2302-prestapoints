@@ -1,1 +1,24 @@
-<p>slider works!</p>
+<div id="swiperCustom" class="carousel slide ">
+    <div class="carousel-inner  ">
+      <ng-container *ngFor="let prestationApi of prestationsApi; let i = index">
+        <div class="carousel-item {{ i === currentIndex ? 'active' : '' }}">
+          <div class="row justify-content-center position-relative">
+            <div class="col-12 col-md-6 col-lg-2 d-flex justify-content-center"
+              *ngFor="let prestationApi of prestationsApi?.slice(i, i + 5)">
+              <app-card [prestation]="prestationApi"></app-card>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <button class="carousel-control-prev btn btn-primary position-absolute top-50 start-0 translate-middle p-0 h-25"
+      type="button" data-bs-target="#swiperCustom" (click)="prev()">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+
+    <button class="carousel-control-next btn btn-primary position-absolute top-50 start-100 translate-middle p-0 h-25"
+      type="button" data-bs-target="#swiperCustom" (click)="next()">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+  </div>
