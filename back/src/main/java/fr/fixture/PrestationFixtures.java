@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 import com.github.javafaker.Faker;
 import fr.entity.Prestation;
 import fr.enums.TablesEnum;
+import fr.repository.LocationRepository;
 import fr.repository.PrestationRepository;
+import fr.repository.TypeRepository;
 
 @Component
 public class PrestationFixtures {
@@ -17,7 +19,10 @@ public class PrestationFixtures {
 
     @Autowired
     PrestationRepository prestationRepository;
-
+    @Autowired
+    TypeRepository typeRepository;
+    @Autowired
+    LocationRepository locationRepository;
 
     public void prepareFixtures() {
 
@@ -31,8 +36,6 @@ public class PrestationFixtures {
             Integer numberOfLigne = 20;
 
             for (int i = 0; i < numberOfLigne; i++) {
-
-
                 prestation.setId(i);
                 prestation.setTitle(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
                 prestation.setDuration(String.valueOf(faker.number().numberBetween(1, 100)));
@@ -43,7 +46,9 @@ public class PrestationFixtures {
                 prestation.setDescription(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
                 prestation.setMaxUser(String.valueOf(faker.number().numberBetween(1,6)));
                 prestation.setImage(fixtures.imageFakerRandom(200, 300));
-                
+                prestation.setType(typeRepository.getReferenceById(faker.number().numberBetween(1, 5)));
+                prestation.setLocation(locationRepository.getReferenceById(faker.number().numberBetween(1, 50)));
+
                 prestationRepository.save(prestation);
             }
         }

@@ -54,7 +54,6 @@ public class Fixtures {
         return false;
 	}
 
-
 	public void launchFixtures(String tableName, int number, List<String> columns, Supplier<?>[] suppliers) {
 		if (isTableExist(tableName)) {
 			// La table existe, on la vide
@@ -136,7 +135,7 @@ public class Fixtures {
 	 */
 	public String imageFakerRandom(Integer heigth, Integer width) {
 		Random random = new Random();
-		Integer id = random.nextInt(237) + 1;
+		Integer id = random.nextInt(1080) + 1;
 
 		return "https://picsum.photos/id/" + id.toString() + "/" + width.toString() + "/" + heigth.toString();
 	}
