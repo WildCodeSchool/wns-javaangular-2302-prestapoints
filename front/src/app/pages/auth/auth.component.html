@@ -5,7 +5,7 @@
     </div>
     <div class="containerFormAuth">
         <div class="formRegister">
-            <app-sign-in></app-sign-in>
+            <app-sign-in (alertToSend)="onReceiveAlert($event)"></app-sign-in>
         </div>
         <div class="formLogIn">
             <app-log-in (alertToSend)="onReceiveAlert($event)"></app-log-in>

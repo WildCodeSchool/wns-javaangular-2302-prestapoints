@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { SignInService } from '../service/signIn.service';
 import { User } from 'src/app/shared/model/user';
+import { Alert } from 'src/app/shared/model/alert';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +14,10 @@ export class SignInComponent {
   constructor(private fb: FormBuilder, private signInService: SignInService) { }
 
   newUser?: User;
+  alert: Alert = new Alert();
 
+  @Output()
+  alertToSend: EventEmitter<Alert> = new EventEmitter();
 
   signInForm = this.fb.group({
     firstname: ['', [Validators.required]],
@@ -32,15 +36,19 @@ export class SignInComponent {
         this.signInForm.get('password')?.value,
         this.signInForm.get('phone')?.value,
       )
-      console.log(this.newUser.phone);
-      
-      this.signInService.createUser(this.newUser).subscribe(() => {
 
+      this.alert.type = "info";
+      this.alert.message = "Merci pour votre inscription, veuillez vous connecter afin d'accéder au site.";
+      this.alert.timer = true;
+
+      this.signInService.createUser(this.newUser).subscribe(() => {
+        this.sendAlert();
+        this.startAlertTimer();
         this.signInForm.reset();
       });
     }
   }
-  
+
   passwordValidator(control: AbstractControl): ValidationErrors | null {
     const passwordRegex = RegExp('(?=.*[1-9])');
     const valid = passwordRegex.test(control.value);
@@ -66,6 +74,17 @@ export class SignInComponent {
       }
     };
     return !valid ? errors : null;
+  }
+
+  sendAlert(): void {
+    this.alertToSend.emit(this.alert);
+  }
+
+  startAlertTimer() {
+    setTimeout(() => {
+      this.alert.timer = false; // Réinitialiser l'alerte pour la faire disparaître
+      this.sendAlert();
+    }, 5000); // 2000 millisecondes = 3 secondes
   }
 }
 
