@@ -49,7 +49,7 @@ export class LogInComponent implements OnInit {
           this.loading = false;
           console.error(error);
           this.alert.type = "danger";
-          this.alert.message = "L'identifiant ou le mot de passe sont incorrect";
+          this.alert.message = "L'identifiant ou le mot de passe est incorrect";
           this.alert.timer = true;
           this.sendAlert();
           this.error = error;
@@ -64,7 +64,7 @@ export class LogInComponent implements OnInit {
     setTimeout(() => {
       this.alert.timer = false; // Réinitialiser l'alerte pour la faire disparaître
       this.sendAlert();
-    }, 2000); // 2000 millisecondes = 3 secondes
+    }, 6000); // 2000 millisecondes = 3 secondes
   }
 
 }
