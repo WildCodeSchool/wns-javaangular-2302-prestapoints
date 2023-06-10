@@ -11,6 +11,6 @@ export class SignInService {
   constructor(public http : HttpClient) { }
 
   createUser(user: User): Observable<User>{
-    return this.http.post<User>("http://localhost:8080/users/create", user);
+    return this.http.post<User>("http://localhost:8080/public/sign-in", user);
   }
 }

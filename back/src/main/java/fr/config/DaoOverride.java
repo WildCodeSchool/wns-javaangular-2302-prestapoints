@@ -9,6 +9,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+// DaoOverride
+// - effectue la vérification du mot de passe
 public class DaoOverride extends DaoAuthenticationProvider {
 
     @Autowired

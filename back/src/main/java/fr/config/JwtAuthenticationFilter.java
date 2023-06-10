@@ -17,7 +17,10 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+// JwtAuthenticationFilter
+// - effectue la vérification du token JWT
+// - effectue la vérification du mail utilisateur
+// - charge les informations de l'authentification
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 

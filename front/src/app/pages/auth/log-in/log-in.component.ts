@@ -1,17 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/service/auth/authentication.service';
+import { Alert } from 'src/app/shared/model/alert';
 
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss']
 })
-export class LogInComponent implements OnInit{
+export class LogInComponent implements OnInit {
 
   model: any = {};
   loading: boolean = false;
   error: String = '';
+  alert: Alert = new Alert();
+
+  @Output()
+  alertToSend: EventEmitter<Alert> = new EventEmitter();
 
   constructor(
     private router: Router,
@@ -22,28 +27,44 @@ export class LogInComponent implements OnInit{
   }
 
   login() {
-    console.log("coucou");
-    console.log(this.model.username);
-    console.log(this.model.password);
-    
     this.loading = true;
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(
         result => {
           if (result) {
-              console.log("well done, you are logged with roles: " + this.authenticationService.getRoles().join(', '));
-              // login successful
-              alert("gooooodddd");
-            } else {
-              // login failed
-              this.error = 'Username or password is incorrect';
-              this.loading = false;
-              alert("not gooooodddd");
-            }
-      }, (error: string) => {
-        this.loading = false;
-        console.error(error);
-        this.error = error;
-      });
+            console.log("well done, you are logged with roles: " + this.authenticationService.getRoles().join(', '));
+            this.alert.type = "success";
+            this.alert.message = "Bonjour, vous êtes connecté";
+            this.alert.timer = true;
+            this.sendAlert();
+            this.startAlertTimer();
+            this.router.navigate(['/home']);
+          } else {
+            // login failed
+            this.error = 'Username or password is incorrect';
+            this.loading = false;
+
+          }
+        }, (error: string) => {
+          this.loading = false;
+          console.error(error);
+          this.alert.type = "danger";
+          this.alert.message = "L'identifiant ou le mot de passe sont incorrect";
+          this.alert.timer = true;
+          this.sendAlert();
+          this.error = error;
+        });
   }
+
+  sendAlert(): void {
+    this.alertToSend.emit(this.alert);
+  }
+
+  startAlertTimer() {
+    setTimeout(() => {
+      this.alert.timer = false; // Réinitialiser l'alerte pour la faire disparaître
+      this.sendAlert();
+    }, 2000); // 2000 millisecondes = 3 secondes
+  }
+
 }

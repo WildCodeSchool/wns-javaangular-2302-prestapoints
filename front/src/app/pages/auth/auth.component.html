@@ -1,3 +1,4 @@
+<app-alert [alert]="alertToSend"></app-alert>
 <div class="pageAuth">
     <div class="titleFormAuth">
         <h3>MON COMPTE</h3>
@@ -7,7 +8,7 @@
             <app-sign-in></app-sign-in>
         </div>
         <div class="formLogIn">
-            <app-log-in></app-log-in>
+            <app-log-in (alertToSend)="onReceiveAlert($event)"></app-log-in>
         </div>
     </div>
 </div>

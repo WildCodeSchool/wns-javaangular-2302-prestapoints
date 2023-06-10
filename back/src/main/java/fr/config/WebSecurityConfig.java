@@ -9,13 +9,14 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
+import java.util.Arrays;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import fr.service.SecurityUserService;
 
 @Configuration
@@ -25,48 +26,67 @@ public class WebSecurityConfig {
     private final SecurityUserService userService;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService)
+                .passwordEncoder(passwordEncoder);
+    }
 
     public WebSecurityConfig(SecurityUserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter)
+            throws Exception {
         http.httpBasic();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         http.csrf().disable();
-        // H2 console needs frames
-        http.headers().frameOptions().disable();
-        http.cors() // CORS is configured in corsConfigurationSource bean
-            .and()
-                .authorizeHttpRequests()
-                .requestMatchers(GET, "/auth").hasRole("ADMIN")
-                .requestMatchers("/api/tariffs").hasRole("USER")
-                .anyRequest().permitAll()
-            .and()
+        http.headers().frameOptions().disable(); // à voir avec Louis pourquoi conserver disable ligne 45-46
+        http.cors() // CORS is configured just under
+                .and()
+                    .authorizeHttpRequests()
+                    .requestMatchers(GET, "/admin").hasRole("ROLE_ADMIN")
+                    .requestMatchers("/api/*").hasRole("ROLE_USER") //TODO: à valider avec les copains le mot clé qui restreint les routes
+                    .anyRequest().permitAll()
+                .and()
                 .formLogin()
-                    .loginPage("/public/sign-in").permitAll()
-                    .loginProcessingUrl("/public/do-sign-in")
-                    .defaultSuccessUrl("/public/restricted/view")
-                    .failureUrl("/public/sign-in?error=true")
+                    .loginPage("/public/sign-in").permitAll() //TODO faire une méthode afin de refuser les mails idnetiques et à faire
+                    .loginProcessingUrl("/public/do-sign-in") //TODO à suppr l'url si redirect sur sign-in directement
+                    .defaultSuccessUrl("/home") // à voir avec Louis, me semble inutile (géré dans le front)
+                    .failureUrl("/public/sign-in?error=true") // à voir avec Louis, me semble inutile (géré dans le front)
                     .usernameParameter("username")
                     .passwordParameter("password")
-            .and()
+                .and()
                 .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/public/logout"))
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/public/logout")) // TODO à faire
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
-                    .logoutSuccessUrl("/public/index")
+                    .logoutSuccessUrl("/public/index") //TODO changer l'url et/ou à créer
                     .deleteCookies("JSESSIONID");
-    
+
         return http.build();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService)
-                .passwordEncoder(passwordEncoder);
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(Arrays.asList(
+                "Authorization",
+                "Accept",
+                "Cache-Control",
+                "Content-Type",
+                "Origin",
+                "x-csrf-token",
+                "x-requested-with"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean
@@ -74,7 +94,7 @@ public class WebSecurityConfig {
         DaoAuthenticationProvider authProvider = new DaoOverride();
         authProvider.setUserDetailsService(userService);
         authProvider.setPasswordEncoder(passwordEncoder);
-        
+
         return authProvider;
     }
 }

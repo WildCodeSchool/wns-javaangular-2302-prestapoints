@@ -20,14 +20,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // Inscription du USER :
     @CrossOrigin(origins = "*")
-    @PostMapping("/users/create")
+    @PostMapping("/public/sign-in")
     public void createUser(@RequestBody UserDto userDto) {
         userService.createUser(userDto);
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/users/{id}")
     public UserDto getUser(@PathVariable("id") Integer id) {
         return userMapper.convertToDto(userService.getUserById(id));
     }

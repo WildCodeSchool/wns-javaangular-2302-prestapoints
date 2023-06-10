@@ -20,6 +20,11 @@ import fr.entity.User;
 import fr.helper.JwtUtils;
 import fr.service.UserService;
 
+// AuthController :
+// - gère les requêtes Post d'authentification, 
+// - récupère, grâce aux  informations d'authentification, l'utilisateur, 
+// - génère et renvoit un jeton JWT
+
 @Controller
 public class AuthController {
 
@@ -32,23 +37,23 @@ public class AuthController {
     }
 
     Logger logger = LoggerFactory.getLogger(UserController.class);
-
+    @CrossOrigin(origins = "*")
     @PostMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    @CrossOrigin(origins = "*")
     public Map<String, ?> doAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));       
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         List<String> rolesNames = user.securityUser().getAuthorities().stream()
                 .map(authority -> authority.getAuthority()).toList();
         String token = jwtUtils.generateToken(user.getEmail(), rolesNames);
         return Map.of("token", token);
     }
     
+    //Verifier l'utilité auprès de Louis, sinon à suppr
+    @CrossOrigin(origins = "*")
     @GetMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    @CrossOrigin(origins = "*")
     public Map<String, ?> testAuth() {
         return Map.of("success", true);
     }

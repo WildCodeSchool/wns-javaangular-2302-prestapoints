@@ -38,10 +38,17 @@ public class User {
         this.password = password;
     }
 
-
+    // TODO :
     // voir à mettre une checkbox sur le formulaire de connexion afin de savoir comment le user souhaite se co
     // ou de mettre cette checkbox dans la navbar.
     // bref, trouver une astuce pour gérer les rôles USER et PRESTATAIRE
+
+
+
+    // User (méthode secuityUser)
+    // -créé une liste pour les rôles de l'utilisateur (on stocke son ID en premier)
+    // -attribut le rôle en fonction de son mail
+    // -retourne un userdetails.user (nécessaires pour l'authentification)
     public org.springframework.security.core.userdetails.User securityUser() {
         List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(id.toString()));
