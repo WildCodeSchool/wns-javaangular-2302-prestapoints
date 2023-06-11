@@ -20,11 +20,11 @@ export class AppComponent implements OnInit {
   }
 
   alertSubscription() {
-    this.alertService.alerts.subscribe((alert) => {
+    this.alertService.alert$.subscribe((alert) => {
       this.alert = alert;
     });
   }
-  
+
   clearAlert() {
     this.alertService.clearAlert();
   }

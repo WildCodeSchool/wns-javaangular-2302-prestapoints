@@ -15,15 +15,12 @@ export class LogInComponent implements OnInit {
   model: any = {};
   loading: boolean = false;
   error: String = '';
-  alert: Alert = new Alert();
-
-  @Output()
-  alertToSend: EventEmitter<Alert> = new EventEmitter();
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
     private alertService: AlertService) { }
+  
   ngOnInit() {
     // reset login status
     this.authenticationService.logout();
@@ -36,7 +33,7 @@ export class LogInComponent implements OnInit {
         result => {
           if (result) {
             console.log("well done, you are logged with roles: " + this.authenticationService.getRoles().join(', '));
-            this.sendAlert(AlertEnum.TYPE_SUCCESS, AlertEnum.MESSAGE_LOGIN_SUCCESSED, true);
+            this.alertService.setAlert(AlertEnum.TYPE_SUCCESS, AlertEnum.MESSAGE_LOGIN_SUCCESSED, true, AlertEnum.TIME_MEDIUM);
             this.router.navigate(['/prestation/formulaire']);
           } else {
             // login failed
@@ -46,15 +43,8 @@ export class LogInComponent implements OnInit {
         }, (error: string) => {
           this.loading = false;
           console.error(error);
-          this.sendAlert(AlertEnum.TYPE_DANGER, AlertEnum.MESSAGE_LOGIN_FAILED, true);
+          this.alertService.setAlert(AlertEnum.TYPE_DANGER, AlertEnum.MESSAGE_LOGIN_FAILED, true, AlertEnum.TIME_INFINITY);
           this.error = error;
         });
-  }
-
-  sendAlert(type: string, message: string, timer: boolean): void {
-      this.alert.type = type;
-      this.alert.message = message;
-      this.alert.timer = timer;
-    this.alertService.setAlert(this.alert);
   }
 }

@@ -13,8 +13,7 @@ import { AlertComponent } from 'src/app/shared/alert/alert.component';
   declarations: [
     AuthComponent,
     SignInComponent,
-    LogInComponent, 
-    AlertComponent
+    LogInComponent
   ],
   imports: [
     CommonModule,
