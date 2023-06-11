@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@ang
 import { SignInService } from '../service/signIn.service';
 import { User } from 'src/app/shared/model/user';
 import { Alert } from 'src/app/shared/model/alert';
+import { AlertEnum } from 'src/app/shared/enum/alert-enum';
 
 @Component({
   selector: 'app-sign-in',
@@ -42,8 +43,7 @@ export class SignInComponent {
       this.alert.timer = true;
 
       this.signInService.createUser(this.newUser).subscribe(() => {
-        this.sendAlert();
-        this.startAlertTimer();
+        this.startAlertTimer(AlertEnum.TYPE_SUCCESS, AlertEnum.MESSAGE_SIGNIN_SUCCESS, true, AlertEnum.TIME_LONG);
         this.signInForm.reset();
       });
     }
@@ -65,7 +65,7 @@ export class SignInComponent {
 
     // TODO revoir la regex du numéro de téléphone : 
 
-    const phoneRegex = RegExp('(\\d{10})');
+    const phoneRegex = RegExp('(^0[1-9]\d{8}$)');
     const valid = phoneRegex.test(control.value);
 
     const errors = {
@@ -76,16 +76,19 @@ export class SignInComponent {
     return !valid ? errors : null;
   }
 
-  sendAlert(): void {
-    this.alertToSend.emit(this.alert);
-  }
-
-  startAlertTimer() {
+  private startAlertTimer(type: string, message: string, timer: boolean, duration: number): void {
+    this.sendAlert(type, message, timer);
     setTimeout(() => {
       this.alert.timer = false; // Réinitialiser l'alerte pour la faire disparaître
-      this.sendAlert();
-    }, 5000); // 2000 millisecondes = 3 secondes
+      this.sendAlert(type, message, false);
+    }, duration);
+  }
+  
+  private sendAlert(type: string, message: string, timer: boolean): void {
+    this.alert.type = type;
+    this.alert.message = message;
+    this.alert.timer = timer;
+    this.alertToSend.emit(this.alert);
   }
 }
-
 
