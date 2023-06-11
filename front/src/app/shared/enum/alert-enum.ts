@@ -10,6 +10,8 @@ export enum AlertEnum {
     MESSAGE_LOGOUT_FAILED = "La déconnexion a échoué. Veuillez réessayer.",
     MESSAGE_SESSION_EXPIRED = "Session expirée. Veuillez vous identifier à nouveau.",
     MESSAGE_VERIFY_LOGIN_INFORMATION = "Vérifiez vos informations de connexion.", 
+    MESSAGE_WRONG_PASSWORD = "Les mots de passe sont différents",
+    MESSAGE_EMAIL_ALREADY_EXIST ="L'email existe déjà !",
     TIME_INFINITY = 2147483647,
     TIME_LONG = 10000,
     TIME_MEDIUM = 5000,

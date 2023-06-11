@@ -1,5 +1,8 @@
 package fr.controller;
 
+import java.io.Console;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import fr.dto.UserDto;
+import fr.entity.User;
 import fr.mapper.UserMapper;
 import fr.service.UserService;
 
@@ -27,9 +31,20 @@ public class UserController {
         userService.createUser(userDto);
     }
 
+    // vérification de l'email d'inscription :
+    @CrossOrigin(origins = "*")
+    @PostMapping("/public/email/verification")
+    public boolean emailVerification(@RequestBody String email) {
+        System.out.println(email);
+        Optional<User> user = userService.findUserByEmail(email);
+
+        return user.isPresent();
+    }
+
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/users/{id}")
     public UserDto getUser(@PathVariable("id") Integer id) {
+
         return userMapper.convertToDto(userService.getUserById(id));
     }
 }
