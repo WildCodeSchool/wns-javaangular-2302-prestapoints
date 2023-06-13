@@ -52,10 +52,10 @@ public class WebSecurityConfig {
                     .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                    .loginPage("/public/sign-in").permitAll() //TODO faire une méthode afin de refuser les mails idnetiques et à faire
+                    .loginPage("/public/sign-in").permitAll() //TODO à faire
                     .loginProcessingUrl("/public/do-sign-in") //TODO à suppr l'url si redirect sur sign-in directement
-                    .defaultSuccessUrl("/home") // à voir avec Louis, me semble inutile (géré dans le front)
-                    .failureUrl("/public/sign-in?error=true") // à voir avec Louis, me semble inutile (géré dans le front)
+                    .defaultSuccessUrl("/home") // à voir avec Louis
+                    .failureUrl("/public/sign-in?error=true") // à voir avec Louis
                     .usernameParameter("username")
                     .passwordParameter("password")
                 .and()

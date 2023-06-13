@@ -8,7 +8,7 @@ import {
 import { SignInService } from '../service/signIn.service';
 import { User } from 'src/app/shared/model/user';
 import { Alert } from 'src/app/shared/model/alert';
-import { AlertEnum } from 'src/app/shared/enum/alert-enum';
+import { AlertEnum } from 'src/app/shared/enum/alert.enum';
 import { AlertService } from 'src/app/shared/service/alert.service';
 
 @Component({
@@ -47,7 +47,12 @@ export class SignInComponent {
 
     if (email) {
       if (await this.verifyEmail(email)) {
-        this.alertService.setAlert(AlertEnum.TYPE_DANGER, AlertEnum.MESSAGE_EMAIL_ALREADY_EXIST, true, AlertEnum.TIME_INFINITY);
+        this.alertService.setAlert(
+          AlertEnum.TYPE_DANGER,
+          AlertEnum.MESSAGE_EMAIL_ALREADY_EXIST,
+          true,
+          AlertEnum.TIME_INFINITY
+        );
       } else {
         if (password === confirmPassword) {
           if (this.signInForm.valid) {

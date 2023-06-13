@@ -1,17 +1,16 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/service/auth/authentication.service';
-import { AlertEnum } from 'src/app/shared/enum/alert-enum';
+import { AlertEnum } from 'src/app/shared/enum/alert.enum';
 import { Alert } from 'src/app/shared/model/alert';
 import { AlertService } from 'src/app/shared/service/alert.service';
 
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
-  styleUrls: ['./log-in.component.scss']
+  styleUrls: ['./log-in.component.scss'],
 })
 export class LogInComponent implements OnInit {
-
   model: any = {};
   loading: boolean = false;
   error: String = '';
@@ -19,8 +18,9 @@ export class LogInComponent implements OnInit {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService) { }
-  
+    private alertService: AlertService
+  ) {}
+
   ngOnInit() {
     // reset login status
     this.authenticationService.logout();
@@ -28,23 +28,39 @@ export class LogInComponent implements OnInit {
 
   login() {
     this.loading = true;
-    this.authenticationService.login(this.model.username, this.model.password)
+    this.authenticationService
+      .login(this.model.username, this.model.password)
       .subscribe(
-        result => {
+        (result) => {
           if (result) {
-            console.log("well done, you are logged with roles: " + this.authenticationService.getRoles().join(', '));
-            this.alertService.setAlert(AlertEnum.TYPE_SUCCESS, AlertEnum.MESSAGE_LOGIN_SUCCESSED, true, AlertEnum.TIME_MEDIUM);
+            console.log(
+              'well done, you are logged with roles: ' +
+                this.authenticationService.getRoles().join(', ')
+            );
+            this.alertService.setAlert(
+              AlertEnum.TYPE_SUCCESS,
+              AlertEnum.MESSAGE_LOGIN_SUCCESSED,
+              true,
+              AlertEnum.TIME_MEDIUM
+            );
             this.router.navigate(['/prestation/formulaire']);
           } else {
             // login failed
             this.error = 'Username or password is incorrect';
             this.loading = false;
           }
-        }, (error: string) => {
+        },
+        (error: string) => {
           this.loading = false;
           console.error(error);
-          this.alertService.setAlert(AlertEnum.TYPE_DANGER, AlertEnum.MESSAGE_LOGIN_FAILED, true, AlertEnum.TIME_INFINITY);
+          this.alertService.setAlert(
+            AlertEnum.TYPE_DANGER,
+            AlertEnum.MESSAGE_LOGIN_FAILED,
+            true,
+            AlertEnum.TIME_INFINITY
+          );
           this.error = error;
-        });
+        }
+      );
   }
 }

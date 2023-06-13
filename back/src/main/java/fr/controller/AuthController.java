@@ -50,7 +50,7 @@ public class AuthController {
         return Map.of("token", token);
     }
     
-    //Verifier l'utilité auprès de Louis, sinon à suppr
+    //TODO Verifier l'utilité auprès de Louis, sinon à suppr
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
