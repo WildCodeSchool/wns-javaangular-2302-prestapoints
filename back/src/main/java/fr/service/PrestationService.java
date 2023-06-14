@@ -35,8 +35,8 @@ public class PrestationService {
 
     public String getPrestationById(int id) throws ExceptionJsonDetail {
         Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
-        prestationMapper.convertToDto(prestation);
-        JSONObject object = new JSONObject(prestation);
+        PrestationDto prestationDto = prestationMapper.convertToDto(prestation);
+        JSONObject object = new JSONObject(prestationDto);
         return  object.toString();
     }
 

@@ -1,7 +1,7 @@
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Component,OnInit } from '@angular/core';
-import { Prestation } from '../model/Prestation.model';
+import { Prestation } from '../../../shared/model/Prestation.model';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -17,13 +17,11 @@ export class PrestationFormulaireComponent {
   
     ngOnInit(): void {
         this.prestationForm = this.formBuilder.group({
-          title: ['', Validators.required],
+          title: ['', [Validators.required,Validators.maxLength(50)]],
           duration: ['', Validators.required],
-          addPoint: ['', Validators.required],
-          dateStart: ['', Validators.required],
-          dateEnd: ['', Validators.required],
-          state: ['', Validators.required],
-          description: ['', Validators.required],
+          dateStart: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]],
+          dateEnd: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]],
+          description: ['', [Validators.required,Validators.maxLength(255)]],
           maxUser: ['', Validators.required]
         });
       }
@@ -37,12 +35,13 @@ export class PrestationFormulaireComponent {
       const prestation = new Prestation(
         formData.title,
         formData.duration,
-        formData.addPoint,
         formData.dateStart,
         formData.dateEnd,
         formData.state,
         formData.description,
-        formData.maxUser
+        formData.maxUser,
+        formData.image,
+        formData.id
       );
   
       // Envoie de l'objet JSON au serveur
@@ -58,5 +57,8 @@ export class PrestationFormulaireComponent {
     );
   
    
+   
     }
   }
+
+ 
