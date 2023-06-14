@@ -1,3 +1,5 @@
-<app-alert [alert]="alert"></app-alert>
+<ng-container *ngFor="let alert of alerts"> 
+    <app-alert [alert]="alert"></app-alert>
+</ng-container>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

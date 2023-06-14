@@ -10,6 +10,7 @@ export class AlertService {
   private readonly storageKey = 'alert';
   public alert$ = this.alertSubject.asObservable();
   private alert: Alert = new Alert();
+  private existingAlerts: Alert[] = [];
 
   constructor() {}
 
@@ -22,24 +23,30 @@ export class AlertService {
     this.alert.type = type;
     this.alert.message = message;
     this.alert.timer = timer;
-    this.clearAlert();
-    localStorage.setItem(this.storageKey, JSON.stringify(this.alert));
+
+    this.existingAlerts = this.getAlerts() || [];
+    this.existingAlerts.push(this.alert);
+    localStorage.setItem(this.storageKey, JSON.stringify(this.existingAlerts));
     this.showAlert(duration);
   }
 
-  getAlert(): Alert {
-    const alert = localStorage.getItem(this.storageKey);
-    return alert ? JSON.parse(alert) : null;
+  getAlerts(): Alert[] {
+    const alerts = localStorage.getItem(this.storageKey);
+    return alerts ? JSON.parse(alerts) : null;
   }
 
   clearAlert(): void {
-    localStorage.removeItem(this.storageKey);
-    this.alertSubject.next(null);
+    this.existingAlerts = this.getAlerts() || [];
+    if (this.existingAlerts.length > 0) {
+      this.existingAlerts.pop();
+    }
+    localStorage.setItem(this.storageKey, JSON.stringify(this.existingAlerts));
+    this.alertSubject.next(this.existingAlerts.length > 0 ? this.existingAlerts : null);
   }
 
   // clear the popup alert after the time duration
   showAlert(duration: number): void {
-    this.alertSubject.next(this.getAlert());
+    this.alertSubject.next(this.getAlerts());
     setTimeout(() => {
       this.clearAlert();
     }, duration);

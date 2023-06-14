@@ -11,7 +11,7 @@ import { AlertService } from './shared/service/alert.service';
 })
 export class AppComponent implements OnInit {
   title = 'front';
-  alert: Alert = new Alert();
+  alerts: Alert[] = [];
 
   constructor(private alertService: AlertService) {}
 
@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
   }
 
   alertSubscription() {
-    this.alertService.alert$.subscribe((alert) => {
-      this.alert = alert;
+    this.alertService.alert$.subscribe((alerts) => {
+      this.alerts = alerts;
     });
   }
 

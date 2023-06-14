@@ -1,5 +1,5 @@
 <div class="position-relative">
-  <div class="position-absolute top-0 start-50 translate-middle-x">
+  <div  class="position-absolute top-0 start-50 translate-middle-x w-50">
 
     <svg style="display: none;">
       <symbol id="success" viewBox="0 0 16 16">
@@ -16,7 +16,7 @@
       </symbol>
     </svg>
 
-    <div *ngIf="alert?.timer" class="text-{{alert?.type}} alert alert-{{alert?.type}} d-flex align-items-center justify-content-center mt-2 px-5">
+    <div *ngIf="alert?.timer" id="alert" class="text-{{alert?.type}} alert alert-{{alert?.type}} opacity-50 d-flex align-items-center justify-content-center mt-2 px-5">
 
       <svg class="" style="height: 3rem; width: 3rem; margin-right: 50px;">
         <use [attr.xlink:href]="'#' + alert?.type" />
