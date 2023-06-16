@@ -27,46 +27,49 @@
                 <label for="title" class="form-label">Titre :</label>
                 <input type="text" id="title" formControlName="title" class="form-control"/>
                 {{ prestationForm.get('title')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('title')?.errors && !prestationForm.get('title')?.pristine" class="error-msg">
-                  <div class="m-3 text-danger" [hidden]="!prestationForm.get('title')?.errors?.['required']">
+                <div *ngIf="prestationForm.get('title')?.errors && !prestationForm.get('title')?.pristine" class="error-msg m-3 text-danger">
+                  <div [hidden]="!prestationForm.get('title')?.errors?.['required']">
                     Un titre de prestation est obligatoire.
                   </div>
-                  <div class="m-3 text-danger" [hidden]="!prestationForm.controls['title'].invalid">Le champs est limité a 50 caractères.</div>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="duration" class="form-label">Durée :</label>
-                <input type="text" id="duration" formControlName="duration" class="form-control"/>
-                {{ prestationForm.get('duration')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('duration')?.errors && !prestationForm.get('duration')?.pristine" class="error-msg">
-                  <div class="m-3 text-danger" [hidden]="!prestationForm.get('duration')?.errors?.['required']">
-                    Une durée de prestation est obligatoire.
-                  </div>
+                  <div [hidden]="!prestationForm.controls['title'].invalid">Le champs est limité a 50 caractères.</div>
                 </div>
               </div>
     
-              <div class="mb-3"><label for="dateStart" class="form-label">Date de début :</label>
-                <input type="date" id="dateStart" formControlName="dateStart" class="form-control"/>
-                {{ prestationForm.get('dateStart')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('dateStart')?.errors && !prestationForm.get('dateStart')?.pristine" class="error-msg">
-                  <div class="m-3 text-danger" [hidden]="!prestationForm.get('dateStart')?.errors?.['required']">
-                    Une date de debut de prestation est obligatoire.
+              <div class="mb-3">
+                <label for="duration" class="form-label">Durée de la prestation :</label>
+                <input type="text" id="duration" formControlName="duration" class="form-control"/>
+                <div *ngIf="prestationForm.get('duration')?.errors && !prestationForm.get('duration')?.pristine" class="error-msg m-3 text-danger">
+                  <div  [hidden]="!prestationForm.get('duration')?.errors?.['required']">
+                    Un horraire est obligatoire.
                   </div>
-                  <div class="m-3 text-danger" [hidden]="!prestationForm.controls['dateStart'].invalid">La date n'est pas conforme jj/mm/aaaa </div>
+                  <div  [hidden]="!prestationForm.controls['duration'].invalid">l'horraire n'est pas conforme hh:mm </div>
+                </div>
+              </div> 
+
+              <div class="mb-3"><label for="dateStart" class="form-label">Date de début :</label>
+                <input type="text" id="dateStart" formControlName="dateStart" class="form-control"/>
+                {{ prestationForm.get('dateStart')?.errors?.['rules'] }}
+                <div *ngIf="prestationForm.get('dateStart')?.errors && !prestationForm.get('dateStart')?.pristine" class="error-msg m-3 text-danger">
+                  <div [hidden]="!prestationForm.get('dateStart')?.errors?.['required']">
+                    Une date de prestation est obligatoire.
+                  </div>
+                  <div [hidden]="!prestationForm.controls['dateStart'].invalid">La date n'est pas conforme jj/mm/aaaa </div>
                 </div>
               </div>
 
               <div class="mb-3">
-                <label for="dateEnd" class="form-label">Date de fin :</label>
-                <input type="date" id="dateEnd" formControlName="dateEnd" class="form-control"/>
-                {{ prestationForm.get('dateEnd')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('dateEnd')?.errors && !prestationForm.get('dateEnd')?.pristine" class="error-msg">
-                  <div class="m-3 text-danger" [hidden]="!prestationForm.get('dateEnd')?.errors?.['required']">
-                    Une date de fin est obligatoire.
+                <label for="HeureDebutPrestation" class="form-label">Heure de début :</label>
+                <input type="text" id="HeureDebutPrestation" formControlName="HeureDebutPrestation" class="form-control"/>
+                {{ prestationForm.get('HeureDebutPrestation')?.errors?.['rules'] }}
+                <div *ngIf="prestationForm.get('HeureDebutPrestation')?.errors && !prestationForm.get('HeureDebutPrestation')?.pristine" class="error-msg m-3 text-danger">
+                  <div  [hidden]="!prestationForm.get('HeureDebutPrestation')?.errors?.['required']">
+                    Un horraire est obligatoire.
                   </div>
+                  <div  [hidden]="!prestationForm.controls['HeureDebutPrestation'].invalid">l'horraire n'est pas conforme hh:mm </div>
                 </div>
               </div>
+
+
               
               <div class="mb-3">
                 <label for="description" class="form-label">Description :</label>
