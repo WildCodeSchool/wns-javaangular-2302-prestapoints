@@ -1,6 +1,4 @@
-<div class="position-relative">
-  <div  class="position-absolute top-0 start-50 translate-middle-x w-50">
-
+<div class="d-flex flex-wrap wrap">
     <svg style="display: none;">
       <symbol id="success" viewBox="0 0 16 16">
         <path fill="#60DAB1"
@@ -16,9 +14,9 @@
       </symbol>
     </svg>
 
-    <div *ngIf="alert?.timer" id="alert" class="text-{{alert?.type}} alert alert-{{alert?.type}} opacity-50 d-flex align-items-center justify-content-center mt-2 px-5">
+    <div *ngIf="alert?.timer" role="button" class="d-flex align-items-center justify-content-between  text-{{alert?.type}} alert alert-{{alert?.type}} w-100 mt-2 px-5 mb-0">
 
-      <svg class="" style="height: 3rem; width: 3rem; margin-right: 50px;">
+      <svg class="" style="height: 3rem; width: 3rem;">
         <use [attr.xlink:href]="'#' + alert?.type" />
       </svg>
 
@@ -27,9 +25,8 @@
       </div>
 
       <div>
-        <button type="button" class="btn-close ms-5" (click)="clearAlert()" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" (click)="clearAlert(index)" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
 
     </div>
   </div>
-</div> 

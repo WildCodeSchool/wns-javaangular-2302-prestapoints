@@ -11,9 +11,12 @@ export class AlertComponent {
   @Input()
   alert?: Alert;
 
+  @Input()
+  index?: number;
+
   constructor(private alertService: AlertService) {}
 
-  clearAlert() {
-    this.alertService.clearAlert();
+  clearAlert(index?: number) {
+    this.alertService.clearAlert(index);
   }
 }

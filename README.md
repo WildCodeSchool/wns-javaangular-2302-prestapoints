@@ -216,6 +216,24 @@ Exemple :
                 ...
         } 
 
+#
+# LES MESSAGES D'ALERTES (FRONT)
+#
+C'est un service, donc faites l'injection de dépendance de AlertService et appeler la méthode SetAlert() en passant les paramètres nécessaire grâce aux enums prévus.
+ex :
+
+  constructor(private alertService: AlertService) {}
+
+        trucMachinChoseMethod() {
+                ...
+
+                this.alertService.setAlert(
+                        AlertEnum.TYPE_SUCCESS,
+                        AlertEnum.MESSAGE_LOGIN_SUCCESSED,
+                        true,
+                        AlertEnum.TIME_MEDIUM);
+                ...
+        }
 
 
 #

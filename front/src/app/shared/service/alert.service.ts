@@ -35,11 +35,14 @@ export class AlertService {
     return alerts ? JSON.parse(alerts) : null;
   }
 
-  clearAlert(): void {
+  clearAlert(index?: number): void {
     this.existingAlerts = this.getAlerts() || [];
-    if (this.existingAlerts.length > 0) {
+    if (this.existingAlerts.length > 0 && index == null) {
       this.existingAlerts.pop();
+    } else if (this.existingAlerts.length > 0 && index != null) {
+      this.existingAlerts.splice(index,1);
     }
+
     localStorage.setItem(this.storageKey, JSON.stringify(this.existingAlerts));
     this.alertSubject.next(this.existingAlerts.length > 0 ? this.existingAlerts : null);
   }
@@ -48,7 +51,7 @@ export class AlertService {
   showAlert(duration: number): void {
     this.alertSubject.next(this.getAlerts());
     setTimeout(() => {
-      this.clearAlert();
+      this.clearAlert(this.existingAlerts.length - 1);
     }, duration);
   }
 }

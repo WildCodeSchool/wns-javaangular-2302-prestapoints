@@ -51,7 +51,7 @@ export class SignInComponent {
           AlertEnum.TYPE_DANGER,
           AlertEnum.MESSAGE_EMAIL_ALREADY_EXIST,
           true,
-          AlertEnum.TIME_INFINITY
+          AlertEnum.TIME_LONG
         );
       } else {
         if (password === confirmPassword) {

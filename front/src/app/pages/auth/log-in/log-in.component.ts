@@ -57,7 +57,7 @@ export class LogInComponent implements OnInit {
             AlertEnum.TYPE_DANGER,
             AlertEnum.MESSAGE_LOGIN_FAILED,
             true,
-            AlertEnum.TIME_INFINITY
+            AlertEnum.TIME_MEDIUM
           );
           this.error = error;
         }
