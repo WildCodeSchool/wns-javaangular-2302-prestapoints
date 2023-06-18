@@ -17,7 +17,7 @@ public class Registration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    
     private Integer evaluation;
     private String comment;
 

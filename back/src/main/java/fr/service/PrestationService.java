@@ -30,22 +30,25 @@ public class PrestationService {
         for (Prestation prestation : prestations) {
             prestationDtos.add(prestationMapper.convertToDto(prestation));
         }
+
         return prestationDtos;
     }
 
-    public String getPrestationById(int id) throws ExceptionJsonDetail {
+    public String getPrestationById(Integer id) throws ExceptionJsonDetail {
         Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
         prestationMapper.convertToDto(prestation);
         JSONObject object = new JSONObject(prestation);
-        return  object.toString();
+
+        return object.toString();
     }
 
     public Prestation createPrestation(PrestationDto prestationDto) {
         Prestation prestation = prestationMapper.convertToEntity(prestationDto);
+
         return prestationRepository.save(prestation);
     }
 
-    public void deletePrestationById(int id){
+    public void deletePrestationById(int id) {
         prestationRepository.deleteById(id);
     }
 }
