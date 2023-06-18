@@ -230,7 +230,6 @@ ex :
                 this.alertService.setAlert(
                         AlertEnum.TYPE_SUCCESS,
                         AlertEnum.MESSAGE_LOGIN_SUCCESSED,
-                        true,
                         AlertEnum.TIME_MEDIUM);
                 ...
         }

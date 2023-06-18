@@ -14,7 +14,7 @@
       </symbol>
     </svg>
 
-    <div *ngIf="alert?.timer" role="button" class="d-flex align-items-center justify-content-between  text-{{alert?.type}} alert alert-{{alert?.type}} w-100 mt-2 px-5 mb-0">
+    <div  role="button" class="d-flex align-items-center justify-content-between  text-{{alert?.type}} alert alert-{{alert?.type}} w-100 mt-2 px-5 mb-0">
 
       <svg class="" style="height: 3rem; width: 3rem;">
         <use [attr.xlink:href]="'#' + alert?.type" />

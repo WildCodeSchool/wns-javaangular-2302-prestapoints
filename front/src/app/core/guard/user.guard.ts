@@ -32,7 +32,6 @@ export class UserGuard implements CanActivate {
       this.alertService.setAlert(
         AlertEnum.TYPE_DANGER,
         AlertEnum.MESSAGE_WRONG_ROLE,
-        true,
         AlertEnum.TIME_MEDIUM
       );
       return false;

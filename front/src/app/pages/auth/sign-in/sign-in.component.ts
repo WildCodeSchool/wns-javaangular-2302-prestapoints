@@ -50,7 +50,6 @@ export class SignInComponent {
         this.alertService.setAlert(
           AlertEnum.TYPE_DANGER,
           AlertEnum.MESSAGE_EMAIL_ALREADY_EXIST,
-          true,
           AlertEnum.TIME_LONG
         );
       } else {
@@ -67,7 +66,6 @@ export class SignInComponent {
               this.alertService.setAlert(
                 AlertEnum.TYPE_SUCCESS,
                 AlertEnum.MESSAGE_SIGNIN_SUCCESS,
-                true,
                 AlertEnum.TIME_MEDIUM
               );
               this.signInForm.reset();
@@ -77,7 +75,6 @@ export class SignInComponent {
           this.alertService.setAlert(
             AlertEnum.TYPE_DANGER,
             AlertEnum.MESSAGE_WRONG_PASSWORD,
-            true,
             AlertEnum.TIME_INFINITY
           );
         }

@@ -40,7 +40,6 @@ export class LogInComponent implements OnInit {
             this.alertService.setAlert(
               AlertEnum.TYPE_SUCCESS,
               AlertEnum.MESSAGE_LOGIN_SUCCESSED,
-              true,
               AlertEnum.TIME_MEDIUM
             );
             this.router.navigate(['/prestation/formulaire']);
@@ -56,7 +55,6 @@ export class LogInComponent implements OnInit {
           this.alertService.setAlert(
             AlertEnum.TYPE_DANGER,
             AlertEnum.MESSAGE_LOGIN_FAILED,
-            true,
             AlertEnum.TIME_MEDIUM
           );
           this.error = error;

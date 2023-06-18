@@ -17,12 +17,10 @@ export class AlertService {
   setAlert(
     type: string,
     message: string,
-    timer: boolean,
     duration: number
   ): void {
     this.alert.type = type;
     this.alert.message = message;
-    this.alert.timer = timer;
     this.alert.duration = duration;
 
     this.existingAlerts = this.getAlerts() || [];
@@ -30,7 +28,6 @@ export class AlertService {
       return (
         alert.type === this.alert.type &&
         alert.message === this.alert.message &&
-        alert.timer === this.alert.timer &&
         alert.duration === this.alert.duration
       );
     });
