@@ -34,7 +34,7 @@ public class PrestationService {
         return prestationDtos;
     }
 
-    public String getPrestationById(int id) throws ExceptionJsonDetail {
+    public String getPrestationById(Integer id) throws ExceptionJsonDetail {
         Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
         prestationMapper.convertToDto(prestation);
         JSONObject object = new JSONObject(prestation);

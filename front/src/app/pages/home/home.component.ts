@@ -10,11 +10,15 @@ import { PrestationService } from 'src/app/shared/services/prestation.service';
 export class HomeComponent implements OnInit {
   public prestationsApi?: Prestation[];
   
-  constructor(private service: PrestationService) {}
+  constructor(private prestationService: PrestationService) {}
 
   ngOnInit() {
-    this.service.getPrestations().subscribe((response) => {
+    this.prestationService.getPrestations().subscribe((response) => {
       this.prestationsApi = response;
     });
+  }
+
+  onGetPrestation(prestationsSearch: Prestation[]): void {
+    this.prestationsApi = prestationsSearch;
   }
 }
