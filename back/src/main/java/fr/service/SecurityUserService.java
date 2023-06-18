@@ -2,6 +2,7 @@ package fr.service;
 
 import java.text.MessageFormat;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,15 +14,17 @@ import fr.repository.UserRepository;
 @Service
 public class SecurityUserService implements UserDetailsService {
 
-    final UserRepository userRepository;
-    final PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public SecurityUserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    // public SecurityUserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    //     this.userRepository = userRepository;
+    //     this.passwordEncoder = passwordEncoder;
 
-        System.out.println(" ****** ****** ******* *** *le password  " + passwordEncoder.encode("coucou"));
-    }
+    //     System.out.println(" ****** ****** ******* *** *le password  " + passwordEncoder.encode("coucou"));
+    // }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import fr.helper.JwtUtils;
+import fr.service.SecurityUserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,14 +26,16 @@ import jakarta.servlet.http.HttpServletResponse;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     public Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
-
+    
+    @Autowired
     private JwtUtils jwtUtils;
-    private UserDetailsService userDetailsService;
+    @Autowired
+    private SecurityUserService userDetailsService;
 
-    JwtAuthenticationFilter(JwtUtils jwtUtils, UserDetailsService userDetailsService) {
-        this.jwtUtils = jwtUtils;
-        this.userDetailsService = userDetailsService;
-    }
+    // JwtAuthenticationFilter(JwtUtils jwtUtils, UserDetailsService userDetailsService) {
+    //     this.jwtUtils = jwtUtils;
+    //     this.userDetailsService = userDetailsService;
+    // }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

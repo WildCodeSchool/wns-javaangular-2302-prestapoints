@@ -4,11 +4,13 @@ import static org.springframework.http.HttpMethod.GET;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -23,8 +25,10 @@ import fr.service.SecurityUserService;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private final SecurityUserService userService;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private SecurityUserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -37,6 +41,20 @@ public class WebSecurityConfig {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Profile("tests")
+    @Bean
+    public SecurityFilterChain filterChain2(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
+        System.out.println("Security test configuration");
+        http.csrf().disable();
+        http.authorizeHttpRequests()
+                .anyRequest().permitAll();
+        
+        return http.build();
+    }
+    
+
+
+    @Profile("!tests")
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter)
             throws Exception {

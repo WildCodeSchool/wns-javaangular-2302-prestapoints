@@ -5,7 +5,7 @@ import { AdminGuard } from 'src/app/core/guard/admin.guard';
 import { UserGuard } from 'src/app/core/guard/user.guard';
 
 const routes: Routes = [
-    { path: 'formulaire', component: PrestationFormulaireComponent, canActivate: [AdminGuard] }
+    { path: 'formulaire', component: PrestationFormulaireComponent, canActivate: [UserGuard] }
 ];
 
 @NgModule({
