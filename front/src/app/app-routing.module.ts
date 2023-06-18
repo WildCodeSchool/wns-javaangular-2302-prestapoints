@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-    { path: 'prestation', loadChildren: () => import('./pages/prestation/prestation.module').then(m => m.PrestationModule)},
-    { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) }
+  { path: 'auth', loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule) },
+  { path: 'prestation', loadChildren: () => import('./pages/prestation/prestation.module').then(m => m.PrestationModule) },
+  { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) }
 ];
 
 @NgModule({

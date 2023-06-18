@@ -1,6 +1,10 @@
 package fr.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import fr.dto.UserDto;
 import fr.entity.User;
@@ -16,13 +20,20 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public void createUser(UserDto userDto) {
+    public User createUser(UserDto userDto) {
+        PasswordEncoder passwordEncoder  = new BCryptPasswordEncoder();
+        
         User user = userMapper.convertToEntity(userDto);
-        userRepository.save(user);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        return userRepository.save(user);
     }
 
     public User getUserById(Integer id) {
         
         return userRepository.getReferenceById(id);
+    }
+
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

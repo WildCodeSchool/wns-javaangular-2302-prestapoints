@@ -1,4 +1,27 @@
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
+NOTE DU 25/05/2023
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
+pour rappel, pour utiliser un composant shared
+côté HTML
+<ng-container *ngFor="let prestationTarget of prestations">
+    <app-card [prestation]="prestationTarget"></app-card>
+</ng-container>
+
+côté TS
+  public prestations?: Prestation[];
+  public prestationTarget?: Prestation;
+
+  constructor(private service: PrestationService) { 
+    this.prestationTarget = new Prestation("");
+  }
+  
+  ngOnInit() {
+    this.service.getTest().subscribe((response) => {
+      this.prestations = response;
+    });
+  }
+
+#### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
 NOTE DU 30/04/2023
 <TODO : 
 #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### 
