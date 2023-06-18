@@ -1,6 +1,5 @@
 package fr.controller;
 
-import java.io.Console;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;

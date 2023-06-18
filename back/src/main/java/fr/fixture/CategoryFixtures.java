@@ -1,12 +1,9 @@
 package fr.fixture;
 
-import java.text.SimpleDateFormat;
-import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.github.javafaker.Faker;
 import fr.entity.Category;
-import fr.entity.Type;
 import fr.enums.TablesEnum;
 import fr.repository.CategoryRepository;
 import fr.repository.TypeRepository;

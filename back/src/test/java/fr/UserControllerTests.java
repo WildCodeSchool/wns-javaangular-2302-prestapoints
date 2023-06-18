@@ -16,6 +16,12 @@ import fr.config.PasswordEncoderConfig;
 import fr.config.WebSecurityConfig;
 import fr.controller.PrestationController;
 import fr.controller.UserController;
+import fr.fixture.CategoryFixtures;
+import fr.fixture.LocationFixtures;
+import fr.fixture.PrestationFixtures;
+import fr.fixture.RegistrationFixtures;
+import fr.fixture.TypeFixtures;
+import fr.fixture.UserFixtures;
 import fr.helper.JwtUtils;
 import fr.mapper.UserMapper;
 import fr.service.SecurityUserService;
@@ -36,8 +42,20 @@ public class UserControllerTests {
     private PrestationController prestationController;
     @MockBean
     private UserMapper userMapper;
+    @MockBean
+    private UserFixtures userFixtures;
+    @MockBean
+    private PrestationFixtures prestationFixtures;
+    @MockBean
+    private CategoryFixtures categoryFixtures;
+    @MockBean
+    private LocationFixtures locationFixtures;
+    @MockBean
+    private RegistrationFixtures registrationFixtures;
+    @MockBean
+    private TypeFixtures typeFixtures;
 
-   @Autowired
+    @Autowired
     private MockMvc mockMvc;
 
 

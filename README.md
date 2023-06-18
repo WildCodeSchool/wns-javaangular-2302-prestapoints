@@ -180,6 +180,9 @@ Les <mappers> sont les classes qui effectuent le mapping entre les <models> et l
 Les <repositories> effectuent des opérations sur la base de données pour les renvoyer au <service>.
 <Config> contient les fichiers de configuration, dans notre application, pour paramétrer la sécurité dans un premier temps.
 
+## Environnement de Tests ##
+Pour faire fonctionner le site avec les tests (pour les tests sur les controllers dans le back) vous devez décommenter la ligne <spring.profiles.active= tests> dans <resources/application.properties> afin d'activer le profil 'tests', ne pas oublier de la commenter pour retrouver un site utilisable.
+
 #
 # Fixtures
 #

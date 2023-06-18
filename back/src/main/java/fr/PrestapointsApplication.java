@@ -13,31 +13,31 @@ import jakarta.annotation.PostConstruct;
 @SpringBootApplication
 public class PrestapointsApplication {
 
-	// @Autowired
-	// private UserFixtures userFixtures;
-	// @Autowired
-	// private PrestationFixtures prestationFixtures;
-	// @Autowired
-	// private CategoryFixtures categoryFixtures;
-	// @Autowired
-	// private TypeFixtures typeFixtures;
-	// @Autowired
-	// private LocationFixtures locationFixtures;
+	@Autowired
+	private UserFixtures userFixtures;
+	@Autowired
+	private PrestationFixtures prestationFixtures;
+	@Autowired
+	private CategoryFixtures categoryFixtures;
+	@Autowired
+	private TypeFixtures typeFixtures;
+	@Autowired
+	private LocationFixtures locationFixtures;
 
-	// /* STOP FIXTURES = false   # START FIXTURES = true */ 
-	// private boolean loadFixtures = false;
+	/* STOP FIXTURES = false   # START FIXTURES = true */ 
+	private boolean loadFixtures = false;
 
-	// @PostConstruct
-	// public void init() {
-	// 	if (this.loadFixtures) {
-	// 		//Faire attention à l'ordre des dépendences !
-	// 		userFixtures.prepareFixtures(); //depends on
-	// 		categoryFixtures.prepareFixtures(); //depends on 
-	// 		typeFixtures.prepareFixtures(); //depends on category
-	// 		locationFixtures.prepareFixtures();
-	// 		prestationFixtures.prepareFixtures(); // depends on user, category, location
-	// 		}
-	// }
+	@PostConstruct
+	public void init() {
+		if (this.loadFixtures) {
+			//Faire attention à l'ordre des dépendences !
+			userFixtures.prepareFixtures(); //depends on
+			categoryFixtures.prepareFixtures(); //depends on 
+			typeFixtures.prepareFixtures(); //depends on category
+			locationFixtures.prepareFixtures();
+			prestationFixtures.prepareFixtures(); // depends on user, category, location
+			}
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(PrestapointsApplication.class, args);
