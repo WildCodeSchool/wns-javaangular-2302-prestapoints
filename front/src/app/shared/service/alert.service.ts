@@ -23,11 +23,25 @@ export class AlertService {
     this.alert.type = type;
     this.alert.message = message;
     this.alert.timer = timer;
+    this.alert.duration = duration;
 
     this.existingAlerts = this.getAlerts() || [];
-    this.existingAlerts.push(this.alert);
+    const existingIndex = this.existingAlerts.findIndex(alert => {
+      return (
+        alert.type === this.alert.type &&
+        alert.message === this.alert.message &&
+        alert.timer === this.alert.timer &&
+        alert.duration === this.alert.duration
+      );
+    });
+    
+    if (existingIndex > -1) {
+      this.clearAlert(existingIndex);   
+    }
+    
+    this.existingAlerts.unshift(this.alert);
     localStorage.setItem(this.storageKey, JSON.stringify(this.existingAlerts));
-    this.showAlert(duration);
+    this.showAlert(this.alert.duration);
   }
 
   getAlerts(): Alert[] {
