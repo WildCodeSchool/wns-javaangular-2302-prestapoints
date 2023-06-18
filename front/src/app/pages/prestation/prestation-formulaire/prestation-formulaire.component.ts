@@ -1,7 +1,7 @@
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Component,OnInit } from '@angular/core';
-import { Prestation } from '../model/Prestation.model';
+import { Prestation } from '../../../shared/model/Prestation.model';
 import { HttpClient } from '@angular/common/http';
 
 
