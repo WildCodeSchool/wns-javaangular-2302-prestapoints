@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import '/node_modules/bootstrap/dist/js/bootstrap.min.js';
 import { Alert } from './shared/model/alert';
-import { ActivatedRoute } from '@angular/router';
 import { AlertService } from './shared/service/alert.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +12,13 @@ import { AlertService } from './shared/service/alert.service';
 export class AppComponent implements OnInit {
   title = 'front';
   alerts: Alert[] = [];
+  isVisible?: boolean;
 
-  constructor(private alertService: AlertService) {}
+  constructor(private alertService: AlertService, public location: Location) {}
 
   ngOnInit() {
     this.alertSubscription();
+    this.isVisible = this.location.path() === '/auth' ? false : true;
   }
 
   alertSubscription() {
