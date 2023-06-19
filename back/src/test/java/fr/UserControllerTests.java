@@ -7,15 +7,25 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.Optional;
+
+import org.springframework.http.MediaType;
 import fr.config.JwtAuthenticationFilter;
 import fr.config.PasswordEncoderConfig;
 import fr.config.WebSecurityConfig;
 import fr.controller.PrestationController;
 import fr.controller.UserController;
+import fr.dto.UserDto;
+import fr.entity.User;
 import fr.fixture.CategoryFixtures;
 import fr.fixture.LocationFixtures;
 import fr.fixture.PrestationFixtures;
@@ -58,15 +68,68 @@ public class UserControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
-
- @Test
-    public void testGetUser_ShouldReturnTrue() throws Exception{
+    @Test
+    public void testGetUser_ShouldReturnStatusOk() throws Exception {
         // Arrange
-        Integer userId = 11;
         // Act & Assert
         mockMvc.perform(
-                get("/users/" + userId))
+                get("/users/" + 1))
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testGetUser_ShouldReturnStatusNotFound() throws Exception {
+        // Arrange
+        // Act & Assert
+        mockMvc.perform(
+                get("/users/"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void testGetUser_ShouldReturnStatusBadResquet() throws Exception {
+        // Arrange
+        // Act & Assert
+        mockMvc.perform(
+                get("/users/toto"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testCreateUser_testGetUser_ShouldReturnStatusOk() throws Exception {
+        // Arrange
+        UserDto userDto = new UserDto();
+        String bodyUser = new ObjectMapper().writeValueAsString(userDto);
+
+        // Act & Assert
+        mockMvc.perform(post("/public/sign-in")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bodyUser))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testEmailVerification_ShouldReturnBadRequest() throws Exception {
+        // Arrange
+        // Act & Assert
+        mockMvc.perform(post("/public/email/verification")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(""))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testEmailVerification_ShouldReturnTrue() throws Exception {
+        // Arrange
+        // UserService is Mocked (no reel creation with createUser() in DB) 
+        // so we simulate the return of the method called by the api
+        when(userService.findUserByEmail(anyString())).thenReturn(Optional.of(new User()));
+        // Act & Assert
+        mockMvc.perform(post("/public/email/verification")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("\"test@test.com\""))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+
+    }
 }
