@@ -18,6 +18,8 @@ export class PrestationFormulaireComponent {
     dateFin : Date = new Date();
     dateTemp :Date  = new Date(); 
     dateActuelle !: string;
+
+    selectedImage!: File;
     
 
     constructor(private formBuilder: FormBuilder, private http: HttpClient, private dateTimeService : DateTimeValidatorsService) { }
@@ -40,6 +42,18 @@ export class PrestationFormulaireComponent {
       }
   
       
+
+      onFileSelected(event: any): void {
+        this.selectedImage = event.target.files[0];
+        const reader = new FileReader();
+      
+        reader.onload = (e: any) => {
+          this.selectedImage = e.target.result;
+        };
+      
+        reader.readAsDataURL(this.selectedImage);
+      }
+
     
     onSubmit() {
       if (this.prestationForm.invalid) {
@@ -60,26 +74,22 @@ export class PrestationFormulaireComponent {
         formData.state,
         formData.description,
         formData.maxUser,
-        formData.image,
-        
+        this.selectedImage,
       );
 
       console.log(prestation);
   
       // Envoie de l'objet JSON au serveur
-    this.http.post("http://localhost:8080/prestations", prestation).subscribe(
-      response => {
-        // Traitement de la réponse du serveur
-        this.prestationForm.reset();
-      },
-      error => {
-        // Gestion des erreurs
-        console.error(error);
-      }
-    );
-  
-   
-   
+        this.http.post("http://localhost:8080/prestations", prestation).subscribe(
+          response => {
+            // Traitement de la réponse du serveur
+            this.prestationForm.reset();
+          },
+          error => {
+            // Gestion des erreurs
+            console.error(error);
+          }
+        );
     }
   }
 

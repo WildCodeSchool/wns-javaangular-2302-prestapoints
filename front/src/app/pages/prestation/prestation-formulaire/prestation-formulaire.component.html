@@ -69,8 +69,6 @@
                 </div>
               </div>
 
-
-              
               <div class="mb-3">
                 <label for="description" class="form-label">Description :</label>
                 <textarea id="description" formControlName="description" class="form-control"></textarea>
@@ -92,6 +90,12 @@
                   </div>
                 </div>
               </div>
+              
+              <div class="mt-5">
+                <input type="file" (change)="onFileSelected($event)" accept="image/*">
+                <img *ngIf="selectedImage" [src]="selectedImage" alt="Preview" class="img-thumbnail mt-3">
+              </div>
+
             </div>
           </div>
           <div class="modal-footer">
