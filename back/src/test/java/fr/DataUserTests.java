@@ -54,6 +54,7 @@ public class DataUserTests {
 
         // Assert
         assertTrue(userFromDB.isPresent());
-
+        assertEquals(user.getId(), userFromDB.get().getId());
+        assertEquals(user.getEmail(),userFromDB.get().getEmail());
     }
 }
