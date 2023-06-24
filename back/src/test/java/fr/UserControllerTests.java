@@ -1,11 +1,13 @@
 package fr;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -38,20 +40,11 @@ import fr.service.SecurityUserService;
 import fr.service.UserService;
 
 @WebMvcTest(controllers = UserController.class)
-@Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class })
+@Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class, })
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class UserControllerTests {
 
-    // must call all this list to not have Exceptions errors.
-    @MockBean
-    private UserDetailsService userDetailsService;
-    @MockBean
-    private SecurityUserService securityUserService;
-    @MockBean
-    private UserService userService;
-    @MockBean
-    private PrestationController prestationController;
-    @MockBean
-    private UserMapper userMapper;
+    // must MockBean all fixtures classes to not have Exceptions errors with the PostConstruct.
     @MockBean
     private UserFixtures userFixtures;
     @MockBean
@@ -64,6 +57,18 @@ public class UserControllerTests {
     private RegistrationFixtures registrationFixtures;
     @MockBean
     private TypeFixtures typeFixtures;
+    
+    // we MockBean also this list in consequences of the test
+    @MockBean
+    private UserDetailsService userDetailsService;
+    @MockBean
+    private SecurityUserService securityUserService;
+    @MockBean
+    private UserService userService;
+    @MockBean
+    private PrestationController prestationController;
+    @MockBean
+    private UserMapper userMapper;
 
     @Autowired
     private MockMvc mockMvc;
@@ -123,6 +128,7 @@ public class UserControllerTests {
         // Arrange
         // UserService is Mocked (no reel creation with createUser() in DB) 
         // so we simulate the return of the method called by the api
+        // and we test the DB in DataUserTests.java
         when(userService.findUserByEmail(anyString())).thenReturn(Optional.of(new User()));
         // Act & Assert
         mockMvc.perform(post("/public/email/verification")
@@ -130,6 +136,5 @@ public class UserControllerTests {
                 .content("\"test@test.com\""))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
-
     }
 }

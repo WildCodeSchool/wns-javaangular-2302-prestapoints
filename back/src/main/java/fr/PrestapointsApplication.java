@@ -2,6 +2,7 @@ package fr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Profile;
 
 import fr.fixture.CategoryFixtures;
 import fr.fixture.LocationFixtures;
@@ -28,6 +29,7 @@ public class PrestapointsApplication {
 	private boolean loadFixtures = false;
 
 	@PostConstruct
+	@Profile("!test")
 	public void init() {
 		if (this.loadFixtures) {
 			//Faire attention à l'ordre des dépendences !
