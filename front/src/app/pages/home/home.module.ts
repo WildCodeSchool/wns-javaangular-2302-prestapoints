@@ -6,7 +6,8 @@ import { HomeComponent } from './home.component';
 import { PrestationService } from 'src/app/shared/services/prestation.service';
 import { SliderComponent } from 'src/app/shared/components/slider/slider.component';
 import { CardComponent } from 'src/app/shared/components/card/card.component';
-import { SearchbarModule } from 'src/app/shared/components/searchbar/component/searchbar.module';
+import { SearchbarModule } from 'src/app/shared/components/searchbar/searchbar.module';
+
 
 
 @NgModule({

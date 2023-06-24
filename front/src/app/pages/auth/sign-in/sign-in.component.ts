@@ -5,11 +5,12 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { SignInService } from '../service/signIn.service';
+import { SignInService } from './service/signIn.service';
 import { User } from 'src/app/shared/model/user';
 import { Alert } from 'src/app/shared/model/alert';
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
-import { AlertService } from 'src/app/shared/service/alert.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
+
 
 @Component({
   selector: 'app-sign-in',

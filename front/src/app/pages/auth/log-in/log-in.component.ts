@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/service/auth/authentication.service';
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
 import { Alert } from 'src/app/shared/model/alert';
-import { AlertService } from 'src/app/shared/service/alert.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
+
 
 @Component({
   selector: 'app-log-in',

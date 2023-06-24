@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import '/node_modules/bootstrap/dist/js/bootstrap.min.js';
 import { Alert } from './shared/model/alert';
-import { AlertService } from './shared/service/alert.service';
+
 import { Location } from '@angular/common';
+import { AlertService } from './shared/services/alert.service';
 
 @Component({
   selector: 'app-root',

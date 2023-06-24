@@ -9,7 +9,8 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from '../service/auth/authentication.service';
 import { Role } from 'src/app/shared/enum/role.enum';
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
-import { AlertService } from 'src/app/shared/service/alert.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
+
 
 @Injectable({
   providedIn: 'root',

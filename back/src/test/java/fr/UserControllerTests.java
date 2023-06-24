@@ -39,7 +39,7 @@ import fr.mapper.UserMapper;
 import fr.service.SecurityUserService;
 import fr.service.UserService;
 
-@WebMvcTest(controllers = UserController.class)
+@WebMvcTest
 @Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class, })
 @TestPropertySource(locations = "classpath:application-test.properties")
 public class UserControllerTests {
