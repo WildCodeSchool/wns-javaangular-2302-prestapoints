@@ -33,13 +33,13 @@ public class UserController {
     public ResponseApi createUser(@RequestBody UserDto userDto) {
 
         ResponseApi responseApi = new ResponseApi();
-        responseApi.setValid(false);
+        responseApi.setResponseValid(false);
 
         if (!userService.findUserByEmail(userDto.getEmail()).isPresent()) {
             if (Pattern.matches(RegexEnum.REGEX_EMAIL.getString(),
                     userDto.getEmail())) {
                 userService.createUser(userDto);
-                responseApi.setValid(true);
+                responseApi.setResponseValid(true);
             } else {
                 responseApi.setMessage(MessageApiEnum.EMAIL_NOT_VALID.getMessage());
             }

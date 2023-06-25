@@ -1,7 +1,7 @@
 export class ResponseApi {
 
   constructor(
-    public isValid?: boolean | null,
-    public message: string = ""
-  ) {}
+    public message: string,
+    public responseValid?: boolean | null
+  ) { }
 }

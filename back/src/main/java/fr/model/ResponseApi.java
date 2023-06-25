@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ResponseApi {
-    private boolean isValid;
     private String message;
+    private boolean responseValid;
 }

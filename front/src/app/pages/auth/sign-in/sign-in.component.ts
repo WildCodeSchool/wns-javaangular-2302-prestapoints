@@ -26,7 +26,7 @@ export class SignInComponent {
     private fb: FormBuilder,
     private signInService: SignInService,
     private alertService: AlertService
-  ) {}
+  ) { }
 
   signInForm = this.fb.group({
     firstname: ['', [Validators.required]],
@@ -49,7 +49,7 @@ export class SignInComponent {
     const email = this.signInForm.get('email')?.value;
 
     if (email) {
-      if (await this.verifyEmail(email)) {
+      if (!await this.verifyEmail(email)) {
         this.alertService.setAlert(
           AlertEnum.TYPE_DANGER,
           AlertEnum.MESSAGE_EMAIL_ALREADY_EXIST,
@@ -66,20 +66,21 @@ export class SignInComponent {
               this.signInForm.get('phone')?.value
             );
             this.signInService.createUser(this.newUser).subscribe((response) => {
-                 this.responseApi = response;
-              if (this.responseApi.isValid) {
+              this.responseApi = response;
+
+              if (this.responseApi.responseValid == true) {
                 this.alertService.setAlert(
                   AlertEnum.TYPE_SUCCESS,
                   AlertEnum.MESSAGE_SIGNIN_SUCCESS,
                   AlertEnum.TIME_MEDIUM
-                  );
+                );
               } else {
                 this.alertService.setAlert(
                   AlertEnum.TYPE_DANGER,
-                  this.responseApi?.message,
+                  this.responseApi.message,
                   AlertEnum.TIME_MEDIUM
-                  );
-                }
+                );
+              }
               this.signInForm.reset();
             });
           }
