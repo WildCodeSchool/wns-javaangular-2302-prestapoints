@@ -1,5 +1,5 @@
 <div class="position-relative ">
-    <app-navbar></app-navbar>
+    <app-navbar [isVisible]="isVisible" ></app-navbar>
     <div  class="position-absolute top-0 start-50 translate-middle-x w-50">
         <ng-container *ngFor="let alert of alerts; let i=index"> 
             <app-alert [alert]="alert" [index]="i"></app-alert>
@@ -8,4 +8,3 @@
 </div>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
-<!--TODO: faire une condition afin que lorsque nous sommes sur la page de co et de signin, le footer s'affiche mais pas la navbar ()-->

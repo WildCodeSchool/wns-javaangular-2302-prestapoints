@@ -5,11 +5,13 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { SignInService } from '../service/signIn.service';
+import { SignInService } from './service/signIn.service';
 import { User } from 'src/app/shared/model/user';
 import { Alert } from 'src/app/shared/model/alert';
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
-import { AlertService } from 'src/app/shared/service/alert.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
+import { ResponseApi } from 'src/app/shared/model/responseApi';
+
 
 @Component({
   selector: 'app-sign-in',
@@ -18,12 +20,13 @@ import { AlertService } from 'src/app/shared/service/alert.service';
 })
 export class SignInComponent {
   newUser?: User;
+  responseApi?: ResponseApi;
 
   constructor(
     private fb: FormBuilder,
     private signInService: SignInService,
     private alertService: AlertService
-  ) {}
+  ) { }
 
   signInForm = this.fb.group({
     firstname: ['', [Validators.required]],
@@ -46,7 +49,7 @@ export class SignInComponent {
     const email = this.signInForm.get('email')?.value;
 
     if (email) {
-      if (await this.verifyEmail(email)) {
+      if (!await this.verifyEmail(email)) {
         this.alertService.setAlert(
           AlertEnum.TYPE_DANGER,
           AlertEnum.MESSAGE_EMAIL_ALREADY_EXIST,
@@ -62,12 +65,22 @@ export class SignInComponent {
               this.signInForm.get('password')?.value,
               this.signInForm.get('phone')?.value
             );
-            this.signInService.createUser(this.newUser).subscribe(() => {
-              this.alertService.setAlert(
-                AlertEnum.TYPE_SUCCESS,
-                AlertEnum.MESSAGE_SIGNIN_SUCCESS,
-                AlertEnum.TIME_MEDIUM
-              );
+            this.signInService.createUser(this.newUser).subscribe((response) => {
+              this.responseApi = response;
+
+              if (this.responseApi.responseValid == true) {
+                this.alertService.setAlert(
+                  AlertEnum.TYPE_SUCCESS,
+                  AlertEnum.MESSAGE_SIGNIN_SUCCESS,
+                  AlertEnum.TIME_MEDIUM
+                );
+              } else {
+                this.alertService.setAlert(
+                  AlertEnum.TYPE_DANGER,
+                  this.responseApi.message,
+                  AlertEnum.TIME_MEDIUM
+                );
+              }
               this.signInForm.reset();
             });
           }

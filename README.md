@@ -180,10 +180,51 @@ Les <mappers> sont les classes qui effectuent le mapping entre les <models> et l
 Les <repositories> effectuent des opérations sur la base de données pour les renvoyer au <service>.
 <Config> contient les fichiers de configuration, dans notre application, pour paramétrer la sécurité dans un premier temps.
 
+
+#
+## Environnement de Tests ##
+#
+Pour le back : 
+        Pour faire fonctionner le site avec les tests (pour les tests sur les controllers  par exemple) vous devez annoter votre classe de test avec:
+
+        Pour les tests de la BDD :
+        <@DataJpaTest> 
+        <@TestPropertySource(locations = "classpath:application-test.properties")>
+
+        Pour les autres tests
+        <@WebMvcTest>  
+        <@Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class, })>
+        <@TestPropertySource(locations = "classpath:application-test.properties")>
+
+        @TestPropertySource permet de mettre en place une configuration spécifique pour les tests, tel que pointer sur une BDD H2 (pour les tests sur la data) et activer un profil 'tests'.
+        @Import permet de Mock la sécurité.
+
+        Dans les 2 cas il faudra aussi @MockBean toutes les classes appelées lors des fixtures. Nous n'avons pas le choix, sinon cela casse.
+
+        La construction d'un test est toujours dans le modèle des 3A (AAA) :
+        //Arrange (je prépare les données)
+        //Act (j'appelle la/les méthodes à tester)
+        //Assert (je check)
+
+        Pour lancer les tests, dans VSCode cliquer sur le triangle en face chaque test (lance le test individuellement), vous pouvez aussi les lancer en mode debug.
+        Ainsi que lancer tous les tests de la classe (triangle en face la classe), etc...
+
+Pour le front :
+        Les tests se font avec Cypress, en e2e (endToEnd, bout-en-bout) et component.
+        La ligne de commande afin de lancer cypress est <npm run cy:open>.
+
+        La construction d'un test est plus proche du modèle GWT (Given-When-Then) avec :
+        //Visit (Etant donnée que je visite la page web ??? )
+        //Query (Quand je clique sur l'élément id=??? ...)
+        //Interact (...et que j'interragie avec l'élément id=???)
+        //Assert (Alors je dois avoir le résultat suivant) 
+
+#        Le lien valable 30j (nous sommes le 24/06/2023) pour rejoindre la team Cypress : https://cloud.cypress.io/invitation/e537baa1-ab0c-49ba-8c43-1a6bff16e9e6
+
+
 #
 # Fixtures
 #
-
 Pour la préparations des fixtures, voici les consignes :
 Dans le dossier <fixture> créez votre fichier de fixture selon l'entité concernée ou complétez celle existante.
 Ensuite dans le fichier d'application PrestapointsApplication.java faites l'injection de dépendance et appeler votre méthode ce qui lancera vos fixtures à chaque démarrage.

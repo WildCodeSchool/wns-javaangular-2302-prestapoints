@@ -16,13 +16,12 @@ public class PrestationFixtures {
 
     @Autowired
     private Fixtures fixtures;
-
     @Autowired
-    PrestationRepository prestationRepository;
+    private PrestationRepository prestationRepository;
     @Autowired
-    TypeRepository typeRepository;
+    private TypeRepository typeRepository;
     @Autowired
-    LocationRepository locationRepository;
+    private LocationRepository locationRepository;
 
     public void prepareFixtures() {
 

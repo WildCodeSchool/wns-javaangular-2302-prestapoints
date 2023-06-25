@@ -1,7 +1,7 @@
 package fr.controller;
 
-import java.io.Console;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import fr.dto.UserDto;
 import fr.entity.User;
+import fr.enums.MessageApiEnum;
+import fr.enums.RegexEnum;
 import fr.mapper.UserMapper;
+import fr.model.ResponseApi;
 import fr.service.UserService;
 
 @RestController
@@ -27,8 +30,24 @@ public class UserController {
     // Inscription du USER :
     @CrossOrigin(origins = "*")
     @PostMapping("/public/sign-in")
-    public void createUser(@RequestBody UserDto userDto) {
-        userService.createUser(userDto);
+    public ResponseApi createUser(@RequestBody UserDto userDto) {
+
+        ResponseApi responseApi = new ResponseApi();
+        responseApi.setResponseValid(false);
+
+        if (!userService.findUserByEmail(userDto.getEmail()).isPresent()) {
+            if (Pattern.matches(RegexEnum.REGEX_EMAIL.getString(),
+                    userDto.getEmail())) {
+                userService.createUser(userDto);
+                responseApi.setResponseValid(true);
+            } else {
+                responseApi.setMessage(MessageApiEnum.EMAIL_NOT_VALID.getMessage());
+            }
+        } else {
+            responseApi.setMessage(MessageApiEnum.EMAIL_EXISTING.getMessage());
+        }
+
+        return responseApi;
     }
 
     // vérification de l'email d'inscription :

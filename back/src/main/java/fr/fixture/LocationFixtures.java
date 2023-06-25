@@ -1,17 +1,13 @@
 package fr.fixture;
 
-import java.text.SimpleDateFormat;
-import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.github.javafaker.Faker;
 
 import fr.entity.Location;
-import fr.entity.Prestation;
 import fr.enums.TablesEnum;
 import fr.repository.LocationRepository;
-import fr.repository.PrestationRepository;
-import fr.repository.TypeRepository;
+
 
 @Component
 public class LocationFixtures {

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,14 +28,16 @@ import fr.service.UserService;
 
 @Controller
 public class AuthController {
+    
+    @Autowired
+    private  UserService userService;
+    @Autowired
+    private  JwtUtils jwtUtils;
 
-    private final UserService userService;
-    private final JwtUtils jwtUtils;
-
-    public AuthController(UserService userService, JwtUtils jwtUtils) {
-        this.userService = userService;
-        this.jwtUtils = jwtUtils;
-    }
+    // public AuthController(UserService userService, JwtUtils jwtUtils) {
+    //     this.userService = userService;
+    //     this.jwtUtils = jwtUtils;
+    // }
 
     Logger logger = LoggerFactory.getLogger(UserController.class);
     @CrossOrigin(origins = "*")
