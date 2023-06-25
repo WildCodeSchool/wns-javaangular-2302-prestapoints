@@ -27,7 +27,11 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @PostMapping("/public/sign-in")
     public void createUser(@RequestBody UserDto userDto) {
-        userService.createUser(userDto);
+
+        if (!userService.findUserByEmail(userDto.getEmail()).isPresent()) {
+            userService.createUser(userDto);
+        }
+        //TODO mettre en place une réponse, réussite ou non : si non, le pourquoi
     }
 
     // vérification de l'email d'inscription :
