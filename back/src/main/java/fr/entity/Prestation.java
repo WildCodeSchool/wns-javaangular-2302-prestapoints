@@ -12,6 +12,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
+@Table(name="`prestation`")
 public class Prestation {
 
     @Id

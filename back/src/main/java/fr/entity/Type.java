@@ -9,11 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@Table(name="`type`")
 public class Type {
     
     @Id

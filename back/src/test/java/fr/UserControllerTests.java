@@ -78,7 +78,7 @@ public class UserControllerTests {
         // Arrange
         // Act & Assert
         mockMvc.perform(
-                get("/users/" + 1))
+                get("/users/1"))
                 .andExpect(status().isOk());
     }
 
@@ -101,7 +101,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testCreateUser_testGetUser_ShouldReturnStatusOk() throws Exception {
+    public void testCreateUser_ShouldReturnStatusOk() throws Exception {
         // Arrange
         UserDto userDto = new UserDto();
         String bodyUser = new ObjectMapper().writeValueAsString(userDto);

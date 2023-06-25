@@ -10,6 +10,7 @@ import { User } from 'src/app/shared/model/user';
 import { Alert } from 'src/app/shared/model/alert';
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
 import { AlertService } from 'src/app/shared/services/alert.service';
+import { ResponseApi } from 'src/app/shared/model/responseApi';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 })
 export class SignInComponent {
   newUser?: User;
+  responseApi?: ResponseApi;
 
   constructor(
     private fb: FormBuilder,
@@ -63,12 +65,21 @@ export class SignInComponent {
               this.signInForm.get('password')?.value,
               this.signInForm.get('phone')?.value
             );
-            this.signInService.createUser(this.newUser).subscribe(() => {
-              this.alertService.setAlert(
-                AlertEnum.TYPE_SUCCESS,
-                AlertEnum.MESSAGE_SIGNIN_SUCCESS,
-                AlertEnum.TIME_MEDIUM
-              );
+            this.signInService.createUser(this.newUser).subscribe((response) => {
+                 this.responseApi = response;
+              if (this.responseApi.isValid) {
+                this.alertService.setAlert(
+                  AlertEnum.TYPE_SUCCESS,
+                  AlertEnum.MESSAGE_SIGNIN_SUCCESS,
+                  AlertEnum.TIME_MEDIUM
+                  );
+              } else {
+                this.alertService.setAlert(
+                  AlertEnum.TYPE_DANGER,
+                  this.responseApi?.message,
+                  AlertEnum.TIME_MEDIUM
+                  );
+                }
               this.signInForm.reset();
             });
           }
