@@ -1,7 +1,6 @@
 package fr;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -9,8 +8,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -25,7 +22,6 @@ import fr.config.JwtAuthenticationFilter;
 import fr.config.PasswordEncoderConfig;
 import fr.config.WebSecurityConfig;
 import fr.controller.PrestationController;
-import fr.controller.UserController;
 import fr.dto.UserDto;
 import fr.entity.User;
 import fr.fixture.CategoryFixtures;
@@ -104,6 +100,8 @@ public class UserControllerTests {
     public void testCreateUser_ShouldReturnStatusOk() throws Exception {
         // Arrange
         UserDto userDto = new UserDto();
+        userDto.setEmail("");
+        userDto.setPassword("");
         String bodyUser = new ObjectMapper().writeValueAsString(userDto);
 
         // Act & Assert
