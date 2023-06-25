@@ -1,5 +1,6 @@
 package fr;
 
+import org.apache.catalina.connector.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -32,6 +33,7 @@ import fr.fixture.TypeFixtures;
 import fr.fixture.UserFixtures;
 import fr.helper.JwtUtils;
 import fr.mapper.UserMapper;
+import fr.model.ResponseApi;
 import fr.service.SecurityUserService;
 import fr.service.UserService;
 
@@ -40,7 +42,8 @@ import fr.service.UserService;
 @TestPropertySource(locations = "classpath:application-test.properties")
 public class UserControllerTests {
 
-    // must MockBean all fixtures classes to not have Exceptions errors with the PostConstruct.
+    // must MockBean all fixtures classes to not have Exceptions errors with the
+    // PostConstruct.
     @MockBean
     private UserFixtures userFixtures;
     @MockBean
@@ -53,7 +56,7 @@ public class UserControllerTests {
     private RegistrationFixtures registrationFixtures;
     @MockBean
     private TypeFixtures typeFixtures;
-    
+
     // we MockBean also this list in consequences of the test
     @MockBean
     private UserDetailsService userDetailsService;
@@ -69,6 +72,7 @@ public class UserControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
+    // -----------------------GET USER--------------------------
     @Test
     public void testGetUser_ShouldReturnStatusOk() throws Exception {
         // Arrange
@@ -96,6 +100,7 @@ public class UserControllerTests {
                 .andExpect(status().isBadRequest());
     }
 
+    // -----------------------CREATE USER--------------------------
     @Test
     public void testCreateUser_ShouldReturnStatusOk() throws Exception {
         // Arrange
@@ -111,6 +116,76 @@ public class UserControllerTests {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testCreateUser_ShouldReturnValidResponse() throws Exception {
+        // Arrange
+        UserDto userDto = new UserDto();
+        userDto.setEmail("to@to.to");
+        userDto.setPassword("toto123456");
+        String body = new ObjectMapper().writeValueAsString(userDto);
+
+        ResponseApi responseApi = new ResponseApi();
+        responseApi.setResponseValid(true);
+        responseApi.setMessage(null);
+        String response = new ObjectMapper().writeValueAsString(responseApi);
+
+        // Act & Assert
+        mockMvc.perform(post("/public/sign-in")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body))
+                .andExpect(status().isOk())
+                .andExpect(content().string(response));
+    }
+
+    @Test
+    public void testCreateUser_ShouldReturnErrorInvalidEmailResponse() throws Exception {
+        // Arrange
+        UserDto userDto = new UserDto();
+        userDto.setEmail("toto.to");
+        userDto.setPassword("toto123456");
+        String body = new ObjectMapper().writeValueAsString(userDto);
+
+        ResponseApi responseApi = new ResponseApi();
+        responseApi.setResponseValid(false);
+        responseApi.setMessage("L'email n'est pas conforme.");
+        String response = new ObjectMapper().writeValueAsString(responseApi);
+
+        // Act & Assert
+        mockMvc.perform(post("/public/sign-in")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body))
+                .andExpect(status().isOk())
+                .andExpect(content().string(response));
+    }
+
+    @Test
+    public void testCreateUser_ShouldReturnErrorEmailExistResponse() throws Exception {
+        // Arrange
+        UserDto userDto = new UserDto();
+        userDto.setEmail("to@to.to");
+        userDto.setPassword("toto123456");
+        String body = new ObjectMapper().writeValueAsString(userDto);
+
+        User user = new User();
+        user.setEmail("to@to.to");
+        user.setPassword("toto123456");
+
+        ResponseApi responseApi = new ResponseApi();
+        responseApi.setResponseValid(false);
+        responseApi.setMessage("L'email existe d\u00C3\u00A9j\u00C3\u00A0 !");
+        String response = new ObjectMapper().writeValueAsString(responseApi);
+
+        when(userService.findUserByEmail(anyString())).thenReturn(Optional.of(user));
+
+        // Act & Assert
+        mockMvc.perform(post("/public/sign-in")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body))
+                .andExpect(status().isOk())
+                .andExpect(content().string(response));
+    }
+
+    // -----------------------EMAIL VERIFICATION--------------------------
     @Test
     public void testEmailVerification_ShouldReturnBadRequest() throws Exception {
         // Arrange
