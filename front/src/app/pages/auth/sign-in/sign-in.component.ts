@@ -49,7 +49,7 @@ export class SignInComponent {
     const email = this.signInForm.get('email')?.value;
 
     if (email) {
-      if (!await this.verifyEmail(email)) {
+      if (await this.verifyEmail(email)) { //TODO vérifier avec Louis si toujours utile, nous gérons dans le back
         this.alertService.setAlert(
           AlertEnum.TYPE_DANGER,
           AlertEnum.MESSAGE_EMAIL_ALREADY_EXIST,

@@ -3,7 +3,7 @@ package fr.enums;
 public enum MessageApiEnum {
     
     EMAIL_EXISTING("L'email existe déjà !"),
-    EMAIL_NOT_VALID("L'email toto n'est pas conforme.");
+    EMAIL_NOT_VALID("L'email n'est pas conforme.");
     
     private String message;
 
