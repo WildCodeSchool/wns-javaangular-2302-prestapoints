@@ -3,9 +3,11 @@
 .footer {
   height: 23rem;
   border-top: map-get($theme-colors, quinary) 5px solid; 
-
+  
+  .nav-link {
+    color: white;
+  }
   .social-media-list {
-      display: flex;
       justify-content: center;
       align-items: center;
 

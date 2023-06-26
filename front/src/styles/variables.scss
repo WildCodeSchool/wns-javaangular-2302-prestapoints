@@ -1,24 +1,24 @@
 $theme-colors: (
-    "primary":          #22577A,
-    "secondary":        #38a3a5,
-    "tertiary":         #ffedeb,
-    "quaternary":       #F8F9F0,
-    "quinary":          #e63757,
-    "dark":             #001C46,
-    "grey-text":        #638096,
-    "background-grey":      #FAF6F0,
-    "white":           #ffffff,
-    "accepted":         #4385F4,
-    "refund":           orange,
-    "success":         #60DAB1,
-    "info":            #66d1d1,
-    "warning":         #FFCC00,
-    "danger":          #FA393E,
-    "mat-labe":        #7C879C, 
+    primary:          #22577A,
+    secondary:        #38A3A5,
+    tertiary:         #FFEDEB,
+    quaternary:       #F8F9F0,
+    quinary:          #E63757,
+    dark:             #001C46,
+    grey-text:        #638096,
+    background-grey:      #FAF6F0,
+    white:           #FFFFFF,
+    accepted:         #4385F4,
+    refund:           orange,
+    success:         #60DAB1,
+    info:            #66D1D1,
+    warning:         #FFCC00,
+    danger:          #FA393E,
+    mat-labe:        #7C879C,
 );
 
 $border-size: (
-    1: 1px,  
+    1: 1px,
     2: 2px,
     3: 3px,
     4: 4px,
@@ -29,7 +29,6 @@ $border-size: (
     9: 9px,
     10: 10px
 );
-
 
 $font-size: (
     10: 0.75rem,  // 12px
@@ -61,7 +60,6 @@ $font-weight : (
     x-light: 200
 );
 
-
 @each $name, $value in $font-size {
     .presta-text-fs-#{$name} {
         font-size: $value;
@@ -78,12 +76,10 @@ $font-weight : (
     .presta-bg-#{$name} {
       background-color: $value;
     }
-
     .presta-text-#{$name} {
         color: $value;
     }
 };
-
 
 $spacers: (
     "0": 0rem, // 0px
@@ -111,25 +107,32 @@ $spacers: (
 );
 
 @each $name, $value in $spacers {
+
     .presta-p-#{$name} {
         padding: $value;
     }
+
     .presta-pl-#{$name} {
         padding-left: $value;
     }
+
     .presta-pr-#{$name} {
         padding-right: $value;
     }
+
     .presta-pt-#{$name} {
         padding-top: $value;
     }
+
     .presta-pb-#{$name} {
         padding-bottom: $value;
     }
+
     .presta-px-#{$name} {
         padding-right: $value;
         padding-left: $value;
     }
+
     .presta-py-#{$name} {
         padding-top: $value;
         padding-bottom: $value;
@@ -138,22 +141,28 @@ $spacers: (
     .presta-m-#{$name} {
         margin: $value;
     }
+    
     .presta-ml-#{$name} {
         margin-left: $value;
     }
+
     .presta-mr-#{$name} {
         margin-right: $value;
     }
+
     .presta-mt-#{$name} {
         margin-top: $value;
     }
+
     .presta-mb-#{$name} {
         margin-bottom: $value;
     }
+
     .presta-mx-#{$name} {
         margin-right: $value;
         margin-left: $value;
     }
+
     .presta-my-#{$name} {
         margin-top: $value;
         margin-bottom: $value;

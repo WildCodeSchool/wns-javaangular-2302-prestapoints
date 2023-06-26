@@ -4,14 +4,11 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
 body {
     font-family: 'Raleway', sans-serif;
     color: map-get($colors, primary);
     background-color: map-get($theme-colors, background-grey);
     overflow-x: hidden !important;
-
-
     main {
         overflow: hidden !important;
         width: 100%;
@@ -32,87 +29,73 @@ body {
     &-primary {
         padding: 1.25rem 2rem;
     }
-
     &-secondary {
         padding: 0.5rem 2rem;
     }
 }
 
+
+
 // TEXT & TITLES
 
-.text-black-blue {
+.presta-text-primary {
     color: map-get($theme-colors, primary);
 }
 
-.text-fw-xx-bold {
-    font-weight: map-get($font-weight, xx-bold);
-}
-
-.text-fs-lgx {
+.presta-text-fs-lgx {
     font-size: map-get($font-size, lgx);
 }
 
-.text-fs-md-xl {
-    font-size: map-get($font-size, md-xl);
-}
-
-.text-fw-x-bold {
-    font-weight: map-get($font-weight, x-bold);
-}
-
-.text-fs-md {
+.presta-text-fs-md {
     font-size: map-get($font-size, md);
 }
 
-.text-fw-medium {
+.presta-text-fw-bold {
+    font-weight: map-get($font-weight, x-bold);
+}
+
+.presta-text-fw-medium {
     font-weight: map-get($font-weight, medium);
 }
 
-.mb-lg {
+.presta-mb-lg {
     margin-bottom: map-get($spacers, 7);
 }
 
-.text-fs-m {
-    font-size: map-get($font-size, m);
-}
-
-.mb-m {
+.presta-mb-m {
     margin-bottom: map-get($spacers, 3);
 }
 
-.text-fs-xs {
+.presta-text-fs-xs {
     font-size: map-get($font-size, xs);
 }
 
-.text-fw-bold {
+.presta-text-fw-bold {
     font-weight: map-get($font-weight, bold);
 }
 
-.text-fs-sm {
+.presta-text-fs-sm {
     font-size: map-get($font-size, sm);
-}   
+}
 
 h1 {
-    @extend .text-black-blue;
-    @extend .text-fw-xx-bold;
-    @extend .text-fs-lgx;
-
+    @extend .presta-text-primary;
+    @extend .presta-text-fw-bold;
+    @extend .presta-text-fs-lgx;
     font-family: 'Raleway', sans-serif;
 }
 
 h2 {
-    @extend .text-black-blue;
-    @extend .text-fw-x-bold;
-    @extend .text-fs-md;
-
+    @extend .presta-text-primary;
+    @extend .presta-text-fw-bold;
+    @extend .presta-text-fs-md;
     font-family: 'Raleway', sans-serif;
 }
 
 h3 {
-    @extend .text-black-blue;
-    @extend .text-fw-x-bold;
-    @extend .text-fs-sm; 
-
+    @extend .presta-text-primary;
+    @extend .presta-text-fw-x-light;
+    @extend .presta-text-fs-sm;
     font-family: 'Raleway', sans-serif;
 }
 
@@ -125,9 +108,8 @@ h3 {
 }
 
 p ul li {
-    @extend .text-black-blue;
-    @extend .text-fs-xs;
-
+    @extend .presta-text-primary;
+    @extend .presta-text-fs-xs;
     font-family: 'Raleway', sans-serif;
 }
 
