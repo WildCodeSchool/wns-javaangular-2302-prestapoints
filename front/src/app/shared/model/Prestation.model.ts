@@ -8,7 +8,7 @@ export class Prestation {
         public state : string,
         public description : string,
         public maxUser : string,
-        public image : File,
+        public image : File[],
     ){}
 
 }

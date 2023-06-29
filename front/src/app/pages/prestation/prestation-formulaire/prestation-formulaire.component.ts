@@ -5,7 +5,6 @@ import { Prestation } from '../../../shared/model/Prestation.model';
 import { HttpClient } from '@angular/common/http';
 import { DateTimeValidatorsService } from '../prestation-service/date-time-validators.service';
 
-
 @Component({
   selector: 'app-prestation-formulaire',
   templateUrl: './prestation-formulaire.component.html',
@@ -74,7 +73,7 @@ export class PrestationFormulaireComponent {
         formData.state,
         formData.description,
         formData.maxUser,
-        this.selectedImage,
+        [this.selectedImage],
       );
 
       console.log(prestation);

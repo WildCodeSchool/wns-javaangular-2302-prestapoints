@@ -1,5 +1,6 @@
 package fr.entity;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,17 +19,22 @@ public class Prestation {
     private String title;
     private String duration;
     private String addPoint;
-    private String dateStart;
-    private String dateEnd;
+    private Date dateStart;
+    private Date dateEnd;
     private String state;
     private String description;
-    private String maxUser;
-    private String image;
+    private Integer maxUser;
+
+    @OneToMany(mappedBy = "prestation")
+    private List<Image> images = new ArrayList<>();
 
     @OneToMany(mappedBy = "prestation")
     private List<Registration> registrations = new ArrayList<>();
 
-    public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd, String state, String description, String maxUser, String image, List<Registration> registrations) {
+    public Prestation() {
+    }
+
+    public Prestation(Integer id, String title, String duration, String addPoint, Date dateStart, Date dateEnd, String state, String description, Integer maxUser, List<Image> images, List<Registration> registrations) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -38,12 +44,7 @@ public class Prestation {
         this.state = state;
         this.description = description;
         this.maxUser = maxUser;
-        this.image = image;
+        this.images = images;
         this.registrations = registrations;
     }
-
-    public Prestation() {
-    }
-
-
 }

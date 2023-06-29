@@ -1,6 +1,9 @@
 package fr.dto;
 
+import java.util.Date;
 import java.util.List;
+
+import fr.entity.Image;
 import fr.entity.Registration;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,13 +15,14 @@ public class PrestationDto {
     private Integer id;
     private String title;
     private String duration;
-    private String addPoint;
-    private String dateStart;
+    private Date addPoint;
+    private Date dateStart;
     private String dateEnd;
     private String state;
     private String description;
-    private String maxUser;
-    private String image;
+    private Integer maxUser;
+
+    private List<Image> images;
 
     private List<Registration> registrations;
 
