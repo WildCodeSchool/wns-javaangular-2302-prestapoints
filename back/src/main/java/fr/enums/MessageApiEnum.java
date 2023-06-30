@@ -8,8 +8,6 @@ public enum MessageApiEnum {
     REGISTRATION_ALREADY("Vous êtes déjà inscrit à cette prestation"),
     NEED_TO_BE_CONNECTED("Vous devez être connecté pour utiliser le service.");
     
-    
-    
     private String message;
 
     MessageApiEnum(String message) {

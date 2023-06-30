@@ -14,11 +14,8 @@ import { AlertEnum } from 'src/app/shared/enum/alert.enum';
 export class ReservationComponent {
   responseApi?: ResponseApi;
 
-
   @Input()
   public prestations?: Prestation[];
-
-
 
   constructor(
     private datePipe: DatePipe,
@@ -44,11 +41,8 @@ export class ReservationComponent {
           AlertEnum.TIME_MEDIUM
         );
       }
-
     });
-
   }
-
 }
 
 
