@@ -6,10 +6,14 @@ import java.util.List;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import fr.repository.UserRepository;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +35,12 @@ public class User {
     private String phone;
     private Timestamp tokenValidation;
     private Timestamp creation;
+
+    @ManyToMany
+    @JoinTable(name = "user_role",
+               joinColumns = @JoinColumn(name = "user_id"),
+               inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
     
     public User() {
     }
@@ -56,9 +66,13 @@ public class User {
         grantedAuthorities.add(new SimpleGrantedAuthority(id.toString()));
         if (this.getEmail().contains("admin@")) {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
         } else {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
-        return new org.springframework.security.core.userdetails.User(this.getEmail(), this.getPassword(), grantedAuthorities);
+        
+        return new org.springframework.security.core.userdetails.User(this.getEmail(), this.getPassword(),
+                grantedAuthorities);
     }
 }
