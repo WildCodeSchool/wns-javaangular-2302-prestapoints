@@ -22,12 +22,8 @@ export class ProfilService {
     this.user2.phone = "06434652"
     this.user2.password = "coucou123"
 
-    console.log(this.user2);
-    
-
-
-    this.apiUrl = "http://localhost:8080/public/sign-in";
-    return this.http.post<ResponseApi>(this.apiUrl, this.user2)
+    this.apiUrl = "http://localhost:8080/public/update";
+    return this.http.post<ResponseApi>(this.apiUrl, user)
   }
 }
 

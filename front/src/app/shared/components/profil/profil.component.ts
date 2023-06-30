@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ProfilService } from '../../services/profil.service';
 import { User } from '../../model/user';
 import { SignInService } from 'src/app/pages/auth/sign-in/service/signIn.service';
+import { ResponseApi } from '../../model/responseApi';
 
 @Component({
   selector: 'app-profil',
@@ -13,6 +14,7 @@ export class ProfilComponent {
 
   isDisable: boolean  = true;
   isEditing: boolean = false;
+  responseApi?: ResponseApi;
   userUpdate?: User;
 
   constructor(
@@ -44,7 +46,9 @@ export class ProfilComponent {
       );
 
     console.log(this.userUpdate);
-    this.profilService.updateUser(this.userUpdate)
+    this.profilService.updateUser(this.userUpdate).subscribe((response)=> {
+      this.responseApi = response;
+    })
   }
 
   onEdit(){

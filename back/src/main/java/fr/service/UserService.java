@@ -29,11 +29,23 @@ public class UserService {
     }
 
     public User getUserById(Integer id) {
-        
         return userRepository.getReferenceById(id);
     }
 
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public User updateUser(UserDto userDto) {
+        User user = userRepository.findById(1)
+        .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable"));
+
+        user.setLastname(userDto.getLastname());
+        user.setFirstname(userDto.getFirstname());
+        user.setPassword(userDto.getPassword());
+        user.setEmail(userDto.getEmail());
+        user.setPhone(userDto.getPhone());
+
+        return userRepository.save(user);
     }
 }

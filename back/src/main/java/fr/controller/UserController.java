@@ -36,8 +36,7 @@ public class UserController {
         responseApi.setResponseValid(false);
 
         if (!userService.findUserByEmail(userDto.getEmail()).isPresent()) {
-            if (Pattern.matches(RegexEnum.REGEX_EMAIL.getString(),
-                    userDto.getEmail())) {
+            if (Pattern.matches(RegexEnum.REGEX_EMAIL.getString(), userDto.getEmail())) {
                 userService.createUser(userDto);
                 responseApi.setResponseValid(true);
             } else {
@@ -63,7 +62,17 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/users/{id}")
     public UserDto getUser(@PathVariable("id") Integer id) {
-
         return userMapper.convertToDto(userService.getUserById(id));
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/public/update")
+    public ResponseApi updateUser(@RequestBody UserDto userDto) {
+        ResponseApi responseApi = new ResponseApi();
+        responseApi.setResponseValid(false);
+        responseApi.setMessage("coucou");
+        System.out.println(">>>>>>>>>>>>>>>>  je suis bien passé la ");
+        userService.updateUser(userDto);      
+        return responseApi;
     }
 }
