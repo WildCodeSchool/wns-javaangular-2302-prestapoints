@@ -50,6 +50,8 @@ public class AuthController {
         List<String> rolesNames = user.securityUser().getAuthorities().stream()
                 .map(authority -> authority.getAuthority()).toList();
         String token = jwtUtils.generateToken(user.getEmail(), rolesNames);
+        user.setToken(token);
+        userService.updateOrSaveUser(user);
         userConnected.setUserConnected(user);
 
         return Map.of("token", token);

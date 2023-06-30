@@ -32,7 +32,7 @@ public class UserFixtures {
 
     public void prepareFixtures() {
         String table = TablesEnum.USER.getTableName();
-        String tableJoin = TablesEnum.ROLE_USER.getTableName();
+        String tableJoin = TablesEnum.USER_ROLE.getTableName();
         Integer numberOfLigne = 10;
         Faker faker = new Faker();
 

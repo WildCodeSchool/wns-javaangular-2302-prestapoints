@@ -32,7 +32,6 @@ public class UserService {
         Timestamp timestamp = new Timestamp(instant);
         user.setCreation(timestamp);
 
-
         return userRepository.save(user);
     }
 
@@ -42,12 +41,16 @@ public class UserService {
     }
 
     public Optional<User> findUserByEmail(String email) {
-        
+
         return userRepository.findByEmail(email);
     }
 
     public User getUserConnected() {
-        
+
         return userConnected.getUserConnected();
+    }
+    
+    public void updateOrSaveUser(User user) {
+        userRepository.save(user);
     }
 }

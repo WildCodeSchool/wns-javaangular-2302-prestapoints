@@ -34,7 +34,7 @@ public class User {
     private String email;
     private String password;
     private String phone;
-    private Timestamp tokenValidation;
+    private String token;
     private Timestamp creation;
 
     @ManyToMany
