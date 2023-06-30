@@ -1,5 +1,7 @@
 package fr.service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,10 @@ public class UserService {
         
         User user = userMapper.convertToEntity(userDto);
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        Long instant = Instant.now().getEpochSecond();
+        Timestamp timestamp = new Timestamp(instant);
+        user.setCreation(timestamp);
+
         return userRepository.save(user);
     }
 

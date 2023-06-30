@@ -1,11 +1,12 @@
 package fr.entity;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import fr.enums.RoleEnum;
 import fr.repository.UserRepository;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -59,19 +60,13 @@ public class User {
 
     // User (méthode secuityUser)
     // -créé une liste pour les rôles de l'utilisateur (on stocke son ID en premier)
-    // -attribut le rôle en fonction de son mail
+    // -attribut le rôle User
     // -retourne un userdetails.user (nécessaires pour l'authentification)
     public org.springframework.security.core.userdetails.User securityUser() {
         List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(id.toString()));
-        if (this.getEmail().contains("admin@")) {
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        grantedAuthorities.add(new SimpleGrantedAuthority(RoleEnum.ROLE_USER.getRole()));
 
-        } else {
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        }
-        
         return new org.springframework.security.core.userdetails.User(this.getEmail(), this.getPassword(),
                 grantedAuthorities);
     }

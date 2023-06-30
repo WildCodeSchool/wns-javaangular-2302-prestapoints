@@ -36,8 +36,7 @@ public class UserController {
         responseApi.setResponseValid(false);
 
         if (!userService.findUserByEmail(userDto.getEmail()).isPresent()) {
-            if (Pattern.matches(RegexEnum.REGEX_EMAIL.getString(),
-                    userDto.getEmail())) {
+            if (Pattern.matches(RegexEnum.REGEX_EMAIL.getString(), userDto.getEmail())) {
                 userService.createUser(userDto);
                 responseApi.setResponseValid(true);
             } else {
