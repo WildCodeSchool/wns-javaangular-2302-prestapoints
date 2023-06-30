@@ -13,6 +13,7 @@ import fr.entity.Prestation;
 import fr.entity.Registration;
 import fr.entity.User;
 import fr.enums.MessageApiEnum;
+import fr.enums.RoleEnum;
 import fr.service.PrestationService;
 import fr.service.RegistrationService;
 import fr.service.UserService;

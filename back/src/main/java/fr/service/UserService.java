@@ -50,7 +50,7 @@ public class UserService {
         return userConnected.getUserConnected();
     }
     
-    public void updateOrSaveUser(User user) {
+    public void updateUser(User user) {
         userRepository.save(user);
     }
 }
