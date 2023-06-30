@@ -34,11 +34,12 @@ import fr.fixture.UserFixtures;
 import fr.helper.JwtUtils;
 import fr.mapper.UserMapper;
 import fr.model.ResponseApi;
+import fr.model.UserConnected;
 import fr.service.SecurityUserService;
 import fr.service.UserService;
 
 @WebMvcTest
-@Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class, })
+@Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class, UserConnected.class})
 @TestPropertySource(locations = "classpath:application-test.properties")
 public class UserControllerTests {
 

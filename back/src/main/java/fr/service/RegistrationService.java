@@ -1,10 +1,7 @@
 package fr.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import fr.dto.RegistrationDto;
 import fr.entity.Prestation;
 import fr.entity.Registration;
 import fr.entity.User;

@@ -39,18 +39,20 @@ public class PrestationController {
     }
 
     @GetMapping("/prestations/{id}")
-    public ResponseEntity<String> getPrestation(@PathVariable Integer id){
+    public ResponseEntity<String> getPrestation(@PathVariable Integer id) {
         try {
-            
-            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(prestationService.getPrestationById(id));
+
+            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON)
+                    .body(prestationService.getPrestationById(id));
         } catch (ExceptionJsonDetail exceptionJsonDetail) {
 
-            return ResponseEntity.status(404).contentType(MediaType.APPLICATION_JSON).body(exceptionJsonDetail.getNotFound());
+            return ResponseEntity.status(404).contentType(MediaType.APPLICATION_JSON)
+                    .body(exceptionJsonDetail.getNotFound());
         }
     }
 
     @PostMapping("/prestations")
-    public Prestation createPrestation(@RequestBody PrestationDto prestationDto){
+    public Prestation createPrestation(@RequestBody PrestationDto prestationDto) {
 
         return prestationService.createPrestation(prestationDto);
     }
@@ -60,30 +62,33 @@ public class PrestationController {
 
         prestationService.deletePrestationById(id);
     }
-    
+
     @GetMapping("/prestations/{prestationId}/registration")
     public ResponseApi bookedRegistration(@PathVariable Integer prestationId) {
         User user = userService.getUserConnected();
         ResponseApi responseApi = new ResponseApi();
         Prestation prestation = prestationRepository.findById(prestationId).get();
-        Registration registration = registrationService.getRegistrationByUserIdAndPrestationId(user.getId(),
-                prestationId);
-        
         responseApi.setResponseValid(false);
+        
+        if (user != null) {
 
-        if(registration != null) {
-            responseApi.setMessage(MessageApiEnum.REGISTRATION_ALREADY.getMessage());
-            
-        } else if(prestation.getPlaceAvailable() == 0) {
-            responseApi.setMessage(MessageApiEnum.REGISTRATION_FULL.getMessage());
-            
+            Registration registration = registrationService.getRegistrationByUserIdAndPrestationId(user.getId(),
+                    prestationId);
+
+            if (registration != null) {
+                responseApi.setMessage(MessageApiEnum.REGISTRATION_ALREADY.getMessage());
+
+            } else if (prestation.getPlaceAvailable() == 0) {
+                responseApi.setMessage(MessageApiEnum.REGISTRATION_FULL.getMessage());
+
+            } else {
+                prestationService.subtractOnePlaceAvailableInPrestationById(prestationId);
+                registrationService.addRegistrationByUserIdAndPrestationId(user, prestation);
+                responseApi.setResponseValid(true);
+            }
         } else {
-            prestationService.subtractOnePlaceAvailableInPrestationById(prestationId);
-            registrationService.addRegistrationByUserIdAndPrestationId(user, prestation);
-            responseApi.setResponseValid(true);
+                responseApi.setMessage(MessageApiEnum.NEED_TO_BE_CONNECTED.getMessage());
         }
-
         return responseApi;
     }
-
 }

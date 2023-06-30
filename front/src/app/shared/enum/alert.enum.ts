@@ -13,6 +13,7 @@ export enum AlertEnum {
     MESSAGE_WRONG_PASSWORD = "Les mots de passe sont différents",
     MESSAGE_EMAIL_ALREADY_EXIST = "L'email existe déjà !",
     MESSAGE_WRONG_ROLE = "Désolé, vous n'êtes pas autorisé, contactez votre administrateur",
+    MESSAGE_RESERVATION_SUCCESS = "Votre réservation a bien été enregistré.",
     TIME_INFINITY = 2147483647,
     TIME_LONG = 10000,
     TIME_MEDIUM = 5000,
