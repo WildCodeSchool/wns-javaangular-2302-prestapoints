@@ -43,7 +43,7 @@ public class PrestationFixtures {
                 prestation.setDateStart(String.valueOf(sdf.format(faker.date().future(30,TimeUnit.DAYS))));
                 prestation.setState(String.valueOf(faker.number().numberBetween(1, 3)));
                 prestation.setDescription(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
-                prestation.setMaxUser(String.valueOf(faker.number().numberBetween(1,6)));
+                prestation.setMaxUser(faker.number().numberBetween(1,6));
                 prestation.setImage(fixtures.imageFakerRandom(200, 300));
                 prestation.setType(typeRepository.getReferenceById(faker.number().numberBetween(1, 5)));
                 prestation.setLocation(locationRepository.getReferenceById(faker.number().numberBetween(1, 50)));

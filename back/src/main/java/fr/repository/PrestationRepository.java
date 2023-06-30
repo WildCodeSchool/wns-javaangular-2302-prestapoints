@@ -5,4 +5,5 @@ import fr.entity.Prestation;
 
 public interface PrestationRepository extends JpaRepository<Prestation, Integer> {
 
+    
 }

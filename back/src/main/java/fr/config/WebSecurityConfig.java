@@ -65,7 +65,7 @@ public class WebSecurityConfig {
                 .and()
                     .authorizeHttpRequests()
                     .requestMatchers(GET, "/admin").hasRole("ROLE_ADMIN")
-                    .requestMatchers("/api/*").hasRole("ROLE_USER") //TODO: à valider avec les copains le mot clé qui restreint les routes
+                    .requestMatchers("/prestations/*").hasRole("ROLE_USER") //TODO: à valider avec les copains le mot clé qui restreint les routes
                     .anyRequest().permitAll()
                 .and()
                 .formLogin()

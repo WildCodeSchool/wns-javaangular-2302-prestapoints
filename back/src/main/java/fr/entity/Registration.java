@@ -27,4 +27,7 @@ public class Registration {
     @JoinColumn(name = "prestation_id")
     private Prestation prestation;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 }
