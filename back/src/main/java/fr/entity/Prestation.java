@@ -26,8 +26,9 @@ public class Prestation {
     private String dateEnd;
     private String state;
     private String description;
-    private String maxUser;
+    private Integer maxUser;
     private String image;
+    private Integer placeAvailable;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
@@ -43,7 +44,7 @@ public class Prestation {
     private Location location;
 
     public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd,
-            String state, String description, String maxUser, String image, List<Registration> registrations) {
+            String state, String description, Integer maxUser, String image, List<Registration> registrations) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -55,8 +56,27 @@ public class Prestation {
         this.maxUser = maxUser;
         this.image = image;
         this.registrations = registrations;
+        this.placeAvailable = this.maxUser;
     }
 
     public Prestation() {
+        this.placeAvailable = 0;
     }
+
+    public void bookedPlace() {
+        this.setPlaceAvailable(this.getPlaceAvailable()-1); 
+    }
+
+    public void setMaxUser(Integer maxUser) {
+        this.maxUser = maxUser;
+        calculatePlaceavailable();
+    }
+
+    private void calculatePlaceavailable() {
+        if (this.getRegistrations() != null && this.getMaxUser() > 0) {
+            this.setPlaceAvailable(this.getMaxUser() - this.getRegistrations().size());
+        }
+    }
+    
+     
 }
