@@ -20,6 +20,7 @@ public class PrestationDto {
     private String image;
     private TypeDto type;
     private LocationDto location;
+    private Integer placeAvailable;
 
     private List<RegistrationDto> registrations;
 
