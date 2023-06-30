@@ -1,0 +1,99 @@
+<!-- 
+<div class="modal fade" id="modalProfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form [formGroup]="profilForm" (ngSubmit)="onSubmitFormProfil()" class="text-center p-5">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Mon profil</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-5">
+                        <img class="rounded-circle bg-secondary" style="width: 30%;" src="./assets/img/homme.png">
+                    </div>
+                    <div class="mb-3" [hidden]="!isEditing">
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                    <div class="mb-3 pt-3">
+                        <input type="text" id="defaultRegisterFormFirstName" class="form-control"
+                            formControlName="firstname"
+                            [attr.disabled]="profilForm.get('edit')?.disabled ? true : null">
+                        <div class="position-relative">
+                            <div *ngIf="profilForm.controls['firstname'].errors && !profilForm.controls['firstname'].pristine"
+                                class="position-absolute top-0 start-50 translate-middle-x w-100">
+                                <small [hidden]="!profilForm.get('firstname')?.errors?.['required']"
+                                    class="text-danger">Le nom est
+                                    requis
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+       
+                    <div class="mb-3 pt-3">
+                        <input type="text" id="defaultRegisterFormLastName" class="form-control"
+                            formControlName="lastname" [attr.disabled]="profilForm.get('edit')?.disabled ? true : null">
+                        <div class="position-relative">
+                            <div *ngIf="profilForm.controls['lastname'].errors && !profilForm.controls['lastname'].pristine"
+                                class="position-absolute top-0 start-50 translate-middle-x w-100">
+                                <small [hidden]="!profilForm.get('lastname')?.errors?.['required']"
+                                    class="text-danger">Le prénom
+                                    est requis</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 pt-3">
+                        <input type="email" id="defaultRegisterFormEmail" class="form-control" formControlName="email"
+                            [attr.disabled]="profilForm.get('edit')?.disabled ? true : null">
+                        <div class="position-relative">
+                            <div *ngIf="profilForm.controls['email'].errors && !profilForm.controls['email'].pristine"
+                                class="position-absolute top-0 start-50 translate-middle-x w-100">
+                                {{ profilForm.get('email')?.errors?.['email'].rules }}
+                                <small [hidden]="!profilForm.get('email')?.errors?.['required']"
+                                    class="text-danger">L'e-mail est
+                                    requis
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 pt-3">
+                        <input type="password" id="defaultRegisterFormPassword" class="form-control"
+                            formControlName="password">
+                        <div class="position-relative">
+                            <small
+                                *ngIf="profilForm.controls['password'].errors && !profilForm.controls['password'].pristine"
+                                class="position-absolute top-0 start-50 translate-middle-x text-danger w-100">
+                                {{ profilForm.get('password')?.errors?.['password'].rules }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 pt-3">
+                        <input type="tel" id="defaultRegisterFormPhone" class="form-control"
+                            aria-describedby="defaultRegisterFormPhoneHelpBlock" formControlName="phone">
+                        <div class="position-relative">
+                            <small *ngIf="profilForm.controls['phone'].errors && !profilForm.controls['phone'].pristine"
+                                class="position-absolute top-0 start-50 translate-middle-x text-danger w-100">
+                                {{ profilForm.get('phone')?.errors?.['phone'].rules }}
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        [hidden]="isEditing">Fermer</button>
+                    <button type="button" class="btn btn-secondary" type="submit" [hidden]="!isEditing">Valider</button>
+                    <button type="button" class="btn btn-secondary" (click)="onEdit()">Modifier</button>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</div> -->
+
+
+
+<button (click)="onSubmitFormProfil()">fefgrgrg</button>

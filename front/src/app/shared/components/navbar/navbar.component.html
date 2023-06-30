@@ -26,7 +26,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 border-bottom w-100 justify-content-between px-4">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 border-bottom w-100 justify-content-between px-4 align-items-center">
         <li class="nav-item">
           <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="#">Nos univers</a>
         </li>
@@ -40,7 +40,12 @@
           <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="#">Proposer un atelier</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="#">Se connecter</a>
+          <div class="d-flex align-items-center">
+            <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="#">Se connecter</a>
+            <button type="button" class="nav-link active text-primary fw-bolder fs-6" aria-current="page" data-bs-toggle="modal" data-bs-target="#modalProfil">
+              <img class="rounded-circle bg-secondary" style="width: 30px;" src="./assets/img/connexion.svg">
+            </button>
+          </div>
         </li>
       </ul>
     </div>

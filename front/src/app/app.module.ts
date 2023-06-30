@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { AlertComponent } from './shared/components/alert/alert.component';
+import { ProfilComponent } from './shared/components/profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AlertComponent } from './shared/components/alert/alert.component';
     FooterComponent,
     NavbarComponent,
     AlertComponent,
+    ProfilComponent,
   ],
   imports: [
     BrowserModule,
