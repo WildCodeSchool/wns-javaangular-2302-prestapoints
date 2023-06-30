@@ -3,7 +3,8 @@ import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn, AbstractC
 import { Component,OnInit } from '@angular/core';
 import { Prestation } from '../../../shared/model/Prestation.model';
 import { HttpClient } from '@angular/common/http';
-import { DateTimeValidatorsService } from '../prestation-service/date-time-validators.service';
+import { DateTimeValidatorsService } from '../prestation-service/date-time-handling.service';
+import { FormValidatorsService } from '../prestation-service/form-validators.service';
 
 @Component({
   selector: 'app-prestation-formulaire',
@@ -13,36 +14,36 @@ import { DateTimeValidatorsService } from '../prestation-service/date-time-valid
 export class PrestationFormulaireComponent {
     prestationForm!: FormGroup;
     dateDuJour: Date= new Date();
-    dateDebut : Date = new Date();
-    dateFin : Date = new Date();
+    dateDebut: number = 0;
+    dateFin: number = 0;
     dateTemp :Date  = new Date(); 
-    dateActuelle !: string;
+    dateActuelle !: String;
+    startTemp: number = 0;
 
     selectedImage!: File;
     
 
-    constructor(private formBuilder: FormBuilder, private http: HttpClient, private dateTimeService : DateTimeValidatorsService) { }
+    constructor(private formBuilder: FormBuilder,
+         private http: HttpClient,
+         private dateTimeService : DateTimeValidatorsService,
+         private formValidatorsService : FormValidatorsService
+         ) { }
   
     ngOnInit(): void {
-        const aujourdHui = new Date();
-        const jour = aujourdHui.getDate();
-        const mois = aujourdHui.getMonth() + 1; // Les mois commencent à 0
-        const annee = aujourdHui.getFullYear();
-        this.dateActuelle = `${jour.toString().padStart(2, '0')}/${mois.toString().padStart(2, '0')}/${annee}`;
+
+        this.dateActuelle = this.formValidatorsService.DateToDayToString();
 
         this.prestationForm = this.formBuilder.group({
           title: ['', [Validators.required, Validators.maxLength(50)]],
-          duration: ['', [Validators.required, this.dateTimeService.timeValidator()]],
-          dateStart: [this.dateActuelle , [Validators.required, this.dateTimeService.dateValidator()]],
-          HeureDebutPrestation: ['' , [Validators.required, this.dateTimeService.timeValidator()]],
+          duration: ['', [Validators.required, this.formValidatorsService.timeValidator()]],
+          dateStart: [this.dateActuelle , [Validators.required]],
+          HeureDebutPrestation: ['' , [Validators.required, this.formValidatorsService.timeValidator()]],
           description: ['', [Validators.required, Validators.maxLength(255)]],
           maxUser: ['', Validators.required]
         });
       }
   
-      
-
-      onFileSelected(event: any): void {
+    onFileSelected(event: any): void {
         this.selectedImage = event.target.files[0];
         const reader = new FileReader();
       
@@ -55,39 +56,50 @@ export class PrestationFormulaireComponent {
 
     
     onSubmit() {
-      if (this.prestationForm.invalid) {
-        return;
-      }
+        const formDataAll: FormData = new FormData();
 
-      const formData = this.prestationForm.value;
-      
-      this.dateDebut = this.dateTimeService.dateTimeCreator(formData.dateStart, formData.HeureDebutPrestation);
-      this.dateFin = this.dateTimeService.dateTimeCreatorWithAddDuration( this.dateTemp, formData.duration);
+        if (this.prestationForm.invalid) {
+          return;
+        }
 
-      const prestation = new Prestation(
-        formData.id,
-        formData.title,
-        formData.duration,
-        this.dateDebut,
-        this.dateFin,
-        formData.state,
-        formData.description,
-        formData.maxUser,
-        [this.selectedImage],
-      );
+        const formData = this.prestationForm.value;
+        
+        formData.dateStart = formData.dateStart.replace(/-/g, '/');
+        formData.dateStart = this.dateTimeService.formatYyyymmddToDdmmyyyy(formData.dateStart);
+        this.dateDebut = this.dateTimeService.convertStrDateTimeToTimestamp(formData.dateStart, formData.HeureDebutPrestation);
+        this.dateFin = this.dateDebut + this.dateTimeService.convertTimeToMilliseconds(formData.duration);
+
+        const prestation = new Prestation(
+            formData.id,
+            formData.title,
+            this.dateTimeService.convertTimeToMilliseconds(formData.duration),
+            300,            //300 point par defaut
+            this.dateDebut,
+            this.dateFin,
+            "created",
+            formData.description,
+            formData.maxUser,
+        );
 
       console.log(prestation);
-  
-      // Envoie de l'objet JSON au serveur
-        this.http.post("http://localhost:8080/prestations", prestation).subscribe(
-          response => {
+      console.log(this.selectedImage);
+      if (this.selectedImage) {
+        console.log("je suis dedans");
+        formDataAll.append('image', this.selectedImage);
+      }
+
+        formDataAll.append('prestation', JSON.stringify(prestation));
+        console.log(formDataAll);
+    // Envoie de l'objet JSON au serveur
+        this.http.post("http://localhost:8080/prestations", formDataAll).subscribe(
+        response => {
             // Traitement de la réponse du serveur
             this.prestationForm.reset();
-          },
-          error => {
+        },
+        error => {
             // Gestion des erreurs
             console.error(error);
-          }
+        }
         );
     }
   }

@@ -17,8 +17,8 @@ public class ImageService {
   private ImageRepository imageRepository;
 
   @Transactional
-  public void saveImage(MultipartFile image) throws IOException, SQLException {
+  public Image saveImage(MultipartFile image) throws IOException, SQLException {
     byte[] imageData = image.getBytes();
-    imageRepository.save(new Image(imageData));
+    return imageRepository.save(new Image(imageData));
   }
 }

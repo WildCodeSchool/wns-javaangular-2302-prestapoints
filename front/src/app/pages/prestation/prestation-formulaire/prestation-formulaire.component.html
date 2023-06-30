@@ -47,7 +47,7 @@
               </div> 
 
               <div class="mb-3"><label for="dateStart" class="form-label">Date de début :</label>
-                <input type="text" id="dateStart" formControlName="dateStart" class="form-control"/>
+                <input type="date" id="dateStart" formControlName="dateStart" class="form-control"/>
                 {{ prestationForm.get('dateStart')?.errors?.['rules'] }}
                 <div *ngIf="prestationForm.get('dateStart')?.errors && !prestationForm.get('dateStart')?.pristine" class="error-msg m-3 text-danger">
                   <div [hidden]="!prestationForm.get('dateStart')?.errors?.['required']">

@@ -6,9 +6,7 @@ import java.util.List;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import fr.exception.ExceptionJsonDetail;
-
 import fr.dto.PrestationDto;
 import fr.entity.Prestation;
 import fr.mapper.PrestationMapper;
@@ -40,9 +38,13 @@ public class PrestationService {
         return  object.toString();
     }
 
-    public Prestation createPrestation(PrestationDto prestationDto) {
+    public String createPrestation(PrestationDto prestationDto)throws ExceptionJsonDetail {
+
         Prestation prestation = prestationMapper.convertToEntity(prestationDto);
-        return prestationRepository.save(prestation);
+        prestationRepository.save(prestation);
+        
+        JSONObject object = new JSONObject(prestation);
+        return  object.toString();
     }
 
     public void deletePrestationById(int id){

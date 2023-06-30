@@ -1,14 +1,12 @@
 package fr.fixture;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -42,71 +40,42 @@ public class PrestationFixtures {
 
         if (fixtures.isDatatableExistAndDelete(table)){
                         
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             Integer numberOfLigne = 20;
 
             for (Integer i = 1; i < numberOfLigne; i++) {
 
                 prestation.setId(i);
                 prestation.setTitle(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
-                prestation.setDuration(String.valueOf(faker.number().numberBetween(1, 100)));
-                prestation.setAddPoint(String.valueOf(faker.number().numberBetween(100, 500)));
-                prestation.setDateEnd(String.valueOf(sdf.format(faker.date().future(30,TimeUnit.DAYS))));
-                prestation.setDateStart(String.valueOf(sdf.format(faker.date().future(30,TimeUnit.DAYS))));
+
+                LocalDateTime dateStart = faker.date().future(30, TimeUnit.DAYS).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                long timestamp = dateStart.toInstant(ZoneOffset.UTC).toEpochMilli();
+                Timestamp timestampSql = new Timestamp(timestamp);
+                prestation.setDateStart(timestampSql);
+
+                // Générer une durée aléatoire au format "hh:mm"
+                String randomDuration = String.format("%02d:00", faker.number().numberBetween(0, 23));
+                // Convertir la durée en LocalTime
+                LocalTime duration = LocalTime.parse(randomDuration);
+                Long milliseconds = Duration.between(LocalTime.MIN, duration).toMillis();
+                prestation.setDuration(milliseconds);
+
+                // Créer une instance de Duration à partir de la durée
+                Duration duree = Duration.ofHours(duration.getHour()).plusMinutes(duration.getMinute());
+
+                // Ajouter la durée à la date de début pour obtenir la date de fin
+                LocalDateTime dateEnd = dateStart.plus(duree);
+                timestamp = dateEnd.toInstant(ZoneOffset.UTC).toEpochMilli();
+                timestampSql = new Timestamp(timestamp);
+                prestation.setDateEnd(timestampSql);
+                
+                prestation.setAddPoint(faker.number().numberBetween(100, 500));
                 prestation.setState(String.valueOf(faker.number().numberBetween(1, 3)));
                 prestation.setDescription(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
-                prestation.setMaxUser(String.valueOf(faker.number().numberBetween(1,6)));
+                prestation.setMaxUser(faker.number().numberBetween(1,6));
                 
                 prestationRepository.save(prestation);
- 
-                try {
-                    URL url = new URL(fixtures.imageFakerRandom(200, 300));
-                    InputStream inputStream = url.openStream();
-                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        
-                    byte[] buffer = new byte[1024];
-                    int bytesRead;
-                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                        outputStream.write(buffer, 0, bytesRead);
-                    }
-        
-                    byte[] imageBytes = outputStream.toByteArray();
-                    Image image = new Image(imageBytes);
-                    image.setData(imageBytes);
-                    image.setId(i);
-                    image.setPrestation(prestation);
-                    imageRepository.save(image);
-        
-                    inputStream.close();
-                    outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
 
         }
     } 
-
-    public void saveImageFromUrl() {
-        try {
-            URL url = new URL(fixtures.imageFakerRandom(200, 300));
-            InputStream inputStream = url.openStream();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
-
-            byte[] imageBytes = outputStream.toByteArray();
-            Image image = new Image(imageBytes);
-            imageRepository.save(image);
-
-            inputStream.close();
-            outputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
