@@ -5,6 +5,7 @@ import { Location } from "./location";
 export class Prestation {
 
   constructor(
+    public id?: number,
     public title?: string,
     public duration?: string,
     public addPoint?: string,
@@ -16,6 +17,7 @@ export class Prestation {
     public image?: string,
     public type?: Type,
     public location?: Location,
+    public placeAvailable?: string
     
    // public registration?: Registration[]
   ) {}

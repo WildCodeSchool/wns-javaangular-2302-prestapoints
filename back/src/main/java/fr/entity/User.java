@@ -56,6 +56,8 @@ public class User {
         grantedAuthorities.add(new SimpleGrantedAuthority(id.toString()));
         if (this.getEmail().contains("admin@")) {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+            
         } else {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         }

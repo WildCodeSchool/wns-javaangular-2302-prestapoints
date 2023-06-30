@@ -7,4 +7,4 @@ CREATE USER 'prestapoints'@'localhost' IDENTIFIED BY 'prestapoints';
 GRANT ALL PRIVILEGES ON prestapoints.* TO 'prestapoints'@'localhost' WITH GRANT OPTION;
 --flush this user in MYSQL
 FLUSH PRIVILEGES;
-
+DROP DATABASE prestapoints;
