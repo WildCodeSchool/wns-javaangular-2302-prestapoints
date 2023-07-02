@@ -11,7 +11,8 @@ import { Alert } from 'src/app/shared/model/alert';
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { ResponseApi } from 'src/app/shared/model/responseApi';
-
+import { HttpClient } from '@angular/common/http';
+import { ImageService } from 'src/app/shared/services/image.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -21,12 +22,16 @@ import { ResponseApi } from 'src/app/shared/model/responseApi';
 export class SignInComponent {
   newUser?: User;
   responseApi?: ResponseApi;
+  selectedFile?: File;
+  avatarUrl?: string;
 
   constructor(
     private fb: FormBuilder,
     private signInService: SignInService,
-    private alertService: AlertService
-  ) { }
+    private alertService: AlertService,
+    private imageService: ImageService,
+    private http: HttpClient
+  ) {}
 
   signInForm = this.fb.group({
     firstname: ['', [Validators.required]],
@@ -49,7 +54,8 @@ export class SignInComponent {
     const email = this.signInForm.get('email')?.value;
 
     if (email) {
-      if (await this.verifyEmail(email)) { //TODO vérifier avec Louis si toujours utile, nous gérons dans le back
+      if (await this.verifyEmail(email)) {
+        //TODO vérifier avec Louis si toujours utile, nous gérons dans le back
         this.alertService.setAlert(
           AlertEnum.TYPE_DANGER,
           AlertEnum.MESSAGE_EMAIL_ALREADY_EXIST,
@@ -65,24 +71,26 @@ export class SignInComponent {
               this.signInForm.get('password')?.value,
               this.signInForm.get('phone')?.value
             );
-            this.signInService.createUser(this.newUser).subscribe((response) => {
-              this.responseApi = response;
+            this.signInService
+              .createUser(this.newUser)
+              .subscribe((response) => {
+                this.responseApi = response;
 
-              if (this.responseApi.responseValid == true) {
-                this.alertService.setAlert(
-                  AlertEnum.TYPE_SUCCESS,
-                  AlertEnum.MESSAGE_SIGNIN_SUCCESS,
-                  AlertEnum.TIME_MEDIUM
-                );
-              } else {
-                this.alertService.setAlert(
-                  AlertEnum.TYPE_DANGER,
-                  this.responseApi.message,
-                  AlertEnum.TIME_MEDIUM
-                );
-              }
-              this.signInForm.reset();
-            });
+                if (this.responseApi.responseValid == true) {
+                  this.alertService.setAlert(
+                    AlertEnum.TYPE_SUCCESS,
+                    AlertEnum.MESSAGE_SIGNIN_SUCCESS,
+                    AlertEnum.TIME_MEDIUM
+                  );
+                } else {
+                  this.alertService.setAlert(
+                    AlertEnum.TYPE_DANGER,
+                    this.responseApi.message,
+                    AlertEnum.TIME_MEDIUM
+                  );
+                }
+                this.signInForm.reset();
+              });
           }
         } else {
           this.alertService.setAlert(
@@ -125,5 +133,21 @@ export class SignInComponent {
         isPresent(emailExists);
       });
     });
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+  uploadAvatar() {
+    if (this.selectedFile != null) {
+      this.imageService.uploadAvatar(this.selectedFile).subscribe();
+    }
+  }
+
+  getAvatar(avatarId: number): void {
+    this.imageService.getAvatar(avatarId).subscribe((avatarUrl: string) => {
+      this.avatarUrl = avatarUrl;
+      });
   }
 }

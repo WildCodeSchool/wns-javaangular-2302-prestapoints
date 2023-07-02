@@ -1,10 +1,17 @@
+<!-- ESSAI IMAGE -->
+
+<input type="file" (change)="onFileSelected($event)">
+<button (click)="uploadAvatar()">Upload Avatar</button>
+<img [src]="avatarUrl" alt="Avatar">
+<button (click)="getAvatar(1)">Get Avatar</button>
+
+<!-- FIN ESSAI -->
+
+
 <!-- Default form register -->
 <form [formGroup]="signInForm" (ngSubmit)="onSubmitFormSignIn()" class="text-center p-5">
-
     <h4 class=" mb-4 text-tertiary">Créer son compte</h4>
-
     <div class="form-row mb-4">
-
         <!-- First name -->
         <div class="mb-5 pt-3">
             <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Nom"
