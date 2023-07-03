@@ -34,14 +34,12 @@ public class UserService {
         return userRepository.getReferenceById(id);
     }
 
-    public Optional<User> findUserByEmail(String email) {
-        
+    public Optional<User> findUserByEmail(String email) {     
         return userRepository.findByEmail(email);
     }
 
-    public User updateUser(UserDto userDto) {
-        User user = userRepository.findById(1)
-        .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable"));
+    public User updateUser(Integer id, UserDto userDto) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable"));
 
         user.setLastname(userDto.getLastname());
         user.setFirstname(userDto.getFirstname());
@@ -52,8 +50,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getUserConnected() {
-        
+    public User getUserConnected() { 
+          
         return userConnected.getUserConnected();
     }
 }

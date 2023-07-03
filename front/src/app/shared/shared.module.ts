@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { ProfilComponent } from './components/profil/profil.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormUserModule } from './components/form-user/form-user.module';
+
 
 @NgModule({
   declarations: [
-    NavbarComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class SharedModule {}

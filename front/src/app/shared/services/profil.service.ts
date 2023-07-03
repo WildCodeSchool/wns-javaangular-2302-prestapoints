@@ -15,15 +15,12 @@ export class ProfilService {
   constructor(public http : HttpClient ) { }
 
   updateUser(user: User): Observable<ResponseApi>{
-    
-    this.user2.email = "dvsvdsfv"
-    this.user2.firstname = "dvsvdsfv"
-    this.user2.lastname = "dvsvdsfv"
-    this.user2.phone = "06434652"
-    this.user2.password = "coucou123"
-
     this.apiUrl = "http://localhost:8080/public/update";
     return this.http.post<ResponseApi>(this.apiUrl, user)
+  }
+
+  getUserConnected(): Observable<User>{
+    return this.http.get<User>("http://localhost:8080/getUsers")
   }
 }
 

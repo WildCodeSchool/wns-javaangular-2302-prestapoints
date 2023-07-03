@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +38,7 @@ public class UserController {
         responseApi.setResponseValid(false);
 
         if (!userService.findUserByEmail(userDto.getEmail()).isPresent()) {
-            if (Pattern.matches(RegexEnum.REGEX_EMAIL.getString(), userDto.getEmail())) {
+            if (Pattern.matches(RegexEnum.REGEX_EMAIL.getString(), userDto.getEmail()) ) {
                 userService.createUser(userDto);
                 responseApi.setResponseValid(true);
             } else {
@@ -55,8 +57,22 @@ public class UserController {
     public boolean emailVerification(@RequestBody String email) {
         System.out.println(email);
         Optional<User> user = userService.findUserByEmail(email);
-
         return user.isPresent();
+    }
+
+    /**
+     * Method to return our logged in User
+     *
+     * @return user connected
+     */
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/getUsers")
+    public UserDto getUserConnected() {
+         User user = userService.getUserConnected();
+         System.out.println("*************************** yes !!!!");
+         System.out.println(user);
+         return userMapper.convertToDto(user);
     }
 
     @CrossOrigin(origins = "*")
@@ -65,14 +81,17 @@ public class UserController {
         return userMapper.convertToDto(userService.getUserById(id));
     }
 
+    /**
+     * Method to update logged in user's profile
+     *
+     * @return return the api response
+     */
+
     @CrossOrigin(origins = "*")
     @PostMapping("/public/update")
-    public ResponseApi updateUser(@RequestBody UserDto userDto) {
-        ResponseApi responseApi = new ResponseApi();
-        responseApi.setResponseValid(false);
-        responseApi.setMessage("coucou");
-        System.out.println(">>>>>>>>>>>>>>>>  je suis bien passé la ");
-        userService.updateUser(userDto);      
-        return responseApi;
+    public ResponseEntity<String> updateUser(@RequestBody UserDto userDto) {
+        User user = userService.getUserConnected();
+        userService.updateUser(user.getId(), userDto);  
+        return new ResponseEntity<>("Modification enregistrée", HttpStatus.OK);
     }
 }
