@@ -16,6 +16,7 @@ import { SharedModule } from './shared/shared.module';
 import { FormUserModule } from './shared/components/form-user/form-user.module';
 import { LocalStorageService } from './shared/services/localStorage.service';
 import { ProfilService } from './shared/services/profil.service';
+import { CategoryService } from './shared/services/category.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { ProfilService } from './shared/services/profil.service';
     ReactiveFormsModule,
     FormUserModule
   ],
-  providers: [FormBuilder, { provide: LOCALE_ID, useValue: 'fr' }, LocalStorageService, ProfilService],
+  providers: [FormBuilder, { provide: LOCALE_ID, useValue: 'fr' }, LocalStorageService, ProfilService, CategoryService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
