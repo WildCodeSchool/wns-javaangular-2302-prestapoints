@@ -28,8 +28,8 @@
         <aside class="widgets_tags">
           <h5 class="widget-title">Tags</h5> 
           <div class="entry__tags presta-text-fs-20 presta-text-fw-bold presta-mt-6"> 
-            <div rel="tag" *ngFor="let tag of getTags()">
-              <a href="/ateliers/{{ tag }}" class="no-link tag-link">{{ tag }}</a>
+            <div rel="tag" *ngFor="let tag of tags">
+              <a href="/ateliers/{{ tag.name }}" class="no-link tag-link">{{ tag.name }}</a>
             </div>
           </div> 
         </aside>
