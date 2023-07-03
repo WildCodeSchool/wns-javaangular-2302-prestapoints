@@ -15,6 +15,7 @@ import fr.fixture.CategoryFixtures;
 import fr.fixture.LocationFixtures;
 import fr.fixture.PrestationFixtures;
 import fr.fixture.RegistrationFixtures;
+import fr.fixture.RoleFixtures;
 import fr.fixture.TypeFixtures;
 import fr.fixture.UserFixtures;
 
@@ -37,7 +38,8 @@ public class DataUserTests {
     private RegistrationFixtures registrationFixtures;
     @MockBean
     private TypeFixtures typeFixtures;
-
+    @MockBean
+    private RoleFixtures roleFixtures;
     @Autowired
     private UserRepository userRepository;
 

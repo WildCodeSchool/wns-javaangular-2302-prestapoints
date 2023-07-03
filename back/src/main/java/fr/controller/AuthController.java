@@ -1,6 +1,5 @@
 package fr.controller;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +36,6 @@ public class AuthController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @CrossOrigin(origins = "*")
@@ -50,12 +48,14 @@ public class AuthController {
         List<String> rolesNames = user.securityUser().getAuthorities().stream()
                 .map(authority -> authority.getAuthority()).toList();
         String token = jwtUtils.generateToken(user.getEmail(), rolesNames);
+        user.setToken(token);
+        userService.updateUser(user);
         userConnected.setUserConnected(user);
 
         return Map.of("token", token);
     }
 
-    //TODO Verifier l'utilité auprès de Louis, sinon à suppr
+    // TODO Verifier l'utilité auprès de Louis, sinon à suppr
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
