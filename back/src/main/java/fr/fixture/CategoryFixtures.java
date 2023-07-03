@@ -54,7 +54,7 @@ public class CategoryFixtures {
 
             for (int i = 1; i <= numberOfLigne; i++) {
                 category.setId(i);
-                category.setName(categories.get(i));
+                category.setName(categories.get(i-1));
 
                 categoryRepository.save(category);
             }
