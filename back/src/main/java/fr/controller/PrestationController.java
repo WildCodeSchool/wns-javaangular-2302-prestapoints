@@ -13,7 +13,6 @@ import fr.entity.Prestation;
 import fr.entity.Registration;
 import fr.entity.User;
 import fr.enums.MessageApiEnum;
-import fr.enums.RoleEnum;
 import fr.service.PrestationService;
 import fr.service.RegistrationService;
 import fr.service.UserService;
@@ -32,6 +31,9 @@ public class PrestationController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AuthController authController;
 
     @GetMapping("/prestations")
     public List<PrestationDto> getAllPrestations() {
@@ -64,9 +66,10 @@ public class PrestationController {
         prestationService.deletePrestationById(id);
     }
 
-    @GetMapping("/prestations/{prestationId}/registration")
-    public ResponseApi bookedRegistration(@PathVariable Integer prestationId) {
-        User user = userService.getUserConnected();
+    @PostMapping("/prestations/prestation/registration")
+    public ResponseApi bookedRegistration(@RequestBody Integer prestationId) {
+
+        User user = authController.getUserConnected();
         ResponseApi responseApi = new ResponseApi();
         Prestation prestation = prestationRepository.findById(prestationId).get();
         responseApi.setResponseValid(false);

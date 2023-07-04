@@ -1,8 +1,10 @@
 package fr;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Profile;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import fr.fixture.CategoryFixtures;
 import fr.fixture.LocationFixtures;
@@ -14,6 +16,7 @@ import fr.fixture.UserFixtures;
 import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
+@EnableTransactionManagement
 public class PrestapointsApplication {
 
 	@Autowired
@@ -31,29 +34,30 @@ public class PrestapointsApplication {
 	@Autowired
 	private RoleFixtures roleFixtures;
 
-
-
-	/* STOP FIXTURES = false   # START FIXTURES = true */ 
+	/* STOP FIXTURES = false # START FIXTURES = true */
 	private boolean loadFixtures = false;
 
 	@PostConstruct
 	@Profile("!test")
 	public void init() {
-		if (this.loadFixtures) {
-			//Faire attention à l'ordre des dépendences !
-			roleFixtures.prepareFixtures();
-			userFixtures.prepareFixtures(); //depends on roles
-			categoryFixtures.prepareFixtures(); //depends on 
-			typeFixtures.prepareFixtures(); //depends on category
-			locationFixtures.prepareFixtures();
-			prestationFixtures.prepareFixtures(); // depends on user, category, location
-			registrationFixtures.prepareFixtures();// depends on prestation
+		try {
+			if (this.loadFixtures) {
+				// Faire attention à l'ordre des dépendences !
+				roleFixtures.prepareFixtures();
+				userFixtures.prepareFixtures(); // depends on roles
+				categoryFixtures.prepareFixtures(); // depends on
+				typeFixtures.prepareFixtures(); // depends on category
+				locationFixtures.prepareFixtures();
+				prestationFixtures.prepareFixtures(); // depends on user, category, location
+				registrationFixtures.prepareFixtures();// depends on prestation
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(PrestapointsApplication.class, args);
 	}
-
 
 }

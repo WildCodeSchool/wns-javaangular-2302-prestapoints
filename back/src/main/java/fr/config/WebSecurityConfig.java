@@ -52,7 +52,6 @@ public class WebSecurityConfig {
     }
     
 
-
     @Profile("!tests")
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter)
@@ -64,17 +63,9 @@ public class WebSecurityConfig {
         http.cors() // CORS is configured just under
                 .and()
                     .authorizeHttpRequests()
-                    .requestMatchers(GET, "/admin/*").hasRole("ROLE_ADMIN")
+                    .requestMatchers(GET,"/admin").hasRole("ROLE_ADMIN")
                     .requestMatchers("/prestations/*").hasRole("ROLE_USER") //TODO: à valider avec les copains le mot clé qui restreint les routes
-                    .anyRequest().permitAll()
-                .and()
-                .formLogin()
-                    .loginPage("/public/sign-in").permitAll() //TODO à faire
-                    .loginProcessingUrl("/public/do-sign-in") //TODO à suppr l'url si redirect sur sign-in directement
-                    .defaultSuccessUrl("/home") // à voir avec Louis
-                    .failureUrl("/public/sign-in?error=true") // à voir avec Louis
-                    .usernameParameter("username")
-                    .passwordParameter("password")
+                .anyRequest().permitAll()
                 .and()
                 .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/public/logout")) // TODO à faire

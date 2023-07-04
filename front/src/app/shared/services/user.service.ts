@@ -10,8 +10,9 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
-    this.apiUrl = 'http://localhost:8080/admin/users';
-
+    // console.log("in getUsers")
+    this.apiUrl = 'http://localhost:8080/admin/utilisateurs';
+    // console.log("url " + this.apiUrl)
     return this.http.get<User[]>(this.apiUrl);
   }
 }

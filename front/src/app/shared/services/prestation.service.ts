@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponseBase } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
@@ -18,8 +18,8 @@ export class PrestationService {
   }
 
   addRegistration(id: number | undefined): Observable<ResponseApi> {
-    this.apiUrl = 'http://localhost:8080/prestations/' + id + '/registration';
+    this.apiUrl = 'http://localhost:8080/prestations/prestation/registration';
 
-    return this.http.get<ResponseApi>(this.apiUrl);
+    return this.http.post<ResponseApi>(this.apiUrl, id);
   }
 }

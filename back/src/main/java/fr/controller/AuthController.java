@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.entity.User;
 import fr.helper.JwtUtils;
-import fr.model.UserConnected;
 import fr.service.UserService;
 
 // AuthController :
@@ -29,8 +28,6 @@ import fr.service.UserService;
 @Controller
 public class AuthController {
 
-    @Autowired
-    private UserConnected userConnected;
     @Autowired
     private UserService userService;
     @Autowired
@@ -48,9 +45,8 @@ public class AuthController {
         List<String> rolesNames = user.securityUser().getAuthorities().stream()
                 .map(authority -> authority.getAuthority()).toList();
         String token = jwtUtils.generateToken(user.getEmail(), rolesNames);
-        user.setToken(token);
+
         userService.updateUser(user);
-        userConnected.setUserConnected(user);
 
         return Map.of("token", token);
     }
@@ -61,5 +57,12 @@ public class AuthController {
     @ResponseBody
     public Map<String, ?> testAuth() {
         return Map.of("success", true);
+    }
+
+    public User getUserConnected() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return user;
     }
 }

@@ -22,6 +22,8 @@ import org.springframework.http.MediaType;
 import fr.config.JwtAuthenticationFilter;
 import fr.config.PasswordEncoderConfig;
 import fr.config.WebSecurityConfig;
+import fr.controller.AuthController;
+import fr.controller.CategoryController;
 import fr.controller.PrestationController;
 import fr.dto.UserDto;
 import fr.entity.User;
@@ -35,12 +37,12 @@ import fr.fixture.UserFixtures;
 import fr.helper.JwtUtils;
 import fr.mapper.UserMapper;
 import fr.model.ResponseApi;
-import fr.model.UserConnected;
+
 import fr.service.SecurityUserService;
 import fr.service.UserService;
 
 @WebMvcTest
-@Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class, UserConnected.class})
+@Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class, AuthController.class})
 @TestPropertySource(locations = "classpath:application-test.properties")
 public class UserControllerTests {
 
@@ -73,6 +75,8 @@ public class UserControllerTests {
     private PrestationController prestationController;
     @MockBean
     private UserMapper userMapper;
+    @MockBean
+    private CategoryController categoryController;
 
     @Autowired
     private MockMvc mockMvc;

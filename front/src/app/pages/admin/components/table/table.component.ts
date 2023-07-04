@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/model/user';
-import { UserService } from 'src/app/shared/services/user.service';
+
 
 @Component({
   selector: 'app-table',
@@ -9,6 +9,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class TableComponent {
   @Input()
-  users?: User[];
+  public users?: User[];
+  
+  constructor(){}
 
 }
