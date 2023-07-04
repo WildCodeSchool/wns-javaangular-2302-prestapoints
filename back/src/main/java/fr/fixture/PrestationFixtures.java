@@ -17,19 +17,26 @@ import fr.entity.Prestation;
 import fr.enums.TablesEnum;
 import fr.exception.ExceptionJsonDetail;
 import fr.repository.ImageRepository;
+import fr.repository.LocationRepository;
 import fr.repository.PrestationRepository;
+import fr.repository.TypeRepository;
 
 @Component
 public class PrestationFixtures {
 
     @Autowired
     private Fixtures fixtures;
-
+    
     @Autowired
     PrestationRepository prestationRepository;
 
     @Autowired
     ImageRepository imageRepository;
+   
+    @Autowired
+    private TypeRepository typeRepository;
+    @Autowired
+    private LocationRepository locationRepository;
 
 
     public void prepareFixtures() throws ExceptionJsonDetail {
@@ -42,8 +49,7 @@ public class PrestationFixtures {
                         
             Integer numberOfLigne = 20;
 
-            for (Integer i = 1; i < numberOfLigne; i++) {
-
+            for (int i = 0; i < numberOfLigne; i++) {
                 prestation.setId(i);
                 prestation.setTitle(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
 
@@ -72,7 +78,9 @@ public class PrestationFixtures {
                 prestation.setState(String.valueOf(faker.number().numberBetween(1, 3)));
                 prestation.setDescription(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
                 prestation.setMaxUser(faker.number().numberBetween(1,6));
-                
+                prestation.setType(typeRepository.getReferenceById(faker.number().numberBetween(1, 5)));
+                prestation.setLocation(locationRepository.getReferenceById(faker.number().numberBetween(1, 50)));
+
                 prestationRepository.save(prestation);
             }
 

@@ -1,3 +1,8 @@
+
+# Ajout module en lazy loading
+.    `ng generate module chemin-et-nom-du-module --route url-de-la-route --module app.module` 
+
+
 # Front
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.5.

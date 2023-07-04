@@ -1,0 +1,22 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-small-primary" data-bs-toggle="modal" data-bs-target="#reservationModal">
+  <small>modal</small>
+</button>
+
+<div class="container">
+
+  <div class="d-flex justify-content-end position-relative">
+    <div class="position-absolute top-50 start-25 translate-middle">
+      <app-searchbar (prestationsEmitter)="onGetPrestation($event)"></app-searchbar>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2015/08/19/08/26/artisan-895670_1280.jpg" class="img-fluid w-50 shadow"
+      alt="photo d'accueil">
+  </div>
+
+  <hr class="my-4">
+
+  <p class="my-0 fw-0 ">Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i></p>
+  <app-slider [prestationsApi]="prestationsApi"></app-slider>
+
+</div>
+<app-reservation [prestations]="prestationsApi"></app-reservation>

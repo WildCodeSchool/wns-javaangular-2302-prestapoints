@@ -2,9 +2,10 @@
 import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Component,OnInit } from '@angular/core';
 import { Prestation } from '../../../shared/model/Prestation.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { DateTimeValidatorsService } from '../prestation-service/date-time-handling.service';
 import { FormValidatorsService } from '../prestation-service/form-validators.service';
+
 
 @Component({
   selector: 'app-prestation-formulaire',
@@ -23,7 +24,7 @@ export class PrestationFormulaireComponent {
     dateActuelle !: String;
     startTemp: number = 0;
     selectedImageURL!: string;
-    selectedImage!: File;
+    selectedImage: File | null = null;
     
 
     constructor(
@@ -55,7 +56,10 @@ export class PrestationFormulaireComponent {
           this.selectedImageURL = e.target.result;
         };
       
-        reader.readAsDataURL(this.selectedImage);
+        if (this.selectedImage != null){
+            reader.readAsDataURL(this.selectedImage);
+        }
+        
       }
 
     
@@ -85,13 +89,10 @@ export class PrestationFormulaireComponent {
             formData.maxUser,
         );
 
-        console.log(prestation);
-        console.log(this.selectedImage);
-
         if (this.selectedImage) {
-            console.log("je suis dedans");
             formDataAll.append('picture', this.selectedImage);
         }
+
         formDataAll.append('prestation', JSON.stringify(prestation));
         
         //const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data');
@@ -101,11 +102,11 @@ export class PrestationFormulaireComponent {
               console.log("successful");
               // Handle the server response
               this.prestationForm.reset();
+              this.selectedImage = null;
             },
             (error) => {
               // Handle errors
               console.error(error);
-              console.log(error);
             }
           );
     }

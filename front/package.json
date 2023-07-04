@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "cy:open": "cypress open"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +22,7 @@
     "@popperjs/core": "^2.11.7",
     "bootstrap": "^5.3.0-alpha1",
     "bootstrap-icons": "^1.10.3",
-    "moment": "^2.29.4",
+    "jwt-decode": "^3.1.2",
     "node-sass": "^8.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -32,6 +33,7 @@
     "@angular/cli": "~15.1.5",
     "@angular/compiler-cli": "^15.1.0",
     "@types/jasmine": "~4.3.0",
+    "cypress": "^12.15.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",

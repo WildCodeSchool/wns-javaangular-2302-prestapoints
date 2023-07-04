@@ -27,6 +27,6 @@ public class PrestationDto {
 
     private List<Image> images;
 
-    private List<Registration> registrations;
+    private List<RegistrationDto> registrations;
 
 }

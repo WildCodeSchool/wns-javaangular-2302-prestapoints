@@ -40,10 +40,11 @@ public class PrestationService {
         for (Prestation prestation : prestations) {
             prestationDtos.add(prestationMapper.convertToDto(prestation));
         }
+
         return prestationDtos;
     }
 
-    public String getPrestationById(int id) throws ExceptionJsonDetail {
+    public String getPrestationById(Integer id) throws ExceptionJsonDetail {
         Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
         PrestationDto prestationDto = prestationMapper.convertToDto(prestation);
         JSONObject object = new JSONObject(prestationDto);
@@ -79,10 +80,28 @@ public class PrestationService {
         prestationDto = prestationMapper.convertToDto(prestation);
         JSONObject objectDto = new JSONObject(prestationDto);
         System.out.println(objectDto.toString());
+        
         return new ResponseEntity<>(objectDto.toString(), HttpStatus.OK);          
+
     }
 
-    public void deletePrestationById(int id){
+    public Prestation createPrestation(PrestationDto prestationDto) {
+        Prestation prestation = prestationMapper.convertToEntity(prestationDto);
+
+        return prestationRepository.save(prestation);
+    }
+
+    public void deletePrestationById(int id) {
         prestationRepository.deleteById(id);
+    }
+
+    public Prestation subtractOnePlaceAvailableInPrestationById(Integer id) {
+        Prestation prestation = prestationRepository.findById(id).get();
+        
+        if (prestation.getPlaceAvailable() > 0) {
+            prestation.setPlaceAvailable(prestation.getPlaceAvailable() - 1);
+        }
+        
+        return prestationRepository.save(prestation);
     }
 }
