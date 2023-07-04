@@ -2,7 +2,7 @@
 import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Component,OnInit } from '@angular/core';
 import { Prestation } from '../../../shared/model/Prestation.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DateTimeValidatorsService } from '../prestation-service/date-time-handling.service';
 import { FormValidatorsService } from '../prestation-service/form-validators.service';
 
@@ -12,6 +12,9 @@ import { FormValidatorsService } from '../prestation-service/form-validators.ser
   styleUrls: ['./prestation-formulaire.component.scss']
 })
 export class PrestationFormulaireComponent {
+    
+    url : string = "http://localhost:8080/prestations";
+    
     prestationForm!: FormGroup;
     dateDuJour: Date= new Date();
     dateDebut: number = 0;
@@ -19,15 +22,16 @@ export class PrestationFormulaireComponent {
     dateTemp :Date  = new Date(); 
     dateActuelle !: String;
     startTemp: number = 0;
-
+    selectedImageURL!: string;
     selectedImage!: File;
     
 
-    constructor(private formBuilder: FormBuilder,
-         private http: HttpClient,
-         private dateTimeService : DateTimeValidatorsService,
-         private formValidatorsService : FormValidatorsService
-         ) { }
+    constructor(
+        private formBuilder: FormBuilder,
+        private http: HttpClient,
+        private dateTimeService : DateTimeValidatorsService,
+        private formValidatorsService : FormValidatorsService
+        ) { }
   
     ngOnInit(): void {
 
@@ -48,7 +52,7 @@ export class PrestationFormulaireComponent {
         const reader = new FileReader();
       
         reader.onload = (e: any) => {
-          this.selectedImage = e.target.result;
+          this.selectedImageURL = e.target.result;
         };
       
         reader.readAsDataURL(this.selectedImage);
@@ -81,26 +85,29 @@ export class PrestationFormulaireComponent {
             formData.maxUser,
         );
 
-      console.log(prestation);
-      console.log(this.selectedImage);
-      if (this.selectedImage) {
-        console.log("je suis dedans");
-        formDataAll.append('image', this.selectedImage);
-      }
+        console.log(prestation);
+        console.log(this.selectedImage);
 
-        formDataAll.append('prestation', JSON.stringify(prestation));
-        console.log(formDataAll);
-    // Envoie de l'objet JSON au serveur
-        this.http.post("http://localhost:8080/prestations", formDataAll).subscribe(
-        response => {
-            // Traitement de la réponse du serveur
-            this.prestationForm.reset();
-        },
-        error => {
-            // Gestion des erreurs
-            console.error(error);
+        if (this.selectedImage) {
+            console.log("je suis dedans");
+            formDataAll.append('picture', this.selectedImage);
         }
-        );
+        formDataAll.append('prestation', JSON.stringify(prestation));
+        
+        //const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data');
+    
+        this.http.post(this.url, formDataAll).subscribe(
+            (response) => {
+              console.log("successful");
+              // Handle the server response
+              this.prestationForm.reset();
+            },
+            (error) => {
+              // Handle errors
+              console.error(error);
+              console.log(error);
+            }
+          );
     }
   }
 

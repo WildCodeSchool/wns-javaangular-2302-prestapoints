@@ -5,6 +5,8 @@ import { PrestationRoutingModule } from './prestation-routing.module';
 import { PrestationFormulaireComponent } from './prestation-formulaire/prestation-formulaire.component';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DateTimeValidatorsService } from './prestation-service/date-time-handling.service';
+import { FormValidatorsService } from './prestation-service/form-validators.service';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     PrestationRoutingModule,
     FormsModule,ReactiveFormsModule,
-  ]
+  ],providers: [
+    DateTimeValidatorsService, 
+    FormValidatorsService]
 })
 export class PrestationModule { }

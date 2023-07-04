@@ -2,13 +2,15 @@ package fr.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -19,7 +21,8 @@ import fr.service.ImageService;
 import fr.service.PrestationService;
 
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 //@CrossOrigin(origins = "http://localhost:4200")
 public class PrestationController {
     @Autowired
@@ -52,46 +55,65 @@ public class PrestationController {
     //}
 
 
+  
+   /* @PostMapping(value="/prestations", consumes="multipart/form-data")
+    //public ResponseEntity<String> createPrestation(@RequestBody() Map<String, Object>  body){
+     public ResponseEntity<?> createPrestation(@RequestPart("picture") MultipartFile picture){                                  
     
-    @PostMapping("/prestations")
-    public ResponseEntity<String> createPrestation(@RequestParam(value = "image", required = false) MultipartFile image,
-                                         @RequestParam("prestation") String prestationJson){
-       
-           Image imageSave = new Image();
-       if (image != null){
-            try {
-            imageSave = imageService.saveImage(image);
-            } catch (Exception e) {
-            return new ResponseEntity<>("Failed to upload image", HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-        
-        
-        
-        //gestion dde l'enrigistrement de l'entité
+        System.out.println(picture);
+       // Retrieve values from the request body
+        String prestationJson = (String) body.get("prestation");
+        // Convert the prestation JSON to your desired object type
+        // For example, using Jackson ObjectMapper:
         ObjectMapper objectMapper = new ObjectMapper();
         PrestationDto prestationDto;
         try {
             prestationDto = objectMapper.readValue(prestationJson, PrestationDto.class);
-            List <Image> images = new ArrayList<Image>();
-            images.add(imageSave);
-            prestationDto.setImages(images);
+            // Process the prestationDto object as needed
+        } catch (JsonProcessingException e) {
+            // Handle JSON processing exception
+            return ResponseEntity.badRequest().body("Invalid prestation JSON");
+        }
+        
+        // Access other values from the body map
+        // For example, retrieving the uploaded picture
+        MultipartFile picture = (MultipartFile) body.get("picture");
+        if (picture != null) {
+            // Process the uploaded picture
+        }
+        
+        // Handle the request and return a response
+        return ResponseEntity.ok("Prestation created successfully");
+    }                 */                  
+    
+    
 
+
+    @PostMapping(value="/prestations", consumes="multipart/form-data")
+    public ResponseEntity<?> createPrestation(@RequestPart("picture") MultipartFile picture,
+                                          @RequestPart("prestation") String prestationJson) {
+                                            
+                //gestion dde l'enrigistrement de l'entité
+        ObjectMapper objectMapper = new ObjectMapper();
+        PrestationDto prestationDto;
+        try {
+            prestationDto = objectMapper.readValue(prestationJson, PrestationDto.class);
         } catch (JsonProcessingException e) {
             // Gérer l'erreur de désérialisation
-            return ResponseEntity.badRequest().body("Invalid prestation data");
+            return ResponseEntity.badRequest().body("Invalid prestationDto data");
         }
         
         try {
             
-            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(prestationService.createPrestation(prestationDto));
+            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(prestationService.createPrestation(prestationDto, picture));
         } catch (ExceptionJsonDetail exceptionJsonDetail) {
 
             return ResponseEntity.status(404).contentType(MediaType.APPLICATION_JSON).body(exceptionJsonDetail.getNotFound());
         }
 
-      
-    }
+    } 
+
+
 
     @DeleteMapping("/prestations/{id}")
     public void deletePrestation(@PathVariable Integer id){

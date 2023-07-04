@@ -24,10 +24,10 @@ public class Prestation {
     private String description;
     private Integer maxUser;
 
-    @OneToMany(mappedBy = "prestation")
+    @OneToMany(mappedBy = "prestation", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
 
-    @OneToMany(mappedBy = "prestation")
+    @OneToMany(mappedBy = "prestation",fetch = FetchType.EAGER)
     private List<Registration> registrations = new ArrayList<>();
     
 

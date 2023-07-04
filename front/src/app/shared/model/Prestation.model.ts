@@ -1,3 +1,5 @@
+import { Image } from "./Image";
+
 export class Prestation {
     constructor(
         public id : string,
@@ -9,7 +11,7 @@ export class Prestation {
         public state : string,
         public description : string,
         public maxUser : string,
-        //public image : File
+        //public image : Image[]
     ){}
 
     

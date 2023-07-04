@@ -15,10 +15,10 @@ public class Image {
     private Integer id;
 
     @Lob
-    @Column(name = "data")
+    @Column(name = "data", nullable = false, columnDefinition = "LONGBLOB")
     private byte[] data;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "prestation_id")
     private Prestation prestation;
 

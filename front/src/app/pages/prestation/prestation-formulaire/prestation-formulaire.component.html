@@ -93,7 +93,7 @@
               
               <div class="mt-5">
                 <input type="file" (change)="onFileSelected($event)" accept="image/*">
-                <img *ngIf="selectedImage" [src]="selectedImage" alt="Preview" class="img-thumbnail mt-3">
+                <img *ngIf="selectedImageURL" [src]="selectedImageURL" alt="Preview" class="img-thumbnail mt-3">
               </div>
 
             </div>
