@@ -1,5 +1,7 @@
 package fr.dto;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,4 +14,6 @@ public class UserDto {
     private String password;
     private String email;
     private String phone;
+    private String creationDate;
+    private List<RoleDto> roles;
 }

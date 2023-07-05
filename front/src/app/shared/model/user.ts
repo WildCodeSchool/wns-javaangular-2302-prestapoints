@@ -1,6 +1,8 @@
+import { Role } from "./role";
+
 export class User {
     public id?: string;
-    public roles?: string;
+    public roles?: Role[];
     public creationDate?: string;
 
     constructor(
