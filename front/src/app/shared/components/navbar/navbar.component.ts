@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LocalStorageService } from '../../services/localStorage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,13 +7,27 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  
+
   @Input()
   isVisible?: boolean
+  inputVisible?: boolean;
+  inputNotvisible?: boolean;
 
-  constructor() { }
+  constructor(private localstorageService: LocalStorageService) { }
 
   ngOnInit() {
+    this.checkUserLoggedIn()
+  }
+
+  checkUserLoggedIn() {
+    const value = this.localstorageService.getItem('currentUser');
+    if (value != null) {
+      this.inputVisible = false
+      this.inputNotvisible = true;
+    }else {
+      this.inputVisible = true
+      this.inputNotvisible = false;
+    }
   }
 
 }

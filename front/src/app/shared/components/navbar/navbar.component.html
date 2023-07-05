@@ -41,10 +41,18 @@
         </li>
         <li class="nav-item">
           <div class="d-flex align-items-center">
-            <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="#">Se connecter</a>
-            <button type="button" class="nav-link active text-primary fw-bolder fs-6" aria-current="page" data-bs-toggle="modal" data-bs-target="#modalProfil">
-              <img class="rounded-circle bg-secondary" style="width: 30px;" src="./assets/img/connexion.svg">
-            </button>
+            <div [hidden]="inputNotvisible">
+              <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="auth">Se connecter</a>
+            </div>
+            <div [hidden]="inputVisible">
+              <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="">Déconnexion</a>
+            </div>
+            <div [hidden]="inputVisible">
+              <button type="button" class="nav-link active text-primary fw-bolder fs-6" aria-current="page"
+                data-bs-toggle="modal" data-bs-target="#modalProfil">
+                <img class="rounded-circle bg-secondary" style="width: 30px;" src="./assets/img/connexion.svg">
+              </button>
+            </div>
           </div>
         </li>
       </ul>

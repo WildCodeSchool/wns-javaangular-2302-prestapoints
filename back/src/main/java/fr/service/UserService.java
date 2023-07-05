@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import fr.dto.UserDto;
 import fr.entity.User;
 import fr.mapper.UserMapper;
@@ -44,20 +46,21 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User updateUser(Integer id, UserDto userDto) {
+    public User updateUserProfil(Integer id, UserDto userDto) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable"));
 
         user.setLastname(userDto.getLastname());
         user.setFirstname(userDto.getFirstname());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEmail(userDto.getEmail());
         user.setPhone(userDto.getPhone());
+
 
         return userRepository.save(user);
     }
 
     public User getUserConnected() { 
-  
         return userConnected.getUserConnected();
     }
     

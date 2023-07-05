@@ -12,6 +12,7 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 import { ResponseApi } from 'src/app/shared/model/responseApi';
 import { SignInService } from './service/signIn.service';
 import { LocalStorageService } from '../../services/localStorage.service';
+import { ProfilService } from '../../services/profil.service';
 
 
 @Component({
@@ -21,14 +22,18 @@ import { LocalStorageService } from '../../services/localStorage.service';
 })
 export class FormUserComponent {
   newUser?: User;
+  userResponse?: User;
   responseApi?: ResponseApi;
   isLoggedIn = false;
+  passwordVisible = true;
+  email: string = "";
 
   constructor(
     private fb: FormBuilder,
     private signInService: SignInService,
     private alertService: AlertService,
     private localstorageService: LocalStorageService,
+    private profilService: ProfilService
   ) { }
 
   signInForm = this.fb.group({
@@ -45,17 +50,6 @@ export class FormUserComponent {
     ],
     phone: ['', [Validators.required, this.phoneValidator]],
   });
-
-  ngOnInit() {
-    this.checkUserLoggedIn();
-  }
-
-  checkUserLoggedIn() {
-    const value = this.localstorageService.getItem('currentUser');
-    if (value != null) {
-      this.isLoggedIn = true
-    }
-  }
 
   async onSubmitFormSignIn() {
     const password = this.signInForm.get('password')?.value;

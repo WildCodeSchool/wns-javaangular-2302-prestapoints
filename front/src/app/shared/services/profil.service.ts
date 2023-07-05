@@ -9,18 +9,27 @@ import { Observable } from 'rxjs';
 })
 export class ProfilService {
 
-  apiUrl : string = "";
+  apiUrl: string = "";
   user2: User = new User();
 
-  constructor(public http : HttpClient ) { }
+  constructor(public http: HttpClient) { }
 
-  updateUser(user: User): Observable<ResponseApi>{
-    this.apiUrl = "http://localhost:8080/public/update";
+  updateUser(user: User): Observable<ResponseApi> {
+    this.apiUrl = "http://localhost:8080/update";
     return this.http.post<ResponseApi>(this.apiUrl, user)
   }
 
-  getUserConnected(): Observable<User>{
-    return this.http.get<User>("http://localhost:8080/getUsers")
+  getUserConnected(): Observable<User> {
+    return this.http.get<User>("http://localhost:8080/getUserConnected")
+  }
+
+  updateAvatar(imageFormData: FormData): Observable<ResponseApi> {
+    this.apiUrl = "http://localhost:8080/avatar";
+    return this.http.post<ResponseApi>(this.apiUrl, imageFormData)
+  }
+
+  getAvatar(): Observable<ArrayBuffer> {
+    return this.http.get('http://localhost:8080/get/avatar', { responseType: 'arraybuffer' });
   }
 }
 
