@@ -1,5 +1,6 @@
 package fr.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,6 @@ public class AdminController {
     @Autowired
     private AuthController authController;
 
-    
-
     @GetMapping("/admin/utilisateurs")
     public List<UserDto> getUsersDto() {
 
@@ -46,9 +45,31 @@ public class AdminController {
             return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON)
                     .body(new ResponseApi(false, MessageApiEnum.DELETE_FAILED.getMessage()));
         }
-        
+
         try {
             ResponseApi response = userService.deleteUser(userDto);
+
+            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(response);
+        } catch (ExceptionJsonDetail exceptionJsonDetail) {
+
+            return ResponseEntity.status(404).contentType(MediaType.APPLICATION_JSON)
+                    .body(new ResponseApi(false, exceptionJsonDetail.getNotFound()));
+        }
+    }
+
+    @PostMapping("/admin/utilisateurs/utilisateur/suppressions")
+    public ResponseEntity<ResponseApi> deleteUsers(@RequestBody List<UserDto> usersDto) {
+        User userConnected = authController.getUserConnected();
+        List<User> usersToDelete = new ArrayList<User>();
+        for (UserDto userDto : usersDto) {
+            User user = userService.findUserByEmail(userDto.getEmail()).get();
+            if (user != null && !userConnected.equals(user)) {
+                usersToDelete.add(user);
+            }
+        }
+        
+        try {
+            ResponseApi response = userService.deleteUsers(usersToDelete);
 
             return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(response);
         } catch (ExceptionJsonDetail exceptionJsonDetail) {

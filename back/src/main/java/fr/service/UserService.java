@@ -79,7 +79,22 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public ResponseApi deleteUser(@RequestBody UserDto userDto) {
+    public ResponseApi deleteUsers(List<User> users) {
+        try {
+            userRepository.deleteAll(users);
+
+            return new ResponseApi(true, MessageApiEnum.DELETE_SUCCESS.getMessage());
+
+        } catch (DataIntegrityViolationException e) {
+            String blockingTable = extractBlockingTableFromException(e);
+
+            return new ResponseApi(false,
+                    "Impossible de supprimer au moins l'un des utilisateurs en raison de sa présence dans : "
+                            + blockingTable);
+        }
+    }
+
+    public ResponseApi deleteUser(UserDto userDto) {
         try {
             User user = userRepository.findByEmail(userDto.getEmail()).orElse(null);
 

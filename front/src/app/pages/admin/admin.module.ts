@@ -12,6 +12,6 @@ import { UserService } from 'src/app/shared/services/user.service';
     CommonModule,
     AdminRoutingModule
   ],
-  providers: [UserService]
+  providers: [UserService ]
 })
 export class AdminModule { }

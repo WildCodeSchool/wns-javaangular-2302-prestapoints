@@ -21,4 +21,10 @@ export class UserService {
 
     return this.http.post<ResponseApi>(this.apiUrl, user);
   }
+
+  deleteUsers(users: User[]): Observable<ResponseApi> {
+    this.apiUrl = 'http://localhost:8080/admin/utilisateurs/utilisateur/suppressions';
+
+    return this.http.post<ResponseApi>(this.apiUrl, users);
+  }
 }
