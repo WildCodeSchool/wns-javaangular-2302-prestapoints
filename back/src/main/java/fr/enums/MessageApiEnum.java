@@ -6,7 +6,10 @@ public enum MessageApiEnum {
     EMAIL_NOT_VALID("L'email n'est pas conforme."),
     REGISTRATION_FULL("Désolé, il n'y a plus de place disponible pour cette prestation"),
     REGISTRATION_ALREADY("Vous êtes déjà inscrit à cette prestation"),
-    NEED_TO_BE_CONNECTED("Vous devez être connecté pour utiliser le service.");
+    NEED_TO_BE_CONNECTED("Vous devez être connecté pour utiliser le service."),
+    DELETE_SUCCESS("La suppression a été réalisé avec succès."),
+    ERROR("Une erreur a été rencontrée."),
+    DELETE_FAILED("La suppression n'a pu être effectuée.");
     
     private String message;
 

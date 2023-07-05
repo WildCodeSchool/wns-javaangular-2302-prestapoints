@@ -14,6 +14,8 @@ export enum AlertEnum {
     MESSAGE_EMAIL_ALREADY_EXIST = "L'email existe déjà !",
     MESSAGE_WRONG_ROLE = "Désolé, vous n'êtes pas autorisé, contactez votre administrateur",
     MESSAGE_RESERVATION_SUCCESS = "Votre réservation a bien été enregistré.",
+    MESSAGE_DELETE_SUCCESS = "La suppression a été réalisée avec succès.",
+    ERROR = "Une erreur s'est produite.",
     TIME_INFINITY = 2147483647,
     TIME_LONG = 10000,
     TIME_MEDIUM = 5000,
