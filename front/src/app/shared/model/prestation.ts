@@ -1,10 +1,12 @@
 import { Type } from "./type";
 import { Registration } from "./registration";
 import { Location } from "./location";
+import { SafeUrl } from "@angular/platform-browser";
 
 export class Prestation {
 
   constructor(
+    public id?: string,
     public title?: string,
     public duration?: string,
     public addPoint?: string,
@@ -16,6 +18,9 @@ export class Prestation {
     public image?: string,
     public type?: Type,
     public location?: Location,
+    public tags? : string[],
+    public url?: SafeUrl | string,
+
     
    // public registration?: Registration[]
   ) {}

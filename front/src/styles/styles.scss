@@ -33,48 +33,49 @@ body {
 }
 // TEXT & TITLES
 .text-black-blue {
-  color: map-get($theme-colors, presta-10);
+  color: map-get($theme-colors, "primary");
 }
-.text-fw-xx-bold {
-  font-weight: map-get($font-weight, xx-bold);
-}
+
 .text-fs-lgx {
-  font-size: map-get($font-size, lgx);
+  font-size: map-get($font-size, "50");
 }
-.text-fs-md-xl {
-  font-size: map-get($font-size, md-xl);
-}
-.text-fw-x-bold {
-  font-weight: map-get($font-weight, x-bold);
+.text-fs-sm {
+  font-size: map-get($font-size, sm);
 }
 .text-fs-md {
-  font-size: map-get($font-size, md);
-}
-.text-fw-medium {
-  font-weight: map-get($font-weight, medium);
-}
-.mb-lg {
-  margin-bottom: map-get($spacers, 7);
+  font-size: map-get($font-size, "40");
 }
 .text-fs-m {
-  font-size: map-get($font-size, m);
+  font-size: map-get($font-size, "30");
+}
+.text-fs-s {
+  font-size: map-get($font-size, "20");
+}
+.text-fs-xs {
+  font-size: map-get($font-size, "10");
+}
+
+
+.text-fw-xx-bold {
+  font-weight: map-get($font-weight, "xx-bold");
+}
+.text-fw-x-bold {
+  font-weight: map-get($font-weight, "x-bold");
+}
+.text-fw-bold {
+  font-weight: map-get($font-weight, "bold");
+}
+.text-fw-medium {
+  font-weight: map-get($font-weight, "medium");
+}
+
+.mb-lg {
+  margin-bottom: map-get($spacers, 7);
 }
 .mb-m {
   margin-bottom: map-get($spacers, 3);
 }
 
-.text-fs-s {
-  font-size: map-get($font-size, s);
-}
-.text-fs-xs {
-  font-size: map-get($font-size, xs);
-}
-.text-fw-bold {
-  font-weight: map-get($font-weight, bold);
-}
-.text-fs-sm {
-  font-size: map-get($font-size, sm);
-}
 h1 {
   @extend .text-black-blue;
   @extend .text-fw-xx-bold;
@@ -115,9 +116,14 @@ h5 {
   text-transform: uppercase;
   margin-bottom: 0;
 }
-p ul li {
+p {
   @extend .text-black-blue;
-  @extend .text-fs-xs;
+  @extend .text-fs-s;
+  font-family: "Raleway", sans-serif;
+}
+ul li {
+  @extend .text-black-blue;
+  @extend .text-fs-s;
   font-family: "Raleway", sans-serif;
 }
 .card {
