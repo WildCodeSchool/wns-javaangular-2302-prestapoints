@@ -18,7 +18,7 @@ public class Image {
     @Column(name = "data", nullable = false, columnDefinition = "LONGBLOB")
     private byte[] data;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prestation_id")
     private Prestation prestation;
 
