@@ -7,7 +7,12 @@ export class DateTimeValidatorsService {
   constructor() { }
 
   dateTimeCreatorToDate(date : string, time: string): Date {
-    
+
+    if (!date || !time) {
+        // Gérer le cas où les valeurs de date ou de time sont undefined
+        // Retourner une valeur par défaut ou lancer une exception appropriée
+        throw new Error('Date and time must be provided.');
+      }
     // Extraire les composantes de la date
     const dateComponents = date.split('/');
     const day = parseInt(dateComponents[0], 10);
@@ -22,6 +27,8 @@ export class DateTimeValidatorsService {
     // Créer l'objet Date
     const datetime = new Date(year, month, day, hours, minutes);
     return datetime;
+    
+
   }
 
   dateTimeCreatorWithAddDuration(dateInput : Date, timeStr: string): Date {
@@ -64,7 +71,12 @@ export class DateTimeValidatorsService {
 //----------------------------
 
     convertStrDateTimeToTimestamp(date : string, time: string):number{
-        return  this.dateTimeCreatorToDate(date, time).getTime();
+
+        if (date.indexOf("/") < 0 || time.indexOf(":") < 0) {
+            return 0;
+        }
+        const datetime = this.dateTimeCreatorToDate(date, time);
+        return datetime.getTime();
     }
   
     convertTimeToMilliseconds(time :String) : number {

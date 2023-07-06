@@ -1,5 +1,6 @@
 package fr.dto;
 
+import fr.entity.Prestation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,4 +15,5 @@ public class LocationDto {
     private String address;
     private String addressNumber;
     private String addressInformation;
+    private Prestation prestation;
 }

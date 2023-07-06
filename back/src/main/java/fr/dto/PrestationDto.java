@@ -1,12 +1,7 @@
 package fr.dto;
 
 import java.util.List;
-
-import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties.Data;
-import org.springframework.web.multipart.MultipartFile;
-
 import fr.entity.Image;
-import fr.entity.Registration;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,10 +18,11 @@ public class PrestationDto {
     private Long dateEnd;
     private String state;
     private String description;
-    private Integer maxUser;
-
+    private String maxUser;
+    private TypeDto type;
+    private LocationDto location;
+    private Integer placeAvailable;
     private List<Image> images;
-
     private List<RegistrationDto> registrations;
 
 }

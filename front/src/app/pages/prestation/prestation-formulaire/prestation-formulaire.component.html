@@ -58,14 +58,38 @@
               </div>
 
               <div class="mb-3">
-                <label for="HeureDebutPrestation" class="form-label">Heure de début :</label>
-                <input type="text" id="HeureDebutPrestation" formControlName="HeureDebutPrestation" class="form-control"/>
-                {{ prestationForm.get('HeureDebutPrestation')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('HeureDebutPrestation')?.errors && !prestationForm.get('HeureDebutPrestation')?.pristine" class="error-msg m-3 text-danger">
-                  <div  [hidden]="!prestationForm.get('HeureDebutPrestation')?.errors?.['required']">
+                <label for="heureDebutPrestation" class="form-label">Heure de début :</label>
+                <input type="text" id="heureDebutPrestation" formControlName="heureDebutPrestation" class="form-control"/>
+                {{ prestationForm.get('heureDebutPrestation')?.errors?.['rules'] }}
+                <div *ngIf="prestationForm.get('heureDebutPrestation')?.errors && !prestationForm.get('heureDebutPrestation')?.pristine" class="error-msg m-3 text-danger">
+                  <div  [hidden]="!prestationForm.get('heureDebutPrestation')?.errors?.['required']">
                     Un horraire est obligatoire.
                   </div>
-                  <div  [hidden]="!prestationForm.controls['HeureDebutPrestation'].invalid">l'horraire n'est pas conforme hh:mm </div>
+                  <div  [hidden]="!prestationForm.controls['heureDebutPrestation'].invalid">l'horraire n'est pas conforme hh:mm </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="postalCode" class="form-label">Code postal :</label>
+                <input type="text" id="postalCode" formControlName="postalCode" class="form-control"/>
+                {{ prestationForm.get('postalCode')?.errors?.['rules'] }}
+                <div *ngIf="prestationForm.get('postalCode')?.errors && !prestationForm.get('postalCode')?.pristine" class="error-msg m-3 text-danger">
+                  <div [hidden]="!prestationForm.get('postalCode')?.errors?.['required']">
+                    Une ville est obligatoire.
+                  </div>
+                  <div [hidden]="!prestationForm.controls['postalCode'].invalid">Le champs doit etre de ce format 45000.</div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="city" class="form-label">Nom de la ville :</label>
+                <input type="text" id="city" formControlName="city" class="form-control"/>
+                {{ prestationForm.get('city')?.errors?.['rules'] }}
+                <div *ngIf="prestationForm.get('city')?.errors && !prestationForm.get('city')?.pristine" class="error-msg m-3 text-danger">
+                  <div [hidden]="!prestationForm.get('city')?.errors?.['required']">
+                    Une ville est obligatoire.
+                  </div>
+                  <div [hidden]="!prestationForm.controls['city'].invalid">Le champs est limité a 50 caractères.</div>
                 </div>
               </div>
 

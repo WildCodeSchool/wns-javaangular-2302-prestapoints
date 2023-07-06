@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Prestation } from '../../model/prestation';
+import { Prestation } from '../../model/Prestation';
+
 
 @Component({
   selector: 'app-card',

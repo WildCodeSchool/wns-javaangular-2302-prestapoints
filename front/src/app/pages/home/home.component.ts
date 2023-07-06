@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Prestation } from 'src/app/shared/model/prestation';
+import { Prestation } from 'src/app/shared/model/Prestation';
 import { PrestationService } from 'src/app/shared/services/prestation.service';
 
 @Component({

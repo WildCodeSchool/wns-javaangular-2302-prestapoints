@@ -4,6 +4,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+import java.sql.Timestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +25,7 @@ public class Registration {
     
     private Integer evaluation;
     private String comment;
+    private Timestamp date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prestation_id")

@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Prestation } from '../../model/prestation';
 import { DatePipe } from '@angular/common';
 import { PrestationService } from '../../services/prestation.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { ResponseApi } from 'src/app/shared/model/responseApi';
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
+import { Prestation } from '../../model/Prestation';
 
 @Component({
   selector: 'app-reservation',

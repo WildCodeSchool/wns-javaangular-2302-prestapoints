@@ -1,11 +1,7 @@
 package fr.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +13,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.exception.ExceptionJsonDetail;
 import fr.model.ResponseApi;
 import fr.repository.PrestationRepository;
+import fr.dto.LocationDto;
 import fr.dto.PrestationDto;
-import fr.entity.Image;
 import fr.service.ImageService;
 import fr.entity.Prestation;
 import fr.entity.Registration;
 import fr.entity.User;
 import fr.enums.MessageApiEnum;
-import fr.enums.RoleEnum;
 import fr.service.PrestationService;
 import fr.service.RegistrationService;
 import fr.service.UserService;
@@ -46,11 +41,13 @@ public class PrestationController {
     @Autowired
     UserService userService;
 
+
     @GetMapping("/prestations")
     public List<PrestationDto> getAllPrestations() {
 
         return prestationService.getAllPrestations();
     }
+
 
     @GetMapping("/prestations/{id}")
     public ResponseEntity<String> getPrestation(@PathVariable Integer id) {
@@ -68,10 +65,21 @@ public class PrestationController {
 
     @PostMapping(value="/prestations", consumes="multipart/form-data")
     public ResponseEntity<?> createPrestation(@RequestPart("picture") MultipartFile picture,
-                                          @RequestPart("prestation") String prestationJson) {
+                                          @RequestPart("prestation") String prestationJson,
+                                          @RequestPart("location") String locationJson) {
                                             
                 //gestion dde l'enrigistrement de l'entité
         ObjectMapper objectMapper = new ObjectMapper();
+
+        LocationDto locationDto;
+        try {
+            locationDto = objectMapper.readValue(locationJson, LocationDto.class);
+        } catch (JsonProcessingException e) {
+            // Gérer l'erreur de désérialisation
+            return ResponseEntity.badRequest().body("Invalid locationDto data");
+        }
+
+
         PrestationDto prestationDto;
         try {
             prestationDto = objectMapper.readValue(prestationJson, PrestationDto.class);
@@ -82,7 +90,7 @@ public class PrestationController {
         
         try {
             
-            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(prestationService.createPrestation(prestationDto, picture));
+            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(prestationService.createPrestation(prestationDto,locationDto, picture));
         } catch (ExceptionJsonDetail exceptionJsonDetail) {
 
             return ResponseEntity.status(404).contentType(MediaType.APPLICATION_JSON).body(exceptionJsonDetail.getNotFound());
@@ -91,12 +99,12 @@ public class PrestationController {
     } 
 
 
-
     @DeleteMapping("/prestations/{id}")
     public void deletePrestation(@PathVariable Integer id) {
 
         prestationService.deletePrestationById(id);
     }
+
 
     @GetMapping("/prestations/{prestationId}/registration")
     public ResponseApi bookedRegistration(@PathVariable Integer prestationId) {
@@ -126,4 +134,6 @@ public class PrestationController {
         }
         return responseApi;
     }
+
+
 }

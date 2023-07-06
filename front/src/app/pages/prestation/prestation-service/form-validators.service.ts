@@ -42,4 +42,13 @@ export class FormValidatorsService {
       };
     }
 
+    postalCodeValidator(): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } | null => {
+            // Expression régulière pour vérifier le format du code postal
+            const postalCodeRegex = /^[0-9]{5}$/;
+            const isValid = postalCodeRegex.test(control.value);
+            return !isValid ? { invalidTime: { value: control.value } } : null;
+        }
+    }
+
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrestationService } from 'src/app/shared/services/prestation.service';
-import { Prestation } from 'src/app/shared/model/prestation';
+import { Prestation } from '../../model/Prestation';
 
 @Component({
   selector: 'app-searchbar',

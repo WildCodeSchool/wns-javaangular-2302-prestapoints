@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { Prestation } from '../model/prestation';
+
 import { ResponseApi } from '../model/responseApi';
+import { Prestation } from '../model/Prestation';
 
 @Injectable()
 export class PrestationService {
