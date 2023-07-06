@@ -1,0 +1,56 @@
+<section class="mt-8">
+  <div class="row text-center">
+    <div class="col-md-4 mb-5 mb-md-0 mr-1" style="width: 18rem">
+      <div class="card testimonial-card">
+        <div class="avatar mx-auto bg-white">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
+            class="rounded-circle img-fluid"
+          />
+        </div>
+        <div class="card-body">
+          <h4 class="mb-4" style="font-size: 12px">
+            <div
+              *ngFor="
+                let registration of prestation?.registrations?.slice(0, 1)
+              "
+            >
+              {{ registration?.user?.firstname }}(user?.firstname)<br />
+            </div>
+          </h4>
+
+          <div class="evaluation">
+            <span
+              class="star"
+              *ngFor="let star of stars"
+              [ngClass]="star ? 'filled' : ''"
+            >
+              <i class="bi bi-star-fill"></i>
+            </span>
+          </div>
+
+          <h2 class="mb-4 text-secondary" style="font-size: 12px">
+            {{ prestation?.title }} à
+            {{ prestation?.location?.city }}
+          </h2>
+
+          <hr />
+          <div class="testimonial-quote">
+            <p class="text-primary mt-4" style="font-size: 13px">
+              <i class="fas fa-quote-left pe-2"></i
+              ><em
+                *ngFor="
+                  let registration of prestation?.registrations?.slice(0, 3)
+                "
+                >{{ registration?.comment }} Lorem ipsum dolor sit amet eos
+                adipisci, consectetur adipisicing elit :-) . Lorem ipsum dolor
+                sit amet eos adipisci, consectetur adipisicing elit.</em
+              >
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

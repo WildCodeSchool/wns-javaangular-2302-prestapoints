@@ -1,10 +1,16 @@
-<div class="card" style="width: 12rem; height: 20rem;">
-  <div class="card-body d-flex flex-column ">
+<div class="card" style="width: 12rem; height: 20rem">
+  <div class="card-body d-flex flex-column">
     <div>
-      <h6 class="category-text text-primary fw-bold">{{ prestation?.type?.name }}</h6>
+      <h6 class="category-text text-primary fw-bold">
+        {{ prestation?.type?.name }}
+      </h6>
       <h6 class="card-title text-truncate">{{ prestation?.title }}</h6>
     </div>
-    <img class="card-img-top rounded-0 mb-2" src="{{ prestation?.image }}" alt="photo prestation" />
+    <img
+      class="card-img-top rounded-0 mb-2"
+      src="{{ prestation?.image }}"
+      alt="photo prestation"
+    />
     <div class="mt-auto">
       <p class="card-point text-primary">{{ prestation?.addPoint }} pts</p>
       <p class="card-duration text-grey-text">

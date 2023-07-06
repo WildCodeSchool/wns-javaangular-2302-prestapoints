@@ -1,9 +1,8 @@
-import { Type } from "./type";
-import { Registration } from "./registration";
-import { Location } from "./location";
+import { Type } from './type';
+import { Registration } from './registration';
+import { Location } from './location';
 
 export class Prestation {
-
   constructor(
     public title?: string,
     public duration?: string,
@@ -16,7 +15,6 @@ export class Prestation {
     public image?: string,
     public type?: Type,
     public location?: Location,
-    
-   // public registration?: Registration[]
+    public registrations?: Registration[]
   ) {}
 }

@@ -1,0 +1,28 @@
+.testimonial-card .avatar {
+  width: 110px;
+  margin-top: -60px;
+  overflow: hidden;
+  border: 3px solid #fff;
+  border-radius: 50%;
+}
+.testimonial-quote {
+  position: relative;
+}
+
+.testimonial-quote:before {
+  content: "\201C"; /* Code Unicode pour les guillemets doubles ouvrants */
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  font-size: 40px;
+  color: #ccc;
+}
+
+.testimonial-quote:after {
+  content: "\201D"; /* Code Unicode pour les guillemets doubles fermants */
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  font-size: 40px;
+  color: #ccc;
+}

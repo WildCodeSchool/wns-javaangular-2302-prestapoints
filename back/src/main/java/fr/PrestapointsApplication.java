@@ -1,4 +1,5 @@
 package fr;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,25 +26,24 @@ public class PrestapointsApplication {
 	@Autowired
 	private LocationFixtures locationFixtures;
 
-	/* STOP FIXTURES = false   # START FIXTURES = true */ 
+	/* STOP FIXTURES = false # START FIXTURES = true */
 	private boolean loadFixtures = false;
 
 	@PostConstruct
 	@Profile("!test")
 	public void init() {
 		if (this.loadFixtures) {
-			//Faire attention à l'ordre des dépendences !
-			userFixtures.prepareFixtures(); //depends on
-			categoryFixtures.prepareFixtures(); //depends on 
-			typeFixtures.prepareFixtures(); //depends on category
+			// Faire attention à l'ordre des dépendences !
+			userFixtures.prepareFixtures(); // depends on
+			categoryFixtures.prepareFixtures(); // depends on
+			typeFixtures.prepareFixtures(); // depends on category
 			locationFixtures.prepareFixtures();
 			prestationFixtures.prepareFixtures(); // depends on user, category, location
-			}
+		}
 	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(PrestapointsApplication.class, args);
 	}
-
 
 }

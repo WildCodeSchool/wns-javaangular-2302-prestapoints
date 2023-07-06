@@ -8,11 +8,11 @@ import { Prestation } from '../model/prestation';
 export class PrestationService {
   private apiUrl?: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getPrestations(): Observable<Prestation[]> {
     this.apiUrl = 'http://localhost:8080/prestations';
-
+    //faire get presta sur comment
     return this.http.get<Prestation[]>(this.apiUrl);
   }
 }
