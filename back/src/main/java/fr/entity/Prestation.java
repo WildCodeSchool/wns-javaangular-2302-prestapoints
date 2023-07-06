@@ -26,15 +26,19 @@ public class Prestation {
     private Timestamp dateStart;
     private Timestamp dateEnd;
     private String state;
-    @Column(columnDefinition = "TEXT")
-    private String description;
     private Integer maxUser;
     private Integer placeAvailable;
 
+    @Column(columnDefinition = "TEXT")
+    private String description;
+    
     private String littleDescription;
+
     @Column(columnDefinition = "TEXT")
     private String practicalInformation;
+
     private String language;
+
     @Column(columnDefinition = "TEXT")
     private String personalInfos;
 
@@ -60,7 +64,8 @@ public class Prestation {
     }
 
 
-    public Prestation(Integer id, String title, Long duration, Integer addPoint, Timestamp dateStart, Timestamp dateEnd, String state, String description, Integer maxUser, Integer placeAvailable, String littleDescription, String practicalInformation, String language, String personalInfos, List<Image> images, Type type, List<Registration> registrations, Location location) {
+
+    public Prestation(Integer id, String title, Long duration, Integer addPoint, Timestamp dateStart, Timestamp dateEnd, String state, Integer maxUser, Integer placeAvailable, String description, String littleDescription, String practicalInformation, String language, String personalInfos, List<Image> images, Type type, List<Registration> registrations, Location location) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -68,9 +73,9 @@ public class Prestation {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.state = state;
-        this.description = description;
         this.maxUser = maxUser;
         this.placeAvailable = placeAvailable;
+        this.description = description;
         this.littleDescription = littleDescription;
         this.practicalInformation = practicalInformation;
         this.language = language;
@@ -80,6 +85,7 @@ public class Prestation {
         this.registrations = registrations;
         this.location = location;
     }
+
 
 
 

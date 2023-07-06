@@ -1,6 +1,9 @@
 package fr.dto;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import fr.entity.Image;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,18 +13,22 @@ public class PrestationDto {
 
     private Integer id;
     private String title;
-    private String duration;
-    private String addPoint;
-    private String dateStart;
-    private String dateEnd;
+    private Long duration;
+    private Integer addPoint;
+    private Timestamp dateStart;
+    private Timestamp dateEnd;
     private String state;
+    private Integer maxUser;
+    private Integer placeAvailable;
     private String description;
-    private String maxUser;
-    private String image;
+    private String littleDescription;
+    private String practicalInformation;
+    private String language;
+    private String personalInfos;
     private TypeDto type;
     private LocationDto location;
-    private Integer placeAvailable;
 
+    private List<Image> images;
     private List<RegistrationDto> registrations;
 
 }
