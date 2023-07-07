@@ -5,11 +5,21 @@
   border: 3px solid #fff;
   border-radius: 50%;
 }
-.testimonial-quote {
+
+.testimonial-card {
+  height: 250px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.comment-quote {
   position: relative;
 }
 
-.testimonial-quote:before {
+.comment-quote:before {
   content: "\201C"; /* Code Unicode pour les guillemets doubles ouvrants */
   position: absolute;
   top: -15px;
@@ -18,7 +28,7 @@
   color: #ccc;
 }
 
-.testimonial-quote:after {
+.comment-quote:after {
   content: "\201D"; /* Code Unicode pour les guillemets doubles fermants */
   position: absolute;
   bottom: -15px;

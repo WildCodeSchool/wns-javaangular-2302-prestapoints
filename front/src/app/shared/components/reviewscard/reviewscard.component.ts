@@ -16,13 +16,7 @@ export class ReviewscardComponent {
 
   stars: boolean[] = Array(5).fill(false); // Tableau de 5 éléments initialisé à false
 
-  constructor() {
-    this.prestation = new Prestation();
-    this.prestation.registrations = [];
-    this.registration = new Registration();
-    this.registration.comment = 'bla bla bla';
-    this.prestation.registrations.push(this.registration);
-  }
+  constructor() {}
 
   setEvaluation(index: number) {
     this.stars = this.stars.map((_, i) => i <= index);

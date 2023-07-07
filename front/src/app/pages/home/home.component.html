@@ -19,14 +19,15 @@
   </p>
   <app-slider [prestationsApi]="prestationsApi"></app-slider>
 
+  <hr class="my-4" />
+
   <p class="my-0 fw-0">
     Les avis de nos clients <i class="bi bi-arrow-right"></i>
   </p>
 
-  <div
-    class="d-flex justify-content-between"
-    *ngFor="let prestationApi of prestationsApi?.slice(0, 3)"
-  >
-    <app-reviewscard [prestation]="prestationApi"></app-reviewscard>
+  <div class="d-flex flex-wrap justify-content-center">
+    <ng-container *ngFor="let prestationApi of prestationsApi?.slice(0, 3)">
+      <app-reviewscard [prestation]="prestationApi"></app-reviewscard>
+    </ng-container>
   </div>
 </div>
