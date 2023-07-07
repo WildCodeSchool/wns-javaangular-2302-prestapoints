@@ -1,6 +1,7 @@
 import { Type } from "./type";
 import { Registration } from "./registration";
 import { Location } from "./location";
+import { Image } from "./image";
 
 export class Prestation {
 
@@ -13,7 +14,7 @@ export class Prestation {
     public state? : string;
     public description? : string;
     public maxUser? : number;
-    //public image? : Image;
+    public image? : Image[];
     public type?: Type;
     public location?: Location;
     public placeAvailable?: number;
