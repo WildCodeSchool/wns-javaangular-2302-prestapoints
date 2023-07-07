@@ -97,6 +97,10 @@ public class AdminController {
         }
     }
 
+    /**
+     * Mass delete, method receive a list of users to delete and
+     * @return a ResponseEntity to informe result of the operation
+     */
     @PostMapping("/admin/utilisateurs/utilisateur/suppressions")
     public ResponseEntity<ResponseApi> deleteUsers(@RequestBody List<UserDto> usersDto) {
         User userConnected = authController.getUserConnected();
