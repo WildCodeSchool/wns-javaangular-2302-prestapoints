@@ -1,4 +1,4 @@
-<h3 class="my-5">Liste des utilisateurs <i class="bi bi-person-fill-add ms-5 fs-3 text-secondary"></i></h3>
+<h3 class="my-5">Liste des utilisateurs <p class="btn p-0 m-0 bg-transparent" (click)="showAddUserForm()" data-bs-toggle="modal" data-bs-target="#userFormModal"><i class="bi bi-person-fill-add ms-5 fs-3 text-secondary"></i></p></h3>
 
 
 <table class="table table-striped table-hover mt-5 overflow-auto border">
@@ -21,14 +21,21 @@
                 <td class="border">{{user?.firstname}}</td>
                 <td class="border">{{user?.lastname}}</td>
                 <td class="border">{{user?.email}}</td>
-                <td class="border">{{user?.creationDate | date:'EEEE d MMMM yyyy'}}</td>
+                <td class="border">{{user?.creationDate | date:'EEEE d MMMM yyyy' }}</td>
                 <td class="border"> <ng-container *ngFor="let role of user?.roles" >{{role.slug}}, </ng-container></td>
                 <td class="border">{{user?.phone}}</td>
                 <td class="border">
-                    <i class="bi bi-pen-fill me-5 text-secondary"></i>
+                    <p class="btn p-0 m-0 bg-transparent" (click)="showEditUserForm(user)"  data-bs-toggle="modal" data-bs-target="#userFormModal"><i class="bi bi-pen-fill me-5 text-secondary"></i></p>
                     <p class="btn p-0 m-0 bg-transparent" (click)="deleteUser(user)"><i class="bi bi-trash3-fill ms-5 text-danger"></i></p>
                 </td>
             </tr>
         </ng-container>
     </tbody>
 </table>
+
+  
+
+<!-- Modal User-->
+<div class="modal fade" id="userFormModal" tabindex="-1" aria-labelledby="userLabel" aria-hidden="true">
+<app-userform [user]="user" [isNewUser]="isNewUser"></app-userform>
+</div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { TableComponent } from '../components/table/table.component';
+import { UserformModule } from '../components/userform/userform.module';
 
 
 
@@ -10,7 +11,7 @@ import { TableComponent } from '../components/table/table.component';
     DashboardComponent, TableComponent
   ],
   imports: [
-    CommonModule
+    CommonModule, UserformModule
   ]
 })
 export class DashboardModule { }

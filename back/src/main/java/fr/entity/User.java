@@ -1,6 +1,7 @@
 package fr.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +28,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String lastname;
     private String firstname;
     private String email;
     private String password;
     private String phone;
-    private Timestamp creation;
+    private LocalDateTime creation;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -59,8 +59,6 @@ public class User {
     public org.springframework.security.core.userdetails.User securityUser() {
         List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(id.toString()));
-        // grantedAuthorities.add(new
-        // SimpleGrantedAuthority(RoleEnum.ROLE_USER.getRole()));
 
         try {
             for (Role role : this.getRoles()) {

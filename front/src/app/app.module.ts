@@ -8,12 +8,13 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { AlertComponent } from './shared/components/alert/alert.component';
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
 import { CategoryService } from './shared/services/category.service';
 import { AuthInterceptor } from './core/service/auth/auth.interceptor';
 import { AuthenticationService } from './core/service/auth/authentication.service';
+import { UserService } from './shared/services/user.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { AuthenticationService } from './core/service/auth/authentication.servic
     { provide: LOCALE_ID, useValue: 'fr' },
     CategoryService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    AuthenticationService,
+    AuthenticationService, UserService
   ],
   bootstrap: [AppComponent],
 })

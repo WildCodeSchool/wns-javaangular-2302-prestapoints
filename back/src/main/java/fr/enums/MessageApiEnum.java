@@ -9,7 +9,8 @@ public enum MessageApiEnum {
     NEED_TO_BE_CONNECTED("Vous devez être connecté pour utiliser le service."),
     DELETE_SUCCESS("La suppression a été réalisé avec succès."),
     ERROR("Une erreur a été rencontrée."),
-    DELETE_FAILED("La suppression n'a pu être effectuée.");
+    DELETE_FAILED("La suppression n'a pu être effectuée."),
+    UPDATE_SUCCESS("La modification a été réalisé avec succès.");
     
     private String message;
 

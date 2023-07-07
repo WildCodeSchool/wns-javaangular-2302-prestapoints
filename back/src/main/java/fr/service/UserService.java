@@ -2,6 +2,9 @@ package fr.service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,15 +46,28 @@ public class UserService {
     public User createUser(UserDto userDto) {
         User user = userMapper.convertToEntity(userDto);
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        Long instant = Instant.now().getEpochSecond();
-        Timestamp timestamp = new Timestamp(instant);
-        user.setCreation(timestamp);
-        Role role = roleRepository.findByName(RoleEnum.ROLE_USER.getRole()).get();
+
+        if (user.getCreation() == null) {
+            LocalDate today = LocalDate.now();
+            LocalTime currentTime = LocalTime.now();
+            LocalDateTime currentDateTime = LocalDateTime.of(today, currentTime);
+            user.setCreation(currentDateTime);
+        }
+        
         List<Role> roles = new ArrayList<Role>();
-        roles.add(role);
+        if (!user.getRoles().isEmpty()) {
+            for (Role role : user.getRoles()) {
+                Role roleDb = roleRepository.findByName(role.getName()).get();
+                roles.add(roleDb);
+            }
+        } else {
+            Role role = roleRepository.findByName(RoleEnum.ROLE_USER.getRole()).get();
+            roles.add(role);
+        }
+
         user.setRoles(roles);
 
-        return userRepository.save(user);
+       return userRepository.saveAndFlush(user);
     }
 
     public User getUserById(Integer id) {

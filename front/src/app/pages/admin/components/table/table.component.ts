@@ -4,7 +4,7 @@ import { ResponseApi } from 'src/app/shared/model/responseApi';
 import { User } from 'src/app/shared/model/user';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import { Role } from 'src/app/shared/enum/role.enum';
+import { RoleEnum } from 'src/app/shared/enum/role.enum';
 
 @Component({
   selector: 'app-table',
@@ -12,19 +12,23 @@ import { Role } from 'src/app/shared/enum/role.enum';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-
   public users?: User[];
+  public responseApi?: ResponseApi;
+  public selectedUsers: User[] = [];
+  public user?: User;
+  public isNewUser: boolean = true;
 
-  responseApi?: ResponseApi;
-  selectedUsers: User[] = [];
 
   constructor(
     private userService: UserService,
-      private alertService: AlertService,
+    private alertService: AlertService,
+
   ) {}
+
   ngOnInit(): void {
     this.getUsers();
   }
+
 
   deleteUser(user: User) {
     this.userService.deleteUser(user).subscribe((response) => {
@@ -35,8 +39,8 @@ export class TableComponent implements OnInit {
           AlertEnum.TYPE_SUCCESS,
           AlertEnum.MESSAGE_DELETE_SUCCESS,
           AlertEnum.TIME_MEDIUM
-          );
-          this.getUsers();
+        );
+        this.getUsers();
       } else {
         this.alertService.setAlert(
           AlertEnum.TYPE_DANGER,
@@ -57,8 +61,8 @@ export class TableComponent implements OnInit {
             AlertEnum.TYPE_SUCCESS,
             AlertEnum.MESSAGE_DELETE_SUCCESS,
             AlertEnum.TIME_MEDIUM
-            );
-            this.getUsers();
+          );
+          this.getUsers();
         } else {
           this.alertService.setAlert(
             AlertEnum.TYPE_DANGER,
@@ -85,19 +89,28 @@ export class TableComponent implements OnInit {
   getUsers() {
     this.userService.getUsers().subscribe((response) => {
       this.users = response;
-  
       this.users.forEach((user) => {
         user.roles?.forEach((role) => {
           switch (role.name) {
-            case Role.USER:
-              role.slug = Role.SLUG_USER;
+            case RoleEnum.USER:
+              role.slug = RoleEnum.SLUG_USER;
               break;
-            case Role.ADMIN:
-              role.slug = Role.SLUG_ADMIN;
+            case RoleEnum.ADMIN:
+              role.slug = RoleEnum.SLUG_ADMIN;
               break;
           }
         });
       });
     });
+  }
+
+  showAddUserForm(isNewUser: boolean = true) {
+    this.user = new User();
+    this.isNewUser = isNewUser;
+  }
+
+  showEditUserForm(user: User, isNewUser: boolean = false) {
+    this.user = user;
+    this.isNewUser = isNewUser;
   }
 }
