@@ -45,7 +45,7 @@
               <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="auth">Se connecter</a>
             </div>
             <div [hidden]="inputVisible">
-              <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="">Déconnexion</a>
+              <a class="nav-link active text-primary fw-bolder fs-6 btn bg-transparent" aria-current="page" (click)="logout()">Déconnexion</a>
             </div>
             <div [hidden]="inputVisible">
               <button type="button" class="nav-link active text-primary fw-bolder fs-6" aria-current="page"

@@ -99,8 +99,12 @@ public class UserController {
     @PostMapping("/update")
     public ResponseEntity<String> updateUser(@RequestBody UserDto userDto) {
         User user = userService.getUserConnected();
-        userService.updateUserProfil(user.getId(), userDto);
-        return new ResponseEntity<>("Modification enregistrée", HttpStatus.OK);
+        if (user.getEmail().equals(userDto.getEmail())) {
+            userService.updateUserProfil(user.getId(), userDto);
+            return new ResponseEntity<>("Modification enregistrée", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Erreur lors de la modification", HttpStatus.OK);
+        }
     }
 
     /**
@@ -112,21 +116,19 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @PostMapping("/avatar")
     public ResponseEntity<String> uplaodAvatar(@RequestParam("image") MultipartFile file) throws IOException {
-
         User user = userService.getUserConnected();
-        Avatar existingAvatar = user.getAvatar();
-
-        if (existingAvatar == null) {
-            Avatar newAvatar = new Avatar();
-            newAvatar.setType(file.getContentType());
-            newAvatar.setData(file.getBytes());
-            newAvatar.setUser(user);
-        } else {
-            existingAvatar.setType(file.getContentType());
-            existingAvatar.setData(file.getBytes());
+        if (user != null) {
+            Avatar existingAvatar = user.getAvatar();
+            if (existingAvatar == null) {
+                userService.uploadNewAvatar(file, user);
+            } else {
+                existingAvatar.setType(file.getContentType());
+                existingAvatar.setData(file.getBytes());
+            }
+            avatarRepository.save(user.getAvatar());
+            return new ResponseEntity<>("Avatar mis à jour avec succes", HttpStatus.OK);
         }
-        avatarRepository.save(user.getAvatar());
-        return new ResponseEntity<>("Avatar mis à jour avec succes", HttpStatus.OK);
+        return new ResponseEntity<>("Echec mise à jour Avatar", HttpStatus.OK);
     }
 
     /**
@@ -137,10 +139,8 @@ public class UserController {
 
     @GetMapping("/get/avatar")
     public ResponseEntity<byte[]> getImageAvatarUserConnected() throws IOException {
-
         User user = userService.getUserConnected();
         Optional<Avatar> avatarUserConnected = avatarRepository.findByUserId(user.getId());
-
         if (avatarUserConnected.isPresent()) {
             Avatar avatar = avatarUserConnected.get();
             return ResponseEntity
