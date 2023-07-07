@@ -43,6 +43,7 @@ public class Prestation {
     private String personalInfos;
 
     @OneToMany(mappedBy = "prestation", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Image> images = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
