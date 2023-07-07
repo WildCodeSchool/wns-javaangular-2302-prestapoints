@@ -1,6 +1,11 @@
 package fr.fixture;
 
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,9 +28,21 @@ public class PrestationFixtures {
     @Autowired
     private LocationRepository locationRepository;
 
+
     public void prepareFixtures() {
-        String[] categories = {"Animaux", "Artisanat", "Bijoux", "Bricolage", "Couture", "Jardinage", "Cuisine", "Photographie"};
-        String[] titles = { "Apprenez à dresser votre chien avec notre expert canin", "Explorez votre créativité avec la poterie", "Apprenez à créer vos propres bijoux en perles", "Apprenez à construire vos propres meubles en bois", "Créez vos vêtements sur mesure avec notre styliste", "Apprenez à créer un jardin harmonieux", "Découvrez les saveurs des cuisines du monde", "Portrait", "Forme toi à la tapisserie d’ameublement"};
+        
+        String[] titles = { 
+            "Apprenez à dresser votre chien avec notre expert canin",
+            "Explorez votre créativité avec la poterie",
+            "Apprenez à créer vos propres bijoux en perles",
+            "Apprenez à construire vos propres meubles en bois",
+            "Créez vos vêtements sur mesure avec notre styliste",
+            "Apprenez à créer un jardin harmonieux",
+            "Découvrez les saveurs des cuisines du monde",
+            "Portrait", 
+            "Forme toi à la tapisserie d’ameublement"
+        };
+
         String[] littleDescriptions  = {
             "Découvrez les techniques de dressage de chiens et renforcez votre relation avec votre compagnon à quatre pattes.",
             "Découvrez l'art de la poterie et exprimez votre créativité en créant vos propres pièces uniques.",
@@ -86,32 +103,60 @@ public class PrestationFixtures {
             "Soazig est tapissière d'ameublement. Elle adore le mobilier et les étoffes, et plus précisément redonner vie aux vieux fauteuils ! Elle effectue des réfections traditionnelles ou contemporaines de sièges, fauteuils, canapés, méridiennes, chaises, têtes de lit, tabourets... À travers la diversité des matières et des couleurs, elle se fera un plaisir de vous parler de son parcours et de vous donner des conseils techniques. Soazig vous accueillera avec plaisir et vous transmettra son savoir au sein d'une belle boutique-atelier partagée située en plein centre-ville !"
         };
 
+        String[] durations  = {
+            "02:00",
+            "02:30",
+            "00:30",
+            "01:00",
+            "03:00",
+            "06:00",
+            "10:00",
+            "11:00",
+            "05:30"
+        };
 
         String table = TablesEnum.PRESTATION.getTableName();
         Faker faker = new Faker();
         Prestation prestation = new Prestation();
 
-        if (fixtures.isDatatableExistAndDelete(table)){
-                        
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-            Integer numberOfLigne = 20;
+        if (fixtures.isDatatableExistAndDelete(table)){            
 
-            for (int i = 0; i < numberOfLigne; i++) {
-                prestation.setId(i);
-                prestation.setTitle(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
-                prestation.setDuration(String.valueOf(faker.number().numberBetween(1, 100)));
-                prestation.setAddPoint(String.valueOf(faker.number().numberBetween(100, 500)));
-                prestation.setDateEnd(String.valueOf(sdf.format(faker.date().future(30,TimeUnit.DAYS))));
-                prestation.setDateStart(String.valueOf(sdf.format(faker.date().future(30,TimeUnit.DAYS))));
-                prestation.setState(String.valueOf(faker.number().numberBetween(1, 3)));
-                prestation.setDescription(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
-                prestation.setMaxUser(faker.number().numberBetween(1,6));
-                prestation.setImage(fixtures.imageFakerRandom(200, 300));
-                prestation.setType(typeRepository.getReferenceById(faker.number().numberBetween(1, 5)));
-                prestation.setLocation(locationRepository.getReferenceById(faker.number().numberBetween(1, 50)));
+            for (int i = 0; i < titles.length; i++) {
+                prestation.setId(i+1);
+                prestation.setTitle(titles[i]);
 
+                LocalDateTime dateStart = faker.date().future(30, TimeUnit.DAYS).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+                long timestamp = dateStart.toInstant(ZoneOffset.UTC).toEpochMilli();
+                Timestamp timestampSql = new Timestamp(timestamp);
+                prestation.setDateStart(timestampSql);
+
+                // Générer une durée aléatoire au format "hh:mm"
+                String randomDuration = durations[i];
+                // Convertir la durée en LocalTime
+                LocalTime duration = LocalTime.parse(randomDuration);
+                Long milliseconds = Duration.between(LocalTime.MIN, duration).toMillis();
+                prestation.setDuration(milliseconds);
+        
+                prestation.setAddPoint(300);
+                prestation.setState("EN_COURS");
+                prestation.setDescription(descriptions[i]);
+                prestation.setMaxUser(faker.number().numberBetween(1,10));
+                
+                /*Type type = typeRepository.getReferenceById(i);
+                prestation.setType(type);
+                Location location = locationRepository.getReferenceById(i);
+                prestation.setLocation(location);*/
+
+                prestation.setLanguage(languages[i]);
+                prestation.setLittleDescription(littleDescriptions[i]);
+                prestation.setPersonalInfos(personalsInfos[i]);
+                prestation.setPlaceAvailable(faker.number().numberBetween(1,prestation.getMaxUser()));
+                prestation.setPracticalInformation(practicalsInformations[i]);
+        
                 prestationRepository.save(prestation);
+            
             }
         }
     } 
+
 }

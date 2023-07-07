@@ -17,8 +17,11 @@ export class Prestation {
     public image?: string,
     public type?: Type,
     public location?: Location,
-    public placeAvailable?: string
-    
-   // public registration?: Registration[]
+    public placeAvailable?: string,
+    public littleDescription?: string,
+    public practicalInformation?: string,
+    public language?: string,
+    public personalInfos?: string,
+    public registration?: Registration[]
   ) {}
 }
