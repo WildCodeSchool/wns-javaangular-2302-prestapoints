@@ -1,15 +1,9 @@
 package fr.fixture;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -57,12 +51,9 @@ public class UserFixtures {
                 user.setPassword(passwordEncoder.encode("t123456789"));
                 roles.add(roleUser);
                 user.setRoles(roles);
-                LocalDate today = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalTime currentTime = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault())
-                        .toLocalTime();
-
-                LocalDateTime currentDateTime = LocalDateTime.of(today, currentTime);
-                user.setCreation(currentDateTime);
+                Date birthday = faker.date().birthday();
+                Timestamp timestamp = new Timestamp(birthday.getTime());
+                user.setCreationDate(timestamp);
 
                 userRepository.save(user);
             }
@@ -79,13 +70,10 @@ public class UserFixtures {
             roles.add(roleUser);
             roles.add(roleAdmin);
             user.setRoles(roles);
+            Date birthday = faker.date().birthday();
+            Timestamp timestamp = new Timestamp(birthday.getTime());
+            user.setCreationDate(timestamp);
 
-            LocalDate today = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalTime currentTime = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
-
-            LocalDateTime currentDateTime = LocalDateTime.of(today, currentTime);
-
-            user.setCreation(currentDateTime);
 
             userRepository.save(user);
 

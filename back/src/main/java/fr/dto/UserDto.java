@@ -17,6 +17,6 @@ public class UserDto {
     private String password;
     private String email;
     private String phone;
-    private String creationDate;
+    private Long creationDate;
     private List<RoleDto> roles;
 }

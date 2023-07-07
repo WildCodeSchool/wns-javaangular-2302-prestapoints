@@ -21,7 +21,7 @@
                 <td class="border">{{user?.firstname}}</td>
                 <td class="border">{{user?.lastname}}</td>
                 <td class="border">{{user?.email}}</td>
-                <td class="border">{{user?.creationDate | date:'EEEE d MMMM yyyy' }}</td>
+                <td class="border">{{user?.creationDate | date:'EEEE d MMMM yyyy, HH:mm' }}</td>
                 <td class="border"> <ng-container *ngFor="let role of user?.roles" >{{role.slug}}, </ng-container></td>
                 <td class="border">{{user?.phone}}</td>
                 <td class="border">
@@ -37,5 +37,5 @@
 
 <!-- Modal User-->
 <div class="modal fade" id="userFormModal" tabindex="-1" aria-labelledby="userLabel" aria-hidden="true">
-<app-userform [user]="user" [isNewUser]="isNewUser"></app-userform>
+<app-userform [user]="user" [isNewUser]="isNewUser" (needToRefresh)="needToRefresh($event)"></app-userform>
 </div>

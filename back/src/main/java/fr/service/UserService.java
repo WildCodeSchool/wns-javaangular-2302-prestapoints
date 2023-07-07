@@ -47,11 +47,13 @@ public class UserService {
         User user = userMapper.convertToEntity(userDto);
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        if (user.getCreation() == null) {
+        if (user.getCreationDate() == null) {
             LocalDate today = LocalDate.now();
             LocalTime currentTime = LocalTime.now();
             LocalDateTime currentDateTime = LocalDateTime.of(today, currentTime);
-            user.setCreation(currentDateTime);
+            Timestamp timestamp = Timestamp.valueOf(currentDateTime);
+
+            user.setCreationDate(timestamp);
         }
         
         List<Role> roles = new ArrayList<Role>();

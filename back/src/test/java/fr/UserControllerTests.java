@@ -22,6 +22,7 @@ import org.springframework.http.MediaType;
 import fr.config.JwtAuthenticationFilter;
 import fr.config.PasswordEncoderConfig;
 import fr.config.WebSecurityConfig;
+import fr.controller.AdminController;
 import fr.controller.AuthController;
 import fr.controller.CategoryController;
 import fr.controller.PrestationController;
@@ -73,6 +74,8 @@ public class UserControllerTests {
     private UserService userService;
     @MockBean
     private PrestationController prestationController;
+    @MockBean
+    private AdminController adminController;
     @MockBean
     private UserMapper userMapper;
     @MockBean

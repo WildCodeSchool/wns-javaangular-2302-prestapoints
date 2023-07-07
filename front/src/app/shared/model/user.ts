@@ -1,4 +1,3 @@
-import { Timestamp } from "rxjs";
 import { Role } from "./role";
 
 export class User {

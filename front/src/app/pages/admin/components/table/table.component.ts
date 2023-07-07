@@ -113,4 +113,10 @@ export class TableComponent implements OnInit {
     this.user = user;
     this.isNewUser = isNewUser;
   }
+
+  needToRefresh($event: boolean) {
+    if ($event) {
+      this.getUsers()
+    }
+  }
 }

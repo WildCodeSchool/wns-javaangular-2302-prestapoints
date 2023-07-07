@@ -10,7 +10,9 @@ public enum MessageApiEnum {
     DELETE_SUCCESS("La suppression a été réalisé avec succès."),
     ERROR("Une erreur a été rencontrée."),
     DELETE_FAILED("La suppression n'a pu être effectuée."),
-    UPDATE_SUCCESS("La modification a été réalisé avec succès.");
+    UPDATE_FAILED("La modification n'a pu être effectuée."),
+    UPDATE_SUCCESS("La modification a été réalisée avec succès."),
+    CREATION_SUCCESS("La création a été réalisée avec succès.");
     
     private String message;
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -6,7 +6,6 @@ import {
   ValidationErrors,
   FormGroup,
 } from '@angular/forms';
-import { SignInService } from 'src/app/pages/auth/sign-in/service/signIn.service';
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
 import { RoleEnum } from 'src/app/shared/enum/role.enum';
 import { ResponseApi } from 'src/app/shared/model/responseApi';
@@ -21,6 +20,9 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./userform.component.scss'],
 })
 export class UserformComponent {
+  @Output()
+  public needToRefresh: EventEmitter<boolean> = new EventEmitter();
+  
   @Input()
   public isNewUser: boolean = true;
 
@@ -28,7 +30,7 @@ export class UserformComponent {
   public set user(user: User | undefined) {
     const isOtherUser = this.userValue?.id != user?.id;
     this.userValue = user;
-    if (this.userValue != undefined && isOtherUser) {
+    if (this.userValue != undefined) {
       this.userForm.patchValue({
         firstname: this.user?.firstname,
         lastname: this.user?.lastname,
@@ -54,7 +56,6 @@ export class UserformComponent {
 
   constructor(
     private fb: FormBuilder,
-    private signinService: SignInService,
     private alertService: AlertService,
     private userService: UserService
   ) {
@@ -75,7 +76,6 @@ export class UserformComponent {
     if (this.userForm.valid && this.isNewUser) {
       //can't be a new user with existing email
       if (email && (await this.userService.verifyEmail(email))) {
-        console.log("new user pas bon mail")
         this.alertService.setAlert(
           AlertEnum.TYPE_DANGER,
           AlertEnum.MESSAGE_EMAIL_ALREADY_EXIST,
@@ -90,12 +90,11 @@ export class UserformComponent {
           this.userForm.get('phone')?.value,
           this.getRoles()
         );
-        console.log("new user ok :" + this.newUser)
+
         this.saveUser(this.newUser);
       }
     } else {
       if (email && (await !this.userService.verifyEmail(email))) {
-        console.log("old user pas bon mail" )
 
         this.alertService.setAlert(
           AlertEnum.TYPE_DANGER,
@@ -108,8 +107,8 @@ export class UserformComponent {
           this.user.lastname = this.userForm.get('lastname')?.value;
           this.user.phone = this.userForm.get('phone')?.value;
           this.user.roles = this.getRoles();
-          console.log("old user ok :" + this.user)
 
+          console.log(this.user)
           this.saveUser(this.user);
         }
       }
@@ -119,7 +118,6 @@ export class UserformComponent {
   saveUser(user: User) {
     this.userService.saveUser(user).subscribe((response) => {
       this.responseApi = response;
-      console.log("save user response :" + this.responseApi)
 
       if (this.responseApi.responseValid == true) {
         this.alertService.setAlert(
@@ -129,6 +127,7 @@ export class UserformComponent {
             : AlertEnum.MESSAGE_UPDATE_SUCCESS,
           AlertEnum.TIME_MEDIUM
         );
+
       } else {
         this.alertService.setAlert(
           AlertEnum.TYPE_DANGER,
@@ -137,6 +136,7 @@ export class UserformComponent {
         );
       }
       this.userForm.reset();
+      this.needToRefresh.emit(true);
     });
   }
 
@@ -161,4 +161,6 @@ export class UserformComponent {
     }
     return roles;
   }
+
+
 }
