@@ -28,7 +28,15 @@ public class Prestation {
     private String description;
     private String maxUser;
     private String image;
-
+    private String littleDescription;
+    private String practicalInformation;
+    private String language;
+    private String personalInfos;
+    private String locationInfos;
+    private String dateComment;
+    private String authorComment;
+    private String comment;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
     @JsonIgnoreProperties
@@ -43,7 +51,9 @@ public class Prestation {
     private Location location;
 
     public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd,
-            String state, String description, String maxUser, String image, List<Registration> registrations) {
+            String state, String description, String maxUser, String image, String littleDescription,
+            String practicalInformation, String language, String personalInfos, String locationInfos, String dateComment,
+            String authorComment, String comment, List<Registration> registrations) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -54,6 +64,14 @@ public class Prestation {
         this.description = description;
         this.maxUser = maxUser;
         this.image = image;
+        this.littleDescription = littleDescription;
+        this.practicalInformation = practicalInformation;
+        this.language = language;
+        this.personalInfos = personalInfos;
+        this.locationInfos = locationInfos;
+        this.dateComment = dateComment;
+        this.authorComment = authorComment;
+        this.comment = comment;
         this.registrations = registrations;
     }
 
