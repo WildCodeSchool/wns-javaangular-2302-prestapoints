@@ -2,8 +2,6 @@ package fr.dto;
 
 import java.sql.Timestamp;
 import java.util.List;
-
-import fr.entity.Image;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,7 +26,7 @@ public class PrestationDto {
     private TypeDto type;
     private LocationDto location;
 
-    private List<Image> images;
+    private List<ImageDto> images;
     private List<RegistrationDto> registrations;
 
 }

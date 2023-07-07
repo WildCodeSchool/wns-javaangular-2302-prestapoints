@@ -26,39 +26,49 @@ public class ImageFixtures {
 
     @Autowired
     private Fixtures fixtures;
-    private static final String IMAGE_PATH1 = "src/main/resources/imageFixtures/fixtureImage.jpg";
-    private static final String IMAGE_PATH2 = "src/main/resources/imageFixtures/fixtureImage2.jpg";
+    private static final String IMAGE_PATH1 = "back/src/main/resources/imageFixtures/fixtureImage.jpg";
+    private static final String IMAGE_PATH2 = "back/src/main/resources/imageFixtures/fixtureImage2.jpg";
     public void prepareFixtures() {
 	    String table = TablesEnum.IMAGE.getTableName();
         
 
         if (fixtures.isDatatableExistAndDelete(table)){
-            try {
-                byte[] imageData = loadImageData(IMAGE_PATH1);
+            
+                
                 for (int i = 1; i < 11; i++) {
-                    Image image = new Image(imageData);
-                    image.setId(i);
-                    Prestation prestation = new Prestation();
-                    prestation = prestationRepository.getReferenceById(i);
-                    image.setPrestation(prestation);
-                    imageRepository.save(image);
+                    try {
+                        byte[] imageData = loadImageData(IMAGE_PATH1);
+                        Image image = new Image(imageData);
+                        image.setId(i);
+                        Prestation prestation = new Prestation();
+                        prestation = prestationRepository.getReferenceById(i);
+                        image.setPrestation(prestation);
+                        imageRepository.save(image);
+                    } catch (Exception e) {
+                            e.printStackTrace();
+                    } 
+
                 }
 
-                imageData = loadImageData(IMAGE_PATH2);
+                
+                    
                 for (int i = 1; i < 11; i++) {
-                    Image image = new Image(imageData);
-                    image.setId(i+10);
-                    Prestation prestation = new Prestation();
-                    prestation = prestationRepository.getReferenceById(i);
-                    image.setPrestation(prestation);
-                    imageRepository.save(image);
+                    try {
+                        byte[] imageData = loadImageData(IMAGE_PATH2);
+                        Image image = new Image(imageData);
+                        image.setId(i+10);
+                        Prestation prestation = new Prestation();
+                        prestation = prestationRepository.getReferenceById(i);
+                        image.setPrestation(prestation);
+                        imageRepository.save(image);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } 
+
                 }
                 
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            } 
-
+            
         }
     }
 
@@ -66,6 +76,7 @@ public class ImageFixtures {
         String currentDirectory = System.getProperty("user.dir");
         imagePath = currentDirectory + File.separator + imagePath;;
         Path path = Paths.get(imagePath);
+        byte[] imageData = Files.readAllBytes(path);
         return Files.readAllBytes(path);
     }
 
