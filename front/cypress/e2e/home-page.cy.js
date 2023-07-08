@@ -1,12 +1,12 @@
 describe("Prestation home page", () => {
-  it("Access to home page and search a prestation wich contains 'dolor' in the card", () => {
+  it("Access to home page and search a prestation wich contains 'est' in the card", () => {
     //when
     cy.visit("");
     //given
-    cy.get(".search-input").type("dolor");
+    cy.get(".search-input").type("est");
     cy.get(".discover-button").click();
     //then
-    cy.get(".category-text").first().should("have.text", "dolor");
+    cy.get(".category-text").first().should("have.text", "est");
   });
 
   //Component test

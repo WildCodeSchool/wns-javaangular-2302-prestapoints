@@ -15,6 +15,7 @@ import { CategoryService } from './shared/services/category.service';
 import { AuthInterceptor } from './core/service/auth/auth.interceptor';
 import { AuthenticationService } from './core/service/auth/authentication.service';
 import { UserService } from './shared/services/user.service';
+import { ToolsService } from './shared/services/tools.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { UserService } from './shared/services/user.service';
     { provide: LOCALE_ID, useValue: 'fr' },
     CategoryService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    AuthenticationService, UserService
+    AuthenticationService, UserService, ToolsService
   ],
   bootstrap: [AppComponent],
 })

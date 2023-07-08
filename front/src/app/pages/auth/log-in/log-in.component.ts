@@ -43,7 +43,7 @@ export class LogInComponent implements OnInit {
               AlertEnum.MESSAGE_LOGIN_SUCCESSED,
               AlertEnum.TIME_MEDIUM
             );
-            this.router.navigate(['/prestation/formulaire']);
+            this.router.navigate(['/']);
           } else {
             // login failed
             this.error = 'Username or password is incorrect';

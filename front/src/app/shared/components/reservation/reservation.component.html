@@ -33,14 +33,14 @@
                                     {{ prestation?.placeAvailable }} </span>
                                 <button (click)="addRegistration(prestation?.id) "
                                     class="btn bg-secondary badge rounded-pill"
-                                    [disabled]="prestation.placeAvailable === '0'" data-bs-dismiss="modal">
+                                    [disabled]="prestation.placeAvailable === '0'" >
                                     {{ prestation.placeAvailable === '0' ? 'Complet' : 'Je réserve' }}</button>
                             </li>
                             <li class=" list-group-item border-top border-bottom d-flex flex justify-content-between">
-                                {{ prestation?.dateStart | date:'EEEE d MMMM yyyy, HH:mm'}} <a href="#"
+                                {{ prestation?.dateStart | date:'EEEE d MMMM yyyy, HH:mm'}} <a 
                                     class="btn bg-secondary badge rounded-pill">Je réserve</a></li>
                             <li class=" list-group-item border-top border-bottom d-flex flex justify-content-between">
-                                {{ prestation?.dateStart | date:'EEEE d MMMM yyyy, HH:mm'}} <a href="#"
+                                {{ prestation?.dateStart | date:'EEEE d MMMM yyyy, HH:mm'}} <a 
                                     class="btn bg-secondary badge rounded-pill">Je réserve</a></li>
                         </ul>
                     </div>

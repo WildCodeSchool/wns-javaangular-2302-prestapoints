@@ -57,7 +57,7 @@ public class UserService {
         }
         
         List<Role> roles = new ArrayList<Role>();
-        if (!user.getRoles().isEmpty()) {
+        if (user.getRoles() != null && !user.getRoles().isEmpty()) {
             for (Role role : user.getRoles()) {
                 Role roleDb = roleRepository.findByName(role.getName()).get();
                 roles.add(roleDb);

@@ -9,16 +9,26 @@ import { PrestationService } from 'src/app/shared/services/prestation.service';
 })
 export class HomeComponent implements OnInit {
   public prestationsApi?: Prestation[];
-  
+
   constructor(private prestationService: PrestationService) {}
 
   ngOnInit() {
+    this.getPrestations();
+  }
+
+  onGetPrestation(prestationsSearch: Prestation[]): void {
+    this.prestationsApi = prestationsSearch;
+  }
+
+  getPrestations() {
     this.prestationService.getPrestations().subscribe((response) => {
       this.prestationsApi = response;
     });
   }
 
-  onGetPrestation(prestationsSearch: Prestation[]): void {
-    this.prestationsApi = prestationsSearch;
+  needToRefresh($event: boolean) {
+    if ($event) {
+      this.getPrestations();
+    }
   }
 }

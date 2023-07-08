@@ -5,6 +5,7 @@ import { User } from 'src/app/shared/model/user';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { RoleEnum } from 'src/app/shared/enum/role.enum';
+import { ToolsService } from 'src/app/shared/services/tools.service';
 
 @Component({
   selector: 'app-table',
@@ -17,18 +18,18 @@ export class TableComponent implements OnInit {
   public selectedUsers: User[] = [];
   public user?: User;
   public isNewUser: boolean = true;
-
+  public isAscOrder: boolean = false;
+  public orderUsersByProperty: keyof User = 'creationDate';
 
   constructor(
     private userService: UserService,
-    private alertService: AlertService,
-
+    private alertService: AlertService, 
+    private toolsService: ToolsService
   ) {}
 
   ngOnInit(): void {
     this.getUsers();
   }
-
 
   deleteUser(user: User) {
     this.userService.deleteUser(user).subscribe((response) => {
@@ -98,9 +99,10 @@ export class TableComponent implements OnInit {
             case RoleEnum.ADMIN:
               role.slug = RoleEnum.SLUG_ADMIN;
               break;
-          }
+            }
+          });
         });
-      });
+        this.needToOrder();
     });
   }
 
@@ -116,7 +118,27 @@ export class TableComponent implements OnInit {
 
   needToRefresh($event: boolean) {
     if ($event) {
-      this.getUsers()
+      this.getUsers();
+    }
+  }
+
+  needToOrder() {
+      this.isAscOrder ? this.ascOrderUsersByProperty(this.orderUsersByProperty) : this.descOrderUsersByProperty(this.orderUsersByProperty);
+  }
+
+  ascOrderUsersByProperty(property: keyof User) {
+    if (this.users != null) {
+      this.users = this.toolsService.ascSortListOfObjectByProperty(this.users, property)
+      this.orderUsersByProperty = property;
+      this.isAscOrder = true;
+    }
+  }
+
+  descOrderUsersByProperty(property: keyof User) {
+    if (this.users != null) {
+      this.users = this.toolsService.descSortListOfObjectByProperty(this.users, property)
+      this.orderUsersByProperty = property;
+      this.isAscOrder = false;
     }
   }
 }

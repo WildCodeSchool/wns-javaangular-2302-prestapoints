@@ -55,16 +55,22 @@ public class AdminController {
     public ResponseEntity<ResponseApi> saveUser(@RequestBody UserDto userDto) {
         try {
             User userConnected = authController.getUserConnected();
-            User user = userService.findUserByEmail(userDto.getEmail()).get();
             User userToSave = userMapper.convertToEntity(userDto);
 
-            if (!userConnected.equals(user) ||
-                    (userConnected.equals(user) && userToSave.getRoles()
-                            .contains(roleRepository.findByName(RoleEnum.ROLE_ADMIN.getRole()).get()))) {
-                userService.createUser(userDto);
+            if (userService.findUserByEmail(userDto.getEmail()).isPresent()) {
+                User user = userService.findUserByEmail(userDto.getEmail()).get();
+
+                if (!userConnected.equals(user) ||
+                        (userConnected.equals(user) && userToSave.getRoles()
+                                .contains(roleRepository.findByName(RoleEnum.ROLE_ADMIN.getRole()).get()))) {
+                    userService.createUser(userDto);
+                } else {
+                    
+                    return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON)
+                            .body(new ResponseApi(false, MessageApiEnum.UPDATE_FAILED.getMessage()));
+                }
             } else {
-                return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON)
-                        .body(new ResponseApi(false, MessageApiEnum.UPDATE_FAILED.getMessage()));
+                userService.createUser(userDto);
             }
 
             return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON)
@@ -99,6 +105,7 @@ public class AdminController {
 
     /**
      * Mass delete, method receive a list of users to delete and
+     * 
      * @return a ResponseEntity to informe result of the operation
      */
     @PostMapping("/admin/utilisateurs/utilisateur/suppressions")
