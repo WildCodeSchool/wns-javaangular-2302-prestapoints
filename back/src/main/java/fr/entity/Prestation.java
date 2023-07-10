@@ -13,6 +13,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
+
 @Table(name="`prestation`")
 public class Prestation {
 
@@ -48,7 +49,7 @@ public class Prestation {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
-    @JsonIgnoreProperties
+    @JsonIgnore
     private Type type;
 
     @OneToMany(mappedBy = "prestation")
@@ -57,6 +58,7 @@ public class Prestation {
     
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
+    @JsonIgnore
     private Location location;
 
 

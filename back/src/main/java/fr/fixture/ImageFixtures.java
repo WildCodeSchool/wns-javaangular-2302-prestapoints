@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import fr.entity.Image;
 import fr.entity.Prestation;
 import fr.enums.TablesEnum;
@@ -26,49 +25,43 @@ public class ImageFixtures {
 
     @Autowired
     private Fixtures fixtures;
-    private static final String IMAGE_PATH1 = "back/src/main/resources/imageFixtures/fixtureImage.jpg";
-    private static final String IMAGE_PATH2 = "back/src/main/resources/imageFixtures/fixtureImage2.jpg";
+    private static final String IMAGE_PATH1 = "src/main/resources/imageFixtures/fixtureImage.jpg";
+    private static final String IMAGE_PATH2 = "src/main/resources/imageFixtures/fixtureImage2.jpg";
     public void prepareFixtures() {
 	    String table = TablesEnum.IMAGE.getTableName();
-        
+        int numberOfPrestations = prestationRepository.findAll().size();
 
         if (fixtures.isDatatableExistAndDelete(table)){
-            
-                
-                for (int i = 1; i < 11; i++) {
-                    try {
-                        byte[] imageData = loadImageData(IMAGE_PATH1);
-                        Image image = new Image(imageData);
-                        image.setId(i);
-                        Prestation prestation = new Prestation();
-                        prestation = prestationRepository.getReferenceById(i);
-                        image.setPrestation(prestation);
-                        imageRepository.save(image);
-                    } catch (Exception e) {
-                            e.printStackTrace();
-                    } 
-
-                }
-
-                
-                    
-                for (int i = 1; i < 11; i++) {
-                    try {
-                        byte[] imageData = loadImageData(IMAGE_PATH2);
-                        Image image = new Image(imageData);
-                        image.setId(i+10);
-                        Prestation prestation = new Prestation();
-                        prestation = prestationRepository.getReferenceById(i);
-                        image.setPrestation(prestation);
-                        imageRepository.save(image);
-                    } catch (Exception e) {
+        
+            for (int i = 1; i <= numberOfPrestations; i++) {
+                try {
+                    byte[] imageData = loadImageData(IMAGE_PATH1);
+                    Image image = new Image(imageData);
+                    image.setId(i);
+                    Prestation prestation = new Prestation();
+                    prestation = prestationRepository.getReferenceById(i);
+                    image.setPrestation(prestation);
+                    imageRepository.save(image);
+                } catch (Exception e) {
                         e.printStackTrace();
-                    } 
+                } 
 
-                }
+            }
                 
+            for (int i = 1; i <= numberOfPrestations; i++) {
+                try {
+                    byte[] imageData = loadImageData(IMAGE_PATH2);
+                    Image image = new Image(imageData);
+                    image.setId(i+10);
+                    Prestation prestation = new Prestation();
+                    prestation = prestationRepository.getReferenceById(i);
+                    image.setPrestation(prestation);
+                    imageRepository.save(image);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } 
 
-            
+            }
         }
     }
 
@@ -76,7 +69,6 @@ public class ImageFixtures {
         String currentDirectory = System.getProperty("user.dir");
         imagePath = currentDirectory + File.separator + imagePath;;
         Path path = Paths.get(imagePath);
-        byte[] imageData = Files.readAllBytes(path);
         return Files.readAllBytes(path);
     }
 

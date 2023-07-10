@@ -1,5 +1,7 @@
 package fr.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,5 +30,6 @@ public class Location {
     private String addressInformation;
 
    @OneToOne(mappedBy = "location", fetch = FetchType.LAZY)
+   @JsonIgnore
     private Prestation prestation;
 }

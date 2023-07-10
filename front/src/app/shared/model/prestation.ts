@@ -9,12 +9,14 @@ export class Prestation {
     public title? : string;
     public duration? : number;
     public addPoint? : number;
-    public dateStart? : number;
+    public dateStartTimestamps? : number;
+    //public dateStartString? : string;
+    //public timeStartString? : string;
     public dateEnd? : number;
     public state? : string;
     public description? : string;
     public maxUser? : number;
-    public image? : Image[];
+    public images? : Image[];
     public type?: Type;
     public location?: Location;
     public placeAvailable?: number;
@@ -27,76 +29,52 @@ export class Prestation {
 
     constructor(){}
 
-    getId(): number | undefined {
-        return this.id;
+    get getDuration(): string {
+        if (this.duration != undefined){
+            const durautionHour = this.duration/1000/60/60;
+            console.log(durautionHour);
+            return durautionHour.toString();
+        }
+        return '0';
+
+    }
+
+    get getDateStartString(): string {
+        if (typeof this.dateStartTimestamps === 'number') {
+            const dateStart = new Date(this.dateStartTimestamps);
+            const day = dateStart.getDate().toString().padStart(2, '0');
+            const month = (dateStart.getMonth() + 1).toString().padStart(2, '0');
+            const year = dateStart.getFullYear().toString();
+            const formattedDate = `${day}/${month}/${year}`;
+            return formattedDate;
+        }
+        return 'dd/mm/yyyy'; 
+    }
+      
+    get getTimeStartString(): string {
+        if (typeof this.dateStartTimestamps === 'number') {
+            const date = new Date(this.dateStartTimestamps);
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+        return "hh:mm";
+          
+    }
+
+    get getDateTimeStartString(): string {
+        if (typeof this.dateStartTimestamps === 'number') {
+            const dateTime = new Date(this.dateStartTimestamps);    
+            const day = dateTime.getDate().toString().padStart(2, '0');
+            const month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
+            const year = dateTime.getFullYear().toString();
+            const hours = dateTime.getHours().toString().padStart(2, '0');
+            const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+      
+        return `${day} ${month} ${year}, ${hours}:${minutes}`;
       }
-    
-      getTitle(): string | undefined {
-        return this.title;
-      }
-    
-      getDuration(): string | undefined {
-        return this.duration?.toString();
-      }
-    
-      getAddPoint(): string | undefined {
-        return this.addPoint?.toString();
-      }
-    
-      getDateStart(): string | undefined {
-        return this.dateStart?.toString();
-      }
-    
-      getDateEnd(): string | undefined {
-        return this.dateEnd?.toString();
-      }
-    
-      getState(): string | undefined {
-        return this.state;
-      }
-    
-      getDescription(): string | undefined {
-        return this.description;
-      }
-    
-      getMaxUser(): string | undefined {
-        return this.maxUser?.toString();
-      }
-    
-      getImage(): Image[] | undefined {
-        return this.image;
-      }
-    
-      getType(): Type | undefined {
-        return this.type;
-      }
-    
-      getLocation(): Location | undefined {
-        return this.location;
-      }
-    
-      getPlaceAvailable(): number | undefined {
-        return this.placeAvailable;
-      }
-    
-      getLittleDescription(): string | undefined {
-        return this.littleDescription;
-      }
-    
-      getPracticalInformation(): string | undefined {
-        return this.practicalInformation;
-      }
-    
-      getLanguage(): string | undefined {
-        return this.language;
-      }
-    
-      getPersonalInfos(): string | undefined {
-        return this.personalInfos;
-      }
-    
-      getRegistration(): Registration[] | undefined {
-        return this.registration;
-      }
+      return "dd MM yyyy, HH:mm";
+      
+    }
 
 }

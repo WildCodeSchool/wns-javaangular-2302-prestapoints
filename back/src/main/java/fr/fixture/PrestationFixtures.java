@@ -10,7 +10,9 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.github.javafaker.Faker;
+import fr.entity.Location;
 import fr.entity.Prestation;
+import fr.entity.Type;
 import fr.enums.TablesEnum;
 import fr.repository.LocationRepository;
 import fr.repository.PrestationRepository;
@@ -142,10 +144,11 @@ public class PrestationFixtures {
                 prestation.setDescription(descriptions[i]);
                 prestation.setMaxUser(faker.number().numberBetween(1,10));
                 
-                /*Type type = typeRepository.getReferenceById(i);
+                Type type = typeRepository.getReferenceById(i+1);
                 prestation.setType(type);
-                Location location = locationRepository.getReferenceById(i);
-                prestation.setLocation(location);*/
+
+                Location location = locationRepository.getReferenceById(i+1);
+                prestation.setLocation(location);
 
                 prestation.setLanguage(languages[i]);
                 prestation.setLittleDescription(littleDescriptions[i]);
