@@ -1,5 +1,7 @@
 package fr.dto;
 
+import java.sql.Timestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class RegistrationDto {
 
+    private Timestamp date;
     private Integer evaluation;
     private String comment;
+    
 }

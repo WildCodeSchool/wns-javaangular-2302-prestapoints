@@ -2,15 +2,12 @@ package fr.fixture;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.github.javafaker.Faker;
-
 import fr.entity.Role;
 import fr.entity.User;
 import fr.enums.TablesEnum;
@@ -43,7 +40,7 @@ public class UserFixtures {
             fixtures.isDatatableExistAndDelete(tableJoin);
 
             for (Integer i = 0; i < numberOfLigne; i++) {
-                List<Role> roles = new ArrayList();
+                List<Role> roles = new ArrayList<Role>();
                 User user = new User();
                 user.setId(i);
                 user.setEmail("user" + i.toString() + "@test.com");
@@ -53,6 +50,7 @@ public class UserFixtures {
                 user.setPassword(passwordEncoder.encode("t123456789"));
                 roles.add(roleUser);
                 user.setRoles(roles);
+
                 Date birthday = faker.date().birthday();
                 Timestamp timestamp = new Timestamp(birthday.getTime());
                 user.setCreation(timestamp);
@@ -60,7 +58,7 @@ public class UserFixtures {
                 userRepository.save(user);
             }
 
-            List<Role> roles = new ArrayList();
+            List<Role> roles = new ArrayList<Role>();
             User user = new User();
 
             user.setId(numberOfLigne + 1);
@@ -72,6 +70,7 @@ public class UserFixtures {
             roles.add(roleUser);
             roles.add(roleAdmin);
             user.setRoles(roles);
+            
             Date birthday = faker.date().birthday();
             Timestamp timestamp = new Timestamp(birthday.getTime());
             user.setCreation(timestamp);

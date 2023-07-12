@@ -1,5 +1,7 @@
 package fr.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +22,7 @@ public class Image {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prestation_id")
+    @JsonIgnore
     private Prestation prestation;
 
     public Image() {
