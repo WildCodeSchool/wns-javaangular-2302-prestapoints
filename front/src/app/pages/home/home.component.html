@@ -13,8 +13,8 @@
   <p class="my-0 fw-0 ">Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i></p>
   <app-slider [prestationsApi]="prestationsApi">
     <ng-template let-prestation>
-      <app-card [prestation]="prestation" (cardClicked)="redirectToCardDetails(prestation)"></app-card>
+      <app-card [prestation]="prestation" (click)="redirectToCardDetails(prestation)"></app-card>
     </ng-template>
-  </app-slider>
+  </app-slider>  
 
 </div>

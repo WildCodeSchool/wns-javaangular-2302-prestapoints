@@ -36,6 +36,7 @@ public class Prestation {
     private String dateComment;
     private String authorComment;
     private String comment;
+    private String videoUrl;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
@@ -53,7 +54,7 @@ public class Prestation {
     public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd,
             String state, String description, String maxUser, String image, String littleDescription,
             String practicalInformation, String language, String personalInfos, String locationInfos, String dateComment,
-            String authorComment, String comment, List<Registration> registrations) {
+            String authorComment, String comment, String videoUrl, List<Registration> registrations) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -72,6 +73,7 @@ public class Prestation {
         this.dateComment = dateComment;
         this.authorComment = authorComment;
         this.comment = comment;
+        this.videoUrl = videoUrl;
         this.registrations = registrations;
     }
 

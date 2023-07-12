@@ -4,6 +4,7 @@ import { Location } from "./location";
 import { SafeUrl } from "@angular/platform-browser";
 
 export class Prestation {
+  category: any;
 
   constructor(
     public id?: string,
@@ -16,12 +17,19 @@ export class Prestation {
     public description?: string,
     public maxUser?: string,
     public image?: string,
+    public littleDescription?: string,
+    public practicalInformation?: string,
+    public language?: string,
+    public personalInfos?: string,
+    public locationInfos?: string,
+    public dateComment?: string,
+    public authorComment?: string,
+    public comment?: string,
+    public videoUrl?: string,
     public type?: Type,
     public location?: Location,
     public tags? : string[],
     public url?: SafeUrl | string,
-
-    
-   // public registration?: Registration[]
+    // public registration?: Registration[]
   ) {}
 }

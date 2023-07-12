@@ -1,112 +1,93 @@
 <div class="card-details-maxi p-5 presta-my-12 position-relative">
-
-  <!--main container-->
+  <!-- main container -->
   <div class="main-container container" id="main-container">
-
     <!-- Content -->
     <div class="row ">
-
       <!-- Post Content -->
       <div class="col-lg-12 block-content">
-
-        <!--content box-->
+        <!-- content box -->
         <div class="content-box">
-
           <!-- standard post -->
           <article class="entry">
-
-            <!--entry header-->
+            <!-- entry header -->
             <div class="card-details-header">
               <div class="bold list-category">
-                <a>Prestapoints / Textile / Tapisserie d’ameublement</a>
+                <a>Prestapoints / {{ category }}</a>
               </div>
               <h1 class="entry-title presta-mt-5">
-                Forme toi à la tapisserie d’ameublement
+                {{ prestation?.title }}
               </h1>
               <div class="entry__meta-location d-flex justify-content-start presta-mt-5">
                 <i class="bi bi-geo-alt presta-mr-3"></i>
-                <h2 class="presta-text-quinary presta-text-fw-medium">Bordeaux - Quinconces</h2>
+                <h2 class="presta-text-quinary presta-text-fw-medium">{{ location }}</h2>
                 <i class="bi bi-stopwatch presta-ml-15"></i>
-                <h3 class="presta-ml-3 presta-text-fw-medium">3H</h3>
+                <h3 class="presta-ml-3 presta-text-fw-medium">{{ duration }}H</h3>
               </div>
-                <div class="little-description presta-mt-3 presta-text-fw-bold">
-                  <p>Découvrez le monde de la tapisserie d'ameublement et donnez une seconde vie à votre mobilier avec Soazig</p>
-                </div>
-            </div> 
+              <div class="little-description presta-mt-3 presta-text-fw-bold">
+                <p>{{ littleDescription }}</p>
+              </div>
+            </div>
 
             <!-- Video -->
             <div class="video-playlist">
               <div class="video-playlist_content">
                 <div *ngFor="let video of cardVideo">
-                  <iframe [src]="video.url" frameborder="0" allowfullscreen class="video-playlist_content-video"></iframe>
-                </div>
+                  <iframe *ngIf="video.url" [src]="video.url" frameborder="0" allowfullscreen class="video-playlist_content-video"></iframe>
+                </div>                
               </div>
-            </div>                      
+            </div>
             <!-- end Video -->
 
-
-            <!--entry article wrap -->
+            <!-- entry article wrap -->
             <div class="entry__article-wrap presta-mt-5">
-
-              <!--end entry article -->
+              <!-- end entry article -->
               <div class="entry__article mb-5">
-                
                 <div class="article-content">
-                  <div class="row presta-mt-7 border-top border-grey-text"> 
+                  <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
                       <h3 class="workshop-heading">Déroulement de l'atelier</h3>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
-                      <p>
-                        Venez apprendre les rudiments de la tapisserie ! Apportez votre chaise, tabouret, banc... dans l'atelier de Soazig. Elle vous apprendra à restaurer votre mobilier en le regarnissant et en posant un nouveau tissu d'ameublement. Des tissus vous seront proposés par Soazig lors de l'atelier, vous pouvez également apporter le vôtre, sous réserve que ce soit du tissu d'ameublement. Elle saura vous guider dans ce choix en fonction de votre sujet et de son utilisation ! Les outils vous seront prêtés et la petite fourniture est incluse.
-                      </p>
+                      <p>{{ description }}</p>
                     </div>
                   </div>
-                
+
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
                       <h3 class="workshop-heading">Informations pratiques</h3>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
-                      <p>
-                        Découvrez le monde de la tapisserie d'ameublement et donnez une seconde vie à votre mobilier avec Soazig.
-                      </p>
+                      <p>{{ practicalInformation }}</p>
                     </div>
                   </div>
-                
+
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
                       <h3 class="workshop-heading">Langues de l'atelier</h3>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
-                      <p>
-                        Cet atelier est animé en français.
-                      </p>
+                      <p>{{ language }}</p>
                     </div>
                   </div>
-                
+
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
-                      <h3 class="workshop-heading">En savoir plus sur Soazig</h3>
+                      <h3 class="workshop-heading">En savoir plus sur l'organisateur/trice</h3>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
-                      <p>
-                        Soazig est tapissière d'ameublement. Elle adore le mobilier et les étoffes, et plus précisément redonner vie aux vieux fauteuils ! Elle effectue des réfections traditionnelles ou contemporaines de sièges, fauteuils, canapés, méridiennes, chaises, têtes de lit, tabourets... À travers la diversité des matières et des couleurs, elle se fera un plaisir de vous parler de son parcours et de vous donner des conseils techniques. Soazig vous accueillera avec plaisir et vous transmettra son savoir au sein d'une belle boutique-atelier partagée située en plein centre-ville !
-                      </p>
+                      <p>{{ personalInfos }}</p>
                     </div>
                   </div>
-                
+
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
                       <h3 class="workshop-heading">Lieu de l'atelier</h3>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
-                      <p>
-                        L'atelier de Soazig se trouve dans la boutique Atelier Blue Madone, dans la rue du Loup, à quelques pas de l'arrêt de Tram Sainte-Catherine (Tram A) ou Hôtel de Ville (Tram C).
-                      </p>
+                      <p>{{ locationInfos }}</p>
                     </div>
                   </div>
-                
+
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
                       <h3 class="workshop-heading">Commentaires</h3>
@@ -114,38 +95,37 @@
                     <div class="col-md-7 align-self-start presta-my-5">
                       <div class="comments">
                         <div class="comment" *ngFor="let commentaire of commentaires">
+                          <p class="comment-date presta-text-fw-bold my-0">{{ commentaire.author}}</p>
                           <p class="comment-date presta-text-fw-bold my-0">{{ commentaire.date }}</p>
                           <p class="comment-text">{{ commentaire.texte }}</p>
                         </div>
                       </div>
                     </div>
                   </div>
-
-                </div>                                       
+                </div>
 
                 <!-- tags -->
                 <aside class="widgets_tags presta-mt-5 border-top border-grey-text">
-                  <h3 class="widget-title presta-my-5">Tags</h3> 
-                  <div class="entry__tags presta-text-fs-20 presta-text-fw-bold presta-mt-6"> 
-                    <div rel="tag" *ngFor="let tag of getTags()">
+                  <h3 class="widget-title presta-my-5">Tags</h3>
+                  <div class="entry__tags presta-text-fs-20 presta-text-fw-bold presta-mt-6">
+                    <div rel="tag" *ngFor="let tag of tags">
                       <a class="no-link tag-link">{{ tag }}</a>
                     </div>
-                  </div> 
+                  </div>
                 </aside>
                 <!-- end tags -->
-                
-              </div> <!-- end entry article -->
-              
-            </div> <!-- end entry article wrap -->
-
-          </article> <!-- end standard post -->
-
-        </div> <!-- end content box -->
-
-      </div> <!-- end post content -->
-
-    </div> <!-- end content -->
-
-  </div> <!-- end main container -->
-
+              </div>
+              <!-- end entry article -->
+            </div>
+            <!-- end entry article wrap -->
+          </article>
+          <!-- end standard post -->
+        </div>
+        <!-- end content box -->
+      </div>
+      <!-- end post content -->
+    </div>
+    <!-- end content -->
+  </div>
+  <!-- end main container -->
 </div>
