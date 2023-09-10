@@ -6,6 +6,7 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { RoleEnum } from 'src/app/shared/enum/role.enum';
 import { ToolsService } from 'src/app/shared/services/tools.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -24,7 +25,8 @@ export class TableComponent implements OnInit {
   constructor(
     private userService: UserService,
     private alertService: AlertService, 
-    private toolsService: ToolsService
+    private toolsService: ToolsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -140,5 +142,9 @@ export class TableComponent implements OnInit {
       this.orderUsersByProperty = property;
       this.isAscOrder = false;
     }
+  }
+
+  detailUser(user: User) {
+    // this.router.navigate(['/'], { postParams: { user: JSON.stringify(user) }});
   }
 }

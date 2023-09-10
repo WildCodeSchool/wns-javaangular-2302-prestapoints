@@ -58,7 +58,8 @@
                         [class.text-warning]="!(isAscOrder && orderUsersByProperty === 'creationDate')">
                         <i class="bi bi-caret-up-fill m-0 p-0 "></i>
                     </p>
-                    <p class="btn bg-transparent m-0 p-0 text-warning" (click)="descOrderUsersByProperty('creationDate')"
+                    <p class="btn bg-transparent m-0 p-0 text-warning"
+                        (click)="descOrderUsersByProperty('creationDate')"
                         [class.text-primary]="!isAscOrder && orderUsersByProperty === 'creationDate'"
                         [class.text-warning]="!(!isAscOrder && orderUsersByProperty === 'creationDate')">
                         <i class="bi bi-caret-down-fill"></i>
@@ -79,14 +80,12 @@
                 </span>Rôle(s)</th>
             <!-- phone -->
             <th class="border" scope="col"><span class="me-5 p-0">
-                    <p class="btn bg-transparent m-0 p-0 text-warning"
-                        (click)="ascOrderUsersByProperty('phone')"
+                    <p class="btn bg-transparent m-0 p-0 text-warning" (click)="ascOrderUsersByProperty('phone')"
                         [class.text-primary]="isAscOrder && orderUsersByProperty === 'phone'"
                         [class.text-warning]="!(isAscOrder && orderUsersByProperty === 'phone')">
                         <i class="bi bi-caret-up-fill m-0 p-0 "></i>
                     </p>
-                    <p class="btn bg-transparent m-0 p-0 text-warning"
-                        (click)="descOrderUsersByProperty('phone')"
+                    <p class="btn bg-transparent m-0 p-0 text-warning" (click)="descOrderUsersByProperty('phone')"
                         [class.text-primary]="!isAscOrder && orderUsersByProperty === 'phone'"
                         [class.text-warning]="!(!isAscOrder && orderUsersByProperty === 'phone')">
                         <i class="bi bi-caret-down-fill"></i>
@@ -107,10 +106,14 @@
                 <td class="border"> <ng-container *ngFor="let role of user?.roles">{{role.slug}}, </ng-container></td>
                 <td class="border">{{user?.phone}}</td>
                 <td class="border">
-                    <p class="btn p-0 m-0 bg-transparent" (click)="showEditUserForm(user)" data-bs-toggle="modal"
-                        data-bs-target="#userFormModal"><i class="bi bi-pen-fill me-5 text-secondary"></i></p>
-                    <p class="btn p-0 m-0 bg-transparent" (click)="deleteUser(user)"><i
-                            class="bi bi-trash3-fill ms-5 text-danger"></i></p>
+                    <div class="row">
+                        <p class="btn p-0 m-0 bg-transparent" (click)="showEditUserForm(user)" data-bs-toggle="modal"
+                            data-bs-target="#userFormModal"><i class="bi bi-pen-fill ms-2 me-3 text-secondary"></i></p>
+                        <p class="btn p-0 m-0 bg-transparent" (click)="detailUser(user)"><i
+                            class="bi bi-eye-fill me-3 text-info"></i></p>
+                        <p class="btn p-0 m-0 bg-transparent" (click)="deleteUser(user)"><i
+                            class="bi bi-trash3-fill me-2 text-danger"></i></p>
+                    </div>
                 </td>
             </tr>
         </ng-container>
