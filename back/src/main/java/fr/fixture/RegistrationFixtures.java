@@ -1,8 +1,5 @@
 package fr.fixture;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 // import com.github.javafaker.Faker;

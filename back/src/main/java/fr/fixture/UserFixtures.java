@@ -41,7 +41,7 @@ public class UserFixtures {
             fixtures.isDatatableExistAndDelete(tableJoin);
 
             for (Integer i = 0; i < numberOfLigne; i++) {
-                List<Role> roles = new ArrayList();
+                List<Role> roles = new ArrayList<Role>();
                 User user = new User();
                 user.setId(i);
                 user.setEmail("user" + i.toString() + "@test.com");
@@ -58,7 +58,7 @@ public class UserFixtures {
                 userRepository.save(user);
             }
 
-            List<Role> roles = new ArrayList();
+            List<Role> roles = new ArrayList<Role>();
             User user = new User();
 
             user.setId(numberOfLigne + 1);
