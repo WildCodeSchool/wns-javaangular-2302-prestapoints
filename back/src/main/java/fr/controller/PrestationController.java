@@ -2,10 +2,7 @@ package fr.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import fr.exception.ExceptionJsonDetail;
 import fr.model.ResponseApi;
 import fr.repository.PrestationRepository;
 import fr.dto.PrestationDto;
@@ -13,7 +10,6 @@ import fr.entity.Prestation;
 import fr.entity.Registration;
 import fr.entity.User;
 import fr.enums.MessageApiEnum;
-import fr.enums.RoleEnum;
 import fr.service.PrestationService;
 import fr.service.RegistrationService;
 import fr.service.UserService;
@@ -40,16 +36,9 @@ public class PrestationController {
     }
 
     @GetMapping("/prestations/{id}")
-    public ResponseEntity<String> getPrestation(@PathVariable Integer id) {
-        try {
-
-            return ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON)
-                    .body(prestationService.getPrestationById(id));
-        } catch (ExceptionJsonDetail exceptionJsonDetail) {
-
-            return ResponseEntity.status(404).contentType(MediaType.APPLICATION_JSON)
-                    .body(exceptionJsonDetail.getNotFound());
-        }
+    public PrestationDto getPrestation(@PathVariable Integer id) {
+        
+        return prestationService.getPrestationById(id);
     }
 
     @PostMapping("/prestations")
