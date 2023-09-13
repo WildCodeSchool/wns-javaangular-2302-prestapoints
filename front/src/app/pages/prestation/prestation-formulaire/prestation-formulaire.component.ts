@@ -6,6 +6,14 @@ import {
 } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Prestation } from '../../../shared/model/prestation';
 import { HttpClient } from '@angular/common/http';
 import { Prestation } from 'src/app/shared/model/prestation';
 
@@ -38,16 +46,15 @@ export class PrestationFormulaireComponent {
     }
 
     const formData = this.prestationForm.value;
-    const prestation = new Prestation(
-      formData.title,
-      formData.duration,
-      formData.addPoint,
-      formData.dateStart,
-      formData.dateEnd,
-      formData.state,
-      formData.description,
-      formData.maxUser
-    );
+    const prestation = new Prestation();
+    //formData.title,
+    //formData.duration,
+    //formData.addPoint,
+    //formData.dateStart,
+    //formData.dateEnd,
+    //formData.state,
+    //formData.description,
+    //formData.maxUser
 
     // Envoie de l'objet JSON au serveur
     this.http.post('http://localhost:8080/prestations', prestation).subscribe(

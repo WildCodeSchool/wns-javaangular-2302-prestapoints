@@ -10,10 +10,11 @@ public enum TablesEnum {
     TYPE("'type'"),
     LOCATION("'location'"),
     ADDRESS_LOCATION("'address_location'"),
-    ROLE_USER("'role_user'"),
+    USER_ROLE("'user_role'"),
     PRESTATION("'prestation'"),
     FAVORY("'favory'"),
-    CREATION("'creation'");
+    CREATION("'creation'"),
+    IMAGE("'images'");
 
     private String tableName;
 

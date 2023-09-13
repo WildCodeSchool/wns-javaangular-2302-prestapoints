@@ -1,6 +1,5 @@
 package fr.controller;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.entity.User;
 import fr.helper.JwtUtils;
+import fr.model.UserConnected;
 import fr.service.UserService;
 
 // AuthController :
@@ -28,18 +28,16 @@ import fr.service.UserService;
 
 @Controller
 public class AuthController {
-    
-    @Autowired
-    private  UserService userService;
-    @Autowired
-    private  JwtUtils jwtUtils;
 
-    // public AuthController(UserService userService, JwtUtils jwtUtils) {
-    //     this.userService = userService;
-    //     this.jwtUtils = jwtUtils;
-    // }
+    @Autowired
+    private UserConnected userConnected;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private JwtUtils jwtUtils;
 
     Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @CrossOrigin(origins = "*")
     @PostMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -50,10 +48,14 @@ public class AuthController {
         List<String> rolesNames = user.securityUser().getAuthorities().stream()
                 .map(authority -> authority.getAuthority()).toList();
         String token = jwtUtils.generateToken(user.getEmail(), rolesNames);
+        user.setToken(token);
+        userService.updateUser(user);
+        userConnected.setUserConnected(user);
+
         return Map.of("token", token);
     }
-    
-    //TODO Verifier l'utilité auprès de Louis, sinon à suppr
+
+    // TODO Verifier l'utilité auprès de Louis, sinon à suppr
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

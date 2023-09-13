@@ -8,6 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { AlertComponent } from './shared/components/alert/alert.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { LOCALE_ID } from '@angular/core';
+import { CategoryService } from './shared/services/category.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,10 @@ import { AlertComponent } from './shared/components/alert/alert.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [FormBuilder],
+  providers: [FormBuilder, { provide: LOCALE_ID, useValue: 'fr' }, CategoryService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
+
+registerLocaleData(localeFr);

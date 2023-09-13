@@ -64,8 +64,8 @@ public class WebSecurityConfig {
         http.cors() // CORS is configured just under
                 .and()
                     .authorizeHttpRequests()
-                    .requestMatchers(GET, "/admin").hasRole("ROLE_ADMIN")
-                    .requestMatchers("/api/*").hasRole("ROLE_USER") //TODO: à valider avec les copains le mot clé qui restreint les routes
+                    .requestMatchers(GET, "/admin/*").hasRole("ROLE_ADMIN")
+                    .requestMatchers("/prestations/*").hasRole("ROLE_USER") //TODO: à valider avec les copains le mot clé qui restreint les routes
                     .anyRequest().permitAll()
                 .and()
                 .formLogin()

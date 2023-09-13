@@ -1,72 +1,44 @@
-<footer class="footer bg-primary presta-mt-0 text-white">
-  <div class="container">
+<footer class="footer bg-primary text-white py-0">
+  <div class="container presta-mt-8">
     <div class="row">
-      <div class="col-md-6 presta-mt-7">
-        <h3 class="text-white">PrestaPoints</h3>
-        <p>PrestaPoints permet à des passionnés de partager leur savoir-faire avec des novices à travers des ateliers et d'obtenir des réductions dans des grandes enseignes</p>
-      </div>
-      <div class="col-md-4">
-        <h4 class="text-white presta-mt-8 presta-ml-17">Réseaux sociaux</h4>
-            <div class="social-media-list presta-mt-5 presta-ml-20">
-              <a href="#" class="nav-link"><i class="bi bi-facebook fs-3"></i></a>
-              <a href="#" class="nav-link"><i class="bi bi-twitter fs-3"></i></a>
-              <a href="#" class="nav-link"><i class="bi bi-instagram fs-3"></i></a>
-            </div>
-      </div>
-    </div>
-    <hr>
-    <div class="informations">
-      <div class="row">
-        <div class="col-md-4">
-          <h4 class="text-white">Notre offre</h4>
-            <div>
-              <a href="#" class="nav-link">Par univers</a>
-            </div>
-            <div>
-              <a href="#" class="nav-link">Par ville</a>
-            </div>
-            <div>
-              <a href="#" class="nav-link">Par savoir-faire</a>
-            </div>
-            <div>
-              <a href="#" class="nav-link">Offrir une carte cadeau</a>
-            </div>
+      <div class="col-lg-5">
+
+        <h4 class="text-white presta-mb-6">PrestaPoints</h4>
+        <p class="presta-pr-11 presta-mb-7">PrestaPoints permet à des passionnés de partager leur savoir-faire avec des novices à travers des ateliers et d'obtenir des réductions dans des grandes enseignes</p>
+    
+        <div class="socials socials--large socials--white-base socials--rounded presta-mt-6">
+          <a href="https://www.facebook.com" class="social social-facebook" aria-label="facebook"><i class="bi bi-facebook fs-3"></i></a>
+          <a href="https://twitter.com" class="social social-twitter" aria-label="twitter"><i class="bi bi-twitter fs-3"></i></a>
+          <a href="https://www.youtube.com" class="social social-youtube" aria-label="youtube"><i class="bi bi-youtube fs-3"></i></a>
+          <a href="https://www.instagram.com" class="social social-instagram" aria-label="instagram"><i class="bi bi-instagram fs-3"></i></a>
         </div>
-        <div class="col-md-4">
-          <h4 class="text-white">PrestaPoints</h4>
-            <div>
-              <a href="#" class="nav-link">Notre mission</a>
-            </div>
-            <div>
-              <a href="#" class="nav-link">Nos partenaires</a>
-            </div>
-            <div>
-              <a href="#" class="nav-link">Rejoindre notre équipe</a>
-            </div>
-            <div>
-              <a href="#" class="nav-link">Devenir artisan PrestaPoints</a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <h4 class="text-white">Liens utiles</h4>
-              <div>
-                <a href="#" class="nav-link">FAQ</a>
-              </div>
-              <div>
-                <a href="#" class="nav-link">Le blog</a>
-              </div>
-              <div>
-                <a href="#" class="nav-link">Presse</a>
-              </div>
-              <div>
-                <a href="#" class="nav-link">Espace Artisan</a>
-              </div>
-        </div>  
       </div>
-    </div>
-  <hr>
-    <div class="text-center">
-      <h4>&copy; 2023 PrestaPoints. Tous droits réservés.</h4>
+
+      <div class="col-lg-3 mt-lg-2 mt-5">
+        <h5 class="text-white presta-mb-5">Liens utiles</h5>
+        <div class="presta-links presta-mt-6">
+          <a href="#" class="nav-link mb-3">Notre mission</a>
+          <a href="#" class="nav-link mb-3">Nos partenaires</a>
+          <a href="#" class="nav-link mb-3">Rejoindre notre équipe</a>
+          <a href="#" class="nav-link mb-3">Devenir artisan PrestaPoints</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 d-flex align-items-lg-start flex-row mt-lg-2 mt-5">
+        <aside class="widgets_tags">
+          <h5 class="widget-title">Tags</h5> 
+          <div class="entry__tags presta-text-fs-20 presta-text-fw-bold presta-mt-6"> 
+            <div rel="tag" *ngFor="let tag of tags">
+              <a href="/ateliers/{{ tag.name }}" class="no-link tag-link">{{ tag.name }}</a>
+            </div>
+          </div> 
+        </aside>
+      </div>
+
+      <div class="col-12 text-center mt-lg-5 mt-5">
+        <p class="footer-bottom presta-text-fs-20">&copy; 2023 PrestaPoints. Tous droits réservés.</p>
+      </div>
+
     </div>
   </div>
 </footer>
