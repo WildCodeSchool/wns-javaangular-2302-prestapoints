@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import fr.entity.Image;
 import fr.entity.Prestation;
 import fr.enums.TablesEnum;
@@ -30,35 +29,39 @@ public class ImageFixtures {
     private static final String IMAGE_PATH2 = "src/main/resources/imageFixtures/fixtureImage2.jpg";
     public void prepareFixtures() {
 	    String table = TablesEnum.IMAGE.getTableName();
-        
+        int numberOfPrestations = prestationRepository.findAll().size();
 
         if (fixtures.isDatatableExistAndDelete(table)){
-            try {
-                byte[] imageData = loadImageData(IMAGE_PATH1);
-                for (int i = 1; i < 11; i++) {
+        
+            for (int i = 1; i <= numberOfPrestations; i++) {
+                try {
+                    byte[] imageData = loadImageData(IMAGE_PATH1);
                     Image image = new Image(imageData);
                     image.setId(i);
                     Prestation prestation = new Prestation();
                     prestation = prestationRepository.getReferenceById(i);
                     image.setPrestation(prestation);
                     imageRepository.save(image);
-                }
+                } catch (Exception e) {
+                        e.printStackTrace();
+                } 
 
-                imageData = loadImageData(IMAGE_PATH2);
-                for (int i = 1; i < 11; i++) {
+            }
+                
+            for (int i = 1; i <= numberOfPrestations; i++) {
+                try {
+                    byte[] imageData = loadImageData(IMAGE_PATH2);
                     Image image = new Image(imageData);
                     image.setId(i+10);
                     Prestation prestation = new Prestation();
                     prestation = prestationRepository.getReferenceById(i);
                     image.setPrestation(prestation);
                     imageRepository.save(image);
-                }
-                
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } 
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            } 
-
+            }
         }
     }
 
