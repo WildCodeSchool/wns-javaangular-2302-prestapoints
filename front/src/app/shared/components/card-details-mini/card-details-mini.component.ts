@@ -6,13 +6,18 @@ import { Prestation } from '../../model/prestation';
   templateUrl: './card-details-mini.component.html',
   styleUrls: ['./card-details-mini.component.scss']
 })
-export class CardDetailsMiniComponent implements OnInit {
+export class CardDetailsMiniComponent {
 
-  @Input() prestation?: Prestation;
+  @Input() public prestation?: Prestation;
 
   constructor() { }
 
   ngOnInit() {
+    if (this.prestation) {
+      console.log('Prestation', this.prestation);
+    } else {
+      console.log('Prestation is not defined.');
+    }
   }
-
+  
 }

@@ -4,10 +4,10 @@
   <div class="main-container container" id="main-container">
 
     <!-- Content -->
-    <div class="row ">
+    <div class="row">
 
       <!-- Post Content -->
-      <div class="col-lg-5 block-content">
+      <div class="col-lg-12 block-content">
 
         <!--content box-->
         <div class="content-box">
@@ -16,26 +16,26 @@
           <article class="entry">
 
             <!--entry card-details-mini-->
-            <div class="card-details-mini-header">
+            <div class="col-lg-12 card-details-mini-header text-center text-primary">
 
-              <div class="bold mini-card-description">
-                Rencontre Mélanie, forme toi à la tapisserie d’ameublement
+              <div class="col-lg-12 presta-text-fw-bold mini-card-description presta-mb-5">
+                {{ prestation?.type?.name }}
               </div>
 
-              <p class="timer-workshop">3h d’atelier</p>
+              <p class="">{{ prestation?.duration }}</p>
 
-              <p>+</p>
+              <p class="presta-text-fs-60">+</p>
 
-              <p class="style-workshop">découverte d’un savoir-faire</p>
+              <p class="text-primary">{{ prestation?.description }}</p>
 
-              <p>=</p>
+              <p class="presta-text-fs-60">=</p>
 
               <p class="points-workshop">
-                50 Pts/pers
+                {{ prestation?.addPoint }} Pts/pers
                 à gagner en participant à l’atelier
               </p>
 
-              <p class="points-partner-workshop">Ces points généreront un code promo à dépenser chez nos partenaires</p>  
+              <p class="points-partner-workshop presta-mb-7">{{ prestation?.personalInfos }}</p>  
               
               <!-- button reserve-->
               <button class="btn btn-quinary btn-block text-tertiary" type="submit">Je réserve</button>
