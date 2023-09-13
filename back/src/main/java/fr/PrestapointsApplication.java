@@ -7,8 +7,11 @@ import org.springframework.context.annotation.Profile;
 import fr.fixture.CategoryFixtures;
 import fr.fixture.LocationFixtures;
 import fr.fixture.PrestationFixtures;
+import fr.fixture.RoleFixtures;
+import fr.fixture.RegistrationFixtures;
 import fr.fixture.TypeFixtures;
 import fr.fixture.UserFixtures;
+import fr.fixture.ImageFixtures;
 import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
@@ -19,11 +22,17 @@ public class PrestapointsApplication {
 	@Autowired
 	private PrestationFixtures prestationFixtures;
 	@Autowired
+	private RegistrationFixtures registrationFixtures;
+	@Autowired
 	private CategoryFixtures categoryFixtures;
 	@Autowired
 	private TypeFixtures typeFixtures;
 	@Autowired
 	private LocationFixtures locationFixtures;
+	@Autowired
+	private RoleFixtures roleFixtures;
+    @Autowired
+	private ImageFixtures imageFixtures;
 
 	/* STOP FIXTURES = false   # START FIXTURES = true */ 
 	private boolean loadFixtures = false;
@@ -33,11 +42,14 @@ public class PrestapointsApplication {
 	public void init() {
 		if (this.loadFixtures) {
 			//Faire attention à l'ordre des dépendences !
-			userFixtures.prepareFixtures(); //depends on
+			roleFixtures.prepareFixtures();
+			userFixtures.prepareFixtures(); //depends on roles
 			categoryFixtures.prepareFixtures(); //depends on 
 			typeFixtures.prepareFixtures(); //depends on category
 			locationFixtures.prepareFixtures();
 			prestationFixtures.prepareFixtures(); // depends on user, category, location
+			registrationFixtures.prepareFixtures();// depends on prestation
+            imageFixtures.prepareFixtures();
 			}
 	}
 

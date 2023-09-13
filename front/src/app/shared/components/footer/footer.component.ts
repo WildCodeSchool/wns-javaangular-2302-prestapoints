@@ -1,40 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Category } from '../../model/category';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  tags: string[] = [];
+  public tags?: Category[];
 
-  constructor() { }
+  constructor(private categoryService: CategoryService) {}
 
   ngOnInit() {
-    this.tags = this.getTags();
+    this.tagsSubscription();
   }
 
-  getTags(): string[] {
-    return [
-      'Ameublement',
-      'Animaux',
-      'Artisanat',
-      'Bijoux',
-      'Bricolage',
-      'CréationMeubles',
-      'DressageChiens',
-      'Poterie',
-      'Peinture',
-      'Couture',
-      'Jardinage',
-      'Cuisine',
-      'Photographie',
-      'Danse',
-      'Théâtre',
-      'Yoga',
-      'Dessin',
-      'Musique',
-      'Fitness'
-    ];
+  tagsSubscription() {
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.tags = categories;
+    });
   }
 }

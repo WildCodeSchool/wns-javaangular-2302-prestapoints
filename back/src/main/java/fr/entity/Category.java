@@ -2,6 +2,8 @@ package fr.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -26,7 +28,7 @@ public class Category {
     private String name;
     
     @OneToMany(mappedBy = "category")
-    @JsonIgnoreProperties 
+    @JsonIgnore
     private List<Type> types = new ArrayList<>();
 
     public void setTypes(List<Type> types) {

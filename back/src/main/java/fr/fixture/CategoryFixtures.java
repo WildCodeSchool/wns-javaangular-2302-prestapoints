@@ -2,7 +2,6 @@ package fr.fixture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.github.javafaker.Faker;
 import fr.entity.Category;
 import fr.enums.TablesEnum;
 import fr.repository.CategoryRepository;
@@ -10,6 +9,18 @@ import fr.repository.TypeRepository;
 
 @Component
 public class CategoryFixtures {
+
+    private String[] categories = {
+            "Animaux",
+            "Artisanat",
+            "Bijoux",
+            "Bricolage",
+            "Couture",
+            "Jardinage",
+            "Cuisine",
+            "Photographie",
+            "Autre"
+        };
 
     @Autowired
     private Fixtures fixtures;
@@ -22,19 +33,19 @@ public class CategoryFixtures {
 
     public void prepareFixtures() {
         String table = TablesEnum.CATEGORY.getTableName();
-        Faker faker = new Faker();
+
         Category category = new Category();
 
-        if (fixtures.isDatatableExistAndDelete(table)){
-                        
-            Integer numberOfLigne = 5;
+        if (fixtures.isDatatableExistAndDelete(table)) {
 
-            for (int i = 1; i <= numberOfLigne; i++) {
-                category.setId(i);
-                category.setName(faker.lorem().word());
+            int numberOfLigne = categories.length;
+
+            for (int i = 0; i < numberOfLigne; i++) {
+                category.setId(i+1);
+                category.setName(categories[i]);
 
                 categoryRepository.save(category);
             }
         }
-    } 
+    }
 }
