@@ -1,31 +1,23 @@
 package fr.service;
 
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import fr.controller.AuthController;
 import fr.dto.UserDto;
 import fr.entity.Role;
 import fr.entity.User;
 import fr.enums.MessageApiEnum;
 import fr.enums.RoleEnum;
-import fr.enums.TablesEnum;
 import fr.mapper.UserMapper;
 import fr.model.ResponseApi;
 import fr.repository.RoleRepository;
