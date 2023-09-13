@@ -22,10 +22,9 @@ public class RoleFixtures {
          String table = TablesEnum.ROLE.getTableName();
          Role role = new Role();
 
-
         if (fixtures.isDatatableExistAndDelete(table)){
-
-                role.setId(1);
+                
+            role.setId(1);
                 role.setName(RoleEnum.ROLE_ADMIN.getRole());
                 roleRepository.save(role);
 

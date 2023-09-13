@@ -13,6 +13,7 @@ import fr.fixture.RoleFixtures;
 import fr.fixture.RegistrationFixtures;
 import fr.fixture.TypeFixtures;
 import fr.fixture.UserFixtures;
+import fr.fixture.ImageFixtures;
 import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
@@ -33,8 +34,10 @@ public class PrestapointsApplication {
 	private LocationFixtures locationFixtures;
 	@Autowired
 	private RoleFixtures roleFixtures;
+    @Autowired
+	private ImageFixtures imageFixtures;
 
-	/* STOP FIXTURES = false # START FIXTURES = true */
+	/* STOP FIXTURES = false   # START FIXTURES = true */ 
 	private boolean loadFixtures = false;
 
 	@PostConstruct

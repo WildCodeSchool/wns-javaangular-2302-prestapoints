@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.github.javafaker.Faker;
-
 import fr.entity.Role;
 import fr.entity.User;
 import fr.enums.TablesEnum;
@@ -51,6 +50,7 @@ public class UserFixtures {
                 user.setPassword(passwordEncoder.encode("t123456789"));
                 roles.add(roleUser);
                 user.setRoles(roles);
+
                 Date birthday = faker.date().birthday();
                 Timestamp timestamp = new Timestamp(birthday.getTime());
                 user.setCreationDate(timestamp);
@@ -70,6 +70,7 @@ public class UserFixtures {
             roles.add(roleUser);
             roles.add(roleAdmin);
             user.setRoles(roles);
+            
             Date birthday = faker.date().birthday();
             Timestamp timestamp = new Timestamp(birthday.getTime());
             user.setCreationDate(timestamp);

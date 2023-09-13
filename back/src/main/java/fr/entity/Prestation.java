@@ -1,5 +1,6 @@
 package fr.entity;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
+
 @Table(name="`prestation`")
 public class Prestation {
 
@@ -20,31 +22,53 @@ public class Prestation {
     private Integer id;
 
     private String title;
-    private String duration;
-    private String addPoint;
-    private String dateStart;
-    private String dateEnd;
+    private Long duration;
+    private Integer addPoint;
+    private Timestamp dateStart;
+    private Timestamp dateEnd;
     private String state;
-    private String description;
     private Integer maxUser;
-    private String image;
     private Integer placeAvailable;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+    
+    private String littleDescription;
+
+    @Column(columnDefinition = "TEXT")
+    private String practicalInformation;
+
+    private String language;
+
+    @Column(columnDefinition = "TEXT")
+    private String personalInfos;
+
+    @OneToMany(mappedBy = "prestation", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Image> images = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
-    @JsonIgnoreProperties
+    @JsonIgnore
     private Type type;
 
     @OneToMany(mappedBy = "prestation")
     @JsonIgnore
     private List<Registration> registrations = new ArrayList<>();
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
+    @JsonIgnore
     private Location location;
 
-    public Prestation(Integer id, String title, String duration, String addPoint, String dateStart, String dateEnd,
-            String state, String description, Integer maxUser, String image, List<Registration> registrations) {
+
+    public Prestation() {
+        this.placeAvailable = 0;
+    }
+
+
+
+    public Prestation(Integer id, String title, Long duration, Integer addPoint, Timestamp dateStart, Timestamp dateEnd, String state, Integer maxUser, Integer placeAvailable, String description, String littleDescription, String practicalInformation, String language, String personalInfos, List<Image> images, Type type, List<Registration> registrations, Location location) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -52,16 +76,21 @@ public class Prestation {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.state = state;
-        this.description = description;
         this.maxUser = maxUser;
-        this.image = image;
+        this.placeAvailable = placeAvailable;
+        this.description = description;
+        this.littleDescription = littleDescription;
+        this.practicalInformation = practicalInformation;
+        this.language = language;
+        this.personalInfos = personalInfos;
+        this.images = images;
+        this.type = type;
         this.registrations = registrations;
-        this.placeAvailable = this.maxUser;
+        this.location = location;
     }
 
-    public Prestation() {
-        this.placeAvailable = 0;
-    }
+
+
 
     public void bookedPlace() {
         this.setPlaceAvailable(this.getPlaceAvailable()-1); 
