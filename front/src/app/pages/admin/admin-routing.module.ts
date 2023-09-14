@@ -4,7 +4,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminGuard } from 'src/app/core/guard/admin.guard';
 
-const routes: Routes = [{ path: '', component: DashboardComponent, canActivate: [AdminGuard] }];
+const routes: Routes = [{
+  path: '', component: DashboardComponent
+  // , canActivate: [AdminGuard]
+}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes), DashboardModule ],

@@ -86,11 +86,11 @@ public class UserController {
         return userMapper.convertToDto(user);
     }
 
-    @CrossOrigin(origins = "*")
-    @GetMapping(value = "/users/{id}")
-    public UserDto getUser(@PathVariable("id") Integer id) {
-        return userMapper.convertToDto(userService.getUserById(id));
-    }
+    // @CrossOrigin(origins = "*")
+    // @GetMapping(value = "/users/{id}")
+    // public UserDto getUser(@PathVariable("id") Integer id) {
+    //     return userMapper.convertToDto(userService.getUserById(id));
+    // }
 
     /**
      * Method to update logged in user's profile
