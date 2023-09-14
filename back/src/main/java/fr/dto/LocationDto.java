@@ -7,8 +7,8 @@ import lombok.Setter;
 @Setter
 public class LocationDto {
     private Integer id;
-    private Integer latitude;
-    private Integer longitude;
+    private String latitude;
+    private String longitude;
     private String city;
     private String postalCode;
     private String address;
