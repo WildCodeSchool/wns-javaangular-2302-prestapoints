@@ -37,6 +37,9 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private AuthController authController;
+
+    @Autowired
     private AvatarRepository avatarRepository;
 
     // Inscription du USER :
@@ -79,7 +82,7 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/getUserConnected")
     public UserDto getUserConnected() {
-        User user = userService.getUserConnected();
+        User user = authController.getUserConnected();
         return userMapper.convertToDto(user);
     }
 
@@ -98,7 +101,7 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @PostMapping("/update")
     public ResponseEntity<String> updateUser(@RequestBody UserDto userDto) {
-        User user = userService.getUserConnected();
+        User user = authController.getUserConnected();
         if (user.getEmail().equals(userDto.getEmail())) {
             userService.updateUserProfil(user.getId(), userDto);
             return new ResponseEntity<>("Modification enregistrée", HttpStatus.OK);
@@ -116,7 +119,7 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @PostMapping("/avatar")
     public ResponseEntity<String> uplaodAvatar(@RequestParam("image") MultipartFile file) throws IOException {
-        User user = userService.getUserConnected();
+        User user = authController.getUserConnected();
         if (user != null) {
             Avatar existingAvatar = user.getAvatar();
             if (existingAvatar == null) {
@@ -139,7 +142,7 @@ public class UserController {
 
     @GetMapping("/get/avatar")
     public ResponseEntity<byte[]> getImageAvatarUserConnected() throws IOException {
-        User user = userService.getUserConnected();
+        User user = authController.getUserConnected();
         Optional<Avatar> avatarUserConnected = avatarRepository.findByUserId(user.getId());
         if (avatarUserConnected.isPresent()) {
             Avatar avatar = avatarUserConnected.get();

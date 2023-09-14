@@ -37,7 +37,6 @@ public class User {
     private String password;
     private String phone;
     private String token;
-    private Timestamp creation;
     private Timestamp creationDate;
 
     @OneToOne(mappedBy = "user")

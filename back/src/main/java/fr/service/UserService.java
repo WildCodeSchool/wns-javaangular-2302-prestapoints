@@ -1,5 +1,6 @@
 package fr.service;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import fr.dto.UserDto;
 import fr.entity.Role;
@@ -101,6 +103,13 @@ public class UserService {
 
     public void updateUser(User user) {
         userRepository.save(user);
+    }
+
+    public void uploadNewAvatar(MultipartFile file, User user)throws IOException {
+        Avatar newAvatar = new Avatar();
+        newAvatar.setType(file.getContentType());
+        newAvatar.setData(file.getBytes());
+        newAvatar.setUser(user);
     }
 
     public ResponseApi deleteUsers(List<User> users) {
