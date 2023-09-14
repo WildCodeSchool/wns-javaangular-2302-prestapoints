@@ -6,7 +6,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Role } from 'src/app/shared/enum/role.enum';
+import { RoleEnum } from 'src/app/shared/enum/role.enum';
 import { AuthenticationService } from '../service/auth/authentication.service';
 
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
@@ -29,7 +29,7 @@ export class UserGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!this.authenticationService.getRoles().includes(Role.USER)) {
+    if (!this.authenticationService.getRoles().includes(RoleEnum.USER)) {
       this.alertService.setAlert(
         AlertEnum.TYPE_DANGER,
         AlertEnum.MESSAGE_WRONG_ROLE,

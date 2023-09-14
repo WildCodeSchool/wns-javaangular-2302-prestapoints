@@ -1,6 +1,5 @@
 package fr;
 
-import org.apache.catalina.connector.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -27,6 +26,8 @@ import org.springframework.mock.web.MockMultipartFile;
 import fr.config.JwtAuthenticationFilter;
 import fr.config.PasswordEncoderConfig;
 import fr.config.WebSecurityConfig;
+import fr.controller.AdminController;
+import fr.controller.AuthController;
 import fr.controller.CategoryController;
 import fr.controller.PrestationController;
 import fr.dto.UserDto;
@@ -42,14 +43,14 @@ import fr.fixture.UserFixtures;
 import fr.helper.JwtUtils;
 import fr.mapper.UserMapper;
 import fr.model.ResponseApi;
-import fr.model.UserConnected;
+
 import fr.repository.AvatarRepository;
 import fr.service.SecurityUserService;
 import fr.service.UserService;
 
 @WebMvcTest
 @Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class,
-        UserConnected.class })
+        AuthController.class })
 @TestPropertySource(locations = "classpath:application-test.properties")
 public class UserControllerTests {
 
@@ -86,9 +87,14 @@ public class UserControllerTests {
     @MockBean
     private PrestationController prestationController;
     @MockBean
-    private CategoryController categoryController;
+    private AdminController adminController;
+    @MockBean
+    private AuthController authController;
     @MockBean
     private UserMapper userMapper;
+    @MockBean
+    private CategoryController categoryController;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -239,7 +245,7 @@ public class UserControllerTests {
         UserDto userDto = new UserDto();
         userDto.setEmail("user@example.com");
 
-        when(userService.getUserConnected()).thenReturn(connectedUser);
+        when(authController.getUserConnected()).thenReturn(connectedUser);
         mockMvc.perform(post("/update")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"email\":\"user@example.com\"}"))
@@ -255,7 +261,7 @@ public class UserControllerTests {
         UserDto userDto = new UserDto();
         userDto.setEmail("user@example.com");
 
-        when(userService.getUserConnected()).thenReturn(connectedUser);
+        when(authController.getUserConnected()).thenReturn(connectedUser);
 
         mockMvc.perform(post("/update")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -269,7 +275,7 @@ public class UserControllerTests {
         User connectedUser = user;
         connectedUser.setId(1);
 
-        when(userService.getUserConnected()).thenReturn(connectedUser);
+        when(authController.getUserConnected()).thenReturn(connectedUser);
         when(connectedUser.getAvatar()).thenReturn(avatar);
 
         byte[] fileContent = "Test avatar".getBytes();
@@ -284,7 +290,7 @@ public class UserControllerTests {
     @Test
     public void testUploadAvatar_ShouldReturnStatusOkWithError() throws Exception {
         
-        when(userService.getUserConnected()).thenReturn(null);
+        when(authController.getUserConnected()).thenReturn(null);
 
         byte[] fileContent = "Test avatar".getBytes();
         MockMultipartFile file = new MockMultipartFile("image", "avatar.png", MediaType.IMAGE_PNG_VALUE, fileContent);

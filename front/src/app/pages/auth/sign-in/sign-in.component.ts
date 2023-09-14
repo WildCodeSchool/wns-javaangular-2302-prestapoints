@@ -11,6 +11,7 @@ import { Alert } from 'src/app/shared/model/alert';
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { ResponseApi } from 'src/app/shared/model/responseApi';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 @Component({
@@ -24,8 +25,10 @@ export class SignInComponent {
 
   constructor(
     private fb: FormBuilder,
-    private signInService: SignInService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private userService: UserService,
+    private signInService: SignInService 
+
   ) { }
 
   signInForm = this.fb.group({
@@ -49,7 +52,7 @@ export class SignInComponent {
     const email = this.signInForm.get('email')?.value;
 
     if (email) {
-      if (await this.verifyEmail(email)) { //TODO vérifier avec Louis si toujours utile, nous gérons dans le back
+      if (await this.userService.verifyEmail(email)) { //TODO vérifier avec Louis si toujours utile, nous gérons dans le back
         this.alertService.setAlert(
           AlertEnum.TYPE_DANGER,
           AlertEnum.MESSAGE_EMAIL_ALREADY_EXIST,

@@ -11,5 +11,7 @@ export class CardComponent {
   @Input()
   public prestation?: Prestation;
 
+
+  
   constructor() {}
 }
