@@ -23,6 +23,7 @@ export class Prestation {
     public location?: Location;
     public placeAvailable?: number;
     public littleDescription?: string;
+    public videoLink?: string;
     public practicalInformation?: string;
     public language?: string;
     public personalInfos?: string;
