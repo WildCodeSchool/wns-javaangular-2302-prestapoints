@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   @Input()
-  isVisible?: boolean
+  isVisible?: boolean;
   inputVisible?: boolean;
   inputNotvisible?: boolean;
 
