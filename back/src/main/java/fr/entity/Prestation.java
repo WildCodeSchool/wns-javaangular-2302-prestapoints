@@ -56,7 +56,7 @@ public class Prestation {
     @JsonIgnore
     private Type type;
 
-    @OneToMany(mappedBy = "prestation")
+    @OneToMany(mappedBy = "prestation", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Registration> registrations = new ArrayList<>();
     
