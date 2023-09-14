@@ -1,3 +1,4 @@
+import { Prestation } from "./prestation";
 import { Role } from "./role";
 
 export class User {
@@ -10,7 +11,8 @@ export class User {
         public roles?: Role[] | null,
         public creationDate?: string | null,
         public id?: string | null,
-        public image?: File | null
+        public image?: File | null,
+        public prestation?: Prestation | null
         ) {
     }
 }
