@@ -28,19 +28,19 @@
                         <ul class="list-group list-group-flush mb-5">
                             <!-- boucler sur la liste des dates ensuites -->
                             <li class=" list-group-item border-top border-bottom d-flex flex justify-content-between">
-                                {{ prestation?.dateStart | date:'EEEE d MMMM yyyy, HH:mm'}}
+                                {{ prestation?.getDateTimeStartString }}
                                 <span class="badge rounded-pill text-bg-light ">Nombre de place disponible :
                                     {{ prestation?.placeAvailable }} </span>
                                 <button (click)="addRegistration(prestation?.id) "
                                     class="btn bg-secondary badge rounded-pill"
-                                    [disabled]="prestation.placeAvailable === '0'" data-bs-dismiss="modal">
-                                    {{ prestation.placeAvailable === '0' ? 'Complet' : 'Je réserve' }}</button>
+                                    [disabled]="prestation.placeAvailable === 0" data-bs-dismiss="modal">
+                                    {{ prestation.placeAvailable === 0 ? 'Complet' : 'Je réserve' }}</button>
                             </li>
                             <li class=" list-group-item border-top border-bottom d-flex flex justify-content-between">
-                                {{ prestation?.dateStart | date:'EEEE d MMMM yyyy, HH:mm'}} <a href="#"
+                                {{  prestation?.getDateTimeStartString }} <a href="#"
                                     class="btn bg-secondary badge rounded-pill">Je réserve</a></li>
                             <li class=" list-group-item border-top border-bottom d-flex flex justify-content-between">
-                                {{ prestation?.dateStart | date:'EEEE d MMMM yyyy, HH:mm'}} <a href="#"
+                                {{  prestation?.getDateTimeStartString }} <a href="#"
                                     class="btn bg-secondary badge rounded-pill">Je réserve</a></li>
                         </ul>
                     </div>

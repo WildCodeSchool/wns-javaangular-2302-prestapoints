@@ -1,8 +1,5 @@
 package fr.fixture;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import fr.entity.Category;
@@ -13,26 +10,17 @@ import fr.repository.TypeRepository;
 @Component
 public class CategoryFixtures {
 
-    private List<String> categories = Arrays.asList(
-            "Ameublement",
+    private String[] categories = {
             "Animaux",
             "Artisanat",
             "Bijoux",
             "Bricolage",
-            "CréationMeubles",
-            "DressageChiens",
-            "Poterie",
-            "Peinture",
             "Couture",
             "Jardinage",
             "Cuisine",
             "Photographie",
-            "Danse",
-            "Théâtre",
-            "Yoga",
-            "Dessin",
-            "Musique",
-            "Fitness");
+            "Autre"
+        };
 
     @Autowired
     private Fixtures fixtures;
@@ -50,11 +38,11 @@ public class CategoryFixtures {
 
         if (fixtures.isDatatableExistAndDelete(table)) {
 
-            Integer numberOfLigne = this.categories.size();
+            int numberOfLigne = categories.length;
 
-            for (int i = 1; i <= numberOfLigne; i++) {
-                category.setId(i);
-                category.setName(categories.get(i-1));
+            for (int i = 0; i < numberOfLigne; i++) {
+                category.setId(i+1);
+                category.setName(categories[i]);
 
                 categoryRepository.save(category);
             }

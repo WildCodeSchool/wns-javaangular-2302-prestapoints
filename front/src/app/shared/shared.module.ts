@@ -5,8 +5,7 @@ import { FormUserModule } from './components/form-user/form-user.module';
 
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class SharedModule {}

@@ -13,7 +13,8 @@ public enum TablesEnum {
     USER_ROLE("'user_role'"),
     PRESTATION("'prestation'"),
     FAVORY("'favory'"),
-    CREATION("'creation'");
+    CREATION("'creation'"),
+    IMAGE("'images'");
 
     private String tableName;
 
