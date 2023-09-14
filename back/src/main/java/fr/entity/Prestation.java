@@ -21,6 +21,10 @@ public class Prestation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private String title;
     private Long duration;
     private Integer addPoint;

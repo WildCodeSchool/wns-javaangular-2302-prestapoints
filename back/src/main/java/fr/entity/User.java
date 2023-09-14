@@ -42,6 +42,9 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Avatar avatar;
 
+    @OneToOne(mappedBy = "prestation")
+    private Prestation prestation;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
