@@ -2,6 +2,7 @@ package fr.dto;
 
 import java.sql.Timestamp;
 import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import lombok.Setter;
 public class PrestationDto {
 
     private Integer id;
+    private UserDto user;
     private String title;
     private Long duration;
     private Integer addPoint;

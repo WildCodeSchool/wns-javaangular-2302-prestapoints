@@ -13,16 +13,20 @@ import com.github.javafaker.Faker;
 import fr.entity.Location;
 import fr.entity.Prestation;
 import fr.entity.Type;
+import fr.entity.User;
 import fr.enums.TablesEnum;
 import fr.repository.LocationRepository;
 import fr.repository.PrestationRepository;
 import fr.repository.TypeRepository;
+import fr.repository.UserRepository;
 
 @Component
 public class PrestationFixtures {
 
     @Autowired
     private Fixtures fixtures;
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private PrestationRepository prestationRepository;
     @Autowired
@@ -125,6 +129,10 @@ public class PrestationFixtures {
 
             for (int i = 0; i < titles.length; i++) {
                 prestation.setId(i+1);
+
+                User user = userRepository.getReferenceById(i+1);
+                prestation.setUser(user);
+                
                 prestation.setTitle(titles[i]);
 
                 LocalDateTime dateStart = faker.date().future(30, TimeUnit.DAYS).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
