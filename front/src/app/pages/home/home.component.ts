@@ -22,11 +22,7 @@ export class HomeComponent implements OnInit {
       
       
     });
-
-    
   }
-
-  
 
   onGetPrestation(prestationsSearch: Prestation[]): void {
     this.prestationsApi = prestationsSearch;

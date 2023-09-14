@@ -1,4 +1,4 @@
-<div class="card-details-mini p-5 presta-my-12 presta-ml-17 position-relative">
+<div class="card-details-mini p-5 presta-my-12 presta-ml-17 position-relative shadow">
 
   <!--main container-->
   <div class="main-container container" id="main-container">
@@ -18,27 +18,33 @@
             <!--entry card-details-mini-->
             <div class="col-lg-12 card-details-mini-header text-center text-primary">
 
-              <div class="col-lg-12 presta-text-fw-bold mini-card-description presta-mb-5">
-                {{ prestation?.type?.name }}
+              <div class="col-lg-12 mini-card-description presta-text-fw-xx-bold presta-mb-5">
+                <!--Rencontrez {{ prestation?.user?.firstname }} et {{ prestation?.description }}-->
+                Rencontrez {{ prestation?.description }}
               </div>
 
-              <p class="">{{ prestation?.duration }}</p>
+              <p class="presta-text-fs-40 presta-text-fw-medium mb-0">{{ prestation?.duration | date:'h'}} h</p>
 
-              <p class="presta-text-fs-60">+</p>
+              <p class="presta-text-fw-medium mt-0">d'atelier</p>
 
-              <p class="text-primary">{{ prestation?.description }}</p>
 
-              <p class="presta-text-fs-60">=</p>
+              <p class=" presta-text-fw-medium presta-text-fs-60">+</p>
 
-              <p class="points-workshop">
+              <p class=" presta-text-fw-medium text-primary">découverte d’un savoir-faire</p>
+
+              <p class=" presta-text-fw-medium presta-text-fs-60">=</p>
+
+              <p class=" presta-text-fw-medium presta-text-quinary points-workshop mb-0">
                 {{ prestation?.addPoint }} Pts/pers
+              </p>
+              <p class="presta-text-fw-medium mt-0">
                 à gagner en participant à l’atelier
               </p>
 
-              <p class="points-partner-workshop presta-mb-7">{{ prestation?.personalInfos }}</p>  
+              <p class="presta-text-fw-medium presta-mb-7 presta-mt-7">Ces points généreront un code promo à dépenser chez nos partenaires</p>  
               
               <!-- button reserve-->
-              <button class="btn btn-quinary btn-block text-tertiary" type="submit">Je réserve</button>
+              <button class="btn presta-bg-quinary btn-block presta-mb-7 shadow" type="submit">Je réserve</button>
               <!-- end button -->
 
             </div> 

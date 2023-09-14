@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Prestation } from 'src/app/shared/model/prestation';
 import { PrestationService } from 'src/app/shared/services/prestation.service';
 import { HttpClient } from '@angular/common/http';
-
+import { CardDetailsModule } from 'src/app/pages/card-details/card-details.module';
 import { Location } from '../../model/location';
 import { Category } from '../../model/category';
 

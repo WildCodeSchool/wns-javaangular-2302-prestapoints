@@ -7,16 +7,18 @@ import { CardDetailsMaxiComponent } from 'src/app/shared/components/card-details
 import { CardDetailsMiniComponent } from 'src/app/shared/components/card-details-mini/card-details-mini.component';
 
 import { PrestationService } from 'src/app/shared/services/prestation.service'; 
+import { FormatDurationPipe } from 'src/app/shared/pipes/format-duration.pipe';
 
 @NgModule({
   declarations: [
     CardDetailsComponent,
     CardDetailsMaxiComponent,
-    CardDetailsMiniComponent
+    CardDetailsMiniComponent,
+    FormatDurationPipe
   ],
   imports: [
     CommonModule,
-    CardDetailsRoutingModule
+    CardDetailsRoutingModule,
   ],
   providers: [
     PrestationService 

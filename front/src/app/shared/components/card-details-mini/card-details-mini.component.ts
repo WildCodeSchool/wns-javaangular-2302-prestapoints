@@ -13,10 +13,5 @@ export class CardDetailsMiniComponent {
   constructor() { }
 
   ngOnInit() {
-    if (this.prestation) {
-      console.log('Prestation', this.prestation);
-    } else {
-      console.log('Prestation is not defined.');
-    }
   }
 }

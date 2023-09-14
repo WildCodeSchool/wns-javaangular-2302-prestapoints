@@ -1,4 +1,4 @@
-<div class="card-details-maxi p-5 presta-my-12 position-relative">
+<div class="card-details-maxi p-5 presta-my-12 position-relative shadow">
   <!-- main container -->
   <div class="main-container container" id="main-container">
     <!-- Content -->
@@ -10,9 +10,9 @@
           <!-- standard post -->
           <article class="entry">
             <!-- entry header -->
-            <div class="card-details-header">
-              <div class="bold list-category">
-                <a>Prestapoints / {{ category }}</a>
+            <div class="card-details-header text-primary">
+              <div class="bold list-category text-mat-labe">
+                <a>Prestapoints / {{ prestation?.type?.category?.name }} / {{ prestation?.type?.name }}</a>
               </div>
               <h1 class="entry-title presta-mt-5">
                 {{ prestation?.title }}
@@ -29,7 +29,7 @@
             </div>
 
             <!-- Video -->
-            <div class="video-playlist">
+            <div class="video-playlist text-primary">
               <div class="video-playlist_content">
                 <div *ngFor="let video of cardVideo">
                   <iframe *ngIf="video" [src]="video" frameborder="0" allowfullscreen class="video-playlist_content-video"></iframe>
@@ -39,7 +39,7 @@
             <!-- end Video -->
 
             <!-- entry article wrap -->
-            <div class="entry__article-wrap presta-mt-5">
+            <div class="entry__article-wrap presta-mt-5 text-primary">
               <!-- end entry article -->
               <div class="entry__article mb-5">
                 <div class="article-content">

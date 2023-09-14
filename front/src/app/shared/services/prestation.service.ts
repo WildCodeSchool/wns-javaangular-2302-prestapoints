@@ -21,11 +21,6 @@ export class PrestationService {
     return this.http.get<Prestation>(url);
   }
 
-  getPrestationDetails(id: string): Observable<Prestation> {
-    const url = `${this.apiUrl}/${id}/details`;
-    return this.http.get<Prestation>(url);
-  }
-
   addRegistration(id: number | undefined): Observable<ResponseApi> {
     this.apiUrl = 'http://localhost:8080/prestations/' + id + '/registration';
 

@@ -9,7 +9,7 @@
     styleUrls: ['./card-details.component.scss']
   })
   export class CardDetailsComponent implements OnInit {
-    @Input() prestation?: Prestation;
+    prestation?: Prestation;
 
     constructor(
       private route: ActivatedRoute,
@@ -26,7 +26,7 @@
     }
 
     getPrestationDetails(id: string): void {
-      this.prestationService.getPrestationDetails(id)
+      this.prestationService.getPrestationById(id)
         .subscribe(prestation => {
           this.prestation = prestation;
         });
