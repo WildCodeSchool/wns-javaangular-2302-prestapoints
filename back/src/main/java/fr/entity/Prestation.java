@@ -32,6 +32,7 @@ public class Prestation {
     private String state;
     private Integer maxUser;
     private Integer placeAvailable;
+    private String videoLink;
 
     @Column(columnDefinition = "TEXT")
     private String description;
