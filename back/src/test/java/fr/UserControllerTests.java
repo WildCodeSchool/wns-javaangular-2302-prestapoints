@@ -8,7 +8,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -18,6 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Optional;
 
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
+
 import fr.config.JwtAuthenticationFilter;
 import fr.config.PasswordEncoderConfig;
 import fr.config.WebSecurityConfig;
@@ -26,6 +31,7 @@ import fr.controller.AuthController;
 import fr.controller.CategoryController;
 import fr.controller.PrestationController;
 import fr.dto.UserDto;
+import fr.entity.Avatar;
 import fr.entity.User;
 import fr.fixture.CategoryFixtures;
 import fr.fixture.LocationFixtures;
@@ -38,11 +44,13 @@ import fr.helper.JwtUtils;
 import fr.mapper.UserMapper;
 import fr.model.ResponseApi;
 
+import fr.repository.AvatarRepository;
 import fr.service.SecurityUserService;
 import fr.service.UserService;
 
 @WebMvcTest
-@Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class, AuthController.class})
+@Import({ WebSecurityConfig.class, PasswordEncoderConfig.class, JwtUtils.class, JwtAuthenticationFilter.class,
+        AuthController.class })
 @TestPropertySource(locations = "classpath:application-test.properties")
 public class UserControllerTests {
 
@@ -62,7 +70,12 @@ public class UserControllerTests {
     private TypeFixtures typeFixtures;
     @MockBean
     private RoleFixtures roleFixtures;
-    
+    @MockBean
+    private AvatarRepository avatarRepository;
+    @MockBean
+    private Avatar avatar;
+    @MockBean
+    private User user;
 
     // we MockBean also this list in consequences of the test
     @MockBean
@@ -75,6 +88,8 @@ public class UserControllerTests {
     private PrestationController prestationController;
     @MockBean
     private AdminController adminController;
+    @MockBean
+    private AuthController authController;
     @MockBean
     private UserMapper userMapper;
     @MockBean
@@ -220,5 +235,70 @@ public class UserControllerTests {
                 .content("\"test@test.com\""))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
+    }
+
+    @Test
+    public void testUpdateUser_Success() throws Exception {
+        User connectedUser = new User();
+        connectedUser.setEmail("user@example.com");
+
+        UserDto userDto = new UserDto();
+        userDto.setEmail("user@example.com");
+
+        when(authController.getUserConnected()).thenReturn(connectedUser);
+        mockMvc.perform(post("/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"email\":\"user@example.com\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Modification enregistrée"));
+    }
+
+    @Test
+    public void testUpdateUser_Failed() throws Exception {
+        User connectedUser = new User();
+        connectedUser.setEmail("");
+
+        UserDto userDto = new UserDto();
+        userDto.setEmail("user@example.com");
+
+        when(authController.getUserConnected()).thenReturn(connectedUser);
+
+        mockMvc.perform(post("/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"email\":\"user@example.com\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Erreur lors de la modification"));
+    }
+
+    @Test
+    public void testUploadAvatar_ShouldReturnStatusOk() throws Exception {
+        User connectedUser = user;
+        connectedUser.setId(1);
+
+        when(authController.getUserConnected()).thenReturn(connectedUser);
+        when(connectedUser.getAvatar()).thenReturn(avatar);
+
+        byte[] fileContent = "Test avatar".getBytes();
+        MockMultipartFile file = new MockMultipartFile("image", "avatar.png", MediaType.IMAGE_PNG_VALUE, fileContent);
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/avatar")
+                .file(file))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Avatar mis à jour avec succes"));
+    }
+
+    @Test
+    public void testUploadAvatar_ShouldReturnStatusOkWithError() throws Exception {
+        
+        when(authController.getUserConnected()).thenReturn(null);
+
+        byte[] fileContent = "Test avatar".getBytes();
+        MockMultipartFile file = new MockMultipartFile("image", "avatar.png", MediaType.IMAGE_PNG_VALUE, fileContent);
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/avatar")
+                .file(file))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Echec mise à jour Avatar"));
+
     }
 }

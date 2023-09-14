@@ -9,7 +9,8 @@ export class User {
         public phone?: string | null,
         public roles?: Role[] | null,
         public creationDate?: string | null,
-        public id?: string | null
+        public id?: string | null,
+        public image?: File | null
         ) {
     }
 }

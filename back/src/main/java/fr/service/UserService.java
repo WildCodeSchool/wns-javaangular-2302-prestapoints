@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import fr.dto.UserDto;
 import fr.entity.Role;
+import fr.entity.Avatar;
 import fr.entity.User;
 import fr.enums.MessageApiEnum;
 import fr.enums.RoleEnum;
@@ -65,7 +66,7 @@ public class UserService {
     }
 
     public User getUserById(Integer id) {
-
+        
         return userRepository.getReferenceById(id);
     }
 
@@ -81,8 +82,21 @@ public class UserService {
     }
 
     public Optional<User> findUserByEmail(String email) {
-
         return userRepository.findByEmail(email);
+    }
+
+    public User updateUserProfil(Integer id, UserDto userDto) {
+        // PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable"));
+
+        user.setLastname(userDto.getLastname());
+        user.setFirstname(userDto.getFirstname());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setEmail(userDto.getEmail());
+        user.setPhone(userDto.getPhone());
+
+        return userRepository.save(user);
     }
 
     public void updateUser(User user) {

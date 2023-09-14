@@ -352,6 +352,14 @@ Il faut donc Pull dev de origin vers le local.
 
 Un nouveau travail peut commencer avec une nouvelle en reprenant avec la commande   <git checkout -b maNouvelleBranche>
 
+#---SWAGGER----#
+Voici le lien pour accéder à SWAGGER
+http://localhost:8080/swagger-ui/index.html#/
+
+également lien du tuto
+https://www.youtube.com/watch?v=2o_3hjUPAfQ&t=275s&ab_channel=BoualiAli
+
+
 
 ####################################################################################################################
 #                                                   ENGLISH                                                        #

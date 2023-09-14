@@ -16,4 +16,5 @@ public class UserDto {
     private String phone;
     private Long creationDate;
     private List<RoleDto> roles;
+    private byte[] image;
 }
