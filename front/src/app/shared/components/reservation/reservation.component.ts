@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Prestation } from '../../model/prestation';
 import { DatePipe } from '@angular/common';
 import { PrestationService } from '../../services/prestation.service';
@@ -12,13 +12,15 @@ import { AlertEnum } from 'src/app/shared/enum/alert.enum';
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent {
-  responseApi?: ResponseApi;
-
   @Input()
   public prestations?: Prestation[];
+  
+  @Output()
+  public needToRefresh: EventEmitter<boolean> = new EventEmitter();
 
+  responseApi?: ResponseApi;
+  
   constructor(
-    private datePipe: DatePipe,
     private prestationService: PrestationService,
     private alertService: AlertService) { }
 
@@ -32,7 +34,8 @@ export class ReservationComponent {
           AlertEnum.MESSAGE_RESERVATION_SUCCESS,
           AlertEnum.TIME_MEDIUM
         );
-          //TODO mettre à jour la liste des prestations
+
+        this.needToRefresh.emit(true);
 
       } else {
         this.alertService.setAlert(

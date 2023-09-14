@@ -3,9 +3,6 @@ package fr.fixture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.github.javafaker.Faker;
-
-import fr.entity.Location;
 import fr.entity.Role;
 import fr.enums.RoleEnum;
 import fr.enums.TablesEnum;

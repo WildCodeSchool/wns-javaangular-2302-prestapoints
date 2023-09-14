@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class CardComponent {
   @Input() public prestation?: Prestation;
 
+
+  
   constructor(private router: Router) {}
 
   openCardDetails() {

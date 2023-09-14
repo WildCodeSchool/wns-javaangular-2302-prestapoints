@@ -4,7 +4,6 @@
 </button>
 
 <div class="container">
-
   <div class="d-flex justify-content-end position-relative">
     <div class="position-absolute top-50 start-25 translate-middle">
       <app-searchbar (prestationsEmitter)="onGetPrestation($event)"></app-searchbar>
@@ -17,6 +16,5 @@
 
   <p class="my-0 fw-0 ">Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i></p>
   <app-slider [prestationsApi]="prestationsApi"></app-slider>
-
 </div>
-<app-reservation [prestations]="prestationsApi"></app-reservation>
+<app-reservation [prestations]="prestationsApi" (needToRefresh)="needToRefresh($event)"></app-reservation>
