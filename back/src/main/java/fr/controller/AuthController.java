@@ -64,6 +64,9 @@ public class AuthController {
         User user = userService.findUserByEmail(auth.getName())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-                return user;
+        System.out.println("***************************************----------------------------USERCONNECTED");
+        System.out.println(auth.getAuthorities().stream().map(a -> a.getAuthority()).toList());
+
+        return user;
     }
 }

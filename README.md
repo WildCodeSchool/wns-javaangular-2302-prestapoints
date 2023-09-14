@@ -357,7 +357,7 @@ Voici le lien pour accéder à SWAGGER
 http://localhost:8080/swagger-ui/index.html#/
 
 également lien du tuto
-https://www.youtube.com/watch?v=2o_3hjUPAfQ&t=275s&ab_channel=BoualiAli
+https://www.baeldung.com/openapi-jwt-authentication#3-global-configuration
 
 
 
