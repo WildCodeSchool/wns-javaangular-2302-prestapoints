@@ -63,6 +63,7 @@ public class AuthController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return user;
+
+                return user;
     }
 }

@@ -38,6 +38,9 @@ public class AdminController {
 
     @GetMapping("/admin/utilisateurs")
     public List<UserDto> getUsersDto() {
+        System.out.println("");
+        System.out.println(
+                "*******************************-----------------CONNECTED-------------------****************************");
 
         return userService.getUsersDto();
     }

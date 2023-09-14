@@ -17,6 +17,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 // JwtAuthenticationFilter
 // - effectue la vérification du token JWT
 // - effectue la vérification du mail utilisateur
@@ -25,11 +26,11 @@ import jakarta.servlet.http.HttpServletResponse;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     public Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
-    
+
     @Autowired
     private JwtUtils jwtUtils;
     @Autowired
-    private SecurityUserService  userDetailsService;
+    private SecurityUserService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
