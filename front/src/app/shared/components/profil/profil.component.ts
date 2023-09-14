@@ -6,7 +6,7 @@ import { ResponseApi } from '../../model/responseApi';
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { SignInService } from '../form-user/service/signIn.service';
 import { AlertService } from '../../services/alert.service';
-import * as bcrypt from 'bcryptjs';
+//import * as bcrypt from 'bcryptjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 
@@ -33,23 +33,23 @@ export class ProfilComponent implements OnInit{
   ) {
   }
 
-  lastPasswordValidator = (): ValidationErrors | null => {
-    const passwordForm = this.profilForm.get('lastPassword');
-    const passwordValue = passwordForm?.value;
-
-    if (passwordForm && typeof passwordValue === 'string') {
-      const passwordsMatch = this.comparePassword();
-      if (!passwordsMatch) {
-        const errors = {
-          lastPassword: {
-            rules: 'Le mot de passe ne correspond pas à l\'ancien'
-          }
-        };
-        return errors;
-      }
-    }
-    return null;
-  }
+  //lastPasswordValidator = (): ValidationErrors | null => {
+  //  const passwordForm = this.profilForm.get('lastPassword');
+  //  const passwordValue = passwordForm?.value;
+//
+  //  if (passwordForm && typeof passwordValue === 'string') {
+  //    const passwordsMatch = this.comparePassword();
+  //    if (!passwordsMatch) {
+  //      const errors = {
+  //        lastPassword: {
+  //          rules: 'Le mot de passe ne correspond pas à l\'ancien'
+  //        }
+  //      };
+  //      return errors;
+  //    }
+  //  }
+  //  return null;
+  //}
 
   confirmPasswordValidator = (): ValidationErrors | null => {
     const password = this.profilForm.get('password')?.value;
@@ -99,7 +99,7 @@ export class ProfilComponent implements OnInit{
     firstname: [{ value: '', disabled: true }, [Validators.required]],
     lastname: [{ value: '', disabled: true }, [Validators.required]],
     email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
-    lastPassword: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(8), this.lastPasswordValidator.bind(this)]],
+  //  lastPassword: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(8), this.lastPasswordValidator.bind(this)]],
     password: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(8), this.passwordValidator.bind(this)]],
     confirmPassword: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(8), this.confirmPasswordValidator.bind(this)]],
     phone: [{ value: '', disabled: true }, [Validators.required, this.phoneValidator]],
@@ -228,20 +228,20 @@ export class ProfilComponent implements OnInit{
     }
   }
 
-  comparePassword(): boolean {
-    const passwordFormControl = this.profilForm.get('lastPassword');
-    const passwordValue = passwordFormControl?.value;
-    const userPasswordHash = this.userResponse?.password;
+ //comparePassword(): boolean {
+ //  const passwordFormControl = this.profilForm.get('lastPassword');
+ //  const passwordValue = passwordFormControl?.value;
+ //  const userPasswordHash = this.userResponse?.password;
 
-    if (
-      passwordFormControl && typeof passwordValue === 'string' &&
-      userPasswordHash && typeof userPasswordHash === 'string'
-    ) {
-      const passwordsMatch = bcrypt.compareSync(passwordValue, userPasswordHash.replace('{bcrypt}', ''));
-      return passwordsMatch;
-    }
-    return false;
-  }
+ //  if (
+ //    passwordFormControl && typeof passwordValue === 'string' &&
+ //    userPasswordHash && typeof userPasswordHash === 'string'
+ //  ) {
+ //    const passwordsMatch = bcrypt.compareSync(passwordValue, userPasswordHash.replace('{bcrypt}', ''));
+ //    return passwordsMatch;
+ //  }
+ //  return false;
+ //}
 
   phoneValidator(control: AbstractControl): ValidationErrors | null {
     const phoneRegex = RegExp('(^0\\d{9})');
