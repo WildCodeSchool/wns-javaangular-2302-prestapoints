@@ -23,12 +23,14 @@ public class LocationFixtures {
         Location location = new Location();
 
         if (fixtures.isDatatableExistAndDelete(table)){
-
             Integer numberOfLigne = 10;
             for (int i = 0; i < numberOfLigne; i++) {
-
                 location.setId(i);
+                String numeroDeRue = faker.address().buildingNumber();
+                String rue = faker.address().streetName();
+                location.setAddress(numeroDeRue + " rue "+ rue);
                 location.setPostalCode(faker.address().countryCode());
+                location.setAddressInformation("N/C");
                 location.setCity(faker.address().cityName());
                 locationRepository.save(location);
             }
