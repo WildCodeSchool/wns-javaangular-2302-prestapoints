@@ -38,10 +38,11 @@ public class User {
     private String phone;
     private String token;
     private Timestamp creation;
+    private Timestamp creationDate;
 
     @OneToOne(mappedBy = "user")
     private Avatar avatar;
-    
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
