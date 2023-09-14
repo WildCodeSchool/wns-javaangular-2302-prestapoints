@@ -6,15 +6,17 @@ import java.util.List;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+
 import fr.enums.RoleEnum;
-import fr.repository.UserRepository;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +38,10 @@ public class User {
     private String phone;
     private String token;
     private Timestamp creation;
+
+
+    @OneToOne(mappedBy = "user")
+    private Avatar avatar;
 
     @ManyToMany
     @JoinTable(name = "user_role",
