@@ -14,26 +14,24 @@
               <div class="bold list-category text-mat-labe">
                 <a>Prestapoints / {{ prestation?.type?.category?.name }} / {{ prestation?.type?.name }}</a>
               </div>
-              <h1 class="entry-title presta-mt-5">
+              <h2 class="entry-title presta-mt-5">
                 {{ prestation?.title }}
-              </h1>
+              </h2>
               <div class="entry__meta-location d-flex justify-content-start presta-mt-5">
                 <i class="bi bi-geo-alt presta-mr-3"></i>
-                <h2 class="presta-text-quinary presta-text-fw-medium">{{ location }}</h2>
+                <h5 class="presta-text-quinary presta-text-fw-medium presta-ml-3">{{ prestation?.location?.city }}</h5>
                 <i class="bi bi-stopwatch presta-ml-15"></i>
-                <h3 class="presta-ml-3 presta-text-fw-medium">{{ duration }}H</h3>
+                <h5 class="presta-ml-3 presta-text-fw-medium">{{ prestation?.duration | date:'h'}} h</h5>
               </div>
               <div class="little-description presta-mt-3 presta-text-fw-bold">
-                <p>{{ littleDescription }}</p>
+                <!--<p>{{ littleDescription }}</p>-->
               </div>
             </div>
 
             <!-- Video -->
             <div class="video-playlist text-primary">
               <div class="video-playlist_content">
-                <div *ngFor="let video of cardVideo">
-                  <iframe *ngIf="video" [src]="video" frameborder="0" allowfullscreen class="video-playlist_content-video"></iframe>
-                </div>                
+                <iframe width="645" height="370" src="https://www.youtube.com/embed/nVoDmaF8Znc?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
               </div>
             </div>
             <!-- end Video -->
@@ -45,70 +43,70 @@
                 <div class="article-content">
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
-                      <h3 class="workshop-heading">Déroulement de l'atelier</h3>
+                      <h5 class="workshop-heading">Déroulement de l'atelier</h5>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
-                      <p>{{ description }}</p>
+                      <p>{{ prestation?.description }}</p>
                     </div>
                   </div>
 
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
-                      <h3 class="workshop-heading">Informations pratiques</h3>
+                      <h5 class="workshop-heading">Informations pratiques</h5>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
-                      <p>{{ practicalInformation }}</p>
+                      <p>{{ prestation?.practicalInformation }}</p>
                     </div>
                   </div>
 
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
-                      <h3 class="workshop-heading">Langues de l'atelier</h3>
+                      <h5 class="workshop-heading">Langues de l'atelier</h5>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
-                      <p>{{ language }}</p>
+                      <p>{{ prestation?.language }}</p>
                     </div>
                   </div>
 
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
-                      <h3 class="workshop-heading">En savoir plus sur l'organisateur/trice</h3>
+                      <h5 class="workshop-heading">En savoir plus sur {{ prestation?.user?.firstname }}</h5>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
-                      <p>{{ personalInfos }}</p>
+                      <p>{{ prestation?.personalInfos }}</p>
                     </div>
                   </div>
 
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
-                      <h3 class="workshop-heading">Lieu de l'atelier</h3>
+                      <h5 class="workshop-heading">Lieu de l'atelier</h5>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
-                      <p>{{ locationInfos }}</p>
+                      <p>{{ prestation?.location?.addressInformation}}</p>
                     </div>
                   </div>
 
                   <div class="row presta-mt-7 border-top border-grey-text">
                     <div class="col-md-5 align-items-start presta-my-5">
-                      <h3 class="workshop-heading">Commentaires</h3>
+                      <h5 class="workshop-heading">Commentaires</h5>
                     </div>
                     <div class="col-md-7 align-self-start presta-my-5">
                       <div class="comments">
-                        <div class="comment" *ngFor="let commentaire of commentaires">
-                          <p class="comment-date presta-text-fw-bold my-0">{{ commentaire.author}}</p>
-                          <p class="comment-date presta-text-fw-bold my-0">{{ commentaire.date }}</p>
-                          <p class="comment-text">{{ commentaire.texte }}</p>
+                        <div class="comment" *ngFor="let comment of prestation?.registrations">
+                          <p class="comment-date presta-text-fw-bold my-0">{{ comment.date }}</p>
+                          <p class="comment-date presta-text-fw-bold my-0">{{ comment.evaluation }}</p>
+                          <p class="comment-text">{{ comment.comment }}</p>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>                  
                 </div>
 
                 <!-- tags -->
                 <aside class="widgets_tags presta-mt-5 border-top border-grey-text">
-                  <h3 class="widget-title presta-my-5">Tags</h3>
+                  <h5 class="widget-title presta-my-5">Tags</h5>
                   <div class="entry__tags presta-text-fs-20 presta-text-fw-bold presta-mt-6">
-                    <div rel="tag" *ngFor="let tag of tags">
+                    <div rel="tag" *ngFor="let tag">
                       <a class="no-link tag-link">{{ tag }}</a>
                     </div>
                   </div>
