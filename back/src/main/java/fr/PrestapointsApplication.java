@@ -38,7 +38,7 @@ public class PrestapointsApplication {
 	private ImageFixtures imageFixtures;
 
 	/* STOP FIXTURES = false   # START FIXTURES = true */ 
-	private boolean loadFixtures = false;
+	private boolean loadFixtures = true;
 
 	@PostConstruct
 	@Profile("!test")
@@ -53,6 +53,7 @@ public class PrestapointsApplication {
 				locationFixtures.prepareFixtures();
 				prestationFixtures.prepareFixtures(); // depends on user, category, location
 				registrationFixtures.prepareFixtures();// depends on prestation
+                imageFixtures.prepareFixtures();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
