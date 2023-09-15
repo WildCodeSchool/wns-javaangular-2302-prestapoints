@@ -132,7 +132,7 @@ public class UserControllerTests {
         // Arrange
         UserDto userDto = new UserDto();
         userDto.setEmail("");
-        userDto.setPassword("");
+        //userDto.setPassword("");
         String bodyUser = new ObjectMapper().writeValueAsString(userDto);
 
         // Act & Assert
@@ -147,7 +147,7 @@ public class UserControllerTests {
         // Arrange
         UserDto userDto = new UserDto();
         userDto.setEmail("to@to.to");
-        userDto.setPassword("toto123456");
+        //userDto.setPassword("toto123456");
         String body = new ObjectMapper().writeValueAsString(userDto);
 
         ResponseApi responseApi = new ResponseApi();
@@ -168,7 +168,7 @@ public class UserControllerTests {
         // Arrange
         UserDto userDto = new UserDto();
         userDto.setEmail("toto.to");
-        userDto.setPassword("toto123456");
+        //userDto.setPassword("toto123456");
         String body = new ObjectMapper().writeValueAsString(userDto);
 
         ResponseApi responseApi = new ResponseApi();
@@ -189,7 +189,7 @@ public class UserControllerTests {
         // Arrange
         UserDto userDto = new UserDto();
         userDto.setEmail("to@to.to");
-        userDto.setPassword("toto123456");
+        //userDto.setPassword("toto123456");
         String body = new ObjectMapper().writeValueAsString(userDto);
 
         User user = new User();
