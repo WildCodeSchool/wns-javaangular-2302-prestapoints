@@ -17,7 +17,7 @@ public class Image {
     private Integer id;
 
     @Lob
-    @Column(name = "data", nullable = false, columnDefinition = "LONGBLOB")
+    @Column(name = "data", columnDefinition = "LONGBLOB")
     private byte[] data;
 
     @ManyToOne(fetch = FetchType.LAZY)

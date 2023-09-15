@@ -1,25 +1,21 @@
 <div class="card" style="width: 12rem; height: 20rem;">
     <div *ngIf="prestation">
         <div class="card-body d-flex flex-column ">
-        <div>
-        <h6 class="category-text text-primary fw-bold text-truncate">{{ prestation?.type?.name }}</h6>
-        <h6 class="card-title text-truncate">{{ prestation?.title }}</h6>
-        </div>
-        <!--<img class="card-img-top rounded-0 mb-2" src="{{ prestation?.image[0].getImageUrl }}" alt="photo prestation" />-->
-        <!--<img class="card-img-top rounded-0 mb-2" src="https://images.pexels.com/photos/301703/pexels-photo-301703.jpeg?auto=com" alt="photo prestation" />-->
-        <div *ngIf="prestation.images && prestation.images.length > 0">
-            <img [src]="prestation.images[0].getimageUrl()" alt="Image 1" />
-          </div>
-        <div class="mt-auto">
-        <p class="card-point text-primary">{{ prestation?.addPoint }} pts</p>
-        <p class="card-duration text-grey-text">
-            <i class="bi bi-alarm"></i> {{ prestation?.duration | date:'h'}} h
-        </p>
-        <p class="card-city text-grey-text text-truncate">
-            <i class="bi bi-geo-alt"></i>
-            {{ prestation?.location?.city }}
-        </p>
+            <div>
+                <h6 class="category-text text-primary fw-bold text-truncate">{{ prestation.type?.name }}</h6>
+                <h6 class="card-title text-truncate">{{ prestation.title }}</h6>
+            </div>
+            <img class="card-img-top rounded-0 mb-2" [src]="imageUrl" alt="Image">
+            <div class="mt-auto">
+            <p class="card-point text-primary">{{ prestation.addPoint }} pts</p>
+            <p class="card-duration text-grey-text">
+                <i class="bi bi-alarm"></i> {{ prestation.duration | date:'h'}} h
+            </p>
+            <p class="card-city text-grey-text text-truncate">
+                <i class="bi bi-geo-alt"></i>
+                {{ prestation.location?.city }}
+            </p>
+            </div>
         </div>
     </div>
-  </div>
 </div>
