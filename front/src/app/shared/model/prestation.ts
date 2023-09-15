@@ -27,7 +27,7 @@ export class Prestation {
     public language?: string;
     public personalInfos?: string;
     public registration?: Registration[];
-    
+   
 
     constructor(){}
 
