@@ -14,8 +14,10 @@ export class CardDetailsMaxiComponent implements OnInit {
   constructor(private domSanitizer: DomSanitizer) {}
 
   ngOnInit() {
-    const youtubeEmbedUrl = 'https://www.youtube.com/embed/nVoDmaF8Znc';
-
-    this.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(youtubeEmbedUrl);
+    if (this.prestation && this.prestation.videoLink) {
+      // Utilisez la propriété videoLink de la prestation
+      const sanitizedUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.prestation.videoLink);
+      this.videoUrl = sanitizedUrl;
+    }
   }
 }

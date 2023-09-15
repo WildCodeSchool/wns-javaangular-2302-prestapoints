@@ -19,7 +19,7 @@ export class PrestationService {
   }
 
   getPrestationById(id: string): Observable<Prestation> {
-    this.apiUrl = 'http://localhost:8080/prestations/prestation';
+    this.apiUrl = 'http://localhost:8080/prestations';
     const url = `${this.apiUrl}/${id}`;
 
     return this.http.get<Prestation>(url);
