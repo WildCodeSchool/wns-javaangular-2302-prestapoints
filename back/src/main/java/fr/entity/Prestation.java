@@ -32,6 +32,7 @@ public class Prestation {
     private String state;
     private Integer maxUser;
     private Integer placeAvailable;
+    private String videoLink;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -55,7 +56,7 @@ public class Prestation {
     @JsonIgnore
     private Type type;
 
-    @OneToMany(mappedBy = "prestation")
+    @OneToMany(mappedBy = "prestation", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Registration> registrations = new ArrayList<>();
     

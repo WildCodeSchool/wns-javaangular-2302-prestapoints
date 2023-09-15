@@ -26,6 +26,7 @@ public class PrestationDto {
     private String personalInfos;
     private TypeDto type;
     private LocationDto location;
+    private String videoLink;
     private List<ImageDto> images;
     private List<RegistrationDto> registrations;
 }

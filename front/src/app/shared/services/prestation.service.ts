@@ -1,5 +1,6 @@
 import { HttpClient, HttpResponseBase } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import { Prestation } from '../model/prestation';
@@ -15,6 +16,13 @@ export class PrestationService {
     this.apiUrl = 'http://localhost:8080/accueil';
 
     return this.http.get<Prestation[]>(this.apiUrl);
+  }
+
+  getPrestationById(id: string): Observable<Prestation> {
+    this.apiUrl = 'http://localhost:8080/prestations/prestation';
+    const url = `${this.apiUrl}/${id}`;
+
+    return this.http.get<Prestation>(url);
   }
 
   addRegistration(id: number | undefined): Observable<ResponseApi> {

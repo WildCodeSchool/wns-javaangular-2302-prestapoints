@@ -1,0 +1,52 @@
+@import "/src/styles/variables.scss";
+
+.card-details-maxi {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    height: auto;
+    width: 80%;
+
+    .widgets_tags {
+        .entry__tags {
+        display: flex;
+        flex-wrap: wrap;
+
+            div {
+                background-color: grey;
+                color: white;
+                padding: 0.25rem;
+                margin-right: 0.5rem;
+                margin-bottom: 0.5rem;
+                transition: background-color 0.3s;
+                border-radius: 5px;
+
+                a.tag-link {
+                color: white;
+                text-decoration: none;
+                }
+
+                &:hover {
+                background-color: map-get($theme-colors, quinary);
+                }
+            }
+        }
+    }
+
+    .video-playlist {
+        width: 100%;
+
+            .video-playlist_content {
+                position: relative;
+                padding-bottom: 56.25%; 
+                height: 0;
+
+                .video-playlist_content-video {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                  }
+            }
+    }
+}

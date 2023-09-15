@@ -1,7 +1,12 @@
+import { User } from "./user";
+
 export class Registration {
-    
-    constructor(
-        public evaluation?: string,
-        public comment?: string,
-    ) {}
-}
+
+      public user?: User;
+      public evaluation?: number;
+      public date? : string;
+      public comment?: string;
+
+    constructor() {}
+  }
+  
