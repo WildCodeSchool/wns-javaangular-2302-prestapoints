@@ -8,7 +8,7 @@ import { ResponseApi } from '../model/responseApi';
 
 @Injectable()
 export class PrestationService {
-  private apiUrl = 'http://localhost:8080/prestations';
+  private apiUrl?: string;
 
   constructor(private http: HttpClient) {}
 
@@ -19,7 +19,9 @@ export class PrestationService {
   }
 
   getPrestationById(id: string): Observable<Prestation> {
+    this.apiUrl = 'http://localhost:8080/prestations/prestation';
     const url = `${this.apiUrl}/${id}`;
+
     return this.http.get<Prestation>(url);
   }
 
