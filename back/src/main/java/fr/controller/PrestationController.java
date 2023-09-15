@@ -32,7 +32,7 @@ public class PrestationController {
     @Autowired
     AuthController authController;
 
-    @GetMapping("/prestations")
+    @GetMapping("/accueil")
     public List<PrestationDto> getAllPrestations() {
 
         return prestationService.getAllPrestations();

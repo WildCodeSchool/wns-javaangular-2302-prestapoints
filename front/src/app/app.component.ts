@@ -4,6 +4,7 @@ import { Alert } from './shared/model/alert';
 
 import { Location } from '@angular/common';
 import { AlertService } from './shared/services/alert.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,21 @@ export class AppComponent implements OnInit {
   alerts: Alert[] = [];
   isVisible?: boolean;
 
-  constructor(private alertService: AlertService, public location: Location) {}
+  constructor(
+    private alertService: AlertService,
+    public location: Location,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.alertSubscription();
-    this.isVisible = this.location.path() === '/auth' ? false : true;
+    // Écoute les événements de navigation
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Vérifie l'URL et met à jour isVisible en conséquence
+        this.isVisible = event.url === '/auth' ? false : true;
+      }
+    });
   }
 
   alertSubscription() {

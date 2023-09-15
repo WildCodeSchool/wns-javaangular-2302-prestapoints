@@ -13,6 +13,8 @@ export class PrestationService {
   constructor(private http: HttpClient) {}
 
   getPrestations(): Observable<Prestation[]> {
+    this.apiUrl = 'http://localhost:8080/accueil';
+
     return this.http.get<Prestation[]>(this.apiUrl);
   }
 

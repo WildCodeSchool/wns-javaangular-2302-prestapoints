@@ -29,6 +29,23 @@ export class Prestation {
     public personalInfos?: string,
     public registrations?: Registration[],
     ){}
+    public dateEnd? : number;
+    public state? : string;
+    public description? : string;
+    public maxUser? : number;
+    public images? : Image[];
+    public type?: Type;
+    public location?: Location;
+    public placeAvailable?: number;
+    public littleDescription?: string;
+    public videoLink?: string;
+    public practicalInformation?: string;
+    public language?: string;
+    public personalInfos?: string;
+    public registration?: Registration[];
+    
+
+    constructor(){}
 
     get getDuration(): string {
         if (this.duration != undefined){

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,8 +19,9 @@ public class Prestation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     private String title;
@@ -33,6 +32,7 @@ public class Prestation {
     private String state;
     private Integer maxUser;
     private Integer placeAvailable;
+    private String videoLink;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -56,7 +56,7 @@ public class Prestation {
     @JsonIgnore
     private Type type;
 
-    @OneToMany(mappedBy = "prestation")
+    @OneToMany(mappedBy = "prestation", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Registration> registrations = new ArrayList<>();
     

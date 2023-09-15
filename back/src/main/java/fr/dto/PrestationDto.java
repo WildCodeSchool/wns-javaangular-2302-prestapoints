@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PrestationDto {
-
     private Integer id;
     private UserDto user;
     private String title;
@@ -27,8 +26,7 @@ public class PrestationDto {
     private String personalInfos;
     private TypeDto type;
     private LocationDto location;
-
+    private String videoLink;
     private List<ImageDto> images;
     private List<RegistrationDto> registrations;
-
 }
