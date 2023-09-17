@@ -40,7 +40,7 @@ public class UserService {
 
     public User createUser(UserDto userDto) {
         User user = userMapper.convertToEntity(userDto);
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        // user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         if (user.getCreationDate() == null) {
             LocalDate today = LocalDate.now();
@@ -94,7 +94,7 @@ public class UserService {
 
         user.setLastname(userDto.getLastname());
         user.setFirstname(userDto.getFirstname());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        // user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEmail(userDto.getEmail());
         user.setPhone(userDto.getPhone());
 

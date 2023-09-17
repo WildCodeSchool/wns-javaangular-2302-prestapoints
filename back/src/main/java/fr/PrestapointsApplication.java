@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import fr.fixture.AvatarFixtures;
 import fr.fixture.CategoryFixtures;
 import fr.fixture.LocationFixtures;
 import fr.fixture.PrestationFixtures;
@@ -36,9 +37,11 @@ public class PrestapointsApplication {
 	private RoleFixtures roleFixtures;
     @Autowired
 	private ImageFixtures imageFixtures;
+	@Autowired
+	private AvatarFixtures avatarFixtures;
 
 	/* STOP FIXTURES = false   # START FIXTURES = true */ 
-	private boolean loadFixtures = false;
+	private boolean loadFixtures = true;
 
 	@PostConstruct
 	@Profile("!test")
@@ -53,6 +56,7 @@ public class PrestapointsApplication {
 				locationFixtures.prepareFixtures();
 				prestationFixtures.prepareFixtures(); // depends on user, category, location
 				registrationFixtures.prepareFixtures();// depends on prestation
+				avatarFixtures.prepareFixtures();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

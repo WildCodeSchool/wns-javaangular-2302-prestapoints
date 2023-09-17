@@ -14,7 +14,8 @@ public enum TablesEnum {
     PRESTATION("'prestation'"),
     FAVORY("'favory'"),
     CREATION("'creation'"),
-    IMAGE("'images'");
+    IMAGE("'images'"),
+    AVATAR("'avatar'");
 
     private String tableName;
 
