@@ -6,3 +6,4 @@
       <app-card-details-maxi [prestation]="prestation"></app-card-details-maxi>
     </div>
   </div>
+  <app-reservation [prestation]="prestation" (needToRefresh)="needToRefresh($event)"></app-reservation>

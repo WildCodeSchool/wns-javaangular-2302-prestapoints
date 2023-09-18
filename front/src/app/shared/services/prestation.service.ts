@@ -30,4 +30,10 @@ export class PrestationService {
 
     return this.http.post<ResponseApi>(this.apiUrl, id);
   }
+
+  undoRegistration(id: number | undefined): Observable<ResponseApi> {
+    this.apiUrl = 'http://localhost:8080/prestations/prestation/registration/suppression/' +  id;
+
+    return this.http.delete<ResponseApi>(this.apiUrl);
+  }
 }

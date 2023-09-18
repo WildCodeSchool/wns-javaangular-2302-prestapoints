@@ -83,6 +83,8 @@ public class UserController {
     @GetMapping(value = "/getUserConnected")
     public UserDto getUserConnected() {
         User user = authController.getUserConnected();
+        System.out.println("***************************************----------------------------USERCONNECTED");
+        System.out.println(user.getEmail());
         return userMapper.convertToDto(user);
     }
 
