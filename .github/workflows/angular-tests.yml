@@ -24,3 +24,4 @@ jobs:
 
       - name: Build and Test
         run: ng build && ng test
+        working-directory: front
