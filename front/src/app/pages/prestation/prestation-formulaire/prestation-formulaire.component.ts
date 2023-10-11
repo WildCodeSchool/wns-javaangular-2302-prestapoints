@@ -11,29 +11,53 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./prestation-formulaire.component.scss']
 })
 export class PrestationFormulaireComponent {
-    prestationForm!: FormGroup;
-
+    prestationFormBasic!: FormGroup;
+    prestationFormDescription!: FormGroup;
+    prestationFormLocation!: FormGroup;
+    prestationFormMedia!: FormGroup;
     constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
   
     ngOnInit(): void {
-        this.prestationForm = this.formBuilder.group({
+
+        this.prestationFormBasic = this.formBuilder.group({
           title: ['', Validators.required],
+          type: ['', Validators.required],
+          category: ['', Validators.required],
           duration: ['', Validators.required],
           addPoint: ['', Validators.required],
           dateStart: ['', Validators.required],
-          dateEnd: ['', Validators.required],
-          state: ['', Validators.required],
-          description: ['', Validators.required],
+          //dateEnd: ['', Validators.required],
           maxUser: ['', Validators.required]
+        });
+
+        this.prestationFormDescription = this.formBuilder.group({
+            practicalInformation: ['', Validators.required],
+            description: ['', Validators.required],
+            littleDescription: ['', Validators.required],
+            language: ['', Validators.required],
+            personalInfos: ['', Validators.required],
+        });
+
+        this.prestationFormLocation = this.formBuilder.group({
+            LocationCity: ['', Validators.required],
+            LocationPostalCode: ['', Validators.required],
+            LocationAddress: ['', Validators.required],
+            LocationAddressNumber: ['', Validators.required],
+            LocationAddressInformation: ['', Validators.required],
+        });
+
+        this.prestationFormMedia= this.formBuilder.group({
+            mediaImage: ['', Validators.required],
+            mediaVideo: ['', Validators.required],
         });
       }
   
     onSubmit() {
-      if (this.prestationForm.invalid) {
+      if (this.prestationFormBasic.invalid) {
         return;
       }
   
-      const formData = this.prestationForm.value;
+      const formDataBasic = this.prestationFormBasic.value;
       const prestation = new Prestation(
         //formData.title,
         //formData.duration,
