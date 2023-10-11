@@ -7,16 +7,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+      - name: Angular Full CI
+        uses: colbyhill21/angular-full-ci/@v1.0
+        with:
+          testcommand: run test:ci
+          mocha: true
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 18
 
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Run Angular Tests
-      run: npm run test
