@@ -23,5 +23,5 @@ jobs:
         working-directory: front
 
       - name: Build and Test
-        run: ng build && ng test -- --watch=false --browsers=ChromeHeadless
+        run: ng build && ng test -- --watch=false
         working-directory: front
