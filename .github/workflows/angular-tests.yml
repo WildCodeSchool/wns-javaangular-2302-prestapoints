@@ -28,3 +28,4 @@ jobs:
 
       - name: Stop Job
         uses: styfle/stop-job@v2
+        working-directory: front
