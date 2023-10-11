@@ -7,7 +7,7 @@ import { PrestationService } from 'src/app/shared/services/prestation.service';
 import { SliderComponent } from 'src/app/shared/components/slider/slider.component';
 import { CardComponent } from 'src/app/shared/components/card/card.component';
 import { SearchbarModule } from 'src/app/shared/components/searchbar/searchbar.module';
-import { ReservationComponent } from 'src/app/shared/components/reservation/reservation.component';
+
 
 
 
@@ -17,13 +17,12 @@ import { ReservationComponent } from 'src/app/shared/components/reservation/rese
     HomeComponent,
     SliderComponent,
     CardComponent,
-    ReservationComponent //à suppr en attente de Luc
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     SearchbarModule
   ], 
-  providers: [PrestationService, DatePipe], //suppr datepipe
+  providers: [PrestationService, DatePipe], 
 })
 export class HomeModule { }

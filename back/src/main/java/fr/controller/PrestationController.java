@@ -40,7 +40,7 @@ public class PrestationController {
 
     @GetMapping("/prestations/{id}")
     public PrestationDto getPrestation(@PathVariable Integer id) {
-        
+
         return prestationService.getPrestationById(id);
     }
 
@@ -63,7 +63,7 @@ public class PrestationController {
         ResponseApi responseApi = new ResponseApi();
         Prestation prestation = prestationRepository.findById(prestationId).get();
         responseApi.setResponseValid(false);
-        
+
         if (user != null) {
 
             Registration registration = registrationService.getRegistrationByUserIdAndPrestationId(user.getId(),
@@ -81,8 +81,36 @@ public class PrestationController {
                 responseApi.setResponseValid(true);
             }
         } else {
-                responseApi.setMessage(MessageApiEnum.NEED_TO_BE_CONNECTED.getMessage());
+            responseApi.setMessage(MessageApiEnum.NEED_TO_BE_CONNECTED.getMessage());
         }
         return responseApi;
     }
+
+    @DeleteMapping("/prestations/prestation/registration/suppression/{prestationId}")
+    public ResponseApi undoRegistration(@PathVariable Integer prestationId) {
+
+        User user = authController.getUserConnected();
+        ResponseApi responseApi = new ResponseApi();
+        responseApi.setResponseValid(false);
+
+        if (user != null) {
+
+            Registration registration = registrationService.getRegistrationByUserIdAndPrestationId(user.getId(),
+                    prestationId);
+
+            if (registration != null) {
+                registrationService.deleteRegistrationByUserIdAndPrestationId(user.getId(), prestationId);
+                prestationService.addOnePlaceAvailableInPrestationById(prestationId);
+                responseApi.setResponseValid(true);
+                responseApi.setMessage(MessageApiEnum.DELETE_SUCCESS.getMessage());
+                
+            } else {
+                responseApi.setMessage(MessageApiEnum.DELETE_FAILED.getMessage());
+            }
+        } else {
+            responseApi.setMessage(MessageApiEnum.NEED_TO_BE_CONNECTED.getMessage());
+        }
+        return responseApi;
+    }
+
 }

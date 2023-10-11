@@ -49,11 +49,21 @@ public class PrestationService {
 
     public Prestation subtractOnePlaceAvailableInPrestationById(Integer id) {
         Prestation prestation = prestationRepository.findById(id).get();
-        
+
         if (prestation.getPlaceAvailable() > 0) {
             prestation.setPlaceAvailable(prestation.getPlaceAvailable() - 1);
         }
-        
+
+        return prestationRepository.save(prestation);
+    }
+    
+    public Prestation addOnePlaceAvailableInPrestationById(Integer id) {
+        Prestation prestation = prestationRepository.findById(id).get();
+
+        if (prestation != null) {
+            prestation.setPlaceAvailable(prestation.getPlaceAvailable() + 1);
+        }
+
         return prestationRepository.save(prestation);
     }
 }

@@ -5,6 +5,7 @@ import { CardDetailsRoutingModule } from './card-details-routing.module';
 import { CardDetailsComponent } from './card-details.component';
 import { CardDetailsMaxiComponent } from 'src/app/shared/components/card-details-maxi/card-details-maxi.component';
 import { CardDetailsMiniComponent } from 'src/app/shared/components/card-details-mini/card-details-mini.component';
+import { ReservationComponent } from 'src/app/shared/components/reservation/reservation.component';
 
 import { PrestationService } from 'src/app/shared/services/prestation.service'; 
 import { SafeUrlPipe } from 'src/app/shared/pipes/safe-url.pipe';
@@ -14,7 +15,8 @@ import { SafeUrlPipe } from 'src/app/shared/pipes/safe-url.pipe';
     CardDetailsComponent,
     CardDetailsMaxiComponent,
     CardDetailsMiniComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    ReservationComponent
   ],
   imports: [
     CommonModule,

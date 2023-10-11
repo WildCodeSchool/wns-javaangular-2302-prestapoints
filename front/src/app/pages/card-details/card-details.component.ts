@@ -10,6 +10,7 @@
   })
   export class CardDetailsComponent implements OnInit {
     prestation?: Prestation;
+    private id?: string;
 
     constructor(
       private route: ActivatedRoute,
@@ -20,10 +21,19 @@
       this.route.params.subscribe(params => {
         const id = params['id'];
         if (id) {
+          this.id = id;
           this.getPrestationDetails(id);
         }
       });
     }
+    
+    
+    needToRefresh($event: boolean) {
+      if ($event && this.id) {
+        this.getPrestationDetails(this.id);
+      }
+    }
+  
 
     getPrestationDetails(id: string): void {
       this.prestationService.getPrestationById(id)
