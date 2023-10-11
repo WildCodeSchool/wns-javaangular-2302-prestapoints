@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -34,6 +33,7 @@ import fr.dto.UserDto;
 import fr.entity.Avatar;
 import fr.entity.User;
 import fr.fixture.CategoryFixtures;
+import fr.fixture.ImageFixtures;
 import fr.fixture.LocationFixtures;
 import fr.fixture.PrestationFixtures;
 import fr.fixture.RegistrationFixtures;
@@ -56,6 +56,8 @@ public class UserControllerTests {
 
     // must MockBean all fixtures classes to not have Exceptions errors with the
     // PostConstruct.
+    @MockBean
+    private ImageFixtures imageFixtures;
     @MockBean
     private UserFixtures userFixtures;
     @MockBean
@@ -132,7 +134,7 @@ public class UserControllerTests {
         // Arrange
         UserDto userDto = new UserDto();
         userDto.setEmail("");
-        //userDto.setPassword("");
+        // userDto.setPassword("");
         String bodyUser = new ObjectMapper().writeValueAsString(userDto);
 
         // Act & Assert
@@ -147,7 +149,7 @@ public class UserControllerTests {
         // Arrange
         UserDto userDto = new UserDto();
         userDto.setEmail("to@to.to");
-        //userDto.setPassword("toto123456");
+        // userDto.setPassword("toto123456");
         String body = new ObjectMapper().writeValueAsString(userDto);
 
         ResponseApi responseApi = new ResponseApi();
@@ -168,7 +170,7 @@ public class UserControllerTests {
         // Arrange
         UserDto userDto = new UserDto();
         userDto.setEmail("toto.to");
-        //userDto.setPassword("toto123456");
+        // userDto.setPassword("toto123456");
         String body = new ObjectMapper().writeValueAsString(userDto);
 
         ResponseApi responseApi = new ResponseApi();
@@ -189,7 +191,7 @@ public class UserControllerTests {
         // Arrange
         UserDto userDto = new UserDto();
         userDto.setEmail("to@to.to");
-        //userDto.setPassword("toto123456");
+        // userDto.setPassword("toto123456");
         String body = new ObjectMapper().writeValueAsString(userDto);
 
         User user = new User();
