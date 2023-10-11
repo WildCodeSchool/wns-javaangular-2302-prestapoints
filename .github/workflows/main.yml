@@ -1,17 +1,15 @@
+
 name: Angular Tests
 
 on: [push]
 
 jobs:
-  build:
+  test-client:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Angular Full CI
-        uses: colbyhill21/angular-full-ci/@v1.0
-        with:
-          testcommand: run test:ci
-          mocha: true
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Goto client and run tests
+        run: cd front && npm i && ng test
 
 
