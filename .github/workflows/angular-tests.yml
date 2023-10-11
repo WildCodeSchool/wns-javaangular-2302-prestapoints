@@ -20,6 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: front
 
       - name: Build and Test
         run: ng build && ng test
