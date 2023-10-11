@@ -9,6 +9,7 @@ import { ReservationComponent } from 'src/app/shared/components/reservation/rese
 
 import { PrestationService } from 'src/app/shared/services/prestation.service'; 
 import { SafeUrlPipe } from 'src/app/shared/pipes/safe-url.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,8 @@ import { SafeUrlPipe } from 'src/app/shared/pipes/safe-url.pipe';
   imports: [
     CommonModule,
     CardDetailsRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     PrestationService 
