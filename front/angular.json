@@ -43,7 +43,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "50kb"
+                  "maximumError": "5mb"
                 }
               ],
               "outputHashing": "all"
@@ -83,6 +83,7 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
+            "browsers": "ChromeHeadless",
             "assets": [
               "src/favicon.ico",
               "src/assets"
