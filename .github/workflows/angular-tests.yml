@@ -12,8 +12,9 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
-          with:
-            node-version: 18  
+        with: 
+          node-version: 18  
+      
       - name: Install Angular CLI
         run: cd front && npm install -g @angular/cli
 
