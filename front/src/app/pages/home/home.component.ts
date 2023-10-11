@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   getPrestations() {
     this.prestationService.getPrestations().subscribe((response) => {
       this.prestationsApi = response;
+      console.log(this.prestationsApi)
     });
   }
 

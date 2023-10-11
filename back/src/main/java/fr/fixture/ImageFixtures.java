@@ -25,17 +25,17 @@ public class ImageFixtures {
 
     @Autowired
     private Fixtures fixtures;
-    private static final String IMAGE_PATH1 = "src/main/resources/imageFixtures/fixtureImage.jpg";
-    private static final String IMAGE_PATH2 = "src/main/resources/imageFixtures/fixtureImage2.jpg";
+    private static final String IMAGE_PATH = "src/main/resources/imageFixtures/";
+
     public void prepareFixtures() {
 	    String table = TablesEnum.IMAGE.getTableName();
         int numberOfPrestations = prestationRepository.findAll().size();
 
         if (fixtures.isDatatableExistAndDelete(table)){
         
-            for (int i = 1; i <= numberOfPrestations; i++) {
+            for (Integer i = 1; i <= numberOfPrestations; i++) {
                 try {
-                    byte[] imageData = loadImageData(IMAGE_PATH1);
+                    byte[] imageData = loadImageData(IMAGE_PATH + i.toString()+".jpg");
                     Image image = new Image(imageData);
                     image.setId(i);
                     Prestation prestation = new Prestation();
@@ -48,9 +48,10 @@ public class ImageFixtures {
 
             }
                 
-            for (int i = 1; i <= numberOfPrestations; i++) {
+            for (Integer i = 1; i <= numberOfPrestations; i++) {
                 try {
-                    byte[] imageData = loadImageData(IMAGE_PATH2);
+                    Integer j = i+10;
+                    byte[] imageData = loadImageData(IMAGE_PATH + j.toString()+".jpg");
                     Image image = new Image(imageData);
                     image.setId(i+10);
                     Prestation prestation = new Prestation();

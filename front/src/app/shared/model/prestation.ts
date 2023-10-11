@@ -19,7 +19,7 @@ export class Prestation {
     public state? : string,
     public description? : string,
     public maxUser? : number,
-    public images? : Image[],
+    public images : Image[] = [],
     public type?: Type,
     public location?: Location,
     public placeAvailable?: number,
