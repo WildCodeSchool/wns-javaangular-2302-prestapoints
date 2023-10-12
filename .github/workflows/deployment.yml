@@ -32,6 +32,7 @@ jobs:
 
       # build backend image with Spring Boot plugin for Maven
       - name: Grant execute permission to mvnw
+        working-directory: ./back
         run: sudo chmod +x mvnw
 
       - name: Build BACK image with Maven
