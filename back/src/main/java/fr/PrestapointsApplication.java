@@ -32,36 +32,28 @@ public class PrestapointsApplication {
 	private LocationFixtures locationFixtures;
 	@Autowired
 	private RoleFixtures roleFixtures;
-    @Autowired
+	@Autowired
 	private ImageFixtures imageFixtures;
 
 	/* STOP FIXTURES = false # START FIXTURES = true */
-	private boolean loadFixtures = false;
+	private boolean loadFixtures = true;
 
 	@PostConstruct
 	@Profile("!test")
 	public void init() {
 		if (this.loadFixtures) {
-<<<<<<< HEAD
+
 			// Faire attention à l'ordre des dépendences !
-			userFixtures.prepareFixtures(); // depends on
+			roleFixtures.prepareFixtures();
+			userFixtures.prepareFixtures(); // depends on roles
 			categoryFixtures.prepareFixtures(); // depends on
 			typeFixtures.prepareFixtures(); // depends on category
 			locationFixtures.prepareFixtures();
 			prestationFixtures.prepareFixtures(); // depends on user, category, location
-		}
-=======
-			//Faire attention à l'ordre des dépendences !
-			roleFixtures.prepareFixtures();
-			userFixtures.prepareFixtures(); //depends on roles
-			categoryFixtures.prepareFixtures(); //depends on 
-			typeFixtures.prepareFixtures(); //depends on category
-			locationFixtures.prepareFixtures();
-			prestationFixtures.prepareFixtures(); // depends on user, category, location
 			registrationFixtures.prepareFixtures();// depends on prestation
-            imageFixtures.prepareFixtures();
-			}
->>>>>>> 28047de27167f399e131ee2fb8f4e2eb61d87da1
+			imageFixtures.prepareFixtures();
+		}
+
 	}
 
 	public static void main(String[] args) {
