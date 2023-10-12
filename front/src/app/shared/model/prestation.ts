@@ -3,6 +3,7 @@ import { Registration } from './registration';
 import { Location } from './location';
 import { Image } from './image';
 import { User } from './user';
+import { Category } from './category';
 
 export class Prestation {
   constructor(
@@ -12,14 +13,13 @@ export class Prestation {
     public duration?: number,
     public addPoint?: number,
     public dateStartTimestamps?: number,
-    //public dateStartString? : string;
-    //public timeStartString? : string;
     public dateEnd?: number,
     public state?: string,
     public description?: string,
     public maxUser?: number,
     public images: Image[] = [],
     public type?: Type,
+    public category?: Category,
     public location?: Location,
     public placeAvailable?: number,
     public littleDescription?: string,

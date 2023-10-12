@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './components/navbar/navbar.component';
-
-import { ReviewscardComponent } from './components/reviewscard/reviewscard.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormUserModule } from './components/form-user/form-user.module';
 
 @NgModule({
   declarations: [],
