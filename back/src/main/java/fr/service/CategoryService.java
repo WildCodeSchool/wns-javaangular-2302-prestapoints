@@ -26,11 +26,11 @@ public class CategoryService {
     public List<CategoryDto> getAllCategories() {
         List<CategoryDto> categoriesDto = new ArrayList<>();
         List<Category> categories = categoryRepository.findAll();
-
+       
         for (Category category : categories) {
             categoriesDto.add(categoryMapper.convertToDto(category));
         }
-
+         System.out.println(categoriesDto);
         return categoriesDto;
     }
 

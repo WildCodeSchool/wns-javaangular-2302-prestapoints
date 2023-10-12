@@ -9,106 +9,90 @@
   <div class="modal fade" id="ModalFormulairePrestation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form [formGroup]="prestationForm" (ngSubmit)="onSubmit()">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Ajouter une prestation
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="container">
-              <div class="mb-3">
-                <label for="title" class="form-label">Titre :</label>
-                    <input type="text" id="title" formControlName="title" class="form-control"/>
-                {{ prestationForm.get('title')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('title')?.errors && !prestationForm.get('title')?.pristine" class="error-msg">
-                  <div [hidden]="!prestationForm.get('title')?.errors?.['required']">title is required.</div>
-                </div>
-              </div>
+        <form [formGroup]="prestationFormBasic" (ngSubmit)="onSubmit()">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Ajouter une prestation
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
-              <div class="mb-3">
-                <label for="duration" class="form-label">Durée :</label>
-                <input type="text" id="duration" formControlName="duration" class="form-control"/>
-                {{ prestationForm.get('duration')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('duration')?.errors && !prestationForm.get('duration')?.pristine" class="error-msg">
-                  <div [hidden]="!prestationForm.get('duration')?.errors?.['required']">duration is required.</div>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="addPoint" class="form-label">Point supplémentaire :</label>
-                <input type="text" id="addPoint" formControlName="addPoint" class="form-control"/>
-                {{ prestationForm.get('addPoint')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('addPoint')?.errors && !prestationForm.get('addPoint')?.pristine" class="error-msg">
-                  <div [hidden]="!prestationForm.get('addPoint')?.errors?.['required']">addPoint is required.</div>
-                </div>
-              </div>
-    
-              <div class="mb-3"><label for="dateStart" class="form-label">Date de début :</label>
-                <input type="text" id="dateStart" formControlName="dateStart" class="form-control"/>
-                {{ prestationForm.get('dateStart')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('dateStart')?.errors && !prestationForm.get('dateStart')?.pristine" class="error-msg">
-                  <div [hidden]="!prestationForm.get('dateStart')?.errors?.['required']">dateStart is required.</div>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="dateEnd" class="form-label">Date de fin :</label>
-                <input type="text" id="dateEnd" formControlName="dateEnd" class="form-control"/>
-                {{ prestationForm.get('dateEnd')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('dateEnd')?.errors && !prestationForm.get('dateEnd')?.pristine" class="error-msg">
-                  <div [hidden]="!prestationForm.get('dateEnd')?.errors?.['required']">dateEnd is required.</div>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="state" class="form-label">État :</label>
-                <input type="text" id="state" formControlName="state" class="form-control"/>
-                {{ prestationForm.get('state')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('state')?.errors && !prestationForm.get('state')?.pristine" class="error-msg">
-                  <div [hidden]="!prestationForm.get('state')?.errors?.['required']">
-                    state is required.
-                  </div>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="description" class="form-label">Description :</label>
-                <textarea id="description" formControlName="description" class="form-control"></textarea>
-                {{ prestationForm.get('description')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('description')?.errors && !prestationForm.get('description')?.pristine" class="error-msg">
-                  <div [hidden]="!prestationForm.get('description')?.errors?.['required']">
-                    description is required.
-                  </div>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="maxUser" class="form-label">Nombre maximal d'utilisateurs :</label>
-                <input type="text" id="maxUser" formControlName="maxUser" class="form-control"/>
-                {{ prestationForm.get('maxUser')?.errors?.['rules'] }}
-                <div *ngIf="prestationForm.get('maxUser')?.errors && !prestationForm.get('maxUser')?.pristine" class="error-msg">
-                  <div [hidden]="!prestationForm.get('maxUser')?.errors?.['required']">
-                    maxUser is required.
-                  </div>
-                </div>
-              </div>
+                </button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <div class="d-flex justify-content-end">
-              <button type="submit" [disabled]="prestationForm.invalid" class="btn btn-primary m-2">Soumettre</button>
-              <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Close</button>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="mb-3" *ngFor="let field of formFieldsBasic">
+                        <label [for]="field.name" class="form-label">{{ field.label }} :</label>
+                        <input type="{{ field.type }}" [id]="field.name" formControlName="{{ field.name }}" class="form-control" />
+                        <div *ngIf="prestationFormBasic.get(field.name)?.errors && !prestationFormBasic.get(field.name)?.pristine"
+                             class="error-msg m-3 text-danger">
+                            <div [hidden]="!prestationFormBasic.get(field.name)?.errors?.['required']">
+                                cette donnée est obligatoire.
+                            </div>
+                            <div [hidden]="!prestationFormBasic.controls[field.name].invalid">
+                                {{ field.validationMessage }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" [disabled]="prestationFormBasic.invalid" class="btn btn-primary m-2">Soumettre</button>
+                            <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Close</button>   
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+<div class="card-details-mini p-5 mt-lg-12 mx-lg-12 mx-md-8 my-md-8 mx-sm-5 my-sm-5 position-relative shadow mx-lg-none mx-md-none text-center">
+
+    <!--main container-->
+    <div class="main-container container" id="main-container">
+  
+      <!-- Content -->
+      <div class="row">
+  
+        <!-- Post Content -->
+        <div class="col-12 block-content">
+  
+          <!--content box-->
+          <div class="content-box">
+  
+            <!-- standard post -->
+            <article class="entry">
+  
+              <!--entry card-details-mini-->
+              <div class="col-12 card-details-mini-header text-primary">
+                <form [formGroup]="prestationFormBasic" (ngSubmit)="onSubmit()">
+                <div class="mb-3" *ngFor="let field of formFieldsBasic">
+                    <label [for]="field.name" class="form-label">{{ field.label }} :</label>
+                    <input type="{{ field.type }}" [id]="field.name" formControlName="{{ field.name }}" class="form-control" />
+                    <div *ngIf="prestationFormBasic.get(field.name)?.errors && !prestationFormBasic.get(field.name)?.pristine"
+                         class="error-msg m-3 text-danger">
+                        <div [hidden]="!prestationFormBasic.get(field.name)?.errors?.['required']">
+                            cette donnée est obligatoire.
+                        </div>
+                        <div [hidden]="!prestationFormBasic.controls[field.name].invalid">
+                            {{ field.validationMessage }}
+                        </div>
+                    </div>
+                </div>
+                </form>
+              </div> 
+              <!-- end card-details-mini -->
+  
+            </article> <!-- end standard post -->
+  
+          </div> <!-- end content box -->
+  
+        </div> <!-- end post content -->
+  
+      </div> <!-- end content -->
+  
+    </div> <!-- end main container -->
+  
+  </div>
+  
