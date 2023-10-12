@@ -4,14 +4,23 @@ import { FormBuilder, FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { AlertComponent } from './shared/components/alert/alert.component';
-import { registerLocaleData } from '@angular/common';
+import { ProfilComponent } from './shared/components/profil/profil.component';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
+import { SharedModule } from './shared/shared.module';
+import { FormUserModule } from './shared/components/form-user/form-user.module';
+import { LocalStorageService } from './shared/services/localStorage.service';
+import { ProfilService } from './shared/services/profil.service';
 import { CategoryService } from './shared/services/category.service';
+import { AuthInterceptor } from './core/service/auth/auth.interceptor';
+import { AuthenticationService } from './core/service/auth/authentication.service';
+import { UserService } from './shared/services/user.service';
+import { ToolsService } from './shared/services/tools.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +28,7 @@ import { CategoryService } from './shared/services/category.service';
     FooterComponent,
     NavbarComponent,
     AlertComponent,
+    ProfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,11 +36,17 @@ import { CategoryService } from './shared/services/category.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    FormUserModule
   ],
-  providers: [FormBuilder, { provide: LOCALE_ID, useValue: 'fr' }, CategoryService],
+  providers: [
+    FormBuilder,
+    { provide: LOCALE_ID, useValue: 'fr' },
+    LocalStorageService, ProfilService, CategoryService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthenticationService, UserService, ToolsService
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
 
 registerLocaleData(localeFr);

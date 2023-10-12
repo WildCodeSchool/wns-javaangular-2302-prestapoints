@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Profile;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import fr.fixture.CategoryFixtures;
 import fr.fixture.LocationFixtures;
@@ -16,6 +17,7 @@ import fr.fixture.ImageFixtures;
 import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
+@EnableTransactionManagement
 public class PrestapointsApplication {
 
 	@Autowired
@@ -41,19 +43,21 @@ public class PrestapointsApplication {
 	@PostConstruct
 	@Profile("!test")
 	public void init() {
-		if (this.loadFixtures) {
-
-			// Faire attention à l'ordre des dépendences !
-			roleFixtures.prepareFixtures();
-			userFixtures.prepareFixtures(); // depends on roles
-			categoryFixtures.prepareFixtures(); // depends on
-			typeFixtures.prepareFixtures(); // depends on category
-			locationFixtures.prepareFixtures();
-			prestationFixtures.prepareFixtures(); // depends on user, category, location
-			registrationFixtures.prepareFixtures();// depends on prestation
-			imageFixtures.prepareFixtures();
+		try {
+			if (this.loadFixtures) {
+				// Faire attention à l'ordre des dépendences !
+				roleFixtures.prepareFixtures();
+				userFixtures.prepareFixtures(); // depends on roles
+				categoryFixtures.prepareFixtures(); // depends on
+				typeFixtures.prepareFixtures(); // depends on category
+				locationFixtures.prepareFixtures();
+				prestationFixtures.prepareFixtures(); // depends on user, category, location
+				registrationFixtures.prepareFixtures();// depends on prestation
+				imageFixtures.prepareFixtures();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
 	}
 
 	public static void main(String[] args) {

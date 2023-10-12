@@ -8,4 +8,12 @@ import lombok.Setter;
 public class ResponseApi {
     private String message;
     private boolean responseValid;
+
+    public ResponseApi() {
+    }
+
+    public ResponseApi(boolean responseValid, String message) {
+        this.message = message;
+        this.responseValid = responseValid;
+    }
 }

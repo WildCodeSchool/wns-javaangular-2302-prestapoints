@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { UserService } from 'src/app/shared/services/user.service';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -10,8 +10,10 @@ import { UserService } from 'src/app/shared/services/user.service';
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [UserService]
+  providers: [UserService ]
 })
 export class AdminModule { }

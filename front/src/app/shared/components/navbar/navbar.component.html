@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-grey {{ isVisible ? '' : 'd-none'}}">
   <div class="container">
     <div class="d-flex flex-column text-end me-5 ">
-      <a class="text-decoration-none text-primary fw-bolder fs-4 fs-sm-3 fs-md-2 fs-lg-1" href="#">
+      <a class="text-decoration-none text-primary fw-bolder fs-4 fs-sm-3 fs-md-2 fs-lg-1" href="/">
         <div class="d-flex align-items-center">
           <span class="pe-2">P</span>
           <span class="px-2">R</span>
@@ -19,14 +19,14 @@
         </div>
       </a>
 
-      <a class="text-decoration-none text-secondary fw-normal fs-6 " href="#">Services entre particuliers</a>
+      <a class="text-decoration-none text-secondary fw-normal fs-6 " href="/">Services entre particuliers</a>
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 border-bottom w-100 justify-content-between px-4">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 border-bottom w-100 justify-content-between px-4 align-items-center">
         <li class="nav-item">
           <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="#">Nos univers</a>
         </li>
@@ -40,7 +40,20 @@
           <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="#">Proposer un atelier</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="auth">Se connecter</a>
+          <div class="d-flex align-items-center">
+            <div [hidden]="inputNotvisible">
+              <a class="nav-link active text-primary fw-bolder fs-6" aria-current="page" href="auth">Se connecter</a>
+            </div>
+            <div [hidden]="inputVisible">
+              <a class="nav-link active text-primary fw-bolder fs-6 btn bg-transparent" aria-current="page" (click)="logout()">Déconnexion</a>
+            </div>
+            <div [hidden]="inputVisible">
+              <button type="button" class="nav-link active text-primary fw-bolder fs-6" aria-current="page"
+                data-bs-toggle="modal" data-bs-target="#modalProfil">
+                <img class="rounded-circle bg-secondary" style="width: 30px;" src="./assets/img/connexion.svg">
+              </button>
+            </div>
+          </div>
         </li>
       </ul>
     </div>

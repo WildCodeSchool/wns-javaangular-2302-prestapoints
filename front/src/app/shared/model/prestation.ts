@@ -2,30 +2,33 @@ import { Type } from './type';
 import { Registration } from './registration';
 import { Location } from './location';
 import { Image } from './image';
+import { User } from './user';
 
 export class Prestation {
-  public id?: number;
-  public title?: string;
-  public duration?: number;
-  public addPoint?: number;
-  public dateStartTimestamps?: number;
-  //public dateStartString? : string;
-  //public timeStartString? : string;
-  public dateEnd?: number;
-  public state?: string;
-  public description?: string;
-  public maxUser?: number;
-  public images?: Image[];
-  public type?: Type;
-  public location?: Location;
-  public placeAvailable?: number;
-  public littleDescription?: string;
-  public practicalInformation?: string;
-  public language?: string;
-  public personalInfos?: string;
-  public registration?: Registration[];
-
-  constructor() {}
+  constructor(
+    public id?: number,
+    public user?: User,
+    public title?: string,
+    public duration?: number,
+    public addPoint?: number,
+    public dateStartTimestamps?: number,
+    //public dateStartString? : string;
+    //public timeStartString? : string;
+    public dateEnd?: number,
+    public state?: string,
+    public description?: string,
+    public maxUser?: number,
+    public images: Image[] = [],
+    public type?: Type,
+    public location?: Location,
+    public placeAvailable?: number,
+    public littleDescription?: string,
+    public videoLink?: string,
+    public practicalInformation?: string,
+    public language?: string,
+    public personalInfos?: string,
+    public registrations?: Registration[]
+  ) {}
 
   get getDuration(): string {
     if (this.duration != undefined) {

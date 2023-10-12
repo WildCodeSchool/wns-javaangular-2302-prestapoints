@@ -42,16 +42,16 @@ public class WebSecurityConfig {
 
     @Profile("tests")
     @Bean
-    public SecurityFilterChain filterChain2(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
+    public SecurityFilterChain filterChain2(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter)
+            throws Exception {
         System.out.println("Security test configuration");
         http.csrf().disable();
         http.authorizeHttpRequests()
                 .anyRequest().permitAll();
-        
+
         return http.build();
     }
     
-
 
     @Profile("!tests")
     @Bean
@@ -63,25 +63,30 @@ public class WebSecurityConfig {
         http.headers().frameOptions().disable(); // à voir avec Louis pourquoi conserver disable ligne 45-46
         http.cors() // CORS is configured just under
                 .and()
-                    .authorizeHttpRequests()
-                    .requestMatchers(GET, "/admin/*").hasRole("ROLE_ADMIN")
-                    .requestMatchers("/prestations/*").hasRole("ROLE_USER") //TODO: à valider avec les copains le mot clé qui restreint les routes
-                    .anyRequest().permitAll()
-                .and()
-                .formLogin()
-                    .loginPage("/public/sign-in").permitAll() //TODO à faire
-                    .loginProcessingUrl("/public/do-sign-in") //TODO à suppr l'url si redirect sur sign-in directement
-                    .defaultSuccessUrl("/home") // à voir avec Louis
-                    .failureUrl("/public/sign-in?error=true") // à voir avec Louis
-                    .usernameParameter("username")
-                    .passwordParameter("password")
+                .authorizeHttpRequests()
+                .requestMatchers(GET, "/admin/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/prestations/**").hasAuthority("ROLE_USER")                                                    // qui restreint les routes
+                .requestMatchers(
+                        "/api/v1/auth/",
+                        "/v2/api-docs",
+                        "/v3/api-docs",
+                        "/v3/api-docs/",
+                        "/swagger-resources",
+                        "/swagger-resources/",
+                        "/configuration/ui",
+                        "/configuration/security",
+                        "/swagger-ui/",
+                        "/webjars/**",
+                        "/swagger-ui.html")
+                .permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/public/logout")) // TODO à faire
-                    .clearAuthentication(true)
-                    .invalidateHttpSession(true)
-                    .logoutSuccessUrl("/public/index") //TODO changer l'url et/ou à créer
-                    .deleteCookies("JSESSIONID");
+                .logoutRequestMatcher(new AntPathRequestMatcher("/public/logout")) // TODO à faire
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/public/index") // TODO changer l'url et/ou à créer
+                .deleteCookies("JSESSIONID");
 
         return http.build();
     }

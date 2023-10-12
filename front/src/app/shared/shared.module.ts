@@ -5,7 +5,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ReviewscardComponent } from './components/reviewscard/reviewscard.component';
 
 @NgModule({
-  declarations: [NavbarComponent],
-  imports: [CommonModule],
+  declarations: [],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class SharedModule {}

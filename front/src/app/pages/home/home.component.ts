@@ -12,29 +12,27 @@ import { Registration } from 'src/app/shared/model/registration';
 })
 export class HomeComponent implements OnInit {
   public prestationsApi?: Prestation[];
-  //public registrationApi?: Registration;
 
-  constructor(
-    private prestationService: PrestationService //private registrationService: RegistrationService
-  ) {}
+  constructor(private prestationService: PrestationService) {}
 
   ngOnInit() {
+    this.getPrestations();
+  }
+
+  needToRefresh($event: boolean) {
+    if ($event) {
+      this.getPrestations();
+    }
+  }
+
+  getPrestations() {
     this.prestationService.getPrestations().subscribe((response) => {
       this.prestationsApi = response;
-
       console.log(this.prestationsApi);
     });
-
-    /*this.registrationService.getRegistration().subscribe((response) => {
-      this.registrationApi = response;
-    });*/
   }
 
   onGetPrestation(prestationsSearch: Prestation[]): void {
     this.prestationsApi = prestationsSearch;
   }
-
-  /*onGetRegistration(registrationSearch: Registration): void {
-    this.registrationApi = registrationSearch;
-  }*/
 }

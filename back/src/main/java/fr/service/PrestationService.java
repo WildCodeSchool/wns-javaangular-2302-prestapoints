@@ -2,13 +2,9 @@ package fr.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import fr.exception.ExceptionJsonDetail;
-
 import fr.dto.PrestationDto;
 import fr.entity.Prestation;
 import fr.mapper.PrestationMapper;
@@ -34,12 +30,11 @@ public class PrestationService {
         return prestationDtos;
     }
 
-    public String getPrestationById(Integer id) throws ExceptionJsonDetail {
+    public PrestationDto getPrestationById(Integer id) throws ExceptionJsonDetail {
         Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
-        prestationMapper.convertToDto(prestation);
-        JSONObject object = new JSONObject(prestation);
+        PrestationDto prestationDto = prestationMapper.convertToDto(prestation);
 
-        return object.toString();
+        return prestationDto;
     }
 
     public Prestation createPrestation(PrestationDto prestationDto) {
@@ -54,11 +49,21 @@ public class PrestationService {
 
     public Prestation subtractOnePlaceAvailableInPrestationById(Integer id) {
         Prestation prestation = prestationRepository.findById(id).get();
-        
+
         if (prestation.getPlaceAvailable() > 0) {
             prestation.setPlaceAvailable(prestation.getPlaceAvailable() - 1);
         }
-        
+
+        return prestationRepository.save(prestation);
+    }
+    
+    public Prestation addOnePlaceAvailableInPrestationById(Integer id) {
+        Prestation prestation = prestationRepository.findById(id).get();
+
+        if (prestation != null) {
+            prestation.setPlaceAvailable(prestation.getPlaceAvailable() + 1);
+        }
+
         return prestationRepository.save(prestation);
     }
 }

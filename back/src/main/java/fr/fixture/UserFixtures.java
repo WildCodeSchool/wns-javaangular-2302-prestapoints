@@ -53,7 +53,7 @@ public class UserFixtures {
 
                 Date birthday = faker.date().birthday();
                 Timestamp timestamp = new Timestamp(birthday.getTime());
-                user.setCreation(timestamp);
+                user.setCreationDate(timestamp);
 
                 userRepository.save(user);
             }
@@ -73,7 +73,8 @@ public class UserFixtures {
             
             Date birthday = faker.date().birthday();
             Timestamp timestamp = new Timestamp(birthday.getTime());
-            user.setCreation(timestamp);
+            user.setCreationDate(timestamp);
+
 
             userRepository.save(user);
 

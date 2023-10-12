@@ -18,7 +18,13 @@ import { ReviewscardComponent } from 'src/app/shared/components/reviewscard/revi
     ReservationComponent //à suppr en attente de Luc,
     ReviewscardComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule, SearchbarModule],
-  providers: [PrestationService, DatePipe], //suppr datepipe
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    SearchbarModule, 
+    FormsModule, 
+    ReactiveFormsModule
+  ], 
+  providers: [PrestationService, DatePipe], 
 })
 export class HomeModule {}

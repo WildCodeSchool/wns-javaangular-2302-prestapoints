@@ -180,6 +180,50 @@ Les <mappers> sont les classes qui effectuent le mapping entre les <models> et l
 Les <repositories> effectuent des opérations sur la base de données pour les renvoyer au <service>.
 <Config> contient les fichiers de configuration, dans notre application, pour paramétrer la sécurité dans un premier temps.
 
+# Les routes
+
+Côté back, la limitation se fait dans le fichier <config/WebSecurityConfig.java>, le requestMatchers permet de déterminer quel rôle à le droit d'accès.
+Côté front, il faut mettre en place des <guards>. Attention, s'il y a plusieurs guards sur une route, l'utilisateur doit valider toutes les guards pour y accéder.
+
+<Limiter au ROLE_ADMIN : admin/*> 
+côté Angular le {u.id} deviendra "utilisateur", {p.id} deviendra "prestation", ...
+
+admin/
+admin/utilisateurs
+admin/utilisateurs/creation
+admin/utilisateurs/{u.id}/details
+admin/utilisateurs/{u.id}/modification
+admin/utilisateurs/{u.id}/suppression
+admin/prestations/
+admin/prestations/{p.id}/details
+admin/prestations/{p.id}/modification
+admin/prestations/{p.id}/suppression
+
+<Limiter au ROLE_USER : prestapoints/*>
+côté Angular le {u.id} deviendra "utilisateur", {p.id} deviendra "prestation", {i.id} deviendra "inscription",...
+
+prestapoints/particulier/deconnexion
+prestapoints/particulier/utilisateurs/{u.id}
+prestapoints/particulier/prestations/creation
+
+<!-- prestapoints/prestations -->
+<!-- prestapoints/prestations/{p.id}/details -->
+prestapoints/particulier/prestations/{p.id}/inscriptions   <!-- je ne sais pas si c'est pertinent de l'utiliser, mais utile pour bien comprendre la structure -->
+prestapoints/particulier/prestations/{p.id}/inscriptions/creation
+prestapoints/particulier/prestations/{p.id}/inscriptions/{i.id}/details
+prestapoints/particulier/prestations/{p.id}/inscriptions/{i.id}/modification
+prestapoints/particulier/prestations/{p.id}/inscriptions/{i.id}/suppression
+
+
+<sans limitation : public/*>
+prestapoints/
+prestapoints/inscription
+prestapoints/connexion
+prestapoints/authentification
+prestapoints/categories
+prestapoints/email/verification
+prestapoints/prestations
+prestapoints/prestations/{p.id}/details
 
 #
 ## Environnement de Tests ##
@@ -307,6 +351,14 @@ Il faut donc Pull dev de origin vers le local.
         <git pull origin dev>
 
 Un nouveau travail peut commencer avec une nouvelle en reprenant avec la commande   <git checkout -b maNouvelleBranche>
+
+#---SWAGGER----#
+Voici le lien pour accéder à SWAGGER
+http://localhost:8080/swagger-ui/index.html#/
+
+également lien du tuto
+https://www.baeldung.com/openapi-jwt-authentication#3-global-configuration
+
 
 
 ####################################################################################################################
