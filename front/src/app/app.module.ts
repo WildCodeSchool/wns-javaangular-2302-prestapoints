@@ -36,7 +36,7 @@ import { ToolsService } from './shared/services/tools.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FormUserModule
+    FormUserModule,
   ],
   providers: [
     FormBuilder,

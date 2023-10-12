@@ -8,6 +8,8 @@ import { SliderComponent } from 'src/app/shared/components/slider/slider.compone
 import { CardComponent } from 'src/app/shared/components/card/card.component';
 import { SearchbarModule } from 'src/app/shared/components/searchbar/searchbar.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CardCategoryComponent } from 'src/app/shared/components/card-category/card-category.component';
+import { SliderCategoryComponent } from 'src/app/shared/components/slider-category/slider-category.component';
 
 
 
@@ -18,6 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     SliderComponent,
     CardComponent,
+    CardCategoryComponent,
+    SliderCategoryComponent
   ],
   imports: [
     CommonModule,
