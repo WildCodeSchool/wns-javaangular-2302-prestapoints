@@ -2,6 +2,7 @@ package fr.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import fr.model.ResponseApi;
 import fr.repository.PrestationRepository;
@@ -42,6 +43,13 @@ public class PrestationController {
     public PrestationDto getPrestation(@PathVariable Integer id) {
 
         return prestationService.getPrestationById(id);
+    }
+
+     @GetMapping("/prestations/categories/{id}")
+    public ResponseEntity<List<PrestationDto>> getPrestationsByCategory(@PathVariable Integer categoryId) {
+
+        List<PrestationDto> prestations = prestationService.getPrestationsByCategory(categoryId);
+        return ResponseEntity.ok(prestations);
     }
 
     @PostMapping("/prestations")
