@@ -8,12 +8,16 @@ import { ResponseApi } from '../model/responseApi';
 
 @Injectable()
 export class PrestationService {
+  getPrestationsByCategory(categoryId: string) {
+    throw new Error('Method not implemented.');
+  }
   private apiUrl?: string;
 
   constructor(private http: HttpClient) {}
 
   getPrestations(): Observable<Prestation[]> {
-    this.apiUrl = 'http://localhost:8080/accueil';
+    this.apiUrl =
+      'http://localhost:8080/accueil';
 
     return this.http.get<Prestation[]>(this.apiUrl);
   }

@@ -1,4 +1,6 @@
-.custom-card {
+@import "/src/styles/variables.scss";
+
+.custom-category-card {
     
     @media (max-width: 767px) {
         width: 18rem; 
@@ -10,4 +12,3 @@
         height: 20rem;
     }
 }
-

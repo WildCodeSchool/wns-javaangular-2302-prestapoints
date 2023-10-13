@@ -39,6 +39,8 @@ public class PrestapointsApplication {
 
 	/* STOP FIXTURES = false # START FIXTURES = true */
 	private boolean loadFixtures = true;
+	/* STOP FIXTURES = false # START FIXTURES = true */
+	private boolean loadFixtures = true;
 
 	@PostConstruct
 	@Profile("!test")

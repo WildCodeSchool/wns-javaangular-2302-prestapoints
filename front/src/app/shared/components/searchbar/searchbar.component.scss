@@ -38,3 +38,10 @@
     outline: none;
 }
   
+
+@media (max-width: 767px) {
+    .search-bar {
+      width: 80vw;
+      margin-left: 55vw;
+    }
+}
