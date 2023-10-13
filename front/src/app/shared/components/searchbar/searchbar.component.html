@@ -1,12 +1,17 @@
-<form class="search-bar p-0 border-secondary d-flex mt-5"  (ngSubmit)="searchForm.valid && onSubmit()"
+<form class="search-bar p-0 border-secondary d-flex mt-5" (ngSubmit)="searchForm.valid && onSubmit()"
   [formGroup]="searchForm" #searchF="ngForm">
-  <input name="inputSearchBar" class="search-input rounded-left rounded-right mx-3" type="text"
+  <input name="inputSearchBar" class="search-input rounded-left mx-3" type="text"
     placeholder="Rechercher par lieu, mot(s) clé(s), etc..." required maxlength="255" minlength="3" name="search"
     formControlName="search">
-  <button class="discover-button rounded-right rounded-left me-3 border-0 " type="submit"> <span
-      class="mx-5">Découvrir</span> </button>
+  <span class="material-symbols-outlined search-icon d-md-none presta-mr-3">
+    search
+  </span>
+  <button class="discover-button rounded-right rounded-left me-3 border-0 d-none d-md-block" type="submit">
+    <span class="mx-5">Découvrir</span>
+  </button>
 </form>
-<div class="position-absolute start-50 ">
+
+<div class="position-absolute start-50">
   <ng-container *ngIf="searchForm.controls?.['search']?.errors && searchF.submitted">
     <span class="m-1 p-0"><small class="fs-small text-danger"
         *ngIf="searchForm.controls?.['search']?.errors?.['required']">Une recherche vide est impossible</small></span>
