@@ -36,14 +36,18 @@ import { ToolsService } from './shared/services/tools.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FormUserModule
+    FormUserModule,
   ],
   providers: [
     FormBuilder,
     { provide: LOCALE_ID, useValue: 'fr' },
-    LocalStorageService, ProfilService, CategoryService,
+    LocalStorageService,
+    ProfilService,
+    CategoryService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    AuthenticationService, UserService, ToolsService
+    AuthenticationService,
+    UserService,
+    ToolsService,
   ],
   bootstrap: [AppComponent],
 })
