@@ -11,6 +11,7 @@ import { Prestation } from "../../model/prestation";
     @Input()
     public prestationsApi?: Prestation[];
     public currentIndex = 0;
+    public prestationsToDisplay: Prestation[] = [];
   
     constructor() { }
 
