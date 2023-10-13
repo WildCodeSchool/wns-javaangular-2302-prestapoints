@@ -12,22 +12,24 @@ import { CardCategoryComponent } from 'src/app/shared/components/card-category/c
 import { SliderCategoryComponent } from 'src/app/shared/components/slider-category/slider-category.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+import { ReviewscardComponent } from 'src/app/shared/components/reviewscard/reviewscard.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     SliderComponent,
     CardCategoryComponent,
-    SliderCategoryComponent
+    SliderCategoryComponent,
+    ReviewscardComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SearchbarModule, 
-    FormsModule, 
+    SearchbarModule,
+    FormsModule,
     ReactiveFormsModule,
-    SharedModule
-  ], 
-  providers: [PrestationService, DatePipe], 
+    SharedModule,
+  ],
+  providers: [PrestationService, DatePipe],
 })
-export class HomeModule { }
+export class HomeModule {}
