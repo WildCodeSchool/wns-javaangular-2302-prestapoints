@@ -39,14 +39,18 @@ import { CategoryDetailsModule } from './pages/category/category-details/categor
     ReactiveFormsModule,
     FormUserModule,
     SharedModule,
-    CategoryDetailsModule
+    CategoryDetailsModule,
   ],
   providers: [
     FormBuilder,
     { provide: LOCALE_ID, useValue: 'fr' },
-    LocalStorageService, ProfilService, CategoryService,
+    LocalStorageService,
+    ProfilService,
+    CategoryService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    AuthenticationService, UserService, ToolsService
+    AuthenticationService,
+    UserService,
+    ToolsService,
   ],
   bootstrap: [AppComponent],
 })
