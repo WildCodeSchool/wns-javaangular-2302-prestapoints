@@ -13,7 +13,7 @@ export class PrestationService {
   constructor(private http: HttpClient) {}
 
   getPrestations(): Observable<Prestation[]> {
-    this.apiUrl = 'http://back:8080/accueil';
+    this.apiUrl = 'https://staging.prestapoints.lille-1.wilders.dev/api/accueil/api/accueil';
 
     return this.http.get<Prestation[]>(this.apiUrl);
   }
