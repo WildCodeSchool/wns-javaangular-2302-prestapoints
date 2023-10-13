@@ -13,7 +13,8 @@ export class PrestationService {
   constructor(private http: HttpClient) {}
 
   getPrestations(): Observable<Prestation[]> {
-    this.apiUrl = 'http://localhost:8080/accueil';
+    this.apiUrl =
+      'https://staging.prestapoints.lille-1.wilders.dev/api/accueil';
 
     return this.http.get<Prestation[]>(this.apiUrl);
   }
@@ -32,7 +33,9 @@ export class PrestationService {
   }
 
   undoRegistration(id: number | undefined): Observable<ResponseApi> {
-    this.apiUrl = 'http://localhost:8080/prestations/prestation/registration/suppression/' +  id;
+    this.apiUrl =
+      'http://localhost:8080/prestations/prestation/registration/suppression/' +
+      id;
 
     return this.http.delete<ResponseApi>(this.apiUrl);
   }

@@ -4,8 +4,9 @@ on:
   # this job is started after git push on branch "main" or "dev"
   push:
     branches:
-      - main
-      - dev
+       - US_CI-CD 
+#      - main
+#      - dev
   # allow user to start job manually
   workflow_dispatch:
 

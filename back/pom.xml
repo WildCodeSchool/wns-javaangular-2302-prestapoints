@@ -12,13 +12,13 @@
 	<groupId>fr</groupId>
 	<artifactId>prestapoints</artifactId>
 	<version>1.0.0</version>
-	<name>prestapoints-back</name>
+	<name>prestapoints</name>
 	<description>project CDA</description>
 	<properties>
 		<java.version>17</java.version>
 		<cucumber.version>7.11.2</cucumber.version>
 		<image.dockeruser></image.dockeruser>
-		<image.name>prestapoints</image.name>
+		<image.name>prestapoints-back</image.name>
 		<image.tag>latest</image.tag>
 	</properties>
 	<dependencies>
