@@ -17,7 +17,7 @@ export class PrestationService {
 
   getPrestations(): Observable<Prestation[]> {
     this.apiUrl =
-      'https://staging.prestapoints.lille-1.wilders.dev/api/accueil';
+      'http://localhost:8080/accueil';
 
     return this.http.get<Prestation[]>(this.apiUrl);
   }
