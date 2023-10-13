@@ -51,7 +51,6 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-    
 
     @Profile("!tests")
     @Bean
@@ -65,7 +64,7 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(GET, "/admin/**").hasAuthority("ROLE_ADMIN")
-                .requestMatchers("/prestations/**").hasAuthority("ROLE_USER")                                                    // qui restreint les routes
+                .requestMatchers("/prestations/**").hasAuthority("ROLE_USER") // qui restreint les routes
                 .requestMatchers(
                         "/api/v1/auth/",
                         "/v2/api-docs",
@@ -94,7 +93,8 @@ public class WebSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedOrigins(
+                Arrays.asList("http://localhost:4200", "https://staging.prestapoints.lille-1.wilders.dev/"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(Arrays.asList(
