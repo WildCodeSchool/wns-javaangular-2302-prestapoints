@@ -21,6 +21,7 @@ import { AuthInterceptor } from './core/service/auth/auth.interceptor';
 import { AuthenticationService } from './core/service/auth/authentication.service';
 import { UserService } from './shared/services/user.service';
 import { ToolsService } from './shared/services/tools.service';
+import { CategoryDetailsModule } from './pages/category/category-details/category-details.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { ToolsService } from './shared/services/tools.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FormUserModule
+    FormUserModule,
+    SharedModule,
+    CategoryDetailsModule
   ],
   providers: [
     FormBuilder,
