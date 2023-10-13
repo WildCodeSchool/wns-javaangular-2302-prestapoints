@@ -14,7 +14,7 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @OpenAPIDefinition(info = @Info(contact = @Contact(name = "Charly", email = "Mettre Email conforme"), description = "", title = "API for Prestapoint", version = "1.0", license = @License(name = "License name", url = "some-url"), termsOfService = "Terms of service"), servers = {
-        @Server(description = "Local ENV", url = "http://localhost:8080/")
+        @Server(description = "Local ENV", url = "/api/")
 })
 @Configuration
 public class OpenApiConfig {

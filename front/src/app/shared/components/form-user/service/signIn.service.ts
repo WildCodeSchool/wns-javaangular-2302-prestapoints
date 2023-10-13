@@ -12,10 +12,10 @@ export class SignInService {
   constructor(public http : HttpClient) { }
 
   createUser(user: User): Observable<ResponseApi>{
-    return this.http.post<ResponseApi>("http://localhost:8080/public/sign-in", user);
+    return this.http.post<ResponseApi>("/api/public/sign-in", user);
   }
 
   verifyEmail(email?: string): Observable<boolean>{
-    return this.http.post<boolean>("http://localhost:8080/public/email/verification", email);
+    return this.http.post<boolean>("/api/public/email/verification", email);
   }
 }

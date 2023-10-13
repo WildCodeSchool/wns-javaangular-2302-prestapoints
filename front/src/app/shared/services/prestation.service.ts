@@ -19,21 +19,21 @@ export class PrestationService {
   }
 
   getPrestationById(id: string): Observable<Prestation> {
-    this.apiUrl = 'http://localhost:8080/prestations';
+    this.apiUrl = '/api/prestations';
     const url = `${this.apiUrl}/${id}`;
 
     return this.http.get<Prestation>(url);
   }
 
   addRegistration(id: number | undefined): Observable<ResponseApi> {
-    this.apiUrl = 'http://localhost:8080/prestations/prestation/registration';
+    this.apiUrl = '/api/prestations/prestation/registration';
 
     return this.http.post<ResponseApi>(this.apiUrl, id);
   }
 
   undoRegistration(id: number | undefined): Observable<ResponseApi> {
     this.apiUrl =
-      'http://localhost:8080/prestations/prestation/registration/suppression/' +
+      '/api/prestations/prestation/registration/suppression/' +
       id;
 
     return this.http.delete<ResponseApi>(this.apiUrl);

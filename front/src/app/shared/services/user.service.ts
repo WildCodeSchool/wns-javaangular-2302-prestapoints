@@ -12,28 +12,28 @@ export class UserService {
   constructor(private http: HttpClient, private signinService: SignInService) {}
 
   getUsers(): Observable<User[]> {
-    this.apiUrl = 'http://localhost:8080/admin/utilisateurs';
+    this.apiUrl = '/api/admin/utilisateurs';
 
     return this.http.get<User[]>(this.apiUrl);
   }
 
   saveUser(user: User): Observable<ResponseApi> {
     this.apiUrl =
-      'http://localhost:8080/admin/utilisateurs/utilisateur/sauvegarde';
+      '/api/admin/utilisateurs/utilisateur/sauvegarde';
 console.log(user)
     return this.http.post<ResponseApi>(this.apiUrl, user);
   }
 
   deleteUser(user: User): Observable<ResponseApi> {
     this.apiUrl =
-      'http://localhost:8080/admin/utilisateurs/utilisateur/suppression';
+      '/api/admin/utilisateurs/utilisateur/suppression';
 
     return this.http.post<ResponseApi>(this.apiUrl, user);
   }
 
   deleteUsers(users: User[]): Observable<ResponseApi> {
     this.apiUrl =
-      'http://localhost:8080/admin/utilisateurs/utilisateur/suppressions';
+      '/api/admin/utilisateurs/utilisateur/suppressions';
 
     return this.http.post<ResponseApi>(this.apiUrl, users);
   }

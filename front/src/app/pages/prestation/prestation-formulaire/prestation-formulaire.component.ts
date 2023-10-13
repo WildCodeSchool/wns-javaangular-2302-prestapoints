@@ -46,7 +46,7 @@ export class PrestationFormulaireComponent {
       );
   
       // Envoie de l'objet JSON au serveur
-    this.http.post("http://localhost:8080/prestations", prestation).subscribe(
+    this.http.post("/api/prestations", prestation).subscribe(
       response => {
         // Traitement de la réponse du serveur
         this.prestationForm.reset();

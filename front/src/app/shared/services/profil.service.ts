@@ -15,21 +15,21 @@ export class ProfilService {
   constructor(public http: HttpClient) { }
 
   updateUser(user: User): Observable<ResponseApi> {
-    this.apiUrl = "http://localhost:8080/update";
+    this.apiUrl = "/api/update";
     return this.http.post<ResponseApi>(this.apiUrl, user)
   }
 
   getUserConnected(): Observable<User> {
-    return this.http.get<User>("http://localhost:8080/getUserConnected")
+    return this.http.get<User>("/api/getUserConnected")
   }
 
   updateAvatar(imageFormData: FormData): Observable<ResponseApi> {
-    this.apiUrl = "http://localhost:8080/avatar";
+    this.apiUrl = "/api/avatar";
     return this.http.post<ResponseApi>(this.apiUrl, imageFormData)
   }
 
   getAvatar(): Observable<ArrayBuffer> {
-    return this.http.get('http://localhost:8080/get/avatar', { responseType: 'arraybuffer' });
+    return this.http.get('/api/get/avatar', { responseType: 'arraybuffer' });
   }
 }
 

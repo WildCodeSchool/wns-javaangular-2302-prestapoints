@@ -1,7 +1,7 @@
 
 it.only('ReqRes API Create User test', () => {
     cy.request({
-        url: 'http://localhost:8080/public/sign-in',
+        url: '/api/public/sign-in',
         method: 'POST',
         body: {
             "firstname": "Mohammed",
