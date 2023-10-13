@@ -12,6 +12,7 @@ import org.springframework.test.context.TestPropertySource;
 
 import fr.entity.User;
 import fr.fixture.CategoryFixtures;
+import fr.fixture.ImageFixtures;
 import fr.fixture.LocationFixtures;
 import fr.fixture.PrestationFixtures;
 import fr.fixture.RegistrationFixtures;
@@ -32,6 +33,8 @@ public class DataUserTests {
     private PrestationFixtures prestationFixtures;
     @MockBean
     private CategoryFixtures categoryFixtures;
+    @MockBean
+    private ImageFixtures imageFixtures;
     @MockBean
     private LocationFixtures locationFixtures;
     @MockBean
