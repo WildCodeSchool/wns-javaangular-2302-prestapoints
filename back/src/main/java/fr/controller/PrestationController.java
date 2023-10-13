@@ -45,10 +45,10 @@ public class PrestationController {
         return prestationService.getPrestationById(id);
     }
 
-     @GetMapping("/prestations/categories/{id}")
+     @GetMapping("/prestations/categories/{categoryId}")
     public ResponseEntity<List<PrestationDto>> getPrestationsByCategory(@PathVariable Integer categoryId) {
-
         List<PrestationDto> prestations = prestationService.getPrestationsByCategory(categoryId);
+
         return ResponseEntity.ok(prestations);
     }
 
