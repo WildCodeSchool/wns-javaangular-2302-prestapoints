@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
   })
   export class ImageService {
-    private apiUrl = 'http://localhost:8080';
+    private apiUrl = '/api';
     private baseUrl = '/images'; // L'URL de base de votre API Spring Boot
   
     constructor(private http: HttpClient) { }

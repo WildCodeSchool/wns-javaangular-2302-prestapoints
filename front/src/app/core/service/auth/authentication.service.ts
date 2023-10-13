@@ -7,7 +7,7 @@ import jwtDecode from 'jwt-decode';
 @Injectable()
 export class AuthenticationService {
 
-  private authUrl = 'http://localhost:8080/auth';
+  private authUrl = 'api/auth';
 
   constructor(private http: HttpClient) { }
 
