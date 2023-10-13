@@ -10,16 +10,13 @@ import { SearchbarModule } from 'src/app/shared/components/searchbar/searchbar.m
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardCategoryComponent } from 'src/app/shared/components/card-category/card-category.component';
 import { SliderCategoryComponent } from 'src/app/shared/components/slider-category/slider-category.component';
-
-
-
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     SliderComponent,
-    CardComponent,
     CardCategoryComponent,
     SliderCategoryComponent
   ],
@@ -28,7 +25,8 @@ import { SliderCategoryComponent } from 'src/app/shared/components/slider-catego
     HomeRoutingModule,
     SearchbarModule, 
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ], 
   providers: [PrestationService, DatePipe], 
 })

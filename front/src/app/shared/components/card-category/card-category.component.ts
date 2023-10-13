@@ -1,17 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-category',
   templateUrl: './card-category.component.html',
   styleUrls: ['./card-category.component.scss']
 })
-export class CardCategoryComponent implements OnInit {
+export class CardCategoryComponent {
 
+  selectedCategory: any;
+  
   @Input() category: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {
-  }
-
+  openCategoryDetails() {
+    if (this.category && this.category.id) {
+      this.selectedCategory = this.category;
+      this.router.navigate(['/categorie', this.category.id, 'prestations']);
+    }
+  }  
 }
