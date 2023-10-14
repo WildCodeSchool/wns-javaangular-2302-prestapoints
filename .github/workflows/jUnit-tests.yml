@@ -1,4 +1,4 @@
-name: Tests JUnit Workflow
+name: JUnit Tests
 
 on:
   workflow_run:
@@ -19,6 +19,7 @@ jobs:
         with:
           java-version: "17"
           distribution: "temurin"
+          cache: maven
 
       - name: Build and test project
         run: cd back && ./mvnw clean install
