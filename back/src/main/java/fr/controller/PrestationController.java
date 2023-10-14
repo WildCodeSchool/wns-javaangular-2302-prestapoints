@@ -83,6 +83,7 @@ public class PrestationController {
         } else {
             responseApi.setMessage(MessageApiEnum.NEED_TO_BE_CONNECTED.getMessage());
         }
+        
         return responseApi;
     }
 

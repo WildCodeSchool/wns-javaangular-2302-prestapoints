@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { SliderCategoryComponent } from './slider-category.component';
+import { CardCategoryComponent } from '../card-category/card-category.component';
 
 describe('SliderCategoryComponent', () => {
   let component: SliderCategoryComponent;
@@ -11,7 +12,7 @@ describe('SliderCategoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SliderCategoryComponent ]
+      declarations: [ SliderCategoryComponent, CardCategoryComponent ]
     })
     .compileComponents();
   }));

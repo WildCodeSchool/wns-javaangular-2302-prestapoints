@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Category } from '../../model/category';
 
 @Component({
   selector: 'app-card-category',
@@ -10,7 +11,7 @@ export class CardCategoryComponent {
 
   selectedCategory: any;
   
-  @Input() category: any;
+  @Input() category?: Category;
 
   constructor(private router: Router) { }
 
