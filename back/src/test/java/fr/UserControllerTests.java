@@ -250,10 +250,7 @@ public class UserControllerTests {
         //Arrange
         User connectedUser = new User();
         connectedUser.setEmail("user@example.com");
-        // when(authController.getUserConnected()).thenReturn(connectedUser);
-
-        //Act
-        
+        when(authController.getUserConnected()).thenReturn(connectedUser);
 
         //Assert
         mockMvc.perform(post("/update")
