@@ -45,7 +45,7 @@ public class DataUserTests {
     private RoleFixtures roleFixtures;
     @Autowired
     private UserRepository userRepository;
-
+    
     @Test
     public void testEmailVerification_ShouldReturnTrue() throws Exception {
         // Arrange
