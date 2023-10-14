@@ -37,8 +37,9 @@ public class PrestapointsApplication {
 	@Autowired
 	private ImageFixtures imageFixtures;
 
-	/* STOP FIXTURES = false # START FIXTURES = true */
+	/* STOP FIXTURES = false   # START FIXTURES = true */ 
 	private boolean loadFixtures = false;
+
 
 	@PostConstruct
 	@Profile("!test")
