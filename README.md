@@ -27,7 +27,6 @@ vérifier également qu'une table user avec un champ <id> et un champ <name> se 
 #
 # Variables d'environnement
 #
-
  
 1- Sous Windows -> Ouvrir les "propriétés systèmes", aller dans "Paramètres système avancés" puis cliquer sur "Variables d'environnement" 
 
