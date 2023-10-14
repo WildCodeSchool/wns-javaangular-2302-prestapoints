@@ -246,13 +246,13 @@ public class UserControllerTests {
     }
 
     @Test
-    public void testUpdateUser_ShouldReturnStatusOkAndSuccessMessage() throws Exception {
-        //Arrange
+    public void testUpdateUser_Success() throws Exception {
         User connectedUser = new User();
         connectedUser.setEmail("user@example.com");
+
+
+
         when(authController.getUserConnected()).thenReturn(connectedUser);
-        //Act
-        //Assert
         mockMvc.perform(post("/update")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"email\":\"user@example.com\"}"))
