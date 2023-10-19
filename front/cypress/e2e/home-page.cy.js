@@ -1,12 +1,13 @@
 describe("Prestation home page", () => {
-  it("Access to home page and search a prestation wich contains 'est' in the card", () => {
-    //when
+  it("Access to home page and search a prestation wich contains 'Poterie' in the card", () => {
+    //Access
     cy.visit("");
-    //given
-    cy.get(".search-input").type("est");
+    //Act
+    cy.get(".search-input").type("poterie");
+    //Activate
     cy.get(".discover-button").click();
-    //then
-    cy.get(".category-text").first().should("have.text", "est");
+    //Assert
+    cy.get(".category-text").first().should("have.text", " Poterie ");
   });
 
   //Component test
