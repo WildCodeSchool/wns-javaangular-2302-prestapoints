@@ -73,7 +73,6 @@ public class PrestationController {
         responseApi.setResponseValid(false);
 
         if (user != null) {
-
             Registration registration = registrationService.getRegistrationByUserIdAndPrestationId(user.getId(),
                     prestationId);
 
