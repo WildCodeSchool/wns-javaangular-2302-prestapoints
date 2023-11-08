@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-slider-category',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SliderCategoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -65,4 +67,10 @@ export class SliderCategoryComponent implements OnInit {
   }
 
   currentIndex: number = 0;
+
+  openCategoryDetails(categoryId: string) {
+    this.router.navigate(['prestations', categoryId, 'details']);
+  }
+  
 }
+

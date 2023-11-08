@@ -2,12 +2,18 @@ package fr.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-import fr.exception.ExceptionJsonDetail;
+
 import fr.dto.PrestationDto;
+import fr.entity.Category;
 import fr.entity.Prestation;
 import fr.mapper.PrestationMapper;
+import fr.model.ExceptionJsonDetail;
+import fr.repository.CategoryRepository;
 import fr.repository.PrestationRepository;
 
 @Service
@@ -18,6 +24,9 @@ public class PrestationService {
 
     @Autowired
     private PrestationMapper prestationMapper;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public List<PrestationDto> getAllPrestations() {
         List<PrestationDto> prestationDtos = new ArrayList<>();
@@ -31,7 +40,7 @@ public class PrestationService {
     }
 
     public PrestationDto getPrestationById(Integer id) throws ExceptionJsonDetail {
-        Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
+        Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail("Pas de prestation trouvé"));
         PrestationDto prestationDto = prestationMapper.convertToDto(prestation);
 
         return prestationDto;
@@ -65,5 +74,18 @@ public class PrestationService {
         }
 
         return prestationRepository.save(prestation);
+    }
+
+    public List<PrestationDto> getPrestationsByCategory(Integer categoryId) throws ExceptionJsonDetail {
+       Category category = categoryRepository.findById(categoryId)
+        .orElseThrow(() -> new ExceptionJsonDetail("Catégorie non trouvée"));
+
+        List<Prestation> prestations = prestationRepository.findByTypeCategory(category);
+
+        List<PrestationDto> prestationDtos = prestations.stream()
+            .map(prestationMapper::convertToDto)
+            .collect(Collectors.toList());
+
+        return prestationDtos;
     }
 }

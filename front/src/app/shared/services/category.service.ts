@@ -19,10 +19,10 @@ export class CategoryService {
     const url = `${this.apiUrl}/categories/${categoryId}`;
     return this.http.get<Category>(url);
   }
+  
 
   getPrestationsByCategory(categoryId: string): Observable<Prestation[]> {
-    this.apiUrl = 'http://localhost:8080/prestations/categories/id ';
-    const url = `${this.apiUrl}/${categoryId}/prestations`;
+    const url = `${this.apiUrl}/prestations/categories/${categoryId}`;
     return this.http.get<Prestation[]>(url);
   }
 }

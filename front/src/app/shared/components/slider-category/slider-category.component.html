@@ -6,7 +6,7 @@
         <div class="row justify-content-center position-relative">
           <div class="col-12 col-md-6 col-lg-2 d-flex justify-content-center"
             *ngFor="let category of categories.slice(i, i + 5)">
-            <app-card-category [category]="category"></app-card-category>
+            <app-card-category [category]="category" (click)="openCategoryDetails(category.id)"></app-card-category>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
     <ng-container *ngFor="let category of categories; let i = index">
       <div class="carousel-item {{ i === currentIndex ? 'active' : '' }}">
         <div class="d-flex justify-content-center position-relative">
-          <app-card-category [category]="category"></app-card-category>
+          <app-card-category [category]="category" (click)="openCategoryDetails(category.id)"></app-card-category>
         </div>
       </div>
     </ng-container>

@@ -45,13 +45,13 @@ public class DataUserTests {
     private RoleFixtures roleFixtures;
     @Autowired
     private UserRepository userRepository;
-
+    
     @Test
     public void testEmailVerification_ShouldReturnTrue() throws Exception {
         // Arrange
         User user = new User();
-        user.setEmail("to@to.com");
-        user.setPassword("toto123456");
+        user.setEmail("test@email.fr");
+        user.setPassword("password1");
 
         // Act
         userRepository.saveAndFlush(user);

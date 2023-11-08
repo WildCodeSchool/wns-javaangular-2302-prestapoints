@@ -2,6 +2,7 @@ package fr.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import fr.model.ResponseApi;
 import fr.repository.PrestationRepository;
@@ -44,6 +45,13 @@ public class PrestationController {
         return prestationService.getPrestationById(id);
     }
 
+     @GetMapping("/prestations/categories/{categoryId}")
+    public ResponseEntity<List<PrestationDto>> getPrestationsByCategory(@PathVariable Integer categoryId) {
+        List<PrestationDto> prestations = prestationService.getPrestationsByCategory(categoryId);
+
+        return ResponseEntity.ok(prestations);
+    }
+
     @PostMapping("/prestations")
     public Prestation createPrestation(@RequestBody PrestationDto prestationDto) {
 
@@ -65,7 +73,6 @@ public class PrestationController {
         responseApi.setResponseValid(false);
 
         if (user != null) {
-
             Registration registration = registrationService.getRegistrationByUserIdAndPrestationId(user.getId(),
                     prestationId);
 
@@ -83,6 +90,7 @@ public class PrestationController {
         } else {
             responseApi.setMessage(MessageApiEnum.NEED_TO_BE_CONNECTED.getMessage());
         }
+        
         return responseApi;
     }
 

@@ -14,9 +14,13 @@
     />
   </div>
   <div class="border-top presta-mt-10 mt-md-6">
+<<<<<<< HEAD
+    <p class="my-0 fw-0 mt-3 text-md-left">Découvrez les ateliers près de chez vous<i class="bi bi-arrow-right p-3"></i></p>
+=======
     <p class="my-0 fw-0mt-3 text-md-left">
       Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i>
     </p>
+>>>>>>> dev
     <app-slider [prestationsApi]="prestationsApi"></app-slider>
 
     <hr class="my-4" />
@@ -32,9 +36,13 @@
     </div>
   </div>
   <div class="border-top presta-my-7 presta-mt-md-5">
+<<<<<<< HEAD
+    <p class="my-0 fw-0 mt-3 text-md-left">Découvrez tous nos savoir-faire<i class="bi bi-arrow-right p-3"></i></p>
+=======
     <p class="my-0 fw-0 mt-3 text-md-left">
       Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i>
     </p>
+>>>>>>> dev
     <app-slider-category></app-slider-category>
   </div>
 </div>
