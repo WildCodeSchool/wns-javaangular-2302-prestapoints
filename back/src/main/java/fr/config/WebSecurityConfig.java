@@ -94,7 +94,7 @@ public class WebSecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
-                Arrays.asList("http://localhost:4200", "http://localhost:8100", "http://192.168.1.182:8080",
+                Arrays.asList("http://localhost:4200", "http://localhost:8100", "http://192.168.1.182:8080", "http://localhost:50072",
                                         "https://staging.prestapoints.lille-1.wilders.dev"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowCredentials(true);
