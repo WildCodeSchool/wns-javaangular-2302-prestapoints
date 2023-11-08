@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'mobile',
+  appId: 'com.prestapoints.app',
+  appName: 'Prestapoints',
   webDir: 'www',
   server: {
     androidScheme: 'https'

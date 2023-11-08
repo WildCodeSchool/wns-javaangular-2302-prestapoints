@@ -17,7 +17,7 @@ import { PrestationService } from '../services/prestation.service';
     IonicModule,
     HomePageRoutingModule,
   ],
-  declarations: [HomePage, SliderComponent, CardComponent],
+  declarations: [HomePage, SliderComponent, CardComponent,],
   providers:[PrestationService]
 })
 export class HomePageModule {}
