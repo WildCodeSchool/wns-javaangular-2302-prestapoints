@@ -17,14 +17,18 @@ export class CategoryDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private categoryService: CategoryService
-  ) {}
+    private categoryService: CategoryService,
+  ) {
+    console.log('CategoryDetailsComponent loaded'); // Ajoutez cette ligne
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
+      console.log('Category ID:', id); // Ajoutez cette ligne
       if (id) {
         this.getPrestationsByCategory(id);
+        this.getCategoryDetails(id); 
       }
     });
   }
@@ -33,6 +37,12 @@ export class CategoryDetailsComponent implements OnInit {
     this.categoryService.getPrestationsByCategory(id).subscribe(prestations => {
       console.log('Prestations:', prestations);
       this.prestations = prestations;
+    });
+  }
+
+  getCategoryDetails(id: string): void {
+    this.categoryService.getCategoryById(id).subscribe(category => {
+      this.selectedCategory = category;
     });
   }
 }
