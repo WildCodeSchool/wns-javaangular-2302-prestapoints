@@ -10,7 +10,7 @@ export class Prestation {
     constructor(
         public id? : number,
         public user? : User,
-        public title? : string,
+        public title : string ="",
         public duration? : number,
         public addPoint? : number,
         public dateStartTimestamps? : number,

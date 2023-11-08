@@ -15,10 +15,12 @@ import { Category } from 'src/app/shared/model/category';
   styleUrls: ['./prestation-formulaire.component.scss']
 })
 export class PrestationFormulaireComponent {
-    prestation!: Prestation;
-    location!: Location;
-    categories!: Category[];
+    prestation: Prestation = new Prestation;
+    location: Location = new Location;
+    categories: Category[]=  [];
+
     isLoaded: boolean = false;
+    isFormulaireFalse : boolean = false;
     prestationFormBasic!: FormGroup;
     prestationFormDescription!: FormGroup;
     prestationFormLocation!: FormGroup;
@@ -34,7 +36,7 @@ export class PrestationFormulaireComponent {
 
     formFieldsCharacteristic: { name: string; label: string; type: string; placeholder: string; validationMessage: string }[] = [
         { name: 'dateStart', label: 'Date de début', type: 'date', placeholder: "", validationMessage: 'La date doit être sous forme jj/mm/aaaa et supérieur à aujourdui.' },
-        { name: 'timeStart', label: 'Heure de début', type: 'text', placeholder: "ex : 16:00", validationMessage: "On acceepte que des nombres" },
+        { name: 'timeStart', label: 'Heure de début', type: 'text', placeholder: "ex : 16:00", validationMessage: "On accepte que des nombres" },
         { name: 'duration', label: 'Durée de la prestation en Heure', type: 'number', placeholder: "ex : 3", validationMessage: "L'horraire n'est pas conforme hh:mm." },
         { name: 'maxUser', label: 'Nombre maximal d\'utilisateurs', type: 'number', placeholder: "ex : 6", validationMessage: 'L\'information du nombre de participants maximal est obligatoire.' }
     ];
@@ -68,32 +70,32 @@ export class PrestationFormulaireComponent {
     ngOnInit(): void {
     
         this.prestationFormBasic = this.formBuilder.group({
-            title: ['', [Validators.required, Validators.maxLength(50)]],
-            type: ['', [Validators.required, Validators.maxLength(50)]],
-            category: [],
+            title: ['Dressage de chiens', [Validators.required, Validators.maxLength(50)]],
+            type: ['Apprenez à dresser votre chien avec notre expert canin', [Validators.required, Validators.maxLength(100)]],
+            category: ['', Validators.required],
         });
 
         this.prestationFormCharacteristic = this.formBuilder.group({
-        dateStart: ['', [Validators.required, this.formValidatorsService.dateValidator()]],
-        timeStart: ['', [Validators.required, this.formValidatorsService.timeValidator]],
-            duration: ['', [Validators.required, Validators.maxLength(2)]],
-            maxUser: ['', [Validators.required, Validators.maxLength(3)]],
+        dateStart: ['15/11/2023', [Validators.required, this.formValidatorsService.dateValidator()]],
+        timeStart: ['16:00', [Validators.required, this.formValidatorsService.timeValidator]],
+            duration: ['3', [Validators.required, Validators.maxLength(2)]],
+            maxUser: ['6', [Validators.required, Validators.maxLength(3)]],
         });
 
         this.prestationFormDescription = this.formBuilder.group({
-            practicalInformation: ['',[ Validators.required, Validators.maxLength(255)]],
-            description: ['', [Validators.required, Validators.maxLength(1000)]],
-            littleDescription: ['',[ Validators.required, Validators.maxLength(255)]],
-            language: ['', [Validators.required, Validators.maxLength(50)]],
-            personalInfos: ['', [Validators.required, Validators.maxLength(255)]],
+            practicalInformation: ['Les chiens admis sont des chiens dressés ...',[ Validators.required, Validators.maxLength(255)]],
+            description: ['Découvrez les techniques de dressage de chiens et renforcez ...', [Validators.required, Validators.maxLength(1000)]],
+            littleDescription: ['Découvrez les techniques de dressage de chiens ...',[ Validators.required, Validators.maxLength(255)]],
+            language: ['Francais', [Validators.required, Validators.maxLength(50)]],
+            personalInfos: ['Notre expert canin possède une vaste expérience', [Validators.required, Validators.maxLength(255)]],
         });
 
         this.prestationFormLocation = this.formBuilder.group({
-            LocationCity: ['', [Validators.required, Validators.maxLength(50)]],
-            LocationPostalCode: ['', [Validators.required, this.formValidatorsService.postalCodeValidator(),Validators.maxLength(5)]],
-            LocationAddress: ['', [Validators.required, Validators.maxLength(50)]],
-            LocationAddressNumber: ['', [Validators.required, Validators.maxLength(50)]],
-            LocationAddressInformation: ['', [Validators.required, Validators.maxLength(255)]],
+            LocationCity: ['Janville', [Validators.required, Validators.maxLength(50)]],
+            LocationPostalCode: ['28310', [Validators.required, this.formValidatorsService.postalCodeValidator(),Validators.maxLength(5)]],
+            LocationAddress: ['forge', [Validators.required, Validators.maxLength(50)]],
+            LocationAddressNumber: ['56', [Validators.required, Validators.maxLength(50)]],
+            LocationAddressInformation: ['dans un grand espace', [Validators.required, Validators.maxLength(255)]],
         });
 
         this.prestationFormMedia= this.formBuilder.group({
@@ -103,44 +105,61 @@ export class PrestationFormulaireComponent {
     }
 
     onSubmitBpNext(pageNumber: number){
-        /*if (pageNumber == 0 && this.prestationFormBasic.invalid) {
+        if (pageNumber == 0 && this.prestationFormBasic.invalid) {
+            this.isFormulaireFalse = true;
             return;
         }
         if (pageNumber == 1 && this.prestationFormCharacteristic.invalid) {
+            this.isFormulaireFalse = true;
             return;
         }
         if (pageNumber == 2 && this.prestationFormDescription.invalid) {
+            this.isFormulaireFalse = true;
             return;
-        }*/
+        }
+        if (pageNumber == 3 && this.prestationFormLocation.invalid) {
+            this.isFormulaireFalse = true;
+            return;
+        }
+        if (pageNumber == 4 && this.prestationFormMedia.invalid) {
+            this.isFormulaireFalse = true;
+            return;
+        }
 
-        
+        this.isFormulaireFalse = false;
         this.pageNumber = pageNumber + 1;
     }
 
     onSubmitBpPrevious(pageNumber: number){
-        console.log("je suis dedans");
+
         this.pageNumber = pageNumber - 1;
     }
 
     onSubmit() {
-        
+        console.log("je suis dedans");
         if (this.prestationFormLocation.invalid) {
           return;
         }
-
+        console.log("apres");
+       
         const formDataBasic = this.prestationFormBasic.value;
         const formDataDescription = this.prestationFormDescription.value;
         const formDataLocation = this.prestationFormLocation.value;
         const formDataCharacteristic = this.prestationFormCharacteristic.value;
+        console.log(formDataBasic);
+
 
         this.prestation.title = formDataBasic.title;
         this.prestation.type = formDataBasic.type;
-        this.prestation.category = formDataBasic.category;
+        this.prestation.category = this.categories[formDataBasic.category-1];
 
-
+        console.log(formDataCharacteristic.dateStart);
         const [jour, mois, annee] = formDataCharacteristic.dateStart.split('/');
+        console.log(jour+"/"+ mois+"/"+ annee);
         const [heures, minutes] = formDataCharacteristic.timeStart.split(':');
-        const date = new Date(annee, mois - 1, jour, heures, minutes); 
+        console.log(heures +":"+ minutes);
+        const date = new Date(annee, mois - 1, jour, heures, minutes);
+ 
         this.prestation.dateStartTimestamps = date.getTime();
         
         this.prestation.duration = formDataCharacteristic.duration;
@@ -166,6 +185,8 @@ export class PrestationFormulaireComponent {
        this.prestation.videoLink = formDataLocation.videoLink;
        this.prestation.images = formDataLocation.images;
        
+       console.log(this.prestation);
+       console.log(this.location);
     }
 
     savePrestationToBack(prestation : Prestation){
