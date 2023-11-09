@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from '../../model/category';
-
 @Component({
   selector: 'app-card-category',
   templateUrl: './card-category.component.html',
@@ -10,13 +8,14 @@ import { Category } from '../../model/category';
 export class CardCategoryComponent {
 
   selectedCategory: any;
-  
-  @Input() category: Category = new Category();
+  @Input() category: any;
 
   constructor(private router: Router) { }
 
-  openCategoryDetails() { 
+  openCategoryDetails() {
+    if (this.category && this.category.id) {
+      this.selectedCategory = this.category;
       this.router.navigate(['/categories', this.category.id, 'prestations']);
-        state: { category: this.category }
-  }  
+    }
+  }
 }

@@ -1,21 +1,18 @@
-<div class="category-details text-primary">
-  <h4>Découvrez les ateliers près de chez vous</h4>
-  <div class="row">
-    <div class="col-lg-3 col-md-12">
-      <div class="category-details-card">
-        <h3>{{ selectedCategory.name }}</h3>
-        <img [src]="selectedCategory.img" alt="{{ selectedCategory.name }} Image" class="category-img">
-      </div>
+<div class="container presta-mt-md-10 mt-7">
+  <div class="category-details text-primary">
+    <div class="my-0 fw-0 presta-mt-4 text-md-left">
+      <h6>Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i></h6>
     </div>
-    <div class="col-lg-9 col-md-12">
-      <h4>Ateliers liés à la catégorie "{{ selectedCategory.name }}"</h4>
-      <div class="row">
-        <div class="col-12" *ngFor="let prestation of prestations">
-          <app-card [prestation]="prestation"></app-card>
+    <div class="row">
+      <div class="col-lg-9 col-md-12 my-0 fw-0 mt-4 text-md-left">
+        <h5>Ateliers liés à la catégorie "{{ selectedCategory.name }}"</h5>
+        <div class="row">
+          <div class="col-12" *ngFor="let prestation of prestations">
+            <app-card [prestation]="prestation"></app-card>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
+  

@@ -107,8 +107,6 @@ export class UserformComponent {
           this.user.lastname = this.userForm.get('lastname')?.value;
           this.user.phone = this.userForm.get('phone')?.value;
           this.user.roles = this.getRoles();
-
-          console.log(this.user)
           this.saveUser(this.user);
         }
       }
