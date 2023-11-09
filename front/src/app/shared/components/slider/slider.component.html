@@ -4,7 +4,7 @@
       <div class="carousel-item {{ i === currentIndex ? 'active' : '' }}">
         <div class="row justify-content-center position-relative">
           <div class="col-12 col-md-6 col-lg-2 d-flex justify-content-center card_hover"
-            *ngFor="let prestationApi of prestationsApi?.slice(i, i + 5)">
+            *ngFor="let prestationApi of prestationsApi?.slice(i, i + 5)" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
             <app-card [prestation]="prestationApi"></app-card>
           </div>
         </div>
