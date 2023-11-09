@@ -12,14 +12,14 @@
     </ng-container>
   </div>
 
-  <button class="carousel-control-prev position-absolute top-50 start-0 translate-middle p-0 h-25"
+  <button *ngIf="prestationsApi && prestationsApi.length > 1" class="carousel-control-prev position-absolute top-50 start-0 translate-middle p-0 h-25"
     type="button" data-bs-target="#swiperCustomDesktop" (click)="prev()">
     <span class="material-symbols-outlined">
       arrow_back_ios
     </span>
   </button>
 
-  <button class="carousel-control-next position-absolute top-50 start-100 translate-middle p-0 h-25"
+  <button *ngIf="prestationsApi && prestationsApi.length > 1" class="carousel-control-next position-absolute top-50 start-100 translate-middle p-0 h-25"
     type="button" data-bs-target="#swiperCustomDesktop" (click)="next()">
     <span class="material-symbols-outlined">
       arrow_forward_ios
@@ -37,14 +37,16 @@
       </div>
     </ng-container>
   </div>
-  <button class="carousel-control-prev position-absolute top-50 start-0 translate-middle p-0 h-25"
-    type="button" data-bs-target="#swiperCustomMobile" (click)="prev()">
+
+  <button *ngIf="prestationsApi && prestationsApi.length > 1" class="carousel-control-prev position-absolute top-50 start-0 translate-middle p-0 h-25"
+    type="button" data-bs-target="#swiperCustomDesktop" (click)="prev()">
     <span class="material-symbols-outlined">
       arrow_back_ios
     </span>
   </button>
-  <button class="carousel-control-next position-absolute top-50 start-100 translate-middle p-0 h-25"
-    type="button" data-bs-target="#swiperCustomMobile" (click)="next()">
+
+  <button *ngIf="prestationsApi && prestationsApi.length > 1" class="carousel-control-next position-absolute top-50 start-100 translate-middle p-0 h-25"
+    type="button" data-bs-target="#swiperCustomDesktop" (click)="next()">
     <span class="material-symbols-outlined">
       arrow_forward_ios
     </span>

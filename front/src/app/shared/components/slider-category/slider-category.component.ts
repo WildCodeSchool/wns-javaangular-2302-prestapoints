@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
+import { Category } from '../../model/category';
+import { CategoryService } from '../../services/category.service';
+
 
 @Component({
   selector: 'app-slider-category',
@@ -7,48 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SliderCategoryComponent implements OnInit {
 
-  constructor() { }
+  categories : Category[] = [];
+
+  constructor(private router: Router, private categoryService: CategoryService) { }
+
 
   ngOnInit() {
+    this.categories = this.categoryService.getCategoryStatic();
   }
-
-  categories = [
-    {
-      title: 'Animaux',
-      id: '1',
-      img: 'assets/img/animaux.png'
-    },
-    {
-      title: 'Jardinage',
-      id: '6',
-      img: 'assets/img/jardinage.png'
-    },
-    {
-      title: 'Mode',
-      id: '5',
-      img: 'assets/img/mode.png'
-    },
-    {
-      title: 'Photographie',
-      id: '8',
-      img: 'assets/img/photographie.png'
-    },
-    {
-      title: 'Poterie',
-      id: '2',
-      img: 'assets/img/poterie.png'
-    },
-    {
-      title: 'Bricolage',
-      id: '4',
-      img: 'assets/img/bricolage.png'
-    },
-    {
-      title: 'Cuisine',
-      id: '7',
-      img: 'assets/img/cuisine.png'
-    }
-  ];
   
   prevCategory() {
     this.currentIndex =
@@ -66,3 +36,5 @@ export class SliderCategoryComponent implements OnInit {
 
   currentIndex: number = 0;
 }
+
+

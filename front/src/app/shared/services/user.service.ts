@@ -20,7 +20,6 @@ export class UserService {
   saveUser(user: User): Observable<ResponseApi> {
     this.apiUrl =
       'http://localhost:8080/admin/utilisateurs/utilisateur/sauvegarde';
-console.log(user)
     return this.http.post<ResponseApi>(this.apiUrl, user);
   }
 

@@ -17,7 +17,6 @@ import { ReviewscardComponent } from 'src/app/shared/components/reviewscard/revi
 @NgModule({
   declarations: [
     HomeComponent,
-    SliderComponent,
     CardCategoryComponent,
     SliderCategoryComponent,
     ReviewscardComponent,

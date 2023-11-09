@@ -34,7 +34,6 @@ export class Prestation {
   get getDuration(): string {
     if (this.duration != undefined) {
       const durautionHour = this.duration / 1000 / 60 / 60;
-      console.log(durautionHour);
       return durautionHour.toString();
     }
     return '0';

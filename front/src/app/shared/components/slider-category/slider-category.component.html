@@ -1,12 +1,13 @@
-<!-- Partie pour Desktop (masquée sur mobile) -->
 <div id="categorySliderDesktop" class="carousel slide d-none d-md-block">
   <div class="carousel-inner">
     <ng-container *ngFor="let category of categories; let i = index">
       <div class="carousel-item {{ i === currentIndex ? 'active' : '' }}">
         <div class="row justify-content-center position-relative">
           <div class="col-12 col-md-6 col-lg-2 d-flex justify-content-center"
-            *ngFor="let category of categories.slice(i, i + 5)">
-            <app-card-category [category]="category"></app-card-category>
+            *ngFor="let categoryItem of categories.slice(i, i + 5)">
+           
+            <app-card-category [category]="categoryItem"></app-card-category>
+
           </div>
         </div>
       </div>
@@ -28,12 +29,12 @@
   </button>
 </div>
 
-<!-- Partie pour Mobile (avec "next" et "prev" buttons) -->
 <div id="categorySliderMobile" class="carousel slide d-block d-md-none">
   <div class="carousel-inner">
     <ng-container *ngFor="let category of categories; let i = index">
       <div class="carousel-item {{ i === currentIndex ? 'active' : '' }}">
         <div class="d-flex justify-content-center position-relative">
+
           <app-card-category [category]="category"></app-card-category>
         </div>
       </div>
