@@ -62,23 +62,9 @@
                         </div>
                         <!-- Password -->
                         <div *ngIf="visible">
-                            <!-- <div class="mb-5 pt-3">
-                                <input type="password" id="defaultRegisterFormPassword" class="form-control"
-                                    placeholder="Ancien mot de passe" formControlName="lastPassword">
-                                <div class="position-relative">
-                                 <small
-                                        *ngIf="profilForm.controls['lastPassword'].errors && !profilForm.controls['lastPassword'].pristine"
-                                        class="position-absolute top-0 start-50 translate-middle-x text-danger w-100">
-                                        {{ profilForm.get('lastPassword')?.errors?.['lastPassword'].rules }}
-                                    </small> 
-                                </div>
-                            </div> -->
-
-                            <!-- new password -->
-
                             <div class="mb-5 pt-3">
                                 <input type="password" id="newRegisterFormPassword" class="form-control"
-                                    placeholder="Nouveau MdP minimum 8 caractères et un chiffre" formControlName="password">
+                                    placeholder="Nouveau MdP minimum 8 caractères et un chiffre" formControlName="password" autocomplete="new-password">
                                 <div class="position-relative">
                                     <small
                                         *ngIf="profilForm.controls['password'].errors && !profilForm.controls['password'].pristine"
@@ -117,7 +103,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" (click)="toggleFormEditability()" data-bs-dismiss="modal" >Fermer</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" type="submit" [disabled]="!profilForm.valid" [hidden]="!visible">Valider</button>
+                    <button type="button" class="btn btn-secondary" (click)="refreshPage()" data-bs-dismiss="modal" type="submit" [disabled]="!profilForm.valid" [hidden]="!visible">Valider</button>
                     <button type="button" class="btn btn-secondary" (click)="toggleFormEditability()">Modifier</button>
                 </div>
             </form>

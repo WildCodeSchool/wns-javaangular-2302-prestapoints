@@ -10,7 +10,11 @@ export class AuthenticationService {
   private authUrl = 'http://localhost:8080/auth';
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    const storedLoggedInState = localStorage.getItem('isLoggedIn');
+    const initialLoggedInState = storedLoggedInState ? JSON.parse(storedLoggedInState) : false;
+    this.isLoggedInSubject.next(initialLoggedInState);
+  }
 
   login(username: string, password: string): Observable<boolean> {
     console.log("login => " + username + " " + password);
@@ -27,6 +31,7 @@ export class AuthenticationService {
           if (token) {
             // store username and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
+            localStorage.setItem('isLoggedIn', 'true');
             this.isLoggedInSubject.next(true);
             // return true to indicate successful login
             return true;
@@ -60,15 +65,12 @@ export class AuthenticationService {
   logout(): void {
     // clear token remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('isLoggedIn');
     this.isLoggedInSubject.next(false);
   }
 
   isLoggedIn(): Observable<boolean> {
     return this.isLoggedInSubject.asObservable();
-  }
-
-  setLoggedIn(value: boolean) {
-    this.isLoggedInSubject.next(value);
   }
   
 }

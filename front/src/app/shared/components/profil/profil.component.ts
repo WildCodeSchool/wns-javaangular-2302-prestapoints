@@ -99,7 +99,6 @@ export class ProfilComponent implements OnInit{
     firstname: [{ value: '', disabled: true }, [Validators.required]],
     lastname: [{ value: '', disabled: true }, [Validators.required]],
     email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
-  //  lastPassword: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(8), this.lastPasswordValidator.bind(this)]],
     password: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(8), this.passwordValidator.bind(this)]],
     confirmPassword: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(8), this.confirmPasswordValidator.bind(this)]],
     phone: [{ value: '', disabled: true }, [Validators.required, this.phoneValidator]],
@@ -228,20 +227,9 @@ export class ProfilComponent implements OnInit{
     }
   }
 
- //comparePassword(): boolean {
- //  const passwordFormControl = this.profilForm.get('lastPassword');
- //  const passwordValue = passwordFormControl?.value;
- //  const userPasswordHash = this.userResponse?.password;
-
- //  if (
- //    passwordFormControl && typeof passwordValue === 'string' &&
- //    userPasswordHash && typeof userPasswordHash === 'string'
- //  ) {
- //    const passwordsMatch = bcrypt.compareSync(passwordValue, userPasswordHash.replace('{bcrypt}', ''));
- //    return passwordsMatch;
- //  }
- //  return false;
- //}
+  refreshPage() {
+    window.location.reload();
+  }
 
   phoneValidator(control: AbstractControl): ValidationErrors | null {
     const phoneRegex = RegExp('(^0\\d{9})');
