@@ -5,22 +5,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 import fr.exception.ExceptionJsonDetail;
 import fr.controller.AuthController;
 import fr.dto.LocationDto;
 import fr.dto.PrestationDto;
 import fr.dto.TypeDto;
-import fr.dto.UserDto;
+import fr.entity.Category;
 import fr.entity.Location;
 import fr.entity.Prestation;
 import fr.entity.Type;
 import fr.entity.User;
 import fr.mapper.PrestationMapper;
-import fr.mapper.TypeMapper;
+import fr.repository.CategoryRepository;
 import fr.repository.PrestationRepository;
-import fr.repository.TypeRepository;
 
 @Service
 public class PrestationService {
@@ -28,12 +26,10 @@ public class PrestationService {
     @Autowired
     private PrestationRepository prestationRepository;
     @Autowired
-    private TypeRepository typeRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private PrestationMapper prestationMapper;
-    @Autowired
-    private TypeMapper typeMapper;
 
     @Autowired
     private LocationService locationService;
@@ -55,7 +51,7 @@ public class PrestationService {
     }
 
     public PrestationDto getPrestationById(Integer id) throws ExceptionJsonDetail {
-        Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail("Pas de prestation trouvée"));
+        Prestation prestation = prestationRepository.findById(id).get();
         PrestationDto prestationDto = prestationMapper.convertToDto(prestation);
 
         return prestationDto;
@@ -105,8 +101,7 @@ public class PrestationService {
     }
 
     public List<PrestationDto> getPrestationsByCategory(Integer categoryId) throws ExceptionJsonDetail {
-       Category category = categoryRepository.findById(categoryId)
-        .orElseThrow(() -> new ExceptionJsonDetail("Catégorie non trouvée"));
+        Category category = categoryRepository.findById(categoryId).get();
 
         List<Prestation> prestations = prestationRepository.findByTypeCategory(category);
 
