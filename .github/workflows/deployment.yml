@@ -6,7 +6,7 @@ on:
     branches:
        - US_CI-CD 
 #      - main
-#      - dev
+       - dev
   # allow user to start job manually
   workflow_dispatch:
 
