@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from '../shared/model/category';
 import { Prestation } from '../shared/model/prestation';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CategoryService {
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = 'http://192.168.1.182:8080';
 
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<Category[]> {
-    this.apiUrl = 'http://localhost:8080/categories';
+    this.apiUrl = 'http://192.168.1.182:8080/categories';
     return this.http.get<Category[]>(this.apiUrl);
   }
 
@@ -21,7 +21,7 @@ export class CategoryService {
   }
 
   getPrestationsByCategory(categoryId: string): Observable<Prestation[]> {
-    this.apiUrl = 'http://localhost:8080/prestations/categories/id ';
+    this.apiUrl = 'http://192.168.1.182:8080/prestations/categories/id ';
     const url = `${this.apiUrl}/${categoryId}/prestations`;
     return this.http.get<Prestation[]>(url);
   }

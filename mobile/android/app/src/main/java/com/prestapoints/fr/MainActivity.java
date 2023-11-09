@@ -1,4 +1,4 @@
-package com.prestapoints.app;
+package com.prestapoints.fr;
 
 import com.getcapacitor.BridgeActivity;
 

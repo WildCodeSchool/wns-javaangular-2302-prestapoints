@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Prestapoints</string>
-    <string name="title_activity_main">Prestapoints</string>
-    <string name="package_name">com.prestapoints.app</string>
-    <string name="custom_url_scheme">com.prestapoints.app</string>
+    <string name="app_name">prestapoints</string>
+    <string name="title_activity_main">prestapoints</string>
+    <string name="package_name">com.prestapoints.fr</string>
+    <string name="custom_url_scheme">com.prestapoints.fr</string>
 </resources>
