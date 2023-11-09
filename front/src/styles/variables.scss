@@ -163,7 +163,7 @@ $spacers: (
   .presta-my-#{$name} {
     margin-top: $value;
     margin-bottom: $value;
-  }
+  } 
 }
 $icon-sizes: (
   small: map-get($font-size, 10),
