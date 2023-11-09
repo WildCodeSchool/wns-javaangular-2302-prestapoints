@@ -13,7 +13,7 @@ public class PrestationDto {
     private UserDto user;
     private String title;
     private Long duration;
-    private Integer addPoint;
+    private Integer addPoint = 250;
     private Timestamp dateStart;
     private Timestamp dateEnd;
     private String state;

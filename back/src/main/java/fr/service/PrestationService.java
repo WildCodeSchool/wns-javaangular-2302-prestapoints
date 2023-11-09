@@ -5,14 +5,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-
+import fr.exception.ExceptionJsonDetail;
+import fr.controller.AuthController;
+import fr.dto.LocationDto;
 import fr.dto.PrestationDto;
+import fr.dto.TypeDto;
 import fr.entity.Category;
+import fr.entity.Location;
 import fr.entity.Prestation;
+import fr.entity.Type;
+import fr.entity.User;
 import fr.mapper.PrestationMapper;
-import fr.model.ExceptionJsonDetail;
 import fr.repository.CategoryRepository;
 import fr.repository.PrestationRepository;
 
@@ -21,12 +25,19 @@ public class PrestationService {
 
     @Autowired
     private PrestationRepository prestationRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private PrestationMapper prestationMapper;
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private LocationService locationService;
+    @Autowired
+    private TypeService typeService;
+
+    @Autowired
+    private AuthController authController;
 
     public List<PrestationDto> getAllPrestations() {
         List<PrestationDto> prestationDtos = new ArrayList<>();
@@ -40,16 +51,29 @@ public class PrestationService {
     }
 
     public PrestationDto getPrestationById(Integer id) throws ExceptionJsonDetail {
-        Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail("Pas de prestation trouvé"));
+        Prestation prestation = prestationRepository.findById(id).get();
         PrestationDto prestationDto = prestationMapper.convertToDto(prestation);
 
         return prestationDto;
     }
 
-    public Prestation createPrestation(PrestationDto prestationDto) {
+    public PrestationDto createPrestation(PrestationDto prestationDto) {
         Prestation prestation = prestationMapper.convertToEntity(prestationDto);
+        
+        User user = authController.getUserConnected();
+        
+        TypeDto typeDto = prestationDto.getType();
+        Type type = typeService.createType(typeDto);
 
-        return prestationRepository.save(prestation);
+        LocationDto locationDto = prestationDto.getLocation();
+        Location location = locationService.createLocation(locationDto);
+
+        prestation.setUser(user);
+        prestation.setType(type);
+        prestation.setLocation(location);
+        prestation = prestationRepository.save(prestation);
+
+        return prestationMapper.convertToDto(prestation);
     }
 
     public void deletePrestationById(int id) {
@@ -77,8 +101,7 @@ public class PrestationService {
     }
 
     public List<PrestationDto> getPrestationsByCategory(Integer categoryId) throws ExceptionJsonDetail {
-       Category category = categoryRepository.findById(categoryId)
-        .orElseThrow(() -> new ExceptionJsonDetail("Catégorie non trouvée"));
+        Category category = categoryRepository.findById(categoryId).get();
 
         List<Prestation> prestations = prestationRepository.findByTypeCategory(category);
 
