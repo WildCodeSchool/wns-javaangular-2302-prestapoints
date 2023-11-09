@@ -12,6 +12,7 @@ COPY front .
 RUN apk --no-cache add python3
 ENV PYTHON=/usr/bin/python3
 RUN apk --no-cache add make 
+RUN apk --no-cache add g++ 
 RUN npm install
 RUN npx ng build --configuration=production 
 
