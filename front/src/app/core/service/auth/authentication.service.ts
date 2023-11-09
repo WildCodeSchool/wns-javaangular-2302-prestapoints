@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
@@ -8,6 +8,7 @@ import jwtDecode from 'jwt-decode';
 export class AuthenticationService {
 
   private authUrl = 'http://localhost:8080/auth';
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { }
 
@@ -26,8 +27,8 @@ export class AuthenticationService {
           if (token) {
             // store username and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
+            this.isLoggedInSubject.next(true);
             // return true to indicate successful login
-            console.log("token " + token);
             return true;
           } else {
             // return false to indicate failed login
@@ -59,6 +60,15 @@ export class AuthenticationService {
   logout(): void {
     // clear token remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    
+    this.isLoggedInSubject.next(false);
   }
+
+  isLoggedIn(): Observable<boolean> {
+    return this.isLoggedInSubject.asObservable();
+  }
+
+  setLoggedIn(value: boolean) {
+    this.isLoggedInSubject.next(value);
+  }
+  
 }
