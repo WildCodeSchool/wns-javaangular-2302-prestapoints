@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @Input()
   isVisible?: boolean;
   inputVisible?: boolean;
-  inputNotvisible?: boolean;
+  inputSeConnecter?: boolean;
   private isLoggedInSubscription: Subscription = new Subscription();
 
   constructor(
@@ -25,33 +25,38 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private router: Router,
     private authService: AuthenticationService
-  ) { }
+  ) { 
+    this.inputVisible = false;
+    this.inputSeConnecter = true;
+  }
 
   ngOnInit() {
-    this.checkUserLoggedIn()
+    // this.checkUserLoggedIn()
     this.isLoggedInSubscription = this.authService.isLoggedIn().subscribe(loggedIn => {
+      console.log("value 1111111111111111111");
+      console.log(loggedIn);
       if (loggedIn) {
         this.inputVisible = false;
-        this.inputNotvisible = true;
+        this.inputSeConnecter = true;
       } else {
         this.inputVisible = true;
-        this.inputNotvisible = false;
+        this.inputSeConnecter = false;
       }
     });
   }
 
-  checkUserLoggedIn() {
-    const value = this.localstorageService.getItem('currentUser');
-    console.log("value >>>>>>>>>>");
-    console.log(value);
-    if (value != null) {
-      this.inputVisible = false
-      this.inputNotvisible = true;
-    } else {
-      this.inputVisible = true
-      this.inputNotvisible = false;
-    }
-  }
+  // checkUserLoggedIn() {
+  //   const value = this.localstorageService.getItem('currentUser');
+  //   console.log("value >>>>>>>>>>");
+  //   console.log(value);
+  //   if (value != null) {
+  //     this.inputVisible = false
+  //     this.inputSeConnecter = true;
+  //   } else {
+  //     this.inputVisible = true
+  //     this.inputSeConnecter = false;
+  //   }
+  // }
 
   ngOnDestroy() {
     // Se désabonner pour éviter les fuites de mémoire
@@ -60,7 +65,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logout() {
     this.router.navigate(['/']);
-    this.authService.setLoggedIn(false);
     this.logoutService.logout();
     this.alertService.setAlert(
       AlertEnum.TYPE_DANGER,
