@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Category } from 'src/app/shared/model/category';
 import { Prestation } from 'src/app/shared/model/prestation';
 import { CategoryService } from 'src/app/shared/services/category.service';
 @Component({

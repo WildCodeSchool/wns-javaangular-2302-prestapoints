@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../model/category';
+import { Category } from '../../model/category';
 import { CategoryService } from '../../services/category.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-slider-category',
@@ -13,6 +13,7 @@ export class SliderCategoryComponent implements OnInit {
   categories : Category[] = [];
 
   constructor(private router: Router, private categoryService: CategoryService) { }
+
 
   ngOnInit() {
     this.categoryService.getStaticCategories().subscribe(categories => {
@@ -35,4 +36,3 @@ export class SliderCategoryComponent implements OnInit {
   }
 
   currentIndex: number = 0;
-}

@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Category } from 'src/app/shared/model/category';
 import { Prestation } from 'src/app/shared/model/prestation';
 import { CategoryService } from 'src/app/shared/services/category.service';
-<<<<<<< Updated upstream
-=======
-import { Category } from 'src/app/shared/model/category';
->>>>>>> Stashed changes
-
 @Component({
   selector: 'app-category-details',
   templateUrl: './category-details.component.html',
@@ -14,23 +10,13 @@ import { Category } from 'src/app/shared/model/category';
 })
 export class CategoryDetailsComponent implements OnInit {
   prestations: Prestation[] = [];
-<<<<<<< Updated upstream
-  selectedCategory: any;
-
-  constructor(
-    private route: ActivatedRoute,
-    private categoryService: CategoryService
-  ) {}
-=======
   selectedCategory: Category = {}; 
 
 
   constructor(
     private route: ActivatedRoute,
-    private categoryService: CategoryService,
-  ) {
-  }
->>>>>>> Stashed changes
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -46,8 +32,6 @@ export class CategoryDetailsComponent implements OnInit {
       }
     });
   }
-
-  
 
   private getPrestationsByCategory(id: string): void {
     this.categoryService.getPrestationsByCategory(id).subscribe(prestations => {
