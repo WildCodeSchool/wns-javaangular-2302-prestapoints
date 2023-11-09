@@ -106,8 +106,10 @@ public class UserController {
         User user = authController.getUserConnected();
         if (user.getEmail().equals(userDto.getEmail())) {
             userService.updateUserProfil(user.getId(), userDto);
+
             return new ResponseEntity<>("Modification enregistrée", HttpStatus.OK);
         } else {
+            
             return new ResponseEntity<>("Erreur lors de la modification", HttpStatus.OK);
         }
     }

@@ -16,7 +16,7 @@ import { PrestationService } from 'src/app/shared/services/prestation.service';
 @Component({
   selector: 'app-prestation-formulaire',
   templateUrl: './prestation-formulaire.component.html',
-  styleUrls: ['./prestation-formulaire.component.scss']
+  styleUrls: ['./prestation-formulaire.component.scss'],
 })
 export class PrestationFormulaireComponent {
     prestation: Prestation = new Prestation;

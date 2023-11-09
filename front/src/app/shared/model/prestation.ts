@@ -31,15 +31,14 @@ export class Prestation {
         public registrations?: Registration[],
     ){}
 
-    get getDuration(): string {
-        if (this.duration != undefined){
-            const durautionHour = this.duration/1000/60/60;
-            console.log(durautionHour);
-            return durautionHour.toString();
-        }
-        return '0';
-
+  get getDuration(): string {
+    if (this.duration != undefined) {
+      const durautionHour = this.duration / 1000 / 60 / 60;
+      console.log(durautionHour);
+      return durautionHour.toString();
     }
+    return '0';
+  }
 
     get getDateStartString(): string {
         if (typeof this.dateStart === 'number') {

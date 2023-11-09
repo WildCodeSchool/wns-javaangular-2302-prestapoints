@@ -1,15 +1,40 @@
-<!-- Button trigger modal -->
-<div class="container">
+<div class="container mt-md-0 mt-5">
   <div class="d-flex justify-content-end position-relative">
-    <div class="position-absolute top-50 start-25 translate-middle">
-      <app-searchbar (prestationsEmitter)="onGetPrestation($event)"></app-searchbar>
+    <div
+      class="position-absolute top-50 start-25 translate-middle presta-mb-7 presta-mt-4 center-mobile"
+    >
+      <app-searchbar
+        (prestationsEmitter)="onGetPrestation($event)"
+      ></app-searchbar>
     </div>
-    <img src="https://cdn.pixabay.com/photo/2015/08/19/08/26/artisan-895670_1280.jpg" class="img-fluid w-50 shadow"
-      alt="photo d'accueil">
+    <img
+      src="https://cdn.pixabay.com/photo/2015/08/19/08/26/artisan-895670_1280.jpg"
+      class="img-fluid w-50 shadow d-none d-md-block"
+      alt="photo d'accueil"
+    />
   </div>
+  <div class="border-top presta-mt-10 mt-md-6">
+    <p class="my-0 fw-0mt-3 text-md-left">
+      Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i>
+    </p>
+    <app-slider [prestationsApi]="prestationsApi"></app-slider>
 
-  <hr class="my-4">
+    <hr class="my-4" />
 
-  <p class="my-0 fw-0 ">Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i></p>
-  <app-slider [prestationsApi]="prestationsApi"></app-slider>
+    <p class="my-0 fw-0">
+      Les avis de nos clients <i class="bi bi-arrow-right"></i>
+    </p>
+
+    <div class="d-flex flex-wrap justify-content-center">
+      <ng-container *ngFor="let prestationApi of prestationsApi?.slice(0, 3)">
+        <app-reviewscard [prestation]="prestationApi"></app-reviewscard>
+      </ng-container>
+    </div>
+  </div>
+  <div class="border-top presta-my-7 presta-mt-md-5">
+    <p class="my-0 fw-0 mt-3 text-md-left">
+      Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i>
+    </p>
+    <app-slider-category></app-slider-category>
+  </div>
 </div>

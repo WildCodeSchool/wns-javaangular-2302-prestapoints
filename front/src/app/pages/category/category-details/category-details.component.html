@@ -1,0 +1,16 @@
+<div class="category-details">
+  <h4>Découvrez les ateliers près de chez vous</h4>
+  <div class="row">
+    <div class="col-lg-3 col-md-12">
+      <div class="category-details-card">
+        <h3>{{ selectedCategory.title }}</h3>
+        <img [src]="selectedCategory.img" alt="{{ selectedCategory.title }} Image" class="category-img">
+      </div>
+    </div>
+    <div class="col-lg-9 col-md-12" *ngFor="let prestation of prestations">
+      <app-card [prestation]="prestation"></app-card>
+    </div>
+  </div>
+</div>
+
+

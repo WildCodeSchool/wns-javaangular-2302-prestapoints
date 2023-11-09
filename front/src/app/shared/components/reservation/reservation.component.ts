@@ -22,12 +22,12 @@ export class ReservationComponent {
 
   public isRegistered?: boolean;
   public responseApi?: ResponseApi;
-  private userConnected?: User;
+  public userConnected?: User;
 
   constructor(
-    private prestationService: PrestationService,
-    private alertService: AlertService,
-    private profilService: ProfilService
+    public prestationService: PrestationService,
+    public alertService: AlertService,
+    public profilService: ProfilService
   ) {}
 
   ngOnInit() {
@@ -38,19 +38,14 @@ export class ReservationComponent {
   }
 
   verifyRegistration() {
-    if (
-      this.prestation?.registrations != null &&
-      this.prestation?.registrations?.map(
+    if (this.prestation?.registrations != null) {
+      this.isRegistered = this.prestation.registrations.filter(
         (r) => r.user?.email === this.userConnected?.email
-      ).length > 0
-    ) {
-      this.isRegistered = true;
-    } else {
-      this.isRegistered = false;
+      ).length > 0;
     }
   }
 
-  undoRegistration(id: number | undefined){
+  undoRegistration(id: number | undefined) {
     this.prestationService.undoRegistration(id).subscribe((response) => {
       this.responseApi = response;
 
@@ -59,7 +54,7 @@ export class ReservationComponent {
           AlertEnum.TYPE_SUCCESS,
           AlertEnum.MESSAGE_RESERVATION_DELETE,
           AlertEnum.TIME_MEDIUM
-          );
+        );
 
         this.isRegistered = false;
         this.needToRefresh.emit(true);

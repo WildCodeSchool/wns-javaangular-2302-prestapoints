@@ -127,7 +127,7 @@ export class ProfilComponent implements OnInit{
         this.profilForm.patchValue({ lastname: this.userResponse.lastname });
         this.profilForm.patchValue({ email: this.userResponse.email });
         this.profilForm.patchValue({ phone: this.userResponse.phone });
-        // this.getImageAvatar(); 
+        this.getImageAvatar(); 
       }
     });
   }

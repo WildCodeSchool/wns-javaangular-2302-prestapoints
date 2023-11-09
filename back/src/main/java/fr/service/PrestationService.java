@@ -2,7 +2,10 @@ package fr.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 import fr.exception.ExceptionJsonDetail;
 import fr.controller.AuthController;
@@ -52,7 +55,7 @@ public class PrestationService {
     }
 
     public PrestationDto getPrestationById(Integer id) throws ExceptionJsonDetail {
-        Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail());
+        Prestation prestation = prestationRepository.findById(id).orElseThrow(() -> new ExceptionJsonDetail("Pas de prestation trouvée"));
         PrestationDto prestationDto = prestationMapper.convertToDto(prestation);
 
         return prestationDto;
@@ -99,5 +102,18 @@ public class PrestationService {
         }
 
         return prestationRepository.save(prestation);
+    }
+
+    public List<PrestationDto> getPrestationsByCategory(Integer categoryId) throws ExceptionJsonDetail {
+       Category category = categoryRepository.findById(categoryId)
+        .orElseThrow(() -> new ExceptionJsonDetail("Catégorie non trouvée"));
+
+        List<Prestation> prestations = prestationRepository.findByTypeCategory(category);
+
+        List<PrestationDto> prestationDtos = prestations.stream()
+            .map(prestationMapper::convertToDto)
+            .collect(Collectors.toList());
+
+        return prestationDtos;
     }
 }

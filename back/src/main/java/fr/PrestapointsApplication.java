@@ -34,11 +34,12 @@ public class PrestapointsApplication {
 	private LocationFixtures locationFixtures;
 	@Autowired
 	private RoleFixtures roleFixtures;
-    @Autowired
+	@Autowired
 	private ImageFixtures imageFixtures;
 
 	/* STOP FIXTURES = false   # START FIXTURES = true */ 
 	private boolean loadFixtures = false;
+
 
 	@PostConstruct
 	@Profile("!test")
@@ -53,7 +54,7 @@ public class PrestapointsApplication {
 				locationFixtures.prepareFixtures();
 				prestationFixtures.prepareFixtures(); // depends on user, category, location
 				registrationFixtures.prepareFixtures();// depends on prestation
-                imageFixtures.prepareFixtures();
+				imageFixtures.prepareFixtures();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

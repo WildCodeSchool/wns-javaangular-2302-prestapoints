@@ -12,6 +12,7 @@ import org.springframework.test.context.TestPropertySource;
 
 import fr.entity.User;
 import fr.fixture.CategoryFixtures;
+import fr.fixture.ImageFixtures;
 import fr.fixture.LocationFixtures;
 import fr.fixture.PrestationFixtures;
 import fr.fixture.RegistrationFixtures;
@@ -33,6 +34,8 @@ public class DataUserTests {
     @MockBean
     private CategoryFixtures categoryFixtures;
     @MockBean
+    private ImageFixtures imageFixtures;
+    @MockBean
     private LocationFixtures locationFixtures;
     @MockBean
     private RegistrationFixtures registrationFixtures;
@@ -42,13 +45,13 @@ public class DataUserTests {
     private RoleFixtures roleFixtures;
     @Autowired
     private UserRepository userRepository;
-
+    
     @Test
     public void testEmailVerification_ShouldReturnTrue() throws Exception {
         // Arrange
         User user = new User();
-        user.setEmail("to@to.com");
-        user.setPassword("toto123456");
+        user.setEmail("test@email.fr");
+        user.setPassword("password1");
 
         // Act
         userRepository.saveAndFlush(user);

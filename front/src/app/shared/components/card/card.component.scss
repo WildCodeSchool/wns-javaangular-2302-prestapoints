@@ -1,1 +1,15 @@
+.custom-card {
+    
+    @media (max-width: 767px) {
+        width: 18rem; 
+        height: auto;
+        cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+        width: 12rem; 
+        height: 20rem;
+        cursor: pointer;  
+    }
+}
 
