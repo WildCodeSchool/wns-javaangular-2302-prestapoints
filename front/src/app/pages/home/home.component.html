@@ -13,28 +13,28 @@
       alt="photo d'accueil"
     />
   </div>
-  <div class="border-top presta-mt-10 mt-md-6">
-    <p class="my-0 fw-0mt-3 text-md-left">
-      Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i>
-    </p>
-    <app-slider [prestationsApi]="prestationsApi"></app-slider>
-
-    <hr class="my-4" />
-
-    <p class="my-0 fw-0">
-      Les avis de nos clients <i class="bi bi-arrow-right"></i>
-    </p>
-
-    <div class="d-flex flex-wrap justify-content-center">
-      <ng-container *ngFor="let prestationApi of prestationsApi?.slice(0, 3)">
-        <app-reviewscard [prestation]="prestationApi"></app-reviewscard>
-      </ng-container>
+  <div class="border-top presta-pt-5 mt-md-6">
+    <div>
+      <p class="my-0 fw-0mt-3 text-md-left">
+        Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i>
+      </p>
+      <app-slider [prestationsApi]="prestationsApi"></app-slider>
     </div>
-  </div>
-  <div class="border-top presta-my-7 presta-mt-md-5">
-    <p class="my-0 fw-0 mt-3 text-md-left">
-      Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i>
-    </p>
-    <app-slider-category></app-slider-category>
+    <div class="border-top presta-pt-5 mt-md-6">
+      <p class="my-0 fw-0">
+        Les avis de nos clients <i class="bi bi-arrow-right"></i>
+      </p>
+      <div class="d-flex flex-wrap justify-content-center">
+        <ng-container *ngFor="let prestationApi of prestationsApi?.slice(0, 3)">
+          <app-reviewscard [prestation]="prestationApi"></app-reviewscard>
+        </ng-container>
+      </div>
+    </div>
+    <div class="border-top presta-pt-5 mt-md-6">
+      <p class="my-0 fw-0 text-md-left">
+        Découvrez les ateliers près de chez vous <i class="bi bi-arrow-right"></i>
+      </p>
+      <app-slider-category></app-slider-category>
+    </div>
   </div>
 </div>

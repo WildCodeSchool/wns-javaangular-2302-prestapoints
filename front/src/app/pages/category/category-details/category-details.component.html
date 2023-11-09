@@ -8,13 +8,15 @@
         <h5>Ateliers liés à la catégorie "{{ selectedCategory.name }}"</h5>
         <div class="row">
           <div class="col-12 d-none d-md-block">
-            <!-- Code pour la version de bureau -->
-            <ng-container *ngFor="let prestation of prestations">
-              <app-slider [prestationsApi]="prestations"></app-slider>
-            </ng-container>
+            <div class="row">
+              <ng-container *ngFor="let prestation of prestations">
+                <div class="col-6 col-md-4 col-lg-3">
+                  <app-card [prestation]="prestation"></app-card>
+                </div>
+              </ng-container>
+            </div>
           </div>
           <div class="col-12 d-block d-md-none">
-            <!-- Code pour la version mobile -->
             <div id="swiperCustomMobile" class="carousel slide">
               <div class="swiper-container">
                 <div class="swiper-wrapper">
@@ -32,4 +34,3 @@
     </div>
   </div>
 </div>
-
