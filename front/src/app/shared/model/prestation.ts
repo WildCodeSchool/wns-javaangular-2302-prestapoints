@@ -13,7 +13,7 @@ export class Prestation {
         public title : string ="",
         public duration? : number,
         public addPoint? : number,
-        public dateStartTimestamps? : number,
+        public dateStart? : number,
         public dateEnd? : number,
         public state? : string,
         public description? : string,
@@ -42,8 +42,8 @@ export class Prestation {
     }
 
     get getDateStartString(): string {
-        if (typeof this.dateStartTimestamps === 'number') {
-            const dateStart = new Date(this.dateStartTimestamps);
+        if (typeof this.dateStart === 'number') {
+            const dateStart = new Date(this.dateStart);
             const day = dateStart.getDate().toString().padStart(2, '0');
             const month = (dateStart.getMonth() + 1).toString().padStart(2, '0');
             const year = dateStart.getFullYear().toString();
@@ -54,8 +54,8 @@ export class Prestation {
     }
       
     get getTimeStartString(): string {
-        if (typeof this.dateStartTimestamps === 'number') {
-            const date = new Date(this.dateStartTimestamps);
+        if (typeof this.dateStart === 'number') {
+            const date = new Date(this.dateStart);
             const hours = date.getHours().toString().padStart(2, '0');
             const minutes = date.getMinutes().toString().padStart(2, '0');
             return `${hours}:${minutes}`;
@@ -65,8 +65,8 @@ export class Prestation {
     }
 
     get getDateTimeStartString(): string {
-        if (typeof this.dateStartTimestamps === 'number') {
-            const dateTime = new Date(this.dateStartTimestamps);    
+        if (typeof this.dateStart === 'number') {
+            const dateTime = new Date(this.dateStart);    
             const day = dateTime.getDate().toString().padStart(2, '0');
             const month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
             const year = dateTime.getFullYear().toString();

@@ -45,7 +45,7 @@ public class PrestationController {
     }
 
     @PostMapping("/prestations")
-    public Prestation createPrestation(@RequestBody PrestationDto prestationDto) {
+    public PrestationDto createPrestation(@RequestBody PrestationDto prestationDto) {
 
         return prestationService.createPrestation(prestationDto);
     }

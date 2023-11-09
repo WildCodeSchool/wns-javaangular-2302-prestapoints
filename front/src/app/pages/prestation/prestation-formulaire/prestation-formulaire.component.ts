@@ -7,6 +7,10 @@ import { HttpClient } from '@angular/common/http';
 import { FormValidatorsService } from 'src/app/shared/services/formValidators.service';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { Category } from 'src/app/shared/model/category';
+import { Type } from 'src/app/shared/model/type';
+import { Router } from '@angular/router';
+import { PrestationService } from 'src/app/shared/services/prestation.service';
+
 
 
 @Component({
@@ -17,6 +21,8 @@ import { Category } from 'src/app/shared/model/category';
 export class PrestationFormulaireComponent {
     prestation: Prestation = new Prestation;
     location: Location = new Location;
+    type: Type = new Type;
+    category: Category = new Category;
     categories: Category[]=  [];
 
     isLoaded: boolean = false;
@@ -37,7 +43,7 @@ export class PrestationFormulaireComponent {
     formFieldsCharacteristic: { name: string; label: string; type: string; placeholder: string; validationMessage: string }[] = [
         { name: 'dateStart', label: 'Date de début', type: 'date', placeholder: "", validationMessage: 'La date doit être sous forme jj/mm/aaaa et supérieur à aujourdui.' },
         { name: 'timeStart', label: 'Heure de début', type: 'text', placeholder: "ex : 16:00", validationMessage: "On accepte que des nombres" },
-        { name: 'duration', label: 'Durée de la prestation en Heure', type: 'number', placeholder: "ex : 3", validationMessage: "L'horraire n'est pas conforme hh:mm." },
+        { name: 'duration', label: 'Durée de la prestation en Heure', type: 'number', placeholder: "ex : 3", validationMessage: "Le nombre d'heure n'est pas conforme." },
         { name: 'maxUser', label: 'Nombre maximal d\'utilisateurs', type: 'number', placeholder: "ex : 6", validationMessage: 'L\'information du nombre de participants maximal est obligatoire.' }
     ];
 
@@ -57,13 +63,20 @@ export class PrestationFormulaireComponent {
         { name: 'LocationAddressInformation', label: 'Informations complémentaires sur l\'adresse', type: 'text', placeholder: "ex : L'atelier de Modesto se trouve dans la rue Gerlach Ports ...", validationMessage: 'Le champs est limité à 255 caractères.' }, 
     ];
 
-    constructor(private formBuilder: FormBuilder, private http: HttpClient, private formValidatorsService: FormValidatorsService, private categoryService: CategoryService) {
+    constructor( private prestationService: PrestationService,
+        private router: Router, 
+        private formBuilder: FormBuilder, 
+        private http: HttpClient, 
+        private formValidatorsService: FormValidatorsService, 
+        private categoryService: CategoryService,
+        ) {
   
         this.categoryService.getCategories().subscribe((categories) => {
             this.categories = categories;
             this.isLoaded = true;
             console.log("categories : " + this.categories);
         });
+
      }
   
 
@@ -98,10 +111,11 @@ export class PrestationFormulaireComponent {
             LocationAddressInformation: ['dans un grand espace', [Validators.required, Validators.maxLength(255)]],
         });
 
-        this.prestationFormMedia= this.formBuilder.group({
+        this.prestationFormMedia = this.formBuilder.group({
             mediaImage: ['', Validators.required],
-            mediaVideo: ['', Validators.required, Validators.maxLength(255)],
+            mediaVideo: ['https://www.youtube.com/embed/MtRkuDjodCM', [Validators.required, Validators.maxLength(255)]],
         });
+
     }
 
     onSubmitBpNext(pageNumber: number){
@@ -128,79 +142,78 @@ export class PrestationFormulaireComponent {
 
         this.isFormulaireFalse = false;
         this.pageNumber = pageNumber + 1;
+
     }
 
     onSubmitBpPrevious(pageNumber: number){
-
         this.pageNumber = pageNumber - 1;
+
     }
 
     onSubmit() {
-        console.log("je suis dedans");
         if (this.prestationFormLocation.invalid) {
           return;
         }
-        console.log("apres");
        
         const formDataBasic = this.prestationFormBasic.value;
         const formDataDescription = this.prestationFormDescription.value;
         const formDataLocation = this.prestationFormLocation.value;
         const formDataCharacteristic = this.prestationFormCharacteristic.value;
-        console.log(formDataBasic);
-
+        const formDataMedia = this.prestationFormMedia.value;
 
         this.prestation.title = formDataBasic.title;
-        this.prestation.type = formDataBasic.type;
-        this.prestation.category = this.categories[formDataBasic.category-1];
-
-        console.log(formDataCharacteristic.dateStart);
-        const [jour, mois, annee] = formDataCharacteristic.dateStart.split('/');
-        console.log(jour+"/"+ mois+"/"+ annee);
-        const [heures, minutes] = formDataCharacteristic.timeStart.split(':');
-        console.log(heures +":"+ minutes);
-        const date = new Date(annee, mois - 1, jour, heures, minutes);
- 
-        this.prestation.dateStartTimestamps = date.getTime();
+        this.type.name = formDataBasic.type;
+        this.category.id = formDataBasic.category-1;
+        this.type.category =  this.category;
         
-        this.prestation.duration = formDataCharacteristic.duration;
+        this.prestation.type = this.type;
+
+        const [annee, mois, jour] = formDataCharacteristic.dateStart.split('-');  
+        const [heures, minutes] = formDataCharacteristic.timeStart.split(':');
+        const date = new Date(annee, mois - 1, jour, heures, minutes);
+        this.prestation.dateStart = date.getTime();
+        
+        const dateBase = new Date();
+        dateBase.setHours(formDataCharacteristic.duration);
+        this.prestation.duration = dateBase.getTime(); 
+
         this.prestation.maxUser = formDataCharacteristic.maxUser;
 
+
+        this.prestation.description = formDataDescription.description;
+        this.prestation.littleDescription = formDataDescription.littleDescription;
         
-       this.prestation.description = formDataDescription.description;
-       this.prestation.littleDescription = formDataDescription.littleDescription;
-       
-       this.prestation.practicalInformation = formDataDescription.practicalInformation;
-       this.prestation.language = formDataDescription.language;
-       this.prestation.personalInfos = formDataDescription.personalInfos;
-       this.prestation.registrations = formDataDescription.registrations;
+        this.prestation.practicalInformation = formDataDescription.practicalInformation;
+        this.prestation.language = formDataDescription.language;
+        this.prestation.personalInfos = formDataDescription.personalInfos;
+        
+        this.location.city = formDataLocation.LocationCity;
+        this.location.postalCode = formDataLocation.LocationPostalCode;
+        this.location.address = formDataLocation.LocationAddress;
+        this.location.addressNumber = formDataLocation.LocationAddressNumber;
+        this.location.addressInformation = formDataLocation.LocationAddressInformation;
+        this.prestation.location = this.location;
 
-       
-       this.location.city = formDataLocation.LocationCity;
-       this.location.postalCode = formDataLocation.LocationPostalCode;
-       this.location.address = formDataLocation.LocationAddress;
-       this.location.addressNumber = formDataLocation.LocationAddressNumber;
-       this.location.addressInformation = formDataLocation.LocationAddressInformation;
-       this.prestation.location = this.location;
+        this.prestation.videoLink = formDataMedia.mediaVideo;
+        //this.prestation.images = formDataLocation.images;
 
-       this.prestation.videoLink = formDataLocation.videoLink;
-       this.prestation.images = formDataLocation.images;
-       
-       console.log(this.prestation);
-       console.log(this.location);
+        this.savePrestationToBack(this.prestation);
+
     }
+    
+    savePrestationToBack(prestationIn : Prestation){
 
-    savePrestationToBack(prestation : Prestation){
-        // Envoie de l'objet JSON au serveur
-        this.http.post("http://localhost:8080/prestations", this.prestation).subscribe(
-            response => {
-            // Traitement de la réponse du serveur
+        this.prestationService.createPrestation(prestationIn).subscribe( (prestation) => {
             this.prestationFormBasic.reset();
+            this.router.navigate(['/prestations', prestation.id, 'details']);
             },
             error => {
             // Gestion des erreurs
             console.error(error);
             }
-        );  
+        ); 
+          
     }
+
 
   }
