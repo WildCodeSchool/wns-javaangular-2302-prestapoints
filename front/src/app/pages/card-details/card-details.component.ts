@@ -39,7 +39,6 @@
       this.prestationService.getPrestationById(id)
         .subscribe(prestation => {
           this.prestation = prestation;
-          console.log(prestation);
         });
     }
   }
