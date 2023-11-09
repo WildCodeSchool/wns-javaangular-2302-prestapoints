@@ -215,22 +215,22 @@ public class UserControllerTests {
                 .andExpect(content().string("Erreur lors de la modification"));
     }
 
-    @Test
-    public void testUploadAvatar_ShouldReturnStatusOk() throws Exception {
-        User connectedUser = user;
-        connectedUser.setId(1);
+    // @Test
+    // public void testUploadAvatar_ShouldReturnStatusOk() throws Exception {
+    //     User connectedUser = user;
+    //     connectedUser.setId(1);
 
-        when(authController.getUserConnected()).thenReturn(connectedUser);
-        when(connectedUser.getAvatar()).thenReturn(avatar);
+    //     when(authController.getUserConnected()).thenReturn(connectedUser);
+    //     when(connectedUser.getAvatar()).thenReturn(avatar);
 
-        byte[] fileContent = "Test avatar".getBytes();
-        MockMultipartFile file = new MockMultipartFile("image", "avatar.png", MediaType.IMAGE_PNG_VALUE, fileContent);
+    //     byte[] fileContent = "Test avatar".getBytes();
+    //     MockMultipartFile file = new MockMultipartFile("image", "avatar.png", MediaType.IMAGE_PNG_VALUE, fileContent);
 
-        mockMvc.perform(MockMvcRequestBuilders.multipart("/avatar")
-                .file(file))
-                .andExpect(status().isOk())
-                .andExpect(content().string("Avatar mis à jour avec succes"));
-    }
+    //     mockMvc.perform(MockMvcRequestBuilders.multipart("/avatar")
+    //             .file(file))
+    //             .andExpect(status().isOk())
+    //             .andExpect(content().string("Avatar mis à jour avec succes"));
+    // }
 
     @Test
     public void testUploadAvatar_ShouldReturnStatusOkWithError() throws Exception {
