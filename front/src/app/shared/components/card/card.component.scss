@@ -1,6 +1,8 @@
 @import "/src/styles/variables.scss";
 
 .custom-card {
+
+    margin: 20px;
     @media (max-width: 767px) {
       width: 18rem;
       height: auto;
@@ -11,7 +13,7 @@
       width: 18rem;
       height: 30rem;
       cursor: pointer;
-      margin: 50px;
+      margin: 20px;
     }
   
     .card-body {

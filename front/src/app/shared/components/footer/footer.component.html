@@ -26,14 +26,14 @@
 
       <div class="col-lg-4 col-md-6 d-flex align-items-lg-start flex-row mt-lg-2 mt-5">
         <aside class="widgets_tags">
-          <h5 class="widget-title">Tags</h5> 
-          <div class="entry__tags presta-text-fs-20 presta-text-fw-bold presta-mt-6"> 
+          <h5 class="widget-title">Tags</h5>
+          <div class="entry__tags presta-text-fs-20 presta-text-fw-bold presta-mt-6">
             <div rel="tag" *ngFor="let tag of tags">
-              <a href="/ateliers/{{ tag.name }}" class="no-link tag-link">{{ tag.name }}</a>
+              <a (click)="navigateToCategoryDetails(tag.id ?? 0)" class="no-link tag-link">{{ tag.name }}</a>
             </div>
-          </div> 
+          </div>
         </aside>
-      </div>
+      </div>         
 
       <div class="col-12 text-center mt-lg-5 mt-5">
         <p class="footer-bottom presta-text-fs-20">&copy; 2023 PrestaPoints. Tous droits réservés.</p>
