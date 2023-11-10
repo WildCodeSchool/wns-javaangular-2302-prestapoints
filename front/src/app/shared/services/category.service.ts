@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Category } from '../model/category';
 import { Prestation } from '../model/prestation';
-import { environment } from 'src/app/environments/environments';
+import { environment } from 'src/app/environments/environment';
 
 
 
