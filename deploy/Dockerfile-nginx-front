@@ -38,7 +38,6 @@ RUN apk --no-cache add make
 RUN apk --no-cache add g++ 
 RUN npm install
 
-RUN npm audit
 RUN npm audit fix --force
 
 RUN npm install -g npm@latest
