@@ -11,7 +11,8 @@ import { Category } from 'src/app/shared/model/category';
 })
 export class CategoryDetailsComponent implements OnInit {
   prestations: Prestation[] = [];
-  selectedCategory: Category = {}; 
+  selectedCategory: Category = {};
+  isMobile: boolean = false; // Ajout de la propriété isMobile
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +26,11 @@ export class CategoryDetailsComponent implements OnInit {
       if (id) {
         this.getPrestationsAndCategory(id);
       }
+    });
+
+    this.isMobile = window.innerWidth <= 767;
+    window.addEventListener('resize', () => {
+      this.isMobile = window.innerWidth <= 767;
     });
   }
 

@@ -6,28 +6,26 @@
     <div class="row">
       <div class="col-lg-9 col-md-12 my-0 fw-0 mt-4 text-md-left">
         <h5>Ateliers liés à la catégorie "{{ selectedCategory.name }}"</h5>
-          <div class="col-12 d-none d-md-block">
-            <div class="d-flex">
-              <ng-container *ngFor="let prestation of prestations">
-                <div> 
-                  <app-card [prestation]="prestation"></app-card>
-                </div>
-              </ng-container>
+        
+        <div class="col-12" *ngIf="!isMobile">
+          <div class="d-flex flex-wrap">
+            <div class="mb-3" *ngFor="let prestation of prestations">
+              <app-card [prestation]="prestation"></app-card>
             </div>
           </div>
-          <div class="col-12 d-block d-md-none">
-            <div id="swiperCustomMobile" class="carousel slide">
-              <div class="swiper-container">
-                <div class="swiper-wrapper">
-                  <ng-container *ngFor="let prestation of prestations">
-                    <div class="swiper-slide">
-                      <app-slider [prestationsApi]="prestations"></app-slider>
-                    </div>
-                  </ng-container>
+        </div>
+        
+        <div class="d-flex flex-row" *ngIf="isMobile">
+          <div id="swiperCustomMobile" class="carousel slide">
+            <div class="swiper-container">
+              <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide" *ngFor="let prestation of prestations">
+                  <app-slider [prestationsApi]="prestations"></app-slider>
                 </div>
               </div>
             </div>
           </div>
+        </div>        
       </div>
     </div>
   </div>
