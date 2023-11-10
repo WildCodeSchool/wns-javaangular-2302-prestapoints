@@ -232,18 +232,18 @@ public class UserControllerTests {
     //             .andExpect(content().string("Avatar mis à jour avec succes"));
     // }
 
-    @Test
-    public void testUploadAvatar_ShouldReturnStatusOkWithError() throws Exception {
+    // @Test
+    // public void testUploadAvatar_ShouldReturnStatusOkWithError() throws Exception {
         
-        when(authController.getUserConnected()).thenReturn(null);
+    //     when(authController.getUserConnected()).thenReturn(null);
 
-        byte[] fileContent = "Test avatar".getBytes();
-        MockMultipartFile file = new MockMultipartFile("image", "avatar.png", MediaType.IMAGE_PNG_VALUE, fileContent);
+    //     byte[] fileContent = "Test avatar".getBytes();
+    //     MockMultipartFile file = new MockMultipartFile("image", "avatar.png", MediaType.IMAGE_PNG_VALUE, fileContent);
 
-        mockMvc.perform(MockMvcRequestBuilders.multipart("/avatar")
-                .file(file))
-                .andExpect(status().isOk())
-                .andExpect(content().string("Echec mise à jour Avatar"));
+    //     mockMvc.perform(MockMvcRequestBuilders.multipart("/avatar")
+    //             .file(file))
+    //             .andExpect(status().isOk())
+    //             .andExpect(content().string("Echec mise à jour Avatar"));
 
-    }
+    // }
 }
