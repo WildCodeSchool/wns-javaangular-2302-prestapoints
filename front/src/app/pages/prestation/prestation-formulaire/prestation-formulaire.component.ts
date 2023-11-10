@@ -3,14 +3,15 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Component,OnInit } from '@angular/core';
 import { Prestation } from '../../../shared/model/prestation';
 import { Location } from '../../../shared/model/location';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormValidatorsService } from 'src/app/shared/services/formValidators.service';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { Category } from 'src/app/shared/model/category';
 import { Type } from 'src/app/shared/model/type';
 import { Router } from '@angular/router';
 import { PrestationService } from 'src/app/shared/services/prestation.service';
-
+import { ImageService } from 'src/app/shared/services/image.service';
+import { Image } from '../../../shared/model/image';
 
 
 @Component({
@@ -33,6 +34,13 @@ export class PrestationFormulaireComponent {
     prestationFormMedia!: FormGroup;
     prestationFormCharacteristic!:  FormGroup;
     pageNumber: number = 0;
+
+    imageSrc: any; // Utilisé pour afficher l'image dans le balisage img
+    selectedFile!: File; // Stocke le fichier sélectionné
+    isUploadImg: boolean = false;
+    isImgSave: boolean = false;
+    imageFile: Image = new Image;
+    imageFiles: Image[] = [];
 
 
     formFieldsBasic: { name: string; label: string; type: string; placeholder: string; validationMessage: string }[] = [
@@ -69,6 +77,7 @@ export class PrestationFormulaireComponent {
         private http: HttpClient, 
         private formValidatorsService: FormValidatorsService, 
         private categoryService: CategoryService,
+        private imageService: ImageService
         ) {
   
         this.categoryService.getCategories().subscribe((categories) => {
@@ -155,6 +164,7 @@ export class PrestationFormulaireComponent {
           return;
         }
        
+
         const formDataBasic = this.prestationFormBasic.value;
         const formDataDescription = this.prestationFormDescription.value;
         const formDataLocation = this.prestationFormLocation.value;
@@ -195,25 +205,79 @@ export class PrestationFormulaireComponent {
         this.prestation.location = this.location;
 
         this.prestation.videoLink = formDataMedia.mediaVideo;
-        //this.prestation.images = formDataLocation.images;
+
+        this.imageFiles.push(this.imageFile);
+        console.log(this.imageFiles);
+        this.prestation.images = this.imageFiles;
+
+        console.log(this.prestation);
 
         this.savePrestationToBack(this.prestation);
+        
 
     }
     
     savePrestationToBack(prestationIn : Prestation){
 
         this.prestationService.createPrestation(prestationIn).subscribe( (prestation) => {
-            this.prestationFormBasic.reset();
+            this.prestation = prestation;
+            
             this.router.navigate(['/prestations', prestation.id, 'details']);
+            this.prestationFormBasic.reset();
+            this.prestation = new Prestation;
+            this.location = new Location;
+            this.type = new Type;
+            this.category = new Category;
+            this.categories=  [];
+
             },
             error => {
+                this.imageFiles = [];
             // Gestion des erreurs
             console.error(error);
             }
         ); 
           
     }
+
+    // Méthode appelée lorsque le fichier est sélectionné
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+
+    // Afficher l'image sélectionnée
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.imageSrc = e.target.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
+    this.isUploadImg = true;
+
+  }
+
+  // Méthode appelée lors du clic sur le bouton "Enregistrer"
+  UploadImg() {
+    if (this.selectedFile) {
+      // Appeler le service pour enregistrer l'image
+      this.imageService.uploadImage(this.selectedFile).subscribe(
+        (imageId) => {
+          console.log('Image enregistrée avec succès!', imageId);
+          this.imageFile.id = imageId;
+          // Réinitialiser l'image après l'enregistrement réussi
+          this.isUploadImg = false;  
+          this.isImgSave = true;
+        },
+        (error) => {
+          console.error('Erreur lors de l\'enregistrement de l\'image', error);
+          if (error instanceof HttpErrorResponse) {
+            if (error.status === 500) {
+               console.error('Erreur côté serveur: La taille maximale autorisée pour l\'upload a été dépassée.');
+               // Gérez l'affichage d'un message d'erreur à l'utilisateur ou d'autres actions nécessaires.
+            }
+         }
+        }
+      );
+    }
+  }
 
 
   }
