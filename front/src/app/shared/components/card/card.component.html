@@ -15,22 +15,22 @@
       </div>
 
       <div class="mt-auto">
-        <p class="card-point text-primary fw-medium text-truncate">{{ prestation.addPoint }} pts</p>
+        <p class="card-point text-primary fw-medium">{{ prestation.addPoint }} pts</p>
       </div>
 
       <div class="row mt-3">
-        <div class="col-6">
+        <div class="col-5"> 
           <p class="card-duration text-grey-text">
-            <i class="bi bi-alarm"></i> {{ prestation.duration | date: "h" }} h
+            <i class="bi bi-alarm icon-spacing"></i> {{ prestation.duration | date: "h" }} h
           </p>
         </div>
-        <div class="col-6">
-          <p class="card-city text-grey-text text-truncate">
-            <i class="bi bi-geo-alt"></i>
+        <div class="col-7"> 
+          <p class="card-city text-grey-text d-flex justify-content-end">
+            <i class="bi bi-geo-alt icon-spacing"></i>
             {{ prestation.location?.city }}
           </p>
         </div>
-      </div>
+      </div>      
     </div>
   </div>
 </div>
