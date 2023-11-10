@@ -6,7 +6,7 @@ import { Prestation } from '../model/prestation';
 
 @Injectable()
 export class CategoryService {
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = '/api';
 
   constructor(private http: HttpClient) {}
 
