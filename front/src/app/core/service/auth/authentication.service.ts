@@ -20,7 +20,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    console.log("login => " + username + " " + password);
+
     return this.http.post<{ token: string }>(this.authUrl, '', {
       headers: {
         'Content-Type': 'application/json',

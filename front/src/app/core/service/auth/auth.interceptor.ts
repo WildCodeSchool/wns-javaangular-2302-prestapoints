@@ -34,7 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
       return token;
     } catch (error) {
-      console.log(error);
+      reportError(error);
     }
 
     return '';
