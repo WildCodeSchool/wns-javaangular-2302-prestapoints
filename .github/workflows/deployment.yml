@@ -6,7 +6,7 @@ on:
     branches:
        - US_CI-CD 
 #      - main
-       - dev
+       - fix_path_Fixture_Images
   # allow user to start job manually
   workflow_dispatch:
 
