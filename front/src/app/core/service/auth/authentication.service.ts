@@ -3,11 +3,14 @@ import { BehaviorSubject, Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
+import { environment } from 'src/app/environments/environment';
 
 @Injectable()
 export class AuthenticationService {
 
-  private authUrl = 'http://localhost:8080/auth';
+  apiUrl = environment.apiUrl;
+
+  private authUrl = `${this.apiUrl}/auth`;
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { 
