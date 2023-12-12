@@ -3,11 +3,14 @@ import { BehaviorSubject, Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
+import { environment } from 'src/app/environments/environment';
 
 @Injectable()
 export class AuthenticationService {
 
-  private authUrl = 'http://localhost:8080/auth';
+  private environnementURL = environment.apiUrl;
+
+  private authUrl = `${this.environnementURL}/auth`;
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { 
@@ -17,7 +20,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    console.log("login => " + username + " " + password);
+
     return this.http.post<{ token: string }>(this.authUrl, '', {
       headers: {
         'Content-Type': 'application/json',

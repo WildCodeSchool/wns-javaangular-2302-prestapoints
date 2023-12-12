@@ -34,10 +34,6 @@ export class LogInComponent implements OnInit {
       .subscribe(
         (result) => {
           if (result) {
-            console.log(
-              'well done, you are logged with roles: ' +
-                this.authenticationService.getRoles().join(', ')
-            );
             this.alertService.setAlert(
               AlertEnum.TYPE_SUCCESS,
               AlertEnum.MESSAGE_LOGIN_SUCCESSED,

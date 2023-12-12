@@ -3,25 +3,31 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Category } from '../model/category';
 import { Prestation } from '../model/prestation';
+import { environment } from 'src/app/environments/environment';
+
+
 
 @Injectable()
 export class CategoryService {
-  private apiUrl = 'http://localhost:8080';
 
-  constructor(private http: HttpClient) {}
+  private environnementURL = environment.apiUrl;
 
-  getCategories(): Observable<Category[]> {
-    const url = `${this.apiUrl}/categories`;
+  constructor(private http: HttpClient) {
+
+  }
+
+  getCategories(): Observable<Category[]> {    
+    const url = `${this.environnementURL}/categories`;
     return this.http.get<Category[]>(url);
   }
 
   getCategoryById(categoryId: string): Observable<Category> {
-    const url = `${this.apiUrl}/categories/${categoryId}`;
+    const url = `${this.environnementURL}/categories/${categoryId}`;
     return this.http.get<Category>(url);
   }
 
   getPrestationsByCategory(categoryId: string): Observable<Prestation[]> {
-    const url = `${this.apiUrl}/prestations/categories/${categoryId}`; 
+    const url = `${this.environnementURL}/prestations/categories/${categoryId}`; 
     return this.http.get<Prestation[]>(url);
   }
 
