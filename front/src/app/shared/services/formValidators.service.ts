@@ -30,7 +30,6 @@ export class FormValidatorsService {
   
       dateValidator2(): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } | null => {
-          console.log(control.value);
             const dateRegex = /^(?:\d{4})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$/;
           const isValid = dateRegex.test(control.value);
           return !isValid ? { invalidDate: { value: control.value } } : null;

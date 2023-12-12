@@ -4,10 +4,11 @@ import { ProfilService } from '../../services/profil.service';
 import { User } from '../../model/user';
 import { ResponseApi } from '../../model/responseApi';
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
-import { SignInService } from '../form-user/service/signIn.service';
-import { AlertService } from '../../services/alert.service';
 //import * as bcrypt from 'bcryptjs';
 import { HttpErrorResponse } from '@angular/common/http';
+
+
+
 
 
 @Component({
@@ -29,7 +30,7 @@ export class ProfilComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private localstorageService: LocalStorageService,
-    private profilService: ProfilService
+    private profilService: ProfilService,
   ) {
   }
 

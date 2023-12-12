@@ -28,7 +28,6 @@ export class CardComponent {
                 }
             );
         }  
-        console.log('Informations de la prestation:', this.prestation);
     }
 
     openCardDetails() {

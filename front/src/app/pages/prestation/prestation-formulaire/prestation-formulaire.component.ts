@@ -74,7 +74,6 @@ export class PrestationFormulaireComponent {
         this.categoryService.getCategories().subscribe((categories) => {
             this.categories = categories;
             this.isLoaded = true;
-            console.log("categories : " + this.categories);
         });
 
      }
