@@ -48,7 +48,7 @@ export class PrestationFormulaireComponent {
     ];
 
     formFieldsDescription: { name: string; label: string; type: string; placeholder: string; validationMessage: string }[] = [
-        { name: 'practicalInformation', label: 'Informations pratique', type: 'text', placeholder: "ex : Les chiens admis sont des chiens dressés ...", validationMessage: 'ex : Le champs est limité à 255 caractères.' },
+        { name: 'practicalInformation', label: 'Informations pratiques', type: 'text', placeholder: "ex : Les chiens admis sont des chiens dressés ...", validationMessage: 'ex : Le champs est limité à 255 caractères.' },
         { name: 'description', label: 'Description', type: 'textarea', placeholder: "ex : Découvrez les techniques de dressage de chiens et renforcez ...", validationMessage: 'Une description de la prestation est obligatoire.' },
         { name: 'littleDescription', label: 'Petite description', type: 'text', placeholder: "ex : Découvrez les techniques de dressage de chiens ...", validationMessage: 'Le champs est limité à 50 caractères.' },
         { name: 'language', label: 'Durée de la prestation', type: 'text', placeholder: "ex : francais", validationMessage: "Le champs est limité à 50 caractères." },

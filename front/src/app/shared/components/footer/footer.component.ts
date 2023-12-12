@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Category } from '../../model/category';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
+import { Category } from '../../model/category';
 
 @Component({
   selector: 'app-footer',
@@ -10,7 +11,7 @@ import { CategoryService } from '../../services/category.service';
 export class FooterComponent implements OnInit {
   public tags?: Category[];
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService, private router: Router) {}
 
   ngOnInit() {
     this.tagsSubscription();
@@ -20,5 +21,9 @@ export class FooterComponent implements OnInit {
     this.categoryService.getCategories().subscribe((categories) => {
       this.tags = categories;
     });
+  }
+
+  navigateToCategoryDetails(categoryId: number) {
+    this.router.navigate(['/categories', categoryId, 'prestations']);
   }
 }
