@@ -9,10 +9,9 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-
   @Input()
   isVisible?: boolean;
   inputVisible?: boolean;
@@ -25,24 +24,24 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private router: Router,
     private authService: AuthenticationService
-  ) { 
+  ) {
     this.inputVisible = false;
     this.inputSeConnecter = true;
   }
 
   ngOnInit() {
     // this.checkUserLoggedIn()
-    this.isLoggedInSubscription = this.authService.isLoggedIn().subscribe(loggedIn => {
-      console.log("value 1111111111111111111");
-      console.log(loggedIn);
-      if (loggedIn) {
-        this.inputVisible = false;
-        this.inputSeConnecter = true;
-      } else {
-        this.inputVisible = true;
-        this.inputSeConnecter = false;
-      }
-    });
+    this.isLoggedInSubscription = this.authService
+      .isLoggedIn()
+      .subscribe((loggedIn) => {
+        if (loggedIn) {
+          this.inputVisible = false;
+          this.inputSeConnecter = true;
+        } else {
+          this.inputVisible = true;
+          this.inputSeConnecter = false;
+        }
+      });
   }
 
   // checkUserLoggedIn() {
@@ -70,6 +69,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       AlertEnum.TYPE_DANGER,
       AlertEnum.MESSAGE_LOGOUT_SUCCESSED,
       AlertEnum.TIME_MEDIUM
-    )
+    );
   }
 }
