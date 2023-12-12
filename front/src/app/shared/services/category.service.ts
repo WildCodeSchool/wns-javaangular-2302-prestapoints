@@ -10,24 +10,24 @@ import { environment } from 'src/app/environments/environment';
 @Injectable()
 export class CategoryService {
 
-  apiUrl = environment.apiUrl;
+  private environnementURL = environment.apiUrl;
 
   constructor(private http: HttpClient) {
 
   }
 
   getCategories(): Observable<Category[]> {    
-    const url = `${this.apiUrl}/categories`;
+    const url = `${this.environnementURL}/categories`;
     return this.http.get<Category[]>(url);
   }
 
   getCategoryById(categoryId: string): Observable<Category> {
-    const url = `${this.apiUrl}/categories/${categoryId}`;
+    const url = `${this.environnementURL}/categories/${categoryId}`;
     return this.http.get<Category>(url);
   }
 
   getPrestationsByCategory(categoryId: string): Observable<Prestation[]> {
-    const url = `${this.apiUrl}/prestations/categories/${categoryId}`; 
+    const url = `${this.environnementURL}/prestations/categories/${categoryId}`; 
     return this.http.get<Prestation[]>(url);
   }
 

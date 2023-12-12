@@ -11,5 +11,4 @@ export class LocalStorageService {
   getItem(key: string): string | null {
     return localStorage.getItem(key);
   }
-
 }
