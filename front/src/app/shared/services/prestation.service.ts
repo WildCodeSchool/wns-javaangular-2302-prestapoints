@@ -5,40 +5,42 @@ import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Prestation } from '../model/prestation';
 import { ResponseApi } from '../model/responseApi';
+import { environment } from 'src/app/environments/environment';
 
 @Injectable()
 export class PrestationService {
-    private apiUrl?: string = 'http://localhost:8080';
-    
-    constructor(private http: HttpClient) {}
+  private apiUrl?: string;
+  environmentUrl = environment.apiUrl;
 
-    getPrestations(): Observable<Prestation[]> {
-      this.apiUrl = 'http://localhost:8080/accueil';
+  constructor(private http: HttpClient) {}
 
-      return this.http.get<Prestation[]>(this.apiUrl);
-    }
+  getPrestations(): Observable<Prestation[]> {
+    this.apiUrl = `${this.environmentUrl}/accueil`;
 
-    getPrestationById(id: string): Observable<Prestation> {
-      this.apiUrl = 'http://localhost:8080/prestations';
-      const url = `${this.apiUrl}/${id}`;
+    return this.http.get<Prestation[]>(this.apiUrl);
+  }
 
-      return this.http.get<Prestation>(url);
-    }
+  getPrestationById(id: string): Observable<Prestation> {
+    this.apiUrl = `${this.environmentUrl}/prestations/${id}`;
 
-    addRegistration(id: number | undefined): Observable<ResponseApi> {
-      this.apiUrl = 'http://localhost:8080/prestations/prestation/registration';
+    return this.http.get<Prestation>(this.apiUrl);
+  }
 
-      return this.http.post<ResponseApi>(this.apiUrl, id);
-    }
+  addRegistration(id: number | undefined): Observable<ResponseApi> {
+    this.apiUrl = `${this.environmentUrl}/prestations/prestation/registration`;
 
-    undoRegistration(id: number | undefined): Observable<ResponseApi> {
-      this.apiUrl = 'http://localhost:8080/prestations/prestation/registration/suppression/' + id;
+    return this.http.post<ResponseApi>(this.apiUrl, id);
+  }
 
-      return this.http.delete<ResponseApi>(this.apiUrl);
-    }
+  undoRegistration(id: number | undefined): Observable<ResponseApi> {
+    this.apiUrl = `${this.environmentUrl}/prestations/prestation/registration/suppression/${id}`;
 
-    createPrestation(prestation : Prestation): Observable<Prestation> {
-            
-      return this.http.post<Prestation>(this.apiUrl + "/prestations", prestation);
-    }
+    return this.http.delete<ResponseApi>(this.apiUrl);
+  }
+
+  createPrestation(prestation: Prestation): Observable<Prestation> {
+    this.apiUrl = `${this.environmentUrl}/prestations`;
+
+    return this.http.post<Prestation>(this.apiUrl + '/prestations', prestation);
+  }
 }
