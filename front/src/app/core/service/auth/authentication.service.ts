@@ -8,9 +8,9 @@ import { environment } from 'src/app/environments/environment';
 @Injectable()
 export class AuthenticationService {
 
-  apiUrl = environment.apiUrl;
+  private environnementURL = environment.apiUrl;
 
-  private authUrl = `${this.apiUrl}/auth`;
+  private authUrl = `${this.environnementURL}/auth`;
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { 
