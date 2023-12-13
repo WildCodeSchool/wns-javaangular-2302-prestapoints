@@ -21,7 +21,7 @@ import { AuthInterceptor } from './core/service/auth/auth.interceptor';
 import { AuthenticationService } from './core/service/auth/authentication.service';
 import { UserService } from './shared/services/user.service';
 import { ToolsService } from './shared/services/tools.service';
-import { CategoryDetailsModule } from './shared/components/category-details/category-details.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { CategoryDetailsModule } from './shared/components/category-details/cate
     ReactiveFormsModule,
     FormUserModule,
     SharedModule,
-    CategoryDetailsModule,
+    ModalModule.forRoot(),
   ],
   providers: [
     FormBuilder,
