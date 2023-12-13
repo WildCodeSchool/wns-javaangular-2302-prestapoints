@@ -24,7 +24,7 @@ export class CardComponent {
                     this.imageUrl = URL.createObjectURL(data); 
                 },
                 error => {
-                    console.error('Erreur lors de la récupération de l\'image', error);
+                    reportError('Erreur lors de la récupération de l\'image : '+ error);
                 }
             );
         }  
@@ -35,5 +35,4 @@ export class CardComponent {
         this.router.navigate(['/prestations', this.prestation.id, 'details']);
         }
     } 
-    
 }
