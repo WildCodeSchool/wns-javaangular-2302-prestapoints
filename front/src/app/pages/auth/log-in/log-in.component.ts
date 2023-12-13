@@ -1,10 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/service/auth/authentication.service';
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
 import { Alert } from 'src/app/shared/model/alert';
 import { AlertService } from 'src/app/shared/services/alert.service';
-
+import { OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-log-in',
@@ -39,7 +39,11 @@ export class LogInComponent implements OnInit {
               AlertEnum.MESSAGE_LOGIN_SUCCESSED,
               AlertEnum.TIME_MEDIUM
             );
-            this.router.navigate(['/']);
+
+            // Reload the page after navigating to "/"
+            this.router.navigateByUrl('/').then(() => {
+              location.reload();
+            });
           } else {
             // login failed
             this.error = 'Username or password is incorrect';
