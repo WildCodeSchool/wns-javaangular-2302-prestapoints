@@ -40,42 +40,42 @@ export class CategoryService {
       {
         name: 'Animaux',
         id: 1,
-        img: 'assets/img/animaux.png',
+        img: './assets/img/animaux.png',
       },
       {
         name: 'Jardinage',
         id: 6,
-        img: 'assets/img/jardinage.png',
+        img: './assets/img/jardinage.png',
       },
       {
         name: 'Mode',
         id: 5,
-        img: 'assets/img/mode.png',
+        img: './assets/img/mode.png',
       },
       {
         name: 'Photographie',
         id: 8,
-        img: 'assets/img/photographie.png',
+        img: './assets/img/photographie.png',
       },
       {
         name: 'Poterie',
         id: 2,
-        img: 'assets/img/poterie.png',
+        img: './assets/img/poterie.png',
       },
       {
         name: 'Restauration',
         id: 3,
-        img: 'assets/img/restauration.png',
+        img: './assets/img/restauration.png',
       },
       {
         name: 'Travaux',
         id: 4,
-        img: 'assets/img/travaux.png',
+        img: './assets/img/travaux.png',
       },
       {
         name: 'Véhicules',
         id: 7,
-        img: 'assets/img/vehicules.png',
+        img: './assets/img/vehicules.png',
       },
     ];
   }
