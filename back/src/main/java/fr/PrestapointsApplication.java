@@ -38,7 +38,7 @@ public class PrestapointsApplication {
 	private ImageFixtures imageFixtures;
 
 	/* STOP FIXTURES = false   # START FIXTURES = true */ 
-	private boolean loadFixtures = true;
+	private boolean loadFixtures = false;
 
 
 	@PostConstruct

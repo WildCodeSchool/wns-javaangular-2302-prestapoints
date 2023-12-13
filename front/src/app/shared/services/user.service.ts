@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
 import { ResponseApi } from '../model/responseApi';
-import { SignInService } from 'src/app/pages/auth/sign-in/service/signIn.service';
+import { SignInService } from 'src/app/core/service/auth/signIn.service';
 import { environment } from 'src/app/environments/environment';
 
 @Injectable()

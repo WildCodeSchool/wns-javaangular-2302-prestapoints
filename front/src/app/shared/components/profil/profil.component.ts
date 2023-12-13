@@ -32,6 +32,18 @@ export class ProfilComponent implements OnInit {
     private profilService: ProfilService
   ) {}
 
+  ngOnInit() {
+    this.checkUserLoggedIn();
+  }
+
+  checkUserLoggedIn() {
+    const value = this.localstorageService.getItem('currentUser');
+    if (value != null) {
+      this.isLoggedIn = true;
+      this.visible = false;
+      this.getUser();
+    }
+  }
   //lastPasswordValidator = (): ValidationErrors | null => {
   //  const passwordForm = this.profilForm.get('lastPassword');
   //  const passwordValue = passwordForm?.value;
@@ -87,10 +99,6 @@ export class ProfilComponent implements OnInit {
       [Validators.required, this.phoneValidator],
     ],
   });
-
-  ngOnInit() {
-    this.getUser()
- }
 
   getUser(): Promise<void> {
     return new Promise<void>((resolve) => {
