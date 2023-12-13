@@ -2,14 +2,14 @@
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            
+
             <form [formGroup]="profilForm" (ngSubmit)="onSubmitFormLogin()" class="text-center p-5">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Mon profil</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div >
+                    <div>
                         <img class="rounded-circle bg-grey-text" style="width: 30%;" [src]="image" alt="">
                     </div>
                     <div class="mb-5 pt-3" *ngIf="visible">
@@ -64,7 +64,8 @@
                         <div *ngIf="visible">
                             <div class="mb-5 pt-3">
                                 <input type="password" id="newRegisterFormPassword" class="form-control"
-                                    placeholder="Nouveau MdP minimum 8 caractères et un chiffre" formControlName="password" autocomplete="new-password">
+                                    placeholder="Nouveau MdP minimum 8 caractères et un chiffre"
+                                    formControlName="password" autocomplete="new-password">
                                 <div class="position-relative">
                                     <small
                                         *ngIf="profilForm.controls['password'].errors && !profilForm.controls['password'].pristine"
@@ -102,8 +103,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" (click)="toggleFormEditability()" data-bs-dismiss="modal" >Fermer</button>
-                    <button type="button" class="btn btn-secondary" (click)="refreshPage()" data-bs-dismiss="modal" type="submit" [disabled]="!profilForm.valid" [hidden]="!visible">Valider</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-secondary" (click)="refreshPage()" data-bs-dismiss="modal"
+                        type="submit" [disabled]="!profilForm.valid" [hidden]="!visible">Valider</button>
                     <button type="button" class="btn btn-secondary" (click)="toggleFormEditability()">Modifier</button>
                 </div>
             </form>

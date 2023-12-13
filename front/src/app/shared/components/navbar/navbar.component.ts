@@ -65,10 +65,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
   logout() {
     this.router.navigate(['/']);
     this.logoutService.logout();
-    this.alertService.setAlert(
-      AlertEnum.TYPE_DANGER,
-      AlertEnum.MESSAGE_LOGOUT_SUCCESSED,
-      AlertEnum.TIME_MEDIUM
-    );
   }
 }

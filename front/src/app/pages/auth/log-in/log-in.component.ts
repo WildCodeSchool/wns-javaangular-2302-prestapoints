@@ -4,7 +4,7 @@ import { AuthenticationService } from 'src/app/core/service/auth/authentication.
 import { AlertEnum } from 'src/app/shared/enum/alert.enum';
 import { Alert } from 'src/app/shared/model/alert';
 import { AlertService } from 'src/app/shared/services/alert.service';
-import { OnInit} from '@angular/core';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-log-in',
@@ -33,17 +33,16 @@ export class LogInComponent implements OnInit {
       .login(this.model.username, this.model.password)
       .subscribe(
         (result) => {
+          // Reload the page after navigating to "/"
+          this.router.navigateByUrl('/').then(() => {
+            location.reload();
+          });
           if (result) {
-            this.alertService.setAlert(
-              AlertEnum.TYPE_SUCCESS,
-              AlertEnum.MESSAGE_LOGIN_SUCCESSED,
-              AlertEnum.TIME_MEDIUM
-            );
-
-            // Reload the page after navigating to "/"
-            this.router.navigateByUrl('/').then(() => {
-              location.reload();
-            });
+            // this.alertService.setAlert(
+            //   AlertEnum.TYPE_SUCCESS,
+            //   AlertEnum.MESSAGE_LOGIN_SUCCESSED,
+            //   AlertEnum.TIME_MEDIUM
+            // );
           } else {
             // login failed
             this.error = 'Username or password is incorrect';
