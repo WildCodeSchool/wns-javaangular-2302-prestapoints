@@ -11,8 +11,18 @@ import { environment } from 'src/app/environments/environment';
 export class PrestationService {
   private apiUrl?: string;
   environmentUrl = environment.apiUrl;
+  private searchInProgress: boolean = false;
 
   constructor(private http: HttpClient) {}
+
+  setSearchInProgress(status: boolean): void {
+    this.searchInProgress = status;
+  }
+
+  isSearchInProgress(): boolean {
+    return this.searchInProgress;
+  }
+
 
   getPrestations(): Observable<Prestation[]> {
     this.apiUrl = `${this.environmentUrl}/accueil`;
