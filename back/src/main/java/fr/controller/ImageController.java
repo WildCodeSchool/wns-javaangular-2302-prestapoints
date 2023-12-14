@@ -39,7 +39,7 @@ public class ImageController {
     }
 
     @PostMapping("/images")
-    public ResponseEntity<Integer> uploadImage(@RequestParam("image") MultipartFile file) {
+    public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file) {
         return imageService.ImageSav(file);
     }
 }

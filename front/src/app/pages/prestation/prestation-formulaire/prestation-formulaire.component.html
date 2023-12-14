@@ -5,12 +5,14 @@
             <span *ngIf="isFormulaireFalse" class = "mb-5 text-danger fw-bold"> Veuillez remplir tout les champs</span>
             
             <form [formGroup]="prestationFormBasic" *ngIf="pageNumber == 0"  (ngSubmit)="onSubmitBpNext(0)">
-                <label for="category" class="form-label">Catégories :</label>
-                <select id = "category" class="form-select" aria-label="Default select example" formControlName="category">
-                    <option *ngFor="let categoryOption of categories; let i = index" [value]="categoryOption.id">{{categoryOption.name}}</option>
-                </select>
-                
-                <div class="mt-5 mb-4" *ngFor="let field of formFieldsBasic">
+                <h3>Généralités : </h3>
+                <div class="m-8">
+                    <label for="category" class="form-label">Catégories :</label>
+                    <select id = "category" class="form-select mb-6" aria-label="Default select example" formControlName="category">
+                        <option *ngFor="let categoryOption of categories; let i = index" [value]="categoryOption.id">{{categoryOption.name}}</option>
+                    </select>
+                </div>
+                <div class="m-8" *ngFor="let field of formFieldsBasic">
                     <label [for]="field.name" class="form-label">{{ field.label }} :</label>
                     <input type="{{ field.type }}" [id]="field.name" formControlName="{{ field.name }}" placeholder="{{ field.placeholder }}" class="form-control" />
                     <div *ngIf="prestationFormBasic.get(field.name)?.errors && !prestationFormBasic.get(field.name)?.pristine"
@@ -29,7 +31,8 @@
             </form>
 
             <form [formGroup]="prestationFormCharacteristic" *ngIf="pageNumber == 1" (ngSubmit)="onSubmitBpNext(1)">
-                <div class="mt-3 mb-4" *ngFor="let field of formFieldsCharacteristic">
+                <h3>Précisions :</h3>
+                <div class="m-8" *ngFor="let field of formFieldsCharacteristic">
                     <label [for]="field.name" class="form-label">{{ field.label }} :</label>
                     <input type="{{ field.type }}" [id]="field.name" formControlName="{{ field.name }}" placeholder="{{ field.placeholder }}" class="form-control" />
                     <div *ngIf="prestationFormCharacteristic.get(field.name)?.errors && !prestationFormCharacteristic.get(field.name)?.pristine"
@@ -49,7 +52,8 @@
             </form>
 
             <form [formGroup]="prestationFormDescription"  *ngIf="pageNumber == 2" (ngSubmit)="onSubmitBpNext(2)">
-                <div class="mt-3 mb-4" *ngFor="let field of formFieldsDescription">
+                <h3>Medias représentant votre atelier</h3>
+                <div class="m-8" *ngFor="let field of formFieldsDescription">
                     <label [for]="field.name" class="form-label">{{ field.label }} :</label>
                     <input type="{{ field.type }}" [id]="field.name" formControlName="{{ field.name }}" placeholder="{{ field.placeholder }}" class="form-control" />
                     <div *ngIf="prestationFormDescription.get(field.name)?.errors && !prestationFormDescription.get(field.name)?.pristine"
@@ -69,7 +73,8 @@
             </form>
 
             <form [formGroup]="prestationFormLocation"  *ngIf="pageNumber == 3" (ngSubmit)="onSubmitBpNext(3)">
-                <div class="mt-3 mb-4" *ngFor="let field of formFieldsLocation">
+                <h3>Descriptions représentant votre atelier</h3>
+                <div class="m-8" *ngFor="let field of formFieldsLocation">
                     <label [for]="field.name" class="form-label">{{ field.label }} :</label>
                     <input type="{{ field.type }}" [id]="field.name" formControlName="{{ field.name }}" placeholder="{{ field.placeholder }}" class="form-control" />
                     <div *ngIf="prestationFormLocation.get(field.name)?.errors && !prestationFormLocation.get(field.name)?.pristine"
@@ -89,7 +94,8 @@
             </form>
             
             <form [formGroup]="prestationFormMedia"  *ngIf="pageNumber == 4" >
-                <div class="mt-3 mb-4">
+                <h3>Medias représentant votre atelier</h3>
+                <div class="m-8">
                     <label for="mediaVideo" class="form-label"> Veuillez renseigner un lien video : </label>
                     <input type="text" id="mediaVideo" formControlName="mediaVideo" placeholder="https://..." class="form-control" />
                     <div *ngIf="prestationFormMedia.get('mediaVideo')?.errors && !prestationFormMedia.get('mediaVideo')?.pristine"
@@ -102,21 +108,23 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <label for="mediaImage" class="form-label"> Veuillez charger une image de votre atelier : </label><br>
-                    <img *ngIf="imageSrc" [src]="imageSrc" class="img-view" alt="Image">
-                    <div class="d-flex flex-row align-items-center">
-                        <input id="mediaImage" type="file" (change)="onFileSelected($event)">
-                        <button *ngIf="isUploadImg" class="btn btn-outline-primary m-3" (click)="UploadImg()">Enregistrer l'image</button>
+                <div class="m-8">
+                    <label for="mediaImage" class="form-label"> Charger une image (obligatoire) : </label><br>
+                    <div class="m-3 d-flex flex-row align-items-center">
+                        <img class= "m-3" *ngIf="imageSrc" [src]="imageSrc" class="img-view" alt="Image">
+                        <div *ngIf="loading" class="loading-container">
+                            <img class="img-view-loading" src="assets/img/loading.webp" alt="Chargement en cours...">
+                        </div>
                     </div>
-
+                    <div class="m-3 d-flex flex-row align-items-center">
+                        <input id="mediaImage" type="file" (change)="onFileSelected($event)">
+                    </div>
+                    <h6 class="m-3 text-danger">{{messageErreurImage}}</h6>
                 </div>
-                {{isUploadImg}}
-                {{isImgSave}}
+
                 <div class="d-flex justify-content-end m-10">
                     <button class="btn btn-primary m-3" (click)="onSubmitBpPrevious(4)">Précédent</button>
-                    
-                    <button *ngIf="isImgSave" class="btn btn-primary m-3" (click)="onSubmit()">Enregistrer</button>
+                    <button *ngIf="isImageLoading" class="btn btn-primary m-3" (click)="onSubmit()">Enregistrer</button>
                 </div>
             </form>
             
