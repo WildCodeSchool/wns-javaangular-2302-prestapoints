@@ -3,25 +3,27 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Category } from '../model/category';
 import { Prestation } from '../model/prestation';
+import { environment } from 'src/app/environments/environment';
 
 @Injectable()
 export class CategoryService {
-  private apiUrl = 'http://localhost:8080';
+  private environnementURL = environment.apiUrl;
+  private imageUrl = environment.imgUrl;
 
   constructor(private http: HttpClient) {}
 
   getCategories(): Observable<Category[]> {
-    const url = `${this.apiUrl}/categories`;
+    const url = `${this.environnementURL}/categories`;
     return this.http.get<Category[]>(url);
   }
 
   getCategoryById(categoryId: string): Observable<Category> {
-    const url = `${this.apiUrl}/categories/${categoryId}`;
+    const url = `${this.environnementURL}/categories/${categoryId}`;
     return this.http.get<Category>(url);
   }
 
   getPrestationsByCategory(categoryId: string): Observable<Prestation[]> {
-    const url = `${this.apiUrl}/prestations/categories/${categoryId}`; 
+    const url = `${this.environnementURL}/prestations/categories/${categoryId}`;
     return this.http.get<Prestation[]>(url);
   }
 
@@ -34,42 +36,42 @@ export class CategoryService {
       {
         name: 'Animaux',
         id: 1,
-        img: 'assets/img/animaux.png',
+        img: `${this.imageUrl}/animaux.png`,
       },
       {
         name: 'Jardinage',
         id: 6,
-        img: 'assets/img/jardinage.png',
+        img: `${this.imageUrl}/jardinage.png`,
       },
       {
         name: 'Mode',
         id: 5,
-        img: 'assets/img/mode.png',
+        img: `${this.imageUrl}/mode.png`,
       },
       {
         name: 'Photographie',
         id: 8,
-        img: 'assets/img/photographie.png',
+        img: `${this.imageUrl}/photographie.png`,
       },
       {
         name: 'Poterie',
         id: 2,
-        img: 'assets/img/poterie.png',
+        img: `${this.imageUrl}/poterie.png`,
       },
       {
         name: 'Restauration',
         id: 3,
-        img: 'assets/img/restauration.png',
+        img: `${this.imageUrl}/restauration.png`,
       },
       {
         name: 'Travaux',
         id: 4,
-        img: 'assets/img/travaux.png',
+        img: `${this.imageUrl}/travaux.png`,
       },
       {
         name: 'Véhicules',
         id: 7,
-        img: 'assets/img/vehicules.png',
+        img: `${this.imageUrl}/vehicules.png`,
       },
     ];
   }

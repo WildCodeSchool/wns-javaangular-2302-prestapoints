@@ -7,8 +7,10 @@ import { Image } from '../model/image';
     providedIn: 'root'
   })
   export class ImageService {
-    private apiUrl = 'http://localhost:8080';
-    private baseUrl = '/images'; // L'URL de base de votre API Spring Boot
+
+    private environnementURL = environment.apiUrl;
+
+    private baseUrl = '/images'; 
   
     constructor(private http: HttpClient) { }
   
