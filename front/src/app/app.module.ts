@@ -22,6 +22,7 @@ import { AuthenticationService } from './core/service/auth/authentication.servic
 import { UserService } from './shared/services/user.service';
 import { ToolsService } from './shared/services/tools.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CategoryDetailsModule } from './shared/components/category-details/category-details.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ReactiveFormsModule,
     FormUserModule,
     SharedModule,
+    CategoryDetailsModule,
     ModalModule.forRoot(),
   ],
   providers: [
