@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrestationService } from 'src/app/shared/services/prestation.service';
 import { Prestation } from 'src/app/shared/model/prestation';
@@ -9,12 +9,11 @@ import { Prestation } from 'src/app/shared/model/prestation';
   styleUrls: ['./searchbar.component.scss'],
 })
 export class SearchbarComponent implements OnInit {
-  private prestationsApi?: Prestation[];
+  @Input() prestationsApi: Prestation[] = [];
   public prestationsSearch?: Prestation[];
-  public searchForm: FormGroup<any>;
-
-  @Output()
-  prestationsEmitter: EventEmitter<Prestation[]> = new EventEmitter();
+  public searchForm: FormGroup;
+  public noWorkshopFound: boolean = false;
+  @Output() prestationsEmitter: EventEmitter<Prestation[] | null> = new EventEmitter();
 
   constructor(
     private prestationService: PrestationService,
@@ -39,33 +38,52 @@ export class SearchbarComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.searchForm.value['search'].trim()) {
-      const search: string = this.searchForm.value['search'].toLowerCase();
-      const searchWords: string[] = search.split(' ');
-
+    const searchValue = this.searchForm.value['search'].trim();
+  
+    if (searchValue) {
+      const searchWords: string[] = searchValue.toLowerCase().split(' ');
+  
       this.getPrestationsContainingWordsLike(searchWords);
-    } else {
-      this.prestationsSearch = this.prestationsApi;
+  
+      if (this.prestationsSearch && this.prestationsSearch.length > 0) {
+        this.prestationsEmitter.emit(this.prestationsSearch);
+      } else {
+        this.prestationsEmitter.emit(this.prestationsApi || []);
+      }
     }
-
-    this.sendPrestations();
   }
 
   getPrestationsContainingWordsLike(searchWords: string[]) {
-    this.prestationsSearch = this.prestationsApi?.filter((prestation) => {
-      return searchWords.some((word) => {
-        return (
-          prestation.title?.toLowerCase().includes(word) ||
-          prestation.location?.city?.toLowerCase().includes(word) ||
-          prestation.description?.toLowerCase().includes(word) ||
-          prestation.type?.category?.name?.toLowerCase().includes(word) ||
-          prestation.type?.name?.toLowerCase().includes(word)
-        );
-      });
-    });
+    this.prestationsSearch = this.prestationsApi?.filter((prestation) =>
+      searchWords.some((word) => this.isMatch(prestation, word))
+    );
+
+    this.noWorkshopFound = this.prestationsSearch?.length === 0;
+    this.sendPrestations();
+  }
+
+  isMatch(prestation: Prestation, word: string): boolean {
+    return (
+      (prestation.title?.toLowerCase().includes(word) || false) ||
+      (prestation.location?.city?.toLowerCase().includes(word) || false) ||
+      (prestation.description?.toLowerCase().includes(word) || false) ||
+      (prestation.type?.category?.name?.toLowerCase().includes(word) || false) ||
+      (prestation.type?.name?.toLowerCase().includes(word) || false)
+    );
   }
 
   sendPrestations(): void {
-    this.prestationsEmitter.emit(this.prestationsSearch);
+    if (this.prestationsApi && this.prestationsApi.length > 0) {
+      this.prestationsEmitter.emit(this.prestationsSearch || this.prestationsApi);
+    } else {
+      this.prestationsEmitter.emit([]);
+    }
+  }
+
+  resetSearch(): void {
+    this.prestationsSearch = this.prestationsApi;
+    this.noWorkshopFound = false;
+    this.sendPrestations();
   }
 }
+

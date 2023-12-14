@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Prestation } from 'src/app/shared/model/prestation';
-import { Image } from 'src/app/shared/model/image';
 import { PrestationService } from 'src/app/shared/services/prestation.service';
-import { Registration } from 'src/app/shared/model/registration';
-//import { RegistrationService } from 'src/app/shared/services/registration.service';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +9,12 @@ import { Registration } from 'src/app/shared/model/registration';
 })
 export class HomeComponent implements OnInit {
   public prestationsApi?: Prestation[];
+  public originalPrestationsApi?: Prestation[];
 
   constructor(private prestationService: PrestationService) {}
 
   ngOnInit() {
     this.getPrestations();
-    
   }
 
   needToRefresh($event: boolean) {
@@ -29,10 +26,19 @@ export class HomeComponent implements OnInit {
   getPrestations() {
     this.prestationService.getPrestations().subscribe((response) => {
       this.prestationsApi = response;
+      this.originalPrestationsApi = response; 
     });
   }
 
-  onGetPrestation(prestationsSearch: Prestation[]): void {
-    this.prestationsApi = prestationsSearch;
+  onGetPrestation(prestations: Prestation[] | null) {
+    if (prestations === null) {
+      console.log("Aucun atelier trouvé");
+      if (!this.prestationService.isSearchInProgress()) {
+        this.prestationsApi = this.originalPrestationsApi;
+      }
+    } else {
+      console.log("Ateliers trouvés :", prestations);
+      this.prestationsApi = prestations;
+    }
   }
 }
