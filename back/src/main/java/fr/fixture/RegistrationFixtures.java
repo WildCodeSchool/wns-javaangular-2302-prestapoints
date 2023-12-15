@@ -42,7 +42,7 @@ public class RegistrationFixtures {
 
             for (int i = 0; i < numberOfLigne; i++) {
                 registration.setId(i);
-                registration.setComment(faker.lorem().sentence(faker.number().numberBetween(1, 6)));
+                registration.setComment(faker.lorem().sentence(faker.number().numberBetween(1, 3)));
                 registration.setEvaluation(faker.number().numberBetween(1, 5));
 
                 Prestation prestation = prestationRepository.getReferenceById(faker.number().numberBetween(1, numberOfPrestations));               
