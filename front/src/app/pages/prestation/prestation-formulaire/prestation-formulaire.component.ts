@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { PrestationService } from 'src/app/shared/services/prestation.service';
 import { ImageService } from 'src/app/shared/services/image.service';
 import { Image } from '../../../shared/model/image';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { Image } from '../../../shared/model/image';
   styleUrls: ['./prestation-formulaire.component.scss'],
 })
 export class PrestationFormulaireComponent {
+    private unsubscribe$ = new Subject<void>();
     prestation: Prestation = new Prestation;
     location: Location = new Location;
     type: Type = new Type;
@@ -273,36 +275,43 @@ export class PrestationFormulaireComponent {
 
         this.imageFiles.push(this.imageFile);
         this.prestation.images = this.imageFiles;
-
+        console.log(this.prestation);
         this.savePrestationToBack(this.prestation);
         
 
     }
     
-    savePrestationToBack(prestationIn : Prestation){
-
-        this.prestationService.createPrestation(prestationIn).subscribe( 
+    savePrestationToBack(prestationIn: Prestation) {
+        this.prestationService.createPrestation(prestationIn).subscribe(
             (prestation) => {
                 this.prestation = prestation;
-                
+    
+                // Use object instead of array for navigation
                 this.router.navigate(['/prestations', prestation.id, 'details']);
+    
                 this.prestationFormBasic.reset();
-                this.prestation = new Prestation;
-                this.location = new Location;
-                this.type = new Type;
-                this.category = new Category;
-                this.categories=  [];
-
+                this.prestation = new Prestation();
+                this.location = new Location();
+                this.type = new Type();
+                this.category = new Category();
+                this.categories = [];
+    
                 this.loading = false;
             },
             error => {
                 this.imageFiles = [];
-                console.error(error);
+                console.error('Erreur lors de l\'enregistrement de la prestation', error);
+                if (error instanceof HttpErrorResponse) {
+                    if (error.status === 500 || error.status === 400) {
+                        console.error('Retour négatif du serveur' + error.error);
+                        this.messageErreurImage ='Retour négatif du serveur : ' + error.error;
 
+                    }
+                }
+    
                 this.loading = false;
             }
-        ); 
-          
+        );
     }
 
 

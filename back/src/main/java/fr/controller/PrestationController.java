@@ -51,19 +51,7 @@ public class PrestationController {
 
         return ResponseEntity.ok(prestations);
     }
-
-    @PostMapping("/prestations")
-    public PrestationDto createPrestation(@RequestBody PrestationDto prestationDto) {
-
-        return prestationService.createPrestation(prestationDto);
-    }
-
-    @DeleteMapping("/prestations/{id}")
-    public void deletePrestation(@PathVariable Integer id) {
-
-        prestationService.deletePrestationById(id);
-    }
-
+    
     @PostMapping("/prestations/prestation/registration")
     public ResponseApi bookedRegistration(@RequestBody Integer prestationId) {
 
@@ -93,6 +81,20 @@ public class PrestationController {
         
         return responseApi;
     }
+   
+    @PostMapping("/prestations")
+    public PrestationDto createPrestation(@RequestBody PrestationDto prestationDto) {
+
+        return prestationService.createPrestation(prestationDto);
+    }
+
+    @DeleteMapping("/prestations/{id}")
+    public void deletePrestation(@PathVariable Integer id) {
+
+        prestationService.deletePrestationById(id);
+    }
+
+
 
     @DeleteMapping("/prestations/prestation/registration/suppression/{prestationId}")
     public ResponseApi undoRegistration(@PathVariable Integer prestationId) {

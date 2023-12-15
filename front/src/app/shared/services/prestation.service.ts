@@ -51,6 +51,6 @@ export class PrestationService {
   createPrestation(prestation: Prestation): Observable<Prestation> {
     this.apiUrl = `${this.environmentUrl}/prestations`;
 
-    return this.http.post<Prestation>(this.apiUrl + '/prestations', prestation);
+    return this.http.post<Prestation>(this.apiUrl , prestation);
   }
 }
