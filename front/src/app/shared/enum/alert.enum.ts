@@ -15,6 +15,7 @@ export enum AlertEnum {
     MESSAGE_EMAIL_ALREADY_EXIST = "L'email existe déjà !",
     MESSAGE_EMAIL_NOT_FOUND = "L'email est introuvable",
     MESSAGE_WRONG_ROLE = "Désolé, vous n'êtes pas autorisé, contactez votre administrateur",
+    MESSAGE_NOT_CONNECTED = "Veuillez vous connecter !",
     MESSAGE_RESERVATION_SUCCESS = "Votre réservation a bien été enregistrée.",
     MESSAGE_RESERVATION_DELETE = "Votre réservation a bien été annulée.",
     MESSAGE_DELETE_SUCCESS = "La suppression a été réalisée avec succès.",

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.entity.Image;
+import fr.entity.User;
+import fr.model.ResponseApi;
 import fr.service.ImageService;
 
 @RestController
@@ -25,6 +27,9 @@ public class ImageController {
 
     @Autowired
     ImageService imageService;
+
+    @Autowired
+    AuthController authController;
     
      @GetMapping("/images/{id}")
     public ResponseEntity<byte[]> getImage(@PathVariable Integer id) {
@@ -40,6 +45,15 @@ public class ImageController {
 
     @PostMapping("/images")
     public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file) {
-        return imageService.ImageSav(file);
+        User user = authController.getUserConnected();
+        ResponseApi responseApi = new ResponseApi();
+        responseApi.setResponseValid(false);
+
+        if (user != null) {
+            return imageService.ImageSav(file);
+        }
+        
+        return ResponseEntity.status(500).body("Utilisateur non connecter");
+
     }
 }
