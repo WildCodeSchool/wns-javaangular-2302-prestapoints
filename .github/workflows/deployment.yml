@@ -4,9 +4,8 @@ on:
   # this job is started after git push on branch "main" or "dev"
   push:
     branches:
-      # - main
-      - upload_Images_formulaire_prestation
-      # - dev
+      - main
+      - dev
   # allow user to start job manually
   workflow_dispatch:
 
