@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserGuard } from './core/guard/user.guard';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       import('./pages/card-details/card-details.module').then(
         (m) => m.CardDetailsModule
       ),
+    canActivate: [UserGuard],
   },
   {
     path: 'categories/:id/prestations',
