@@ -39,8 +39,6 @@ RUN apk --no-cache add g++
 RUN npm install
 
 # RUN npm audit fix --force
-RUN npm audit fix
-# RUN npm install -g @angular/cli
 
 RUN npx ng build --configuration=production
 
