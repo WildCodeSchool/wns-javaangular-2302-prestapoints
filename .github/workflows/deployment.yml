@@ -5,8 +5,8 @@ on:
   push:
     branches:
       # - main
-      - fixDeploy
-      - dev
+      - upload_Images_formulaire_prestation
+      # - dev
   # allow user to start job manually
   workflow_dispatch:
 

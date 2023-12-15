@@ -65,6 +65,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(GET, "/admin/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers("/prestations/**").hasAuthority("ROLE_USER") // qui restreint les routes
+                .requestMatchers("/images/**").hasAuthority("ROLE_USER") // qui restreint les routes
                 .requestMatchers(
                         "/api/v1/auth/",
                         "/v2/api-docs",

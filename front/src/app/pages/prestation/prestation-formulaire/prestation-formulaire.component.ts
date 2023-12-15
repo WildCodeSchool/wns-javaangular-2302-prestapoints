@@ -3,14 +3,16 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Component,OnInit } from '@angular/core';
 import { Prestation } from '../../../shared/model/prestation';
 import { Location } from '../../../shared/model/location';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormValidatorsService } from 'src/app/shared/services/formValidators.service';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { Category } from 'src/app/shared/model/category';
 import { Type } from 'src/app/shared/model/type';
 import { Router } from '@angular/router';
 import { PrestationService } from 'src/app/shared/services/prestation.service';
-
+import { ImageService } from 'src/app/shared/services/image.service';
+import { Image } from '../../../shared/model/image';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -19,6 +21,7 @@ import { PrestationService } from 'src/app/shared/services/prestation.service';
   styleUrls: ['./prestation-formulaire.component.scss'],
 })
 export class PrestationFormulaireComponent {
+    private unsubscribe$ = new Subject<void>();
     prestation: Prestation = new Prestation;
     location: Location = new Location;
     type: Type = new Type;
@@ -33,6 +36,15 @@ export class PrestationFormulaireComponent {
     prestationFormMedia!: FormGroup;
     prestationFormCharacteristic!:  FormGroup;
     pageNumber: number = 0;
+
+    imageSrc: any; // Utilisé pour afficher l'image dans le balisage img
+    selectedFile!: File; // Stocke le fichier sélectionné
+    isImageLoading: boolean = false;
+    imageFile: Image = new Image;
+    imageFiles: Image[] = [];
+    messageErreurImage: String = "";
+
+    loading: boolean = false;
 
 
     formFieldsBasic: { name: string; label: string; type: string; placeholder: string; validationMessage: string }[] = [
@@ -69,6 +81,7 @@ export class PrestationFormulaireComponent {
         private http: HttpClient, 
         private formValidatorsService: FormValidatorsService, 
         private categoryService: CategoryService,
+        private imageService: ImageService
         ) {
   
         this.categoryService.getCategories().subscribe((categories) => {
@@ -88,8 +101,8 @@ export class PrestationFormulaireComponent {
         });
 
         this.prestationFormCharacteristic = this.formBuilder.group({
-        dateStart: ['15/11/2023', [Validators.required, this.formValidatorsService.dateValidator()]],
-        timeStart: ['16:00', [Validators.required, this.formValidatorsService.timeValidator]],
+            dateStart: ['15/11/2023', [Validators.required, this.formValidatorsService.dateValidator()]],
+            timeStart: ['16:00', [Validators.required, this.formValidatorsService.timeValidator]],
             duration: ['3', [Validators.required, Validators.maxLength(2)]],
             maxUser: ['6', [Validators.required, Validators.maxLength(3)]],
         });
@@ -150,10 +163,75 @@ export class PrestationFormulaireComponent {
     }
 
     onSubmit() {
+        this.UploadImg();
+    }
+
+    // Méthode appelée lorsque le fichier est sélectionné
+    onFileSelected(event: any) {
+        this.isImageLoading = false;
+        this.imageSrc= "";
+        this.messageErreurImage = "";
+        
+        this.selectedFile = event.target.files[0];
+ 
+        // verif du type de fichier
+        if (!this.isValidImageType(this.selectedFile.type)) {
+           console.error('Type de fichier non pris en charge. Veuillez sélectionner une image au format jpg, jpeg, ou png.');
+           this.messageErreurImage = "Type de fichier non pris en charge. Veuillez sélectionner une image au format jpg, jpeg, ou png.";
+           return;
+        }
+
+        // Vérif la taille du fichier
+        if (!this.isValidImageSize(this.selectedFile.size)) {
+            console.error('La taille du fichier est trop grande. Veuillez sélectionner une image plus petite.');
+            this.messageErreurImage = this.messageErreurImage + "La taille du fichier est trop grande. Veuillez sélectionner une image plus petite.";
+            return;
+        }
+
+        // Afficher l'image sélectionnée
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+                this.imageSrc = e.target.result;
+        };
+        reader.readAsDataURL(this.selectedFile);
+
+        this.isImageLoading = true;
+
+    }
+
+    // Méthode appelée lors du clic sur le bouton "Enregistrer"
+    UploadImg() {
+        if (this.selectedFile) {
+            this.messageErreurImage = "";           
+            this.loading = true;
+
+            // Enregistrement de l'image
+            this.imageService.uploadImage(this.selectedFile).subscribe(
+                (imageId) => {
+                    console.log('Image enregistrée avec succès!', imageId);
+                    this.imageFile.id = imageId;
+                    this.prestationLoading();
+                },
+                (error) => {
+                    console.error('Erreur lors de l\'enregistrement de l\'image', error);
+                    if (error instanceof HttpErrorResponse) {
+                        if (error.status === 500 || error.status === 400) {
+                            console.error('Retour négatif du serveur' + error.error);
+                            this.messageErreurImage ='Retour négatif du serveur : ' + error.error;
+
+                        }
+                    }
+                    this.loading = false;
+                }
+            );
+        }
+    }
+
+    prestationLoading() {
         if (this.prestationFormLocation.invalid) {
           return;
         }
-       
+
         const formDataBasic = this.prestationFormBasic.value;
         const formDataDescription = this.prestationFormDescription.value;
         const formDataLocation = this.prestationFormLocation.value;
@@ -194,25 +272,61 @@ export class PrestationFormulaireComponent {
         this.prestation.location = this.location;
 
         this.prestation.videoLink = formDataMedia.mediaVideo;
-        //this.prestation.images = formDataLocation.images;
 
+        this.imageFiles.push(this.imageFile);
+        this.prestation.images = this.imageFiles;
+        console.log(this.prestation);
         this.savePrestationToBack(this.prestation);
+        
 
     }
     
-    savePrestationToBack(prestationIn : Prestation){
-
-        this.prestationService.createPrestation(prestationIn).subscribe( (prestation) => {
-            this.prestationFormBasic.reset();
-            this.router.navigate(['/prestations', prestation.id, 'details']);
+    savePrestationToBack(prestationIn: Prestation) {
+        this.prestationService.createPrestation(prestationIn).subscribe(
+            (prestation) => {
+                this.prestation = prestation;
+    
+                // Use object instead of array for navigation
+                this.router.navigate(['/prestations', prestation.id, 'details']);
+    
+                this.prestationFormBasic.reset();
+                this.prestation = new Prestation();
+                this.location = new Location();
+                this.type = new Type();
+                this.category = new Category();
+                this.categories = [];
+    
+                this.loading = false;
             },
             error => {
-            // Gestion des erreurs
-            console.error(error);
+                this.imageFiles = [];
+                console.error('Erreur lors de l\'enregistrement de la prestation', error);
+                if (error instanceof HttpErrorResponse) {
+                    if (error.status === 500 || error.status === 400) {
+                        console.error('Retour négatif du serveur' + error.error);
+                        this.messageErreurImage ='Retour négatif du serveur : ' + error.error;
+
+                    }
+                }
+    
+                this.loading = false;
             }
-        ); 
-          
+        );
     }
 
 
-  }
+    // Fonction pour vérifier le type de fichier
+    private isValidImageType(fileType: string): boolean {
+        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+        return allowedTypes.includes(fileType);
+    }
+
+    // Fonction pour vérifier la taille du fichier
+    private isValidImageSize(fileSize: number): boolean {
+        const maxSize = 1024 * 1024; // Exemple : 1 Mo (1 Mo = 1024 * 1024 octets)
+        return fileSize <= maxSize;
+    }
+
+}
+
+  

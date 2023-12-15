@@ -8,16 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fr.exception.ExceptionJsonDetail;
 import fr.controller.AuthController;
+import fr.dto.ImageDto;
 import fr.dto.LocationDto;
 import fr.dto.PrestationDto;
 import fr.dto.TypeDto;
 import fr.entity.Category;
+import fr.entity.Image;
 import fr.entity.Location;
 import fr.entity.Prestation;
 import fr.entity.Type;
 import fr.entity.User;
 import fr.mapper.PrestationMapper;
 import fr.repository.CategoryRepository;
+import fr.repository.ImageRepository;
 import fr.repository.PrestationRepository;
 
 @Service
@@ -27,6 +30,8 @@ public class PrestationService {
     private PrestationRepository prestationRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private ImageRepository imageRepository;
 
     @Autowired
     private PrestationMapper prestationMapper;
@@ -35,6 +40,8 @@ public class PrestationService {
     private LocationService locationService;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private ImageService imageService;
 
     @Autowired
     private AuthController authController;
@@ -68,12 +75,28 @@ public class PrestationService {
         LocationDto locationDto = prestationDto.getLocation();
         Location location = locationService.createLocation(locationDto);
 
+        List<ImageDto> imagesDto = prestationDto.getImages();
+        List<Image> images = new ArrayList<>();
+        for (ImageDto imageDto : imagesDto) {
+            images.add(imageService.getImageById(imageDto.getId()));
+        }
+        prestation.setImages(images);
+
         prestation.setUser(user);
         prestation.setType(type);
         prestation.setLocation(location);
+
         prestation = prestationRepository.save(prestation);
 
+        images = prestation.getImages();
+
+        for (Image image : images) {
+            image.setPrestation(prestation);
+            imageRepository.save(image);
+        }
+
         return prestationMapper.convertToDto(prestation);
+        
     }
 
     public void deletePrestationById(int id) {
