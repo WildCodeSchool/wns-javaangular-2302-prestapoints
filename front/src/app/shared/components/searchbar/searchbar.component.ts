@@ -13,7 +13,8 @@ export class SearchbarComponent implements OnInit {
   public prestationsSearch?: Prestation[];
   public searchForm: FormGroup;
   public noWorkshopFound: boolean = false;
-  @Output() prestationsEmitter: EventEmitter<Prestation[] | null> = new EventEmitter();
+  @Output() prestationsEmitter: EventEmitter<Prestation[] | null> =
+    new EventEmitter();
 
   constructor(
     private prestationService: PrestationService,
@@ -23,9 +24,7 @@ export class SearchbarComponent implements OnInit {
       search: [
         '',
         [
-          Validators.required,
           Validators.maxLength(255),
-          Validators.minLength(3),
         ],
       ],
     });
@@ -39,18 +38,16 @@ export class SearchbarComponent implements OnInit {
 
   onSubmit() {
     const searchValue = this.searchForm.value['search'].trim();
-  
-    if (searchValue) {
-      const searchWords: string[] = searchValue.toLowerCase().split(' ');
-  
+
+    const searchWords: string[] = searchValue.toLowerCase().split(' ');
+    
       this.getPrestationsContainingWordsLike(searchWords);
-  
+
       if (this.prestationsSearch && this.prestationsSearch.length > 0) {
         this.prestationsEmitter.emit(this.prestationsSearch);
       } else {
         this.prestationsEmitter.emit(this.prestationsApi || []);
       }
-    }
   }
 
   getPrestationsContainingWordsLike(searchWords: string[]) {
@@ -64,17 +61,24 @@ export class SearchbarComponent implements OnInit {
 
   isMatch(prestation: Prestation, word: string): boolean {
     return (
-      (prestation.title?.toLowerCase().includes(word) || false) ||
-      (prestation.location?.city?.toLowerCase().includes(word) || false) ||
-      (prestation.description?.toLowerCase().includes(word) || false) ||
-      (prestation.type?.category?.name?.toLowerCase().includes(word) || false) ||
-      (prestation.type?.name?.toLowerCase().includes(word) || false)
+      prestation.title?.toLowerCase().includes(word) ||
+      false ||
+      prestation.location?.city?.toLowerCase().includes(word) ||
+      false ||
+      prestation.description?.toLowerCase().includes(word) ||
+      false ||
+      prestation.type?.category?.name?.toLowerCase().includes(word) ||
+      false ||
+      prestation.type?.name?.toLowerCase().includes(word) ||
+      false
     );
   }
 
   sendPrestations(): void {
     if (this.prestationsApi && this.prestationsApi.length > 0) {
-      this.prestationsEmitter.emit(this.prestationsSearch || this.prestationsApi);
+      this.prestationsEmitter.emit(
+        this.prestationsSearch || this.prestationsApi
+      );
     } else {
       this.prestationsEmitter.emit([]);
     }
@@ -86,4 +90,3 @@ export class SearchbarComponent implements OnInit {
     this.sendPrestations();
   }
 }
-

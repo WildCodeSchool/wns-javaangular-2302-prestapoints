@@ -4,7 +4,7 @@
       <form class="search-bar p-0 border-secondary d-flex" (ngSubmit)="searchForm.valid && onSubmit()"
         [formGroup]="searchForm" #searchF="ngForm">
         <input name="inputSearchBar" class="search-input rounded-left mx-3" type="text"
-          placeholder="Rechercher par lieu, mot(s) clé(s), etc..." required maxlength="255" minlength="3" name="search"
+          placeholder="Rechercher par lieu, mot(s) clé(s), etc..." maxlength="255" name="search"
           formControlName="search">
         <span class="material-symbols-outlined search-icon d-md-none presta-mr-3">
           search
@@ -18,14 +18,8 @@
   <div class="row d-flex justify-content-center">
     <div class="col-md-5 text-center presta-ml-20 presta-mb-7">
       <ng-container *ngIf="searchForm.controls?.['search']?.errors && searchF.submitted">
-        <div *ngIf="searchForm.controls?.['search']?.errors?.['required']" class="m-1 p-0 fs-small text-danger">
-          Une recherche vide est impossible
-        </div>
         <div *ngIf="searchForm.controls?.['search']?.errors?.['maxlength']" class="m-1 p-0 fs-small text-danger">
           La longueur maximale est de 255 caractères
-        </div>
-        <div *ngIf="searchForm.controls?.['search']?.errors?.['minlength']" class="m-1 p-0 fs-small text-danger">
-          La longueur minimale est de 3 caractères
         </div>
       </ng-container>
 
