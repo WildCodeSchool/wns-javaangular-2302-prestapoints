@@ -35,7 +35,7 @@ export class ProfilService {
 
   getAvatar(): Observable<ArrayBuffer> {
     this.apiUrl = `${this.environmentUrl}/get/avatar`;
-
+    console.log(this.apiUrl);
     return this.http.get(this.apiUrl, { responseType: 'arraybuffer' });
   }
 }

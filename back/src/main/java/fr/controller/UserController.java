@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.dto.UserDto;
+import fr.dto.UserSignInDto;
 import fr.entity.Avatar;
 import fr.entity.User;
 import fr.enums.MessageApiEnum;
@@ -44,15 +45,14 @@ public class UserController {
     // Inscription du USER :
     @CrossOrigin(origins = "*")
     @PostMapping("/public/sign-in")
-    public ResponseApi createUser(@RequestBody UserDto userDto) {
-
+    public ResponseApi createUser(@RequestBody UserSignInDto userSignInDto) {
         ResponseApi responseApi = new ResponseApi();
-        responseApi.setResponseValid(false);
+        responseApi.setResponseValid(false);  
 
-        if (!userService.findUserByEmail(userDto.getEmail()).isPresent()) {
+        if (!userService.findUserByEmail(userSignInDto.getEmail()).isPresent()) {
             if (Pattern.matches(RegexEnum.REGEX_EMAIL.getString(),
-                    userDto.getEmail())) {
-                userService.createUser(userDto);
+            userSignInDto.getEmail())) {
+                userService.createUser(userSignInDto);
                 responseApi.setResponseValid(true);
             } else {
                 responseApi.setMessage(MessageApiEnum.EMAIL_NOT_VALID.getMessage());
@@ -60,7 +60,6 @@ public class UserController {
         } else {
             responseApi.setMessage(MessageApiEnum.EMAIL_EXISTING.getMessage());
         }
-
         return responseApi;
     }
 
@@ -145,15 +144,18 @@ public class UserController {
 
     @GetMapping("/get/avatar")
     public ResponseEntity<byte[]> getImageAvatarUserConnected() throws IOException {
+        System.out.println(">>>>>>>>>>>>>>>okkkkkkk !!!!");
         User user = authController.getUserConnected();
         Optional<Avatar> avatarUserConnected = avatarRepository.findByUserId(user.getId());
         if (avatarUserConnected.isPresent()) {
+            System.out.println(">>>>>>>>>>>>>>> yes !!!!");
             Avatar avatar = avatarUserConnected.get();
             return ResponseEntity
                     .ok()
                     .contentType(MediaType.valueOf(avatar.getType()))
                     .body(avatar.getData());
         } else {
+            System.out.println(">>>>>>>>>>>>>>> no !!!!");
             return ResponseEntity.notFound().build();
         }
     }

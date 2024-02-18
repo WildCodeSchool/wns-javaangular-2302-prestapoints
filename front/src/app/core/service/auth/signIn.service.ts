@@ -15,7 +15,7 @@ export class SignInService {
   constructor(public http : HttpClient) { }
 
   createUser(user: User): Observable<ResponseApi>{
-    return this.http.post<ResponseApi>(`${this.environnementURL}/sign-in`, user);
+    return this.http.post<ResponseApi>(`${this.environnementURL}/public/sign-in`, user);
   }
 
   verifyEmail(email?: string): Observable<boolean>{

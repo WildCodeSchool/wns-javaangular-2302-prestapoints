@@ -54,7 +54,7 @@ public class User {
     // voir à mettre une checkbox sur le formulaire de connexion afin de savoir
     // comment le user souhaite se co
     // ou de mettre cette checkbox dans la navbar.
-    // bref, trouver une astuce pour gérer les rôles USER et PRESTATAIRE
+    // trouver une astuce pour gérer les rôles USER et PRESTATAIRE
 
     // User (méthode secuityUser)
     // -attribut les rôles du User

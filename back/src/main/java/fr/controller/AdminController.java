@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.dto.UserDto;
+import fr.dto.UserSignInDto;
 import fr.entity.User;
 import fr.enums.MessageApiEnum;
 import fr.enums.RoleEnum;
@@ -43,10 +44,10 @@ public class AdminController {
     }
 
     @PostMapping("/admin/utilisateurs/utilisateur/sauvegarde")
-    public ResponseEntity<ResponseApi> saveUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<ResponseApi> saveUser(@RequestBody UserSignInDto userDto) {
         try {
             User userConnected = authController.getUserConnected();
-            User userToSave = userMapper.convertToEntity(userDto);
+            User userToSave = userMapper.convertSignInDtoToEntity(userDto);
 
             if (userService.findUserByEmail(userDto.getEmail()).isPresent()) {
                 User user = userService.findUserByEmail(userDto.getEmail()).get();

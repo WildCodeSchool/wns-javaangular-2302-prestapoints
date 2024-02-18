@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import fr.dto.UserDto;
+import fr.dto.UserSignInDto;
 import fr.entity.User;
 
 @Component
@@ -16,6 +17,11 @@ public class UserMapper {
         UserDto userDto = modelMapper.map(user, UserDto.class);
 
         return userDto;
+    }
+
+    public User convertSignInDtoToEntity(UserSignInDto userDto) {
+        User user = modelMapper.map(userDto, User.class);
+        return user;
     }
 
     public User convertToEntity(UserDto userDto) {

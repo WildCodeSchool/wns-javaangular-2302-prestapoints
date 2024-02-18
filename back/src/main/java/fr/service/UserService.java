@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.dto.UserDto;
+import fr.dto.UserSignInDto;
 import fr.entity.Role;
 import fr.entity.Avatar;
 import fr.entity.User;
@@ -38,9 +39,9 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public User createUser(UserDto userDto) {
-        User user = userMapper.convertToEntity(userDto);
-        //user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+    public boolean createUser(UserSignInDto userSignInDto) {
+        User user = userMapper.convertSignInDtoToEntity(userSignInDto);
+        userSignInDto.setPassword(passwordEncoder.encode(user.getPassword()));
 
         if (user.getCreationDate() == null) {
             LocalDate today = LocalDate.now();
@@ -63,8 +64,9 @@ public class UserService {
         }
 
         user.setRoles(roles);
+        userRepository.saveAndFlush(user);
 
-       return userRepository.saveAndFlush(user);
+        return true;
     }
 
     public User getUserById(Integer id) {
